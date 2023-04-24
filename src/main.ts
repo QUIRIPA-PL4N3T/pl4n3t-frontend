@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { setupLayouts } from 'virtual:generated-layouts'
 import generatedRoutes from 'virtual:generated-pages'
+import { createPinia } from 'pinia'
 import App from './App.vue'
 import './styles/tailwind.css'
 
@@ -11,6 +12,7 @@ import {
 import isAuthGuard from './guard/authGuard'
 
 const app = createApp(App)
+const pinia = createPinia()
 
 const routes = setupLayouts(generatedRoutes)
 
@@ -25,4 +27,5 @@ const router = createRouter({
 })
 app.use(router)
 app.use(i18n)
+app.use(pinia)
 app.mount('#app')
