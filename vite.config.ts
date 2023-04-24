@@ -1,6 +1,7 @@
 /// <reference types="vitest" />
 
 import path, { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
@@ -10,8 +11,6 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
 import VueMacros from 'unplugin-vue-macros/vite'
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
-import { fileURLToPath } from 'node:url'
-
 
 export default defineConfig({
   resolve: {
@@ -31,7 +30,7 @@ export default defineConfig({
 
     // https://github.com/hannoeru/vite-plugin-pages
     Pages({
-      extensions: ['vue', 'md']
+      extensions: ['vue', 'md'],
     }),
 
     Layouts(),
@@ -61,13 +60,14 @@ export default defineConfig({
       // allow auto import and register components used in markdown
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       dts: 'src/components.d.ts',
-      resolvers: [ElementPlusResolver({ ssr: true })],    }),
+      resolvers: [ElementPlusResolver({ ssr: true })],
+    }),
 
     VueI18nPlugin({
       runtimeOnly: true,
       compositionOnly: true,
-      include: resolve(dirname(fileURLToPath(import.meta.url)) , './locales/**')
-      })
+      include: resolve(dirname(fileURLToPath(import.meta.url)), './locales/**'),
+    }),
 
     // https://github.com/antfu/unocss
     // see uno.config.ts for config
