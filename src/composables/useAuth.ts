@@ -5,7 +5,7 @@ function useAuth() {
 
   const checkAuth = () => {
     const user = !ISSERVER ? JSON.parse(localStorage.getItem('currentUser') || '{}') : null
-    return { isAuthenticate: false }
+    return { isAuthenticate: true }
   }
 
   const logoutUser = async () => {
