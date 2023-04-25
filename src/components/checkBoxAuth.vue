@@ -8,11 +8,13 @@ const {
   name = 'checkebox',
   activeClass = 'ing-black-500  bg-slate-900 dark:bg-slate-700 dark:ring-slate-700',
   value,
-  modelValue,
-} = defineProps<{ label: String; checked?: boolean; disabled?: boolean; name?: string; value: boolean; modelValue: boolean; activeClass?: String }>()
+} = defineProps<{ label: String; checked?: boolean; disabled?: boolean; name?: string; value: boolean; activeClass?: String }>()
+const emit = defineEmits<{
+  (event: 'onSelected', value: boolean): void
+}>()
+
 const ck = ref(checked)
-const model = modelValue
-// on change event
+
 function onChange() {
   ck.value = !ck.value
 }
@@ -24,14 +26,14 @@ function onChange() {
       class="flex items-center"
     >
       <input
-        v-model="model"
         type="checkbox"
         class="hidden"
         :disabled="disabled"
         :name="name"
         :value="value"
         v-bind="$attrs"
-        @change="onChange"
+        @change=" emit('onSelected', ck)"
+        @input="onChange"
       >
       <span
         class="h-4 w-4 border flex-none border-slate-100 dark:border-slate-800 rounded inline-flex ltr:mr-3 rtl:ml-3 relative transition-all duration-150"

@@ -9,14 +9,15 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Button: typeof import('./components/button.vue')['default']
+    ButtonAuth: typeof import('./components/buttonAuth.vue')['default']
     CheckBox: typeof import('./components/checkBox.vue')['default']
+    CheckBoxAuth: typeof import('./components/checkBoxAuth.vue')['default']
     Icon: typeof import('./components/icon.vue')['default']
     Logo: typeof import('./components/logo.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SignSocial: typeof import('./components/signSocial.vue')['default']
-    Social: typeof import('./components/social.vue')['default']
+    SignInSocial: typeof import('./components/signInSocial.vue')['default']
     TextField: typeof import('./components/textField.vue')['default']
+    TextFieldAuth: typeof import('./components/textFieldAuth.vue')['default']
   }
 }
