@@ -1,1 +1,29 @@
-title: a
+textEmail: Correo
+textHinEmail: Correo
+textErrorRequirementEmail: Correo requerido
+textErrorEmail: Correo no valido
+textPassword: Contraseña
+textHinPassword: Contraseña
+textErrorPassword: Minimo 8 caracteres
+forgotPassword: Restablecer Contraseña?
+textSignInSocial: O Continue con
+login:
+  text: Iniciar de sesion
+  textCheckBox: Keep me signed in
+  textButtonLogin: Ingresar
+  textFooter: No tienes una cuenta?
+  textLink: Crear Cuenta
+register:
+  textFullName: Nombre Completo
+  textHinFullName: Nombre Completo
+  text: REGISTRASE
+  textCheckBox: Aceptas nuestros Términos y Condiciones y Política de Privacidad
+  textButtonLogin: Crear Cuenta
+  textFooter: Ya tienes una Cuenta?
+  textLink: Ingresar
+forgotPasswordScreen:
+  text: Restablecer Contraseña
+  textButton: Enviar correo de recuperacion
+  textFooter1: Olvidalo,
+  textFooter2: Al inicio de sesion
+  textLink: Ir

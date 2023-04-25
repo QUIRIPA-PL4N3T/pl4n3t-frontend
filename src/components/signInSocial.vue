@@ -1,12 +1,15 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import go from '~/assets/images/icons/gp.svg'
+
+const { t } = useI18n()
 </script>
 
 <template>
   <div class=" mt-4">
     <div class="flex justify-between items-center mb-6">
       <div class=" w-2/6 h-0.5 bg-gray-200" />
-      <label class=" text-gray-500 ml-1 mr-1 text-xs">Or continue with</label>
+      <label class=" text-gray-500 ml-1 mr-1 text-xs">{{ t('textSignInSocial') }}</label>
       <div class="w-2/6  h-0.5 bg-gray-200" />
     </div>
     <div class="flex justify-center">

@@ -1,1 +1,29 @@
-title: a
+textEmail: E-mail
+textHinEmail: E-mail
+textErrorRequirementEmail: O e-mail é obrigatório
+textErrorEmail: e-mail deve ser um e-mail válido
+textPassword: Senha
+textHinPassword: Senha
+textErrorPassword: A senha deve conter pelo menos 8 caracteres
+forgotPassword: Esqueceu sua senha?
+textSignInSocial: Ou continuar com
+login:
+  text: iniciar sessão
+  textCheckBox: Mantenha-me conectado
+  textButtonLogin: Ingresar
+  textFooter: Você não tem uma conta?
+  textLink: Criar Uma Conta
+register:
+  textFullName: Nome completo
+  textHinFullName: Nome completo
+  text: Check-in
+  textCheckBox: Você aceita nossos Termos e Condições e Política de Privacidade
+  textButtonLogin: Criar uma conta
+  textFooter: Você já tem uma conta?
+  textLink: Entrar
+forgotPasswordScreen:
+  text: Restaurar senha
+  textButton: Enviar e-mail de recuperação
+  textFooter1: Esqueça,
+  textFooter2: No início da sessão
+  textLink: Ir
