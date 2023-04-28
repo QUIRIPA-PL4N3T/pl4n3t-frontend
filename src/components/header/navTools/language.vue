@@ -23,7 +23,7 @@ const selectLanguage = ref(months[0])
         <ListboxButton
           class="relative w-full flex items-center cursor-pointer space-x-[6px] rtl:space-x-reverse"
         >
-          <span class="inline-block md:h-6 md:w-6 w-5 h-5 rounded-full"><img
+          <span class="inline-block md:h-6 md:w-6 w-5 h-5 rounded-full "><img
             :src="selectLanguage.image"
             alt=""
             class="h-full w-full object-cover rounded-full"

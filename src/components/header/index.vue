@@ -11,20 +11,20 @@ import go from '../../assets/images/logo-p.png'
     </a>
     <nav class="flex justify-end w-full">
       <ul class="h-auto flex justify-center items-center ">
-        <li>
+        <li class="mx-3">
           <a href="" class="mx-3"><Language /></a>
         </li>
-        <li>
-          <a href="" class="mx-5 bg-red-700"><SwitchDark /></a>
+        <li class="mx-1">
+          <a href="" class="mx-3"><SwitchDark /></a>
         </li>
-        <li class="hidden md:block">
-          <a href="" class="mx-3">a</a>
+        <li class="hidden md:block mx-3">
+          <a href="" class="mx-3"><Message /></a>
         </li>
-        <li class="hidden md:block">
-          <a href="" class="mx-3">b</a>
+        <li class="hidden md:block mx-3">
+          <a href="" class="mx-3"><Notification /></a>
         </li>
-        <li class="hidden md:block">
-          <a href="" class="mx-3">c</a>
+        <li class="hidden md:block mx-3">
+          <a href="" class="mx-3"><Profile /></a>
         </li>
       </ul>
     </nav>
@@ -33,17 +33,17 @@ import go from '../../assets/images/logo-p.png'
 
     </a>
   </header>
-  <footer class="bg-white shadow-md  fixed bottom-0 block md:hidden w-full h-16 border-t-2 border-gray-00">
+  <footer class="bg-white  fixed bottom-0 block md:hidden w-full h-16 border-t-2 border-gray-00">
     <nav class="flex justify-around w-full">
-      <ul class="h-auto flex justify-center items-center">
+      <ul class="h-auto justify-around md:justify-between flex w-96">
         <li>
-          <a href="" class="mx-3">a</a>
+          <a href="" class="mx-1"><Message /></a>
         </li>
         <li>
-          <a href="" class="mx-3">b</a>
+          <a href="" class="mx-3"><Profile /></a>
         </li>
-        <li class="menu-icon">
-          <a href="" class="mx-3">I</a>
+        <li>
+          <a href="" class="mx-3"><Notification /></a>
         </li>
       </ul>
     </nav>
