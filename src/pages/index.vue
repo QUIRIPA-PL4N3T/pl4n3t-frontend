@@ -1,9 +1,4 @@
 <script setup lang="ts">
-
+const router = useRouter()
+router.push('/auth/login')
 </script>
-
-<template>
-  <div class=" h-6 w-2 bg-red-200">
-    <h1>hello</h1>
-  </div>
-</template>
