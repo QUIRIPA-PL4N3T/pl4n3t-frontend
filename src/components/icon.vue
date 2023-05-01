@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 
-const { icon } = defineProps<{ icon: String }>()
+const { icon, size = '24px' } = defineProps<{ icon: string; size?: String }>()
 </script>
 
 <template>
   <span>
-    <Icon :icon="icon" />
+    <Icon :icon="icon" :width="size" />
   </span>
 </template>
