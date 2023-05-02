@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
-import logo from '~/assets/images/logo.png'
 
 const authStore = useAuthStore()
 const router = useRouter()
@@ -34,14 +33,14 @@ function changeMe() {
     <div class="lg-inner-column">
       <div class="left-columns lg:w-1/2 lg:block hidden">
         <div class="logo-box-3">
-          <Logo :image="logo" class=" h-28" />
+          <Logo class=" h-28" />
         </div>
       </div>
 
       <div class="lg:w-1/2 w-full flex flex-col items-center justify-center">
         <div class="auth-box-3">
           <div class="mobile-logo text-center mb-6 lg:hidden block">
-            <Logo :image="logo" class="h-16 mt-8 m-auto" />
+            <Logo class="h-16 mt-8 m-auto" />
           </div>
           <label class="flex justify-center text-2xl mt-4 text-slate-900">{{ t('login.text') }}</label>
           <form class=" mb-4" @submit.prevent="login">
