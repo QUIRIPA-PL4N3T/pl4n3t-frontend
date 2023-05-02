@@ -10,9 +10,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ButtonAuth: typeof import('./components/buttonAuth.vue')['default']
-    CheckBox: typeof import('./components/checkBox.vue')['default']
     CheckBoxAuth: typeof import('./components/checkBoxAuth.vue')['default']
-    Dropdown: typeof import('./components/Dropdown/index.vue')['default']
     Header: typeof import('./components/header/index.vue')['default']
     Icon: typeof import('./components/icon.vue')['default']
     Language: typeof import('./components/header/navTools/language.vue')['default']
@@ -23,9 +21,6 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SignInSocial: typeof import('./components/signInSocial.vue')['default']
-    SplitDropdown: typeof import('./components/Dropdown/SplitDropdown.vue')['default']
     SwitchDark: typeof import('./components/header/navTools/switchDark.vue')['default']
-    TextField: typeof import('./components/textField.vue')['default']
-    TextFieldAuth: typeof import('./components/textFieldAuth.vue')['default']
   }
 }

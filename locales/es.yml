@@ -8,8 +8,8 @@ textErrorPassword: Minimo 8 caracteres
 forgotPassword: Restablecer Contraseña?
 textSignInSocial: O Continue con
 login:
-  text: Iniciar de sesion
-  textCheckBox: Keep me signed in
+  text: Iniciar Sesión
+  textCheckBox: Mantener conectado
   textButtonLogin: Ingresar
   textFooter: No tienes una cuenta?
   textLink: Crear Cuenta
