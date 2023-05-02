@@ -16,7 +16,10 @@ login:
 register:
   textFullName: Nombre Completo
   textHinFullName: Nombre Completo
-  text: REGISTRASE
+  title: Registrarse
+  description: Cree una cuenta para comenzar a usar PL4N3T
+  first-name: Nombres
+  last-name: Apellidos
   textCheckBox: Aceptas nuestros Términos y Condiciones y Política de Privacidad
   textButtonLogin: Crear Cuenta
   textFooter: Ya tienes una Cuenta?
