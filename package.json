@@ -68,7 +68,8 @@
   "eslintConfig": {
     "extends": [
       "@antfu"
+
     ]
   },
-  "eslintIgnore": ["**/*.scss"]
+  "eslintIgnore": ["**/*.scss", "src/components"]
 }

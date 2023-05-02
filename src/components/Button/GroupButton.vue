@@ -1,9 +1,7 @@
 <script>
-import Button from './index'
-
 export default {
   components: {
-    Button,
+    PlanetButton,
   },
   props: {
     btnClass: {
@@ -35,7 +33,7 @@ export default {
 
 <template>
   <div class="btn-group">
-    <Button
+    <PlanetButton
       v-for="(item, i) in groupButtons"
       :key="i"
       :text="item.title"
