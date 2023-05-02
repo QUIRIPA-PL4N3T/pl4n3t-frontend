@@ -5,6 +5,8 @@ import generatedRoutes from 'virtual:generated-pages'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import './styles/tailwind.css'
+import './assets/scss/auth.scss'
+import './assets/scss/tailwind.scss'
 
 import {
   i18n,
