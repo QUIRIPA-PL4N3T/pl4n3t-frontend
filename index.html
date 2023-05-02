@@ -4,10 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="/logo-p.png" />
+  <link rel="stylesheet" type="text/css" href="/loader.css" />
   <title>Pl4n3t</title>
   <meta name="description" content="Opinionated Vite Starter Template">
 </head>
-<body class="font-sans dark:text-white dark:bg-hex-121212">
+<body class="font-Inter light semi-light skin--default">
+  <!-- TODO: remove display none and implement loading element-->
+  <div id="loading-bg" style="display: none;">
+    <div class="loading-logo text-center">
+      <img src="/logo.png" alt="Logo" />
+    </div>
+    <div class="loading">
+      <div class="effect-1 effects"></div>
+      <div class="effect-2 effects"></div>
+      <div class="effect-3 effects"></div>
+    </div>
+  </div>
   <div id="app"></div>
   <noscript>
     <div>Please enable JavaScript to use this application.</div>
