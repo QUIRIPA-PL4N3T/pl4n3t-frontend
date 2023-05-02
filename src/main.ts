@@ -11,6 +11,7 @@ import {
   i18n,
 } from './modules/index'
 import isAuthGuard from './guard/authGuard'
+import { setup } from '~/core'
 
 const app = createApp(App)
 const pinia = createPinia()
@@ -31,3 +32,4 @@ app.use(i18n)
 app.use(pinia)
 app.config.globalProperties.$store = {}
 app.mount('#app')
+setup()
