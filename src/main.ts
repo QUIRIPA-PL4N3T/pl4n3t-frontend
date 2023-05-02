@@ -7,7 +7,6 @@ import App from './App.vue'
 import './styles/tailwind.css'
 import './assets/scss/auth.scss'
 import './assets/scss/tailwind.scss'
-
 import {
   i18n,
 } from './modules/index'
@@ -30,4 +29,5 @@ const router = createRouter({
 app.use(router)
 app.use(i18n)
 app.use(pinia)
+app.config.globalProperties.$store = {}
 app.mount('#app')
