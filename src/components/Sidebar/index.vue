@@ -4,12 +4,9 @@ import { defineComponent } from 'vue'
 import { SimpleBar } from 'simplebar-vue3'
 import { onMounted, ref } from 'vue'
 import { menuItems } from '../../constant/data'
-import Navmenu from './Navmenu'
 
 export default defineComponent({
   components: {
-    // Icon,
-    Navmenu,
     SimpleBar,
   },
 
@@ -92,7 +89,7 @@ export default defineComponent({
               !$store.themeSettingsStore.isDark
                 && !$store.themeSettingsStore.semidark
             "
-            src="@/assets/images/logo/logo.svg"
+            src="../../assets/images/logo.png"
             alt=""
           >
 
@@ -101,7 +98,7 @@ export default defineComponent({
               $store.themeSettingsStore.isDark
                 || $store.themeSettingsStore.semidark
             "
-            src="@/assets/images/logo/logo-white.svg"
+            src="../../assets/images/logo.png"
             alt=""
           >
         </router-link>
@@ -117,7 +114,7 @@ export default defineComponent({
               !$store.themeSettingsStore.isDark
                 && !$store.themeSettingsStore.semidark
             "
-            src="@/assets/images/logo/logo-c.svg"
+            src="../../assets/images/logo.png"
             alt=""
           >
           <img
@@ -125,7 +122,7 @@ export default defineComponent({
               $store.themeSettingsStore.isDark
                 || $store.themeSettingsStore.semidark
             "
-            src="@/assets/images/logo/logo-c-white.svg"
+            src="../../assets/images/logo.png"
             alt=""
           >
         </router-link>

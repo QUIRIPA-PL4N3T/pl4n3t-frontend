@@ -1,7 +1,4 @@
 import userImg from '~/assets/images/all-img/user.png'
-import user2Img from '~/assets/images/all-img/user.png'
-import user3Img from '~/assets/images/all-img/user.png'
-import user4Img from '~/assets/images/all-img/user.png'
 
 import avatar1 from '~/assets/images/avatar/av-1.svg'
 import avatar2 from '~/assets/images/avatar/av-2.svg'
@@ -77,19 +74,19 @@ export const notifications = [
     title: 'Congratulations Darlene  🎉',
     desc: 'Won the monthly best seller badge',
     unread: true,
-    image: user2Img,
+    image: userImg,
     link: '#',
   },
   {
     title: 'Revised Order 👋',
     desc: 'Won the monthly best seller badge',
-    image: user3Img,
+    image: userImg,
     link: '#',
   },
   {
     title: 'Brooklyn Simmons',
     desc: 'Added you to Top Secret Project group...',
-    image: user4Img,
+    image: userImg,
     link: '#',
   },
 ]
@@ -109,7 +106,7 @@ export const message = [
     desc: 'Hi! How are you doing?.....',
     active: false,
     hasnotifaction: false,
-    image: user2Img,
+    image: userImg,
     link: '#',
   },
   {
@@ -118,7 +115,7 @@ export const message = [
     active: false,
     hasnotifaction: true,
     notification_count: 8,
-    image: user3Img,
+    image: userImg,
     link: '#',
   },
   {
@@ -126,7 +123,7 @@ export const message = [
     desc: 'Hi! How are you doing?.....',
     active: true,
     hasnotifaction: false,
-    image: user4Img,
+    image: userImg,
     link: '#',
   },
   {
@@ -134,7 +131,7 @@ export const message = [
     desc: 'Hi! How are you doing?.....',
     active: false,
     hasnotifaction: false,
-    image: user2Img,
+    image: userImg,
     link: '#',
   },
   {
@@ -143,7 +140,7 @@ export const message = [
     active: false,
     hasnotifaction: true,
     notification_count: 8,
-    image: user3Img,
+    image: userImg,
     link: '#',
   },
   {
@@ -151,7 +148,7 @@ export const message = [
     desc: 'Hi! How are you doing?.....',
     active: true,
     hasnotifaction: false,
-    image: user4Img,
+    image: userImg,
     link: '#',
   },
 ]
@@ -711,31 +708,31 @@ export const TodoList = [
   },
   {
     id: 2,
-    image: user2Img,
+    image: userImg,
     title: 'Amet minim mollit non deserunt ullam.',
     isDone: false,
   },
   {
     id: 3,
-    image: user3Img,
+    image: userImg,
     title: 'Amet minim mollit non deserunt ullam.',
     isDone: false,
   },
   {
     id: 4,
-    image: user4Img,
+    image: userImg,
     title: 'Amet minim mollit non deserunt ullam.',
     isDone: false,
   },
   {
     id: 5,
-    image: user2Img,
+    image: userImg,
     title: 'Amet minim mollit non deserunt ullam.',
     isDone: false,
   },
   {
     id: 6,
-    image: user3Img,
+    image: userImg,
     title: 'Amet minim mollit non deserunt ullam.',
     isDone: false,
   },

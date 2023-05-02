@@ -1,5 +1,5 @@
-<script>
-const logo = '~/assets/images/logo.png'
+<script setup lang="ts">
+import logo from '~/assets/images/logo.png'
 </script>
 
 <template>

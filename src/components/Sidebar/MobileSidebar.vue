@@ -39,13 +39,13 @@ export default defineComponent({
       <router-link to="/auth/login">
         <img
           v-if="!$store.themeSettingsStore.isDark"
-          src="@/assets/images/logo/logo.svg"
+          src="../../assets/images/logo.png"
           alt=""
         >
 
         <img
           v-if="$store.themeSettingsStore.isDark"
-          src="@/assets/images/logo/logo-white.svg"
+          src="../../assets/images/logo.png"
           alt=""
         >
       </router-link>

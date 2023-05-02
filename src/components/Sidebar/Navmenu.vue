@@ -1,12 +1,7 @@
 <script>
 import { useRouter } from 'vue-router'
-import Icon from '../Icon'
 
 export default {
-  components: {
-    Icon,
-  },
-
   props: {
     title: {
       type: String,
