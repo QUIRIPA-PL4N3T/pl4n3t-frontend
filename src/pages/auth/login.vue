@@ -17,19 +17,10 @@ async function login(value: any) {
   if (isAuthenticated.value)
     router.push('/dashboard')
 }
-
-// TODO: Class to select the background remove
-let counter = $ref(0)
-let backgroundClass = $ref<string>('login-background-0')
-function changeMe() {
-  counter++
-  counter = counter % 8
-  backgroundClass = `login-background-${counter}`
-}
 </script>
 
 <template>
-  <div class="loginwrapper" :class="backgroundClass">
+  <div class="loginwrapper auth-background">
     <div class="lg-inner-column">
       <div class="left-columns lg:w-1/2 lg:block hidden">
         <div class="logo-box-3">
@@ -82,52 +73,14 @@ function changeMe() {
               <label class=" text-sm">{{ t('login.textLink') }}</label>
             </RouterLink>
           </div>
-          <button
-            @click="changeMe"
-          >
-            ¡Click me! {{ counter }}
-          </button>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped>
-.login-background-0 {
-  background: linear-gradient(to bottom, #e8e8e8, #d8d8d8, #c8c8c8, #b8b8b8, #a8a8a8);
-}
-
-.login-background-1 {
-  background-image: linear-gradient(to top right, #1f253d, #5377b0, #47c9a2);
-}
-
-.login-background-2 {
-  background-image: linear-gradient(to top right, #000000, #808080, #ffffff);
-}
-.login-background-3 {
+<style>
+.auth-background {
   background-image: linear-gradient(135deg, #5c94ff 0%, #9332ff 100%);
-}
-.login-background-4 {
-  background-image:
-    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 4px),
-    linear-gradient(to right, #4c7aff, #9332ff);
-
-}
-.login-background-5 {
-  background-image:
-    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.1) 0, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 4px),
-    linear-gradient(to right, #4c7aff, #9332ff);
-
-}
-.login-background-6 {
-  background-image:
-    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0, rgba(255, 255, 255, 0.1) 1px, transparent 1px, transparent 20px),
-    linear-gradient(to top right, #4a4a4a, #9e9e9e);
-
-}
-
-.login-background-7 {
-  background-image: linear-gradient(to top right, #4a4a4a, #9e9e9e);
 }
 </style>

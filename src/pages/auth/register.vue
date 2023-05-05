@@ -17,7 +17,7 @@ async function register(value: any) {
 </script>
 
 <template>
-  <div class="loginwrapper bg-cover bg-no-repeat bg-center">
+  <div class="loginwrapper bg-cover bg-no-repeat bg-center auth-background">
     <div class="lg-inner-column">
       <div class="left-columns lg:w-1/2 lg:block hidden">
         <div class="logo-box-3">

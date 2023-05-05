@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" class="">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,9 +13,9 @@
     rel="stylesheet"
   />
   <title>Pl4n3t</title>
-  <meta name="description" content="Opinionated Vite Starter Template">
+  <meta name="description" content="Pl4n3t application">
 </head>
-<body class="font-Inter light semi-light skin--default">
+<body class="font-Inter">
   <!-- TODO: remove display none and implement loading element-->
   <div id="loading-bg" style="display: none;">
     <div class="loading-logo text-center">
@@ -31,14 +31,6 @@
   <noscript>
     <div>Please enable JavaScript to use this application.</div>
   </noscript>
-  <script>
-    (function () {
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-      const setting = localStorage.getItem('color-schema') || 'auto'
-      if (setting === 'dark' || (prefersDark && setting !== 'light'))
-        document.documentElement.classList.toggle('dark', true)
-    })()
-  </script>
   <script type="module" src="/src/main.ts"></script>
 </body>
 </html>

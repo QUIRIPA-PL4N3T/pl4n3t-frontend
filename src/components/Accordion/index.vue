@@ -11,7 +11,7 @@ export default {
     items: {
       type: Array,
       required: true,
-      // setr default value for items
+      // set default value for items
 
       default: () => [
         {

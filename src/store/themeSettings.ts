@@ -27,7 +27,7 @@ export const useThemeSettingsStore = defineStore('themeSettings', {
       this.sidebarCollapse = !this.sidebarCollapse
     },
 
-    toogleDark() {
+    toggleDark() {
       this.isDark = !this.isDark
       document.body.classList.remove(this.theme)
       this.theme = this.theme === 'dark' ? 'light' : 'dark'

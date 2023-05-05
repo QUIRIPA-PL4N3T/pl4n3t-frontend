@@ -7,9 +7,7 @@ import App from './App.vue'
 import './styles/tailwind.css'
 import './assets/scss/auth.scss'
 import './assets/scss/tailwind.scss'
-import {
-  i18n,
-} from './modules/index'
+import { i18n } from './modules/index'
 import isAuthGuard from './guard/authGuard'
 import { setup } from '~/core'
 
