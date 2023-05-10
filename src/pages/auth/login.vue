@@ -24,7 +24,7 @@ async function login(value: any) {
     <div class="lg-inner-column">
       <div class="left-columns lg:w-1/2 lg:block hidden">
         <div class="logo-box-3">
-          <Logo class=" h-28" />
+          <Logo class="w-3/4 max-w-[384px]" />
         </div>
       </div>
 
