@@ -2,15 +2,12 @@
 import { Icon } from '@iconify/vue'
 import { defineComponent } from 'vue'
 import { menuItems } from '../../constant/data'
-import Navmenu from './Navmenu'
-import { useThemeSettingsStore } from '@/store/themeSettings'
 
 const themeSettingsStore = useThemeSettingsStore()
 
 export default defineComponent({
   components: {
     Icon,
-    Navmenu,
   },
   data() {
     return {
@@ -61,11 +58,6 @@ export default defineComponent({
         v-if="!$store.themeSettingsStore.sidebarCollasp"
         class="bg-slate-900 mb-[100px] mt-14 p-4 relative text-center rounded-2xl text-white"
       >
-        <img
-          src="@/assets/images/svg/rabit.svg"
-          alt=""
-          class="mx-auto relative -mt-[73px]"
-        >
         <div class="max-w-[160px] mx-auto mt-6">
           <div class="widget-title">
             Unlimited Access

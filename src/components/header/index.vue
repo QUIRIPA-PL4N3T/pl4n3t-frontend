@@ -22,7 +22,7 @@ export default {
           return 'sticky top-0'
       }
     },
-    borderSwicthClass() {
+    borderSwitchClass() {
       if (
         this.$store.themeSettingsStore.skin === 'bordered'
         && this.$store.themeSettingsStore.navbarType !== 'floating'
@@ -43,7 +43,7 @@ export default {
 <template>
   <header :class="navbarTypeClass()">
     <div
-      :class="`app-header md:px-6 px-[15px]  dark:bg-slate-800 shadow-base dark:shadow-base3 bg-white ${borderSwicthClass()} ${
+      :class="`app-header md:px-6 px-[15px]  dark:bg-slate-800 shadow-base dark:shadow-base3 bg-white ${borderSwitchClass()} ${
         $store.themeSettingsStore.navbarColor
       }
       ${

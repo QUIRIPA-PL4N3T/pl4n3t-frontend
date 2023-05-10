@@ -1,29 +1,7 @@
 <script>
-import Icon from '../Icon'
-import Footer from './Tools/Footer'
-import MenuLayout from './Tools/MenuLayout'
-import Navbar from './Tools/Navbar'
-import Skin from './Tools/Skin'
-import Width from './Tools/Width'
-import Theme from './Tools/Theme'
-import Semidark from './Tools/Semidark'
-import Monochrome from './Tools/Monochrome'
-import Rlt from './Tools/Rtl.vue'
-import window from '@/mixins/window'
+import window from '~/mixins/window'
 
 export default {
-  components: {
-    Icon,
-    Width,
-    Skin,
-    MenuLayout,
-    Navbar,
-    Theme,
-    Footer,
-    Semidark,
-    Monochrome,
-    Rlt,
-  },
   mixins: [window],
   data() {
     return {}
