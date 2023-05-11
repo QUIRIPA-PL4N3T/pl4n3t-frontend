@@ -27,8 +27,8 @@ export default {
 
   watch: {
     $route() {
-      if (this.$store.themeSettingsStore.mobielSidebar)
-        this.$store.themeSettingsStore.mobielSidebar = false
+      if (this.$store.themeSettingsStore.mobilSidebar)
+        this.$store.themeSettingsStore.mobilSidebar = false
 
       this.items.map((item) => {
         if (item.link === this.$route.name)

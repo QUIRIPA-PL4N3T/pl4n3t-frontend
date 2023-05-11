@@ -1,14 +1,9 @@
 <template>
-  <div>
-    <Breadcrumbs />
-    <h1>
-      Dashboard
-    </h1>
-  </div>
+  <h1>Goals</h1>
 </template>
 
 <route lang="yaml">
-name: dashboard
+name: goals
 meta:
   layout: sidebar
   requiresAuth: true

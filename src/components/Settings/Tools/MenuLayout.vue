@@ -3,8 +3,8 @@ export default {
   data() {
     return {
       layout: this.$store.themeSettingsStore.menuLayout,
-      menucollaspse: this.$store.themeSettingsStore.sidebarCollasp,
-      menuHideen: this.$store.themeSettingsStore.sidebarHidden,
+      menuCollapse: this.$store.themeSettingsStore.sidebarCollapse,
+      menuHidden: this.$store.themeSettingsStore.sidebarHidden,
       layouts: [
         {
           value: 'vertical',
@@ -37,15 +37,15 @@ export default {
       },
       immediate: true,
     },
-    menuHideen: {
+    menuHidden: {
       handler() {
-        this.$store.themeSettingsStore.sidebarHidden = this.menuHideen
+        this.$store.themeSettingsStore.sidebarHidden = this.menuHidden
       },
       immediate: true,
     },
-    menucollaspse: {
+    menuCollapse: {
       handler() {
-        this.$store.themeSettingsStore.sidebarCollasp = this.menucollaspse
+        this.$store.themeSettingsStore.sidebarCollapse = this.menuCollapse
       },
       immediate: true,
     },
@@ -91,13 +91,13 @@ export default {
       </div>
       <div>
         <label
-          :class="menucollaspse ? 'bg-primary-500' : 'bg-secondary-500'"
+          :class="menuCollapse ? 'bg-primary-500' : 'bg-secondary-500'"
           class="relative inline-flex h-6 w-[46px] items-center rounded-full transition-all duration-150 cursor-pointer"
         >
-          <input v-model="menucollaspse" type="checkbox" class="hidden">
+          <input v-model="menuCollapse" type="checkbox" class="hidden">
           <span
             :class="
-              menucollaspse
+              menuCollapse
                 ? 'ltr:translate-x-6 rtl:-translate-x-6'
                 : 'ltr:translate-x-[2px] rtl:translate-x-[-2px]'
             "
@@ -115,13 +115,13 @@ export default {
       </div>
       <div>
         <label
-          :class="menuHideen ? 'bg-primary-500' : 'bg-secondary-500'"
+          :class="menuHidden ? 'bg-primary-500' : 'bg-secondary-500'"
           class="relative inline-flex h-6 w-[46px] items-center rounded-full transition-all duration-150 cursor-pointer"
         >
-          <input v-model="menuHideen" type="checkbox" class="hidden">
+          <input v-model="menuHidden" type="checkbox" class="hidden">
           <span
             :class="
-              menuHideen
+              menuHidden
                 ? 'ltr:translate-x-6 rtl:-translate-x-6'
                 : 'ltr:translate-x-[2px] rtl:translate-x-[-2px]'
             "

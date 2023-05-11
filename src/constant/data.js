@@ -14,11 +14,31 @@ export const menuItems = [
   },
   {
     title: 'Dashboard',
+    icon: 'heroicons-outline:view-boards',
+    link: 'dashboard',
+  },
+  {
+    title: 'Empresas',
     icon: 'heroicons-outline:home',
-    link: 'home',
+    link: 'companies',
+  },
+  {
+    title: 'Registro de Actividades',
+    icon: 'heroicons-outline:clipboard-list',
+    link: 'activities',
+  },
+  {
+    title: 'Informes',
+    icon: 'heroicons:document',
+    link: 'reports',
+  },
+  {
+    title: 'Objetivos y Metas',
+    icon: 'heroicons:arrow-trending-up',
+    link: 'goals',
   },
 ]
-// menuseetins
+// menu settings
 
 export const ProfileMenu = [
   {
@@ -26,35 +46,16 @@ export const ProfileMenu = [
     icon: 'heroicons-outline:user',
     link: '#',
   },
-  {
-    label: 'Chat',
-    icon: 'heroicons-outline:chat',
-    link: 'chat',
-  },
-  {
-    label: 'Email',
-    icon: 'heroicons-outline:mail',
-    link: 'email',
-  },
-  {
-    label: 'Todo',
-    icon: 'heroicons-outline:chip',
-    link: 'todo',
-  },
+
   {
     label: 'Settings',
     icon: 'heroicons-outline:cog',
     link: '#',
   },
   {
-    label: 'Price',
+    label: 'Membresía',
     icon: 'heroicons-outline:credit-card',
     link: 'pricing',
-  },
-  {
-    label: 'Faq',
-    icon: 'heroicons-outline:information-circle',
-    link: 'faq',
   },
   {
     label: 'Logout',
@@ -65,27 +66,9 @@ export const ProfileMenu = [
 
 export const notifications = [
   {
-    title: 'Your order is placed',
-    desc: 'Amet minim mollit non deser unt ullamco est sit aliqua.',
-    image: userImg,
-    link: '#',
-  },
-  {
     title: 'Congratulations Darlene  🎉',
     desc: 'Won the monthly best seller badge',
     unread: true,
-    image: userImg,
-    link: '#',
-  },
-  {
-    title: 'Revised Order 👋',
-    desc: 'Won the monthly best seller badge',
-    image: userImg,
-    link: '#',
-  },
-  {
-    title: 'Brooklyn Simmons',
-    desc: 'Added you to Top Secret Project group...',
     image: userImg,
     link: '#',
   },
@@ -98,56 +81,6 @@ export const message = [
     active: true,
     hasnotifaction: true,
     notification_count: 1,
-    image: userImg,
-    link: '#',
-  },
-  {
-    title: 'Savannah Nguyen',
-    desc: 'Hi! How are you doing?.....',
-    active: false,
-    hasnotifaction: false,
-    image: userImg,
-    link: '#',
-  },
-  {
-    title: 'Ralph Edwards',
-    desc: 'Hi! How are you doing?.....',
-    active: false,
-    hasnotifaction: true,
-    notification_count: 8,
-    image: userImg,
-    link: '#',
-  },
-  {
-    title: 'Cody Fisher',
-    desc: 'Hi! How are you doing?.....',
-    active: true,
-    hasnotifaction: false,
-    image: userImg,
-    link: '#',
-  },
-  {
-    title: 'Savannah Nguyen',
-    desc: 'Hi! How are you doing?.....',
-    active: false,
-    hasnotifaction: false,
-    image: userImg,
-    link: '#',
-  },
-  {
-    title: 'Ralph Edwards',
-    desc: 'Hi! How are you doing?.....',
-    active: false,
-    hasnotifaction: true,
-    notification_count: 8,
-    image: userImg,
-    link: '#',
-  },
-  {
-    title: 'Cody Fisher',
-    desc: 'Hi! How are you doing?.....',
-    active: true,
-    hasnotifaction: false,
     image: userImg,
     link: '#',
   },

@@ -9,7 +9,12 @@ export default {
   },
   methods: {
     handleResize() {
-      this.window.width = window.innerWidth
+      try {
+        this.window.width = window.innerWidth
+      }
+      catch (error) {
+        console.error(error)
+      }
     },
   },
   created() {

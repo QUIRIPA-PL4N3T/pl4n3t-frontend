@@ -4,7 +4,7 @@ export const useThemeSettingsStore = defineStore('themeSettings', {
   state: () => ({
     sidebarCollapse: false,
     sidebarHidden: false,
-    mobielSidebar: false,
+    mobilSidebar: false,
     semidark: false,
     monochrome: false,
     semiDarkTheme: 'semi-light',
@@ -51,7 +51,7 @@ export const useThemeSettingsStore = defineStore('themeSettings', {
       this.isOpenSettings = !this.isOpenSettings
     },
     toggleMsidebar() {
-      this.mobielSidebar = !this.mobielSidebar
+      this.mobilSidebar = !this.mobilSidebar
     },
     toggleSemiDark() {
       this.semidark = !this.semidark

@@ -59,9 +59,9 @@ export default {
           class="flex items-center md:space-x-4 space-x-2 rtl:space-x-reverse"
         >
           <button
-            v-if="$store.themeSettingsStore.sidebarCollasp && window.width > 1280"
+            v-if="$store.themeSettingsStore.sidebarCollapse && window.width > 1280"
             class="ltr:mr-5 rtl:ml-5 text-xl text-slate-900 dark:text-white"
-            @click="$store.themeSettingsStore.sidebarCollasp = false"
+            @click="$store.themeSettingsStore.sidebarCollapse = false"
           >
             <Icon
               v-if="!$store.themeSettingsStore.direction"
