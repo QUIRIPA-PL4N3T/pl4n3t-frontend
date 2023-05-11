@@ -11,7 +11,7 @@ export default {
   computed: {
     newMenulist() {
       return this.topMenu.filter((item) => {
-        return Boolean(!item.isHeadr)
+        return Boolean(!item.isHeader)
       })
     },
   },

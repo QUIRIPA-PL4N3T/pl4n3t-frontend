@@ -108,10 +108,10 @@ export default {
       `"
       class="single-sidebar-menu"
     >
-      <!-- ?? single menu with no childred !!  -->
+      <!-- ?? single menu with no children !!  -->
 
       <router-link
-        v-if="!item.child && !item.isHeadr"
+        v-if="!item.child && !item.isHeader"
         :to="`${item.link}`"
         class="menu-link"
       >
@@ -122,8 +122,8 @@ export default {
         </div>
       </router-link>
 
-      <!-- ?? only for menulabel ??  -->
-      <div v-else-if="item.isHeadr && !item.child" class="menulabel">
+      <!-- ?? only for menu label ??  -->
+      <div v-else-if="item.isHeader && !item.child" class="menulabel">
         {{ item.title }}
       </div>
       <!-- !!sub menu parent li !! -->
@@ -228,7 +228,7 @@ export default {
     @apply icon-box inline-flex items-center text-slate-600 dark:text-slate-300 text-lg ltr:mr-3 rtl:ml-3;
   }
 }
-// menu item has chilren
+// menu item has children
 .item-has-children {
   .menu-arrow {
     @apply h-5 w-5 text-base text-slate-300 bg-slate-100 dark:bg-[#334155] dark:text-slate-300 rounded-full flex justify-center items-center;

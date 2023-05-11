@@ -9,31 +9,31 @@ import avatar6 from '~/assets/images/avatar/av-6.svg'
 
 export const menuItems = [
   {
-    isHeadr: true,
+    isHeader: true,
     title: 'menu',
   },
   {
-    title: 'Dashboard',
+    title: 'menu.dashboard',
     icon: 'heroicons-outline:view-boards',
     link: 'dashboard',
   },
   {
-    title: 'Empresas',
+    title: 'menu.company',
     icon: 'heroicons-outline:home',
     link: 'companies',
   },
   {
-    title: 'Registro de Actividades',
+    title: 'menu.activities',
     icon: 'heroicons-outline:clipboard-list',
     link: 'activities',
   },
   {
-    title: 'Informes',
+    title: 'menu.reports',
     icon: 'heroicons:document',
     link: 'reports',
   },
   {
-    title: 'Objetivos y Metas',
+    title: 'menu.goals',
     icon: 'heroicons:arrow-trending-up',
     link: 'goals',
   },
@@ -88,7 +88,7 @@ export const message = [
 
 export const topMenu = [
   {
-    isHeadr: true,
+    isHeader: true,
     title: 'DASHBOARD',
   },
   {
@@ -361,7 +361,7 @@ export const topMenu = [
   },
 
   {
-    isHeadr: true,
+    isHeader: true,
     title: 'PAGES',
   },
   {
