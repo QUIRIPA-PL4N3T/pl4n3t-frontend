@@ -42,19 +42,19 @@ async function register(value: any) {
           <form class=" mb-4" @submit.prevent="register">
             <div class="flex flex-col  relative mb-2">
               <label>{{ t('register.first-name') }}</label>
-              <input class="input" type="text" :placeholder="t('register.textHinFullName')">
+              <input class="input" type="text" :placeholder="t('register.hintFullName')">
             </div>
             <div class="flex flex-col  relative mb-2">
               <label>{{ t('register.last-name') }}</label>
-              <input class="input" type="text" :placeholder="t('register.textHinFullName')">
+              <input class="input" type="text" :placeholder="t('register.hintFullName')">
             </div>
             <div class="flex flex-col  relative mb-2">
-              <label>{{ t('textEmail') }}</label>
-              <input class="input" type="text" :placeholder="t('textHinEmail')">
+              <label>{{ t('email') }}</label>
+              <input class="input" type="text" :placeholder="t('hintEmail')">
             </div>
             <div class="flex flex-col  relative mb-2">
-              <label>{{ t('textPassword') }}</label>
-              <input class="input" :type="typeInput" :placeholder="t('textHinPassword')">
+              <label>{{ t('password') }}</label>
+              <input class="input" :type="typeInput" :placeholder="t('hintPassword')">
               <div class="text-xl absolute top-14 right-3">
                 <span class="cursor-pointer text-secondary-500" @click="showPassword">
                   <Icon v-if="typeInput === 'password'" icon="heroicons-outline:eye" />
@@ -63,16 +63,16 @@ async function register(value: any) {
               </div>
             </div>
             <CheckBoxAuth
-              :label="t('register.textCheckBox')" :value="false" :model-value="checkbox" class="mt-3"
+              :label="t('register.checkBox')" :value="false" :model-value="checkbox" class="mt-3"
               @on-selected="selectedCheckBox = !selectedCheckBox"
             />
-            <ButtonAuth class=" mt-10" :text="t('register.textButtonLogin')" :on-change="register" />
+            <ButtonAuth class=" mt-10" :text="t('register.buttonLogin')" :on-change="register" />
           </form>
           <SignInSocial class=" mt-5 mb-10" />
           <div class="flex justify-center items-center mt-7">
-            <label class=" text-gray-500 text-sm mr-2">{{ t('register.textFooter') }}</label>
+            <label class=" text-gray-500 text-sm mr-2">{{ t('register.footer') }}</label>
             <RouterLink class=" flex justify-center items-center" to="/auth/login">
-              <label class=" text-sm">{{ t('register.textLink') }}</label>
+              <label class=" text-sm">{{ t('register.link') }}</label>
             </RouterLink>
           </div>
         </div>

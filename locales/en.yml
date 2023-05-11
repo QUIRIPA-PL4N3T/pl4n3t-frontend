@@ -1,29 +1,29 @@
-textEmail: Email
-textHinEmail: Email
-textErrorRequirementEmail: Email is required
-textErrorEmail: email must be a valid email
-textPassword: Password
-textHinPassword: Password
-textErrorPassword: password must be at least 8 characters
+email: Email
+hintEmail: Email
+errorRequirementEmail: Email is required
+errorEmail: email must be a valid email
+password: Password
+hintPassword: Password
+errorPassword: password must be at least 8 characters
 forgotPassword: Forgot Password?
-textSignInSocial: Or continue with
+signInSocial: Or continue with
 login:
   text: Sign in
-  textCheckBox: Keep me signed in
-  textButtonLogin: Sign in
-  textFooter: DON´T HAVE AN ACCOUNT? SIGN UP
-  textLink: SIGN UP
+  checkBox: Keep me signed in
+  buttonLogin: Sign in
+  footer: DON´T HAVE AN ACCOUNT? SIGN UP
+  link: SIGN UP
 register:
-  textFullName: Full Name
-  textHinFullName: Full Name
+  fullName: Full Name
+  hintFullName: Full Name
   text: Sign up
-  textCheckBox: You accept our Terms and Conditions and Privacy Policy
-  textButtonLogin: Create An Account
-  textFooter: ALREADY REGISTERED?
-  textLink: SIGN IP
+  checkBox: You accept our Terms and Conditions and Privacy Policy
+  buttonLogin: Create An Account
+  footer: ALREADY REGISTERED?
+  link: SIGN IP
 forgotPasswordScreen:
   text: Forgot Your Password
   textButton: send Recovery Email
   textFooter1: FORGET IT,
   textFooter2: TO THE SIGN IN
-  textLink: SIGN UP
+  link: SIGN UP

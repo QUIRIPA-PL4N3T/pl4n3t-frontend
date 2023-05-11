@@ -36,8 +36,8 @@ async function login(value: any) {
           <label class="flex justify-center text-2xl mt-4 text-slate-900">{{ t('login.text') }}</label>
           <form class=" mb-4" @submit.prevent="login">
             <div class="flex flex-col  relative mb-2">
-              <label>{{ t('textEmail') }}</label>
-              <input name="email" class="input" type="text" :placeholder="t('textHinEmail')">
+              <label>{{ t('email') }}</label>
+              <input name="email" class="input" type="text" :placeholder="t('hintEmail')">
               <h2 v-if="textError" class="text-red-500">
                 {{ textError }}
               </h2>
@@ -49,8 +49,8 @@ async function login(value: any) {
               </div>
             </div>
             <div class="flex flex-col  relative mb-2">
-              <label>{{ t('textPassword') }}</label>
-              <input name="password" class="input" :type="typeInput" :placeholder="t('textHinPassword')">
+              <label>{{ t('password') }}</label>
+              <input name="password" class="input" :type="typeInput" :placeholder="t('hintPassword')">
               <div class="text-xl absolute top-14 right-3">
                 <span class="cursor-pointer text-secondary-500" @click="showPassword">
                   <Icon v-if="typeInput === 'password'" icon="heroicons-outline:eye" />
@@ -59,18 +59,18 @@ async function login(value: any) {
               </div>
             </div>
             <div class="flex justify-between mt-5">
-              <CheckBoxAuth :label="t('login.textCheckBox')" :model-value="checkbox" :checked="false" :value="false" @on-selected="checkbox = !checkbox" />
+              <CheckBoxAuth :label="t('login.checkBox')" :model-value="checkbox" :checked="false" :value="false" @on-selected="checkbox = !checkbox" />
               <RouterLink to="/auth/resetPassword">
                 <label>{{ t('forgotPassword') }}</label>
               </RouterLink>
             </div>
-            <ButtonAuth class=" mt-10" :text="t('login.textButtonLogin')" />
+            <ButtonAuth class=" mt-10" :text="t('login.buttonLogin')" />
           </form>
           <SignInSocial class=" mt-5 mb-10" />
           <div class="flex justify-center items-center mt-7">
-            <label class=" text-gray-500 text-sm mr-2">{{ t('login.textFooter') }}</label>
+            <label class=" text-gray-500 text-sm mr-2">{{ t('login.footer') }}</label>
             <RouterLink class=" flex justify-center items-center" to="/auth/register">
-              <label class=" text-sm">{{ t('login.textLink') }}</label>
+              <label class=" text-sm">{{ t('login.link') }}</label>
             </RouterLink>
           </div>
         </div>

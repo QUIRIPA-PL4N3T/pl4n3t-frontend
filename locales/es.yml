@@ -1,34 +1,34 @@
-textEmail: Correo
-textHinEmail: Correo
-textErrorRequirementEmail: Correo requerido
-textErrorEmail: Correo no valido
-textPassword: Contraseña
-textHinPassword: Contraseña
-textErrorPassword: Minimo 8 caracteres
+email: Correo
+hintEmail: Correo
+errorRequirementEmail: Correo requerido
+errorEmail: Correo no valido
+password: Contraseña
+hintPassword: Contraseña
+errorPassword: Minimo 8 caracteres
 forgotPassword: Restablecer Contraseña?
-textSignInSocial: O Continue con
+signInSocial: O Continue con
 login:
   text: Iniciar Sesión
-  textCheckBox: Mantener conectado
-  textButtonLogin: Ingresar
-  textFooter: No tienes una cuenta?
-  textLink: Crear Cuenta
+  checkBox: Mantener conectado
+  buttonLogin: Ingresar
+  footer: No tienes una cuenta?
+  link: Crear Cuenta
 register:
-  textFullName: Nombre Completo
-  textHinFullName: Nombre Completo
+  fullName: Nombre Completo
+  hintFullName: Nombre Completo
   title: Registrarse
   description: Cree una cuenta para comenzar a usar PL4N3T
   first-name: Nombres
   last-name: Apellidos
-  textCheckBox: Aceptas nuestros Términos y Condiciones y Política de Privacidad
-  textButtonLogin: Crear Cuenta
-  textFooter: Ya tienes una Cuenta?
-  textLink: Ingresar
+  checkBox: Aceptas nuestros Términos y Condiciones y Política de Privacidad
+  buttonLogin: Crear Cuenta
+  footer: Ya tienes una Cuenta?
+  link: Ingresar
 forgotPasswordScreen:
   text: Restablecer Contraseña
   textButton: Enviar correo de recuperacion
   textFooter1: Olvidalo,
   textFooter2: Al inicio de sesion
-  textLink: Ir
+  link: Ir
 copyright:
   footer: COPYRIGHT ©; Amanecer en el Palmar, todos los derechos reservados
