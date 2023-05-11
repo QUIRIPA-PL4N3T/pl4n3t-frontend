@@ -3,12 +3,12 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <h1>{{ t('goals.title') }}</h1>
+  <h1>{{ t('activities.processActivities') }}</h1>
 </template>
 
-<route lang="yaml">
-name: goals
+  <route lang="yaml">
+name: liquidation
 meta:
   layout: sidebar
   requiresAuth: true
-</route>
+  </route>

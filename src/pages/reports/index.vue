@@ -1,5 +1,9 @@
+<script setup lang="ts">
+const { t } = useI18n()
+</script>
+
 <template>
-  <h1>reports</h1>
+  <h1>{{ t('reports.title') }}</h1>
 </template>
 
 <route lang="yaml">

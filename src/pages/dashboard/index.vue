@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Breadcrumbs />
     <h1>
       Dashboard
     </h1>

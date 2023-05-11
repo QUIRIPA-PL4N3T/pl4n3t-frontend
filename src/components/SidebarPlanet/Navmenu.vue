@@ -1,8 +1,7 @@
-<script>
-import { useRouter } from 'vue-router'
-
-export default {
-  props: {
+<script setup lang="ts">
+import { storeToRefs } from 'pinia'
+const { t } = useI18n()
+const props = defineProps({
     title: {
       type: String,
       default: '',
@@ -15,83 +14,76 @@ export default {
       type: String,
       default: '',
     },
-    items: { type: Array, required: true },
-    childrenLinks: { type: Array, default: null },
-  },
-
-  data() {
-    return {
-      activeSubmenu: null,
-    }
-  },
-
-  watch: {
-    $route() {
-      if (this.$store.themeSettingsStore.mobilSidebar)
-        this.$store.themeSettingsStore.mobilSidebar = false
-
-      this.items.map((item) => {
-        if (item.link === this.$route.name)
-          this.activeSubmenu = null
-      })
+    items: { 
+      type: Array,
+      required: true 
     },
-  },
+    childrenLinks: { 
+      type: Array, 
+      default: null 
+    },
+  })
 
-  created() {
-    const router = useRouter()
-    this.items.map((item, i) => {
-      item.child?.map((ci) => {
-        if (ci.childlink === router.currentRoute.value.name)
-          this.activeSubmenu = i
+const themeSettingsStore = useThemeSettingsStore()
+const { mobilSidebar } = storeToRefs(themeSettingsStore)
+let activeSubmenu = $ref(null)
+const router = useRouter()
+
+watch(() => router.currentRoute.value, () => {
+      if (mobilSidebar.value)
+        mobilSidebar.value = false
+
+      props.items.map((item: any) => {
+        if (item.link === router.currentRoute.value.name)
+          activeSubmenu = null
       })
-    })
-  },
-  // update if route chnage then activesubmenu null
+  })
 
-  updated() {},
-
-  methods: {
-    beforeEnter(element) {
+const beforeEnter = (element: any) => {
       requestAnimationFrame(() => {
         if (!element.style.height)
           element.style.height = '0px'
 
         element.style.display = null
       })
-    },
-    enter(element) {
+    }
+
+const enter = (element: any) => {
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           element.style.height = `${element.scrollHeight}px`
         })
       })
-    },
-    afterEnter(element) {
-      element.style.height = null
-    },
-    beforeLeave(element) {
-      requestAnimationFrame(() => {
-        if (!element.style.height)
-          element.style.height = `${element.offsetHeight}px`
-      })
-    },
-    leave(element) {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          element.style.height = '0px'
-        })
-      })
-    },
-    afterLeave(element) {
-      element.style.height = null
-    },
-    toggleSubmenu(index) {
-      if (this.activeSubmenu === index)
-        this.activeSubmenu = null
-      else
-        this.activeSubmenu = index
-    },
-  },
+    }
+
+const afterEnter = (element: any) => {
+  element.style.height = null
+}
+
+const beforeLeave = (element: any) => {
+  requestAnimationFrame(() => {
+    if (!element.style.height)
+      element.style.height = `${element.offsetHeight}px`
+  })
+}
+
+const leave = (element: any) => {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      element.style.height = '0px'
+    })
+  })
+}
+
+const afterLeave = (element: any) => {
+  element.style.height = null
+}
+
+const toggleSubmenu = (index: any) => {
+  if (activeSubmenu === index)
+    activeSubmenu = null
+  else
+    activeSubmenu = index
 }
 </script>
 
@@ -118,13 +110,13 @@ export default {
         <span v-if="item.icon" class="menu-icon">
           <Icon :icon="item.icon" /></span>
         <div v-if="item.title" class="text-box">
-          {{ item.title }}
+          {{ t(item.title) }}
         </div>
       </router-link>
 
       <!-- ?? only for menu label ??  -->
       <div v-else-if="item.isHeader && !item.child" class="menulabel">
-        {{ item.title }}
+        {{ t(item.title) }}
       </div>
       <!-- !!sub menu parent li !! -->
       <div
@@ -139,7 +131,7 @@ export default {
           <span v-show="item.icon" class="menu-icon">
             <Icon :icon="item.icon" /></span>
           <div v-if="item.title" class="text-box">
-            {{ item.title }}
+            {{ t(item.title) }}
           </div>
         </div>
         <div class="flex-0">
@@ -190,7 +182,7 @@ export default {
                   "
                 />
                 <span class="flex-1">
-                  {{ ci.childtitle }}
+                  {{ t(ci.childtitle) }}
                 </span>
               </span>
             </router-link>

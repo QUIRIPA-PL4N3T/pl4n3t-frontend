@@ -1,6 +1,10 @@
-<script>
-export default {
-}
+<script setup lang="ts">
+const { t } = useI18n()
+const route = useRoute()
+
+const name = computed( () => {
+  return route.name!.toString().replace("-", " ")
+})
 </script>
 
 <template>
@@ -14,7 +18,7 @@ export default {
       "
       class="font-medium lg:text-2xl text-xl capitalize text-slate-900 inline-block ltr:pr-4 rtl:pl-4"
     >
-      {{ $route.name.replace("-", " ") }}
+      {{ t(`${name}.title`) }}
     </h4>
     <ul v-if="$route.meta.groupParent" class="breadcrumbs">
       <li class="text-primary-500">
@@ -33,8 +37,8 @@ export default {
           <Icon icon="heroicons:chevron-right" />
         </span>
       </li>
-      <li class="capitalize text-slate-500 dark:text-slate-400">
-        {{ $route.name.replace("-", " ") }}
+      <li class="capitalize text-slate-500 dark:text-slate-400 lo">
+        {{ t(`${name}.title`) }}
       </li>
     </ul>
   </div>

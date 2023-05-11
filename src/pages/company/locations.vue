@@ -3,11 +3,11 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <h1>{{ t('goals.title') }}</h1>
+  <h1>{{ t('company.locations') }}</h1>
 </template>
 
 <route lang="yaml">
-name: goals
+name: locations
 meta:
   layout: sidebar
   requiresAuth: true

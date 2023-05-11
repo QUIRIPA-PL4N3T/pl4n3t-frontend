@@ -10,32 +10,52 @@ import avatar6 from '~/assets/images/avatar/av-6.svg'
 export const menuItems = [
   {
     isHeader: true,
-    title: 'menu',
+    title: 'menu.title',
   },
   {
     title: 'menu.dashboard',
     icon: 'heroicons-outline:view-boards',
-    link: 'dashboard',
+    link: '/dashboard',
   },
   {
     title: 'menu.company',
-    icon: 'heroicons-outline:home',
-    link: 'companies',
+    icon: 'heroicons-outline:document',
+    link: '/company',
+    child: [
+      {
+        childtitle: 'menu.company',
+        childlink: '/company',
+      },
+      {
+        childtitle: 'menu.companyLocations',
+        childlink: '/company/locations',
+      },
+    ],
   },
   {
     title: 'menu.activities',
     icon: 'heroicons-outline:clipboard-list',
-    link: 'activities',
+    link: '/activities',
+    child: [
+      {
+        childtitle: 'activities.register',
+        childlink: '/activities/register',
+      },
+      {
+        childtitle: 'activities.processActivities',
+        childlink: '/activities/liquidation',
+      },
+    ],
   },
   {
     title: 'menu.reports',
     icon: 'heroicons:document',
-    link: 'reports',
+    link: '/reports',
   },
   {
     title: 'menu.goals',
     icon: 'heroicons:arrow-trending-up',
-    link: 'goals',
+    link: '/goals',
   },
 ]
 // menu settings

@@ -39,9 +39,10 @@ function switchHeaderClass() {
     <main class="flex-1 bg-gray-50 h-full">
       <div class="py-6">
         <div
-          class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8"
+          class="px-4 sm:px-6 md:px-8"
           :class="width > 1280 ? switchHeaderClass() : ''"
         >
+          <Breadcrumbs />
           <RouterView />
         </div>
       </div>

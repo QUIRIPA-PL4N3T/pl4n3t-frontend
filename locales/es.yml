@@ -7,6 +7,8 @@ hintPassword: Contraseña
 errorPassword: Minimo 8 caracteres
 forgotPassword: Restablecer Contraseña?
 signInSocial: O Continue con
+dashboard:
+  title: Dashboard
 login:
   text: Iniciar Sesión
   checkBox: Mantener conectado
@@ -32,3 +34,25 @@ forgotPasswordScreen:
   link: Ir
 copyright:
   footer: COPYRIGHT ©; Amanecer en el Palmar, todos los derechos reservados
+company:
+  title: Compañia
+  locations: Sedes
+locations:
+  title: Sedes
+menu:
+  title: Menu
+  dashboard: Dashboard
+  company: Compañia
+  activities: Actividades
+  goals: Metas y Objetivos
+  reports: Reportes
+  companyLocations: Sedes
+activities:
+  register: Registar Actividades
+  processActivities: Liquidar Periodo
+liquidation:
+  title: Liquidar
+goals:
+  title: Metas
+reports:
+  title: Reportes
