@@ -5,7 +5,7 @@ export const useThemeSettingsStore = defineStore('themeSettings', {
     sidebarCollapse: false,
     sidebarHidden: false,
     mobilSidebar: false,
-    semidark: false,
+    semiDark: false,
     monochrome: false,
     semiDarkTheme: 'semi-light',
     isDark: false,
@@ -54,10 +54,10 @@ export const useThemeSettingsStore = defineStore('themeSettings', {
       this.mobilSidebar = !this.mobilSidebar
     },
     toggleSemiDark() {
-      this.semidark = !this.semidark
-      this.semiDarkTheme = this.semidark ? 'semi-dark' : 'semi-light'
+      this.semiDark = !this.semiDark
+      this.semiDarkTheme = this.semiDark ? 'semi-dark' : 'semi-light'
       document.body.classList.toggle(this.semiDarkTheme)
-      localStorage.setItem('semiDark', String(this.semidark))
+      localStorage.setItem('semiDark', String(this.semiDark))
     },
   },
 })

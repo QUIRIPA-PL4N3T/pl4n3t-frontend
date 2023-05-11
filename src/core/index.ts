@@ -26,12 +26,12 @@ export function setup() {
   }
   if (localStorage.semiDark === 'true') {
     document.body.classList.add('semi-dark')
-    themeSettingsStore.semidark = true
+    themeSettingsStore.semiDark = true
     themeSettingsStore.semiDarkTheme = 'semi-dark'
   }
   else {
     document.body.classList.add('semi-light')
-    themeSettingsStore.semidark = false
+    themeSettingsStore.semiDark = false
     themeSettingsStore.semiDarkTheme = 'semi-light'
   }
   // check local storage for menuLayout

@@ -6,11 +6,11 @@ const openClass = 'w-[248px]'
 const closeClass = 'w-[72px] close_sidebar'
 const shadowBase = ref(false)
 const themeSettingsStore = useThemeSettingsStore()
-const { sidebarCollapse, skin, semidark, isMouseHovered, isDark } = storeToRefs(themeSettingsStore)
+const { sidebarCollapse, skin, semiDark, isMouseHovered, isDark } = storeToRefs(themeSettingsStore)
 </script>
 
 <template>
-  <div :class="semidark ? 'dark' : ''">
+  <div :class="semiDark ? 'dark' : ''">
     <div
       :class="`sidebar-wrapper bg-white dark:bg-slate-800 ${
         skin === 'bordered'
@@ -51,7 +51,7 @@ const { sidebarCollapse, skin, semidark, isMouseHovered, isDark } = storeToRefs(
           <img
             v-if="
               !isDark
-                && !semidark
+                && !semiDark
             "
             src="../../assets/images/logo.png"
             alt=""
@@ -60,7 +60,7 @@ const { sidebarCollapse, skin, semidark, isMouseHovered, isDark } = storeToRefs(
           <img
             v-if="
               isDark
-                || semidark
+                || semiDark
             "
             src="../../assets/images/logo.png"
             alt=""
@@ -76,7 +76,7 @@ const { sidebarCollapse, skin, semidark, isMouseHovered, isDark } = storeToRefs(
           <img
             v-if="
               !isDark
-                && !semidark
+                && !semiDark
             "
             src="../../assets/images/logo.png"
             alt=""
@@ -84,7 +84,7 @@ const { sidebarCollapse, skin, semidark, isMouseHovered, isDark } = storeToRefs(
           <img
             v-if="
               isDark
-                || semidark
+                || semiDark
             "
             src="../../assets/images/logo.png"
             alt=""

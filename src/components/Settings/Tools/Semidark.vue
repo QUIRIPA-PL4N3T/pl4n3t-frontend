@@ -2,23 +2,23 @@
 export default {
   data() {
     return {
-      semidark: this.$store.themeSettingsStore.semidark,
+      semiDark: this.$store.themeSettingsStore.semiDark,
     }
   },
   watch: {
-    semidark: {
+    semiDark: {
       handler() {
-        if (this.semidark) {
-          this.$store.themeSettingsStore.semidark = this.semidark
+        if (this.semiDark) {
+          this.$store.themeSettingsStore.semiDark = this.semiDark
           document.body.classList.remove('semi-light')
           document.body.classList.add('semi-dark')
-          localStorage.setItem('semiDark', this.semidark)
+          localStorage.setItem('semiDark', this.semiDark)
         }
         else {
-          this.$store.themeSettingsStore.semidark = this.semidark
+          this.$store.themeSettingsStore.semiDark = this.semiDark
           document.body.classList.remove('semi-dark')
           document.body.classList.add('semi-light')
-          localStorage.setItem('semiDark', this.semidark)
+          localStorage.setItem('semiDark', this.semiDark)
         }
       },
       immediate: true,
@@ -37,13 +37,13 @@ export default {
       </div>
       <div>
         <label
-          :class="semidark ? 'bg-primary-500' : 'bg-secondary-500'"
+          :class="semiDark ? 'bg-primary-500' : 'bg-secondary-500'"
           class="relative inline-flex h-6 w-[46px] items-center rounded-full transition-all duration-150 cursor-pointer"
         >
-          <input v-model="semidark" type="checkbox" class="hidden">
+          <input v-model="semiDark" type="checkbox" class="hidden">
           <span
             :class="
-              semidark
+              semiDark
                 ? 'ltr:translate-x-6 rtl:-translate-x-6'
                 : 'ltr:translate-x-[2px] rtl:translate-x-[-2px]'
             "
