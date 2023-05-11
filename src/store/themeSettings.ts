@@ -50,7 +50,7 @@ export const useThemeSettingsStore = defineStore('themeSettings', {
     toggleSettings() {
       this.isOpenSettings = !this.isOpenSettings
     },
-    toggleMsidebar() {
+    toggleMobilsidebar() {
       this.mobilSidebar = !this.mobilSidebar
     },
     toggleSemiDark() {

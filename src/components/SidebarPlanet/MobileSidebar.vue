@@ -17,8 +17,8 @@ export default defineComponent({
     }
   },
   methods: {
-    toggleMsidebar() {
-      themeSettingsStore.toggleMsidebar()
+    toggleMobilsidebar() {
+      themeSettingsStore.toggleMobilsidebar()
     },
   },
 })
@@ -48,7 +48,7 @@ export default defineComponent({
       </router-link>
       <span
         class="cursor-pointer text-slate-900 dark:text-white text-2xl"
-        @click="toggleMsidebar"
+        @click="toggleMobilsidebar"
       ><Icon icon="heroicons:x-mark" /></span>
     </div>
 
