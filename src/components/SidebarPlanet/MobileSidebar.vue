@@ -53,7 +53,7 @@ export default defineComponent({
     </div>
 
     <div class="sidebar-menu px-4 h-[calc(100%-100px)]" data-simplebar>
-      <Navmenu :items="menuItems" />
+      <NavMenu :items="menuItems" />
       <div
         v-if="!$store.themeSettingsStore.sidebarCollapse"
         class="bg-slate-900 mb-[100px] mt-14 p-4 relative text-center rounded-2xl text-white"
