@@ -36,7 +36,7 @@ function switchHeaderClass() {
         @click="mobilSidebar = false"
       />
     </Transition>
-    <main class="flex-1 bg-gray-50 h-full">
+    <main class="flex-1 h-full">
       <div class="py-6">
         <div
           class="px-4 sm:px-6 md:px-8"

@@ -119,7 +119,7 @@ const { sidebarCollapse, skin, semiDark, isMouseHovered, isDark } = storeToRefs(
       />
 
       <div class="sidebar-menu px-4 h-[calc(100%-80px)]">
-        <NavMenu :items="menuItems" />
+        <NavigationMenu :items="menuItems" />
     </div>
     </div>
   </div>

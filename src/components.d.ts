@@ -44,6 +44,7 @@ declare module '@vue/runtime-core' {
     Monochrome: typeof import('./components/Settings/Tools/Monochrome.vue')['default']
     MonochromeMode: typeof import('./components/header/navTools/MonochromeMode.vue')['default']
     Navbar: typeof import('./components/Settings/Tools/Navbar.vue')['default']
+    NavigationMenu: typeof import('./components/SidebarPlanet/NavigationMenu.vue')['default']
     Navmenu: typeof import('./components/SidebarPlanet/Navmenu.vue')['default']
     NavMenu: typeof import('./components/SidebarPlanet/NavMenu.vue')['default']
     Notification: typeof import('./components/header/navTools/notification.vue')['default']
