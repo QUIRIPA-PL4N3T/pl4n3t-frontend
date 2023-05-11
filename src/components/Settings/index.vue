@@ -60,7 +60,7 @@ export default {
           <hr class="-mx-6 border-slate-200 dark:border-slate-700">
 
           <Navbar />
-          <Footer v-if="window.width > 768" />
+          <FooterPlanet v-if="window.width > 768" />
         </div>
       </div>
     </Transition>
