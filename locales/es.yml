@@ -37,6 +37,10 @@ copyright:
 company:
   title: Compañia
   locations: Sedes
+  contact: Conctacto
+  edit: Editar información
+  phone: Teléfono
+  email: Correo
 locations:
   title: Sedes
 menu:
@@ -56,3 +60,7 @@ goals:
   title: Metas
 reports:
   title: Reportes
+membership:
+  title: Membresía
+  locationLimit: Limite de sedes
+  workersLimit: Limiete de Empleados
