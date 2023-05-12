@@ -21,7 +21,7 @@ async function register(value: any) {
     <div class="lg-inner-column">
       <div class="left-columns lg:w-1/2 lg:block hidden">
         <div class="logo-box-3">
-          <Logo :image="logo" class=" h-28" />
+          <Logo :image="logo" class="w-3/4 max-w-[384px]" />
         </div>
       </div>
       <div class="lg:w-1/2 w-full flex flex-col items-center justify-center">

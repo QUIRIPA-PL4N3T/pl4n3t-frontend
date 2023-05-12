@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
+
 const { t } = useI18n()
 const route = useRoute()
-
-const name = computed( () => {
-  return route.name!.toString().replace("-", " ")
+const router = useRouter()
+const name = computed(() => {
+  return route.name!.toString().replace('-', ' ')
 })
 </script>
 
@@ -18,6 +20,9 @@ const name = computed( () => {
       "
       class="font-medium lg:text-2xl text-xl capitalize text-slate-900 inline-block ltr:pr-4 rtl:pl-4"
     >
+      <button btn text-sm m="3 t8" @click="router.back()">
+        <Icon icon="material-symbols:arrow-back-ios" class="pt-2" />
+      </button>
       {{ t(`${name}.title`) }}
     </h4>
     <ul v-if="$route.meta.groupParent" class="breadcrumbs">

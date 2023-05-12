@@ -85,7 +85,7 @@ export default defineComponent({
       >
         <img
           v-if="ck"
-          src="@/assets/images/icon/ck-white.svg"
+          src="../../assets/images/icon/ck-white.svg"
           alt=""
           class="h-[10px] w-[10px] block m-auto"
         >

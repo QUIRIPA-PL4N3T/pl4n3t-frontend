@@ -1,9 +1,6 @@
 <script>
 export default {
   name: 'PlanetButton',
-  components: {
-    Icon,
-  },
   props: {
     text: {
       type: String,

@@ -1,9 +1,5 @@
 <script>
-import Cleave from 'vue-cleave-component'
-import Icon from '@/components/Icon'
-
 export default {
-  components: { Icon, Cleave },
   props: {
     placeholder: {
       type: String,
@@ -120,21 +116,6 @@ export default {
         :validate="validate"
         @input="$emit('update:modelValue', $event.target.value)"
       >
-      <Cleave
-        v-if="isMask"
-        :id="name"
-        :class="`${classInput} cleave input-control block w-full focus:outline-none h-[40px] `"
-        :name="name"
-        :placeholder="placeholder"
-        :value="modelValue"
-        :error="error"
-        :readonly="isReadonly"
-        :disabled="disabled"
-        :validate="validate"
-        :options="options"
-        model-value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
-      />
 
       <div
         class="flex text-xl absolute ltr:right-[14px] rtl:left-[14px] top-1/2 -translate-y-1/2"

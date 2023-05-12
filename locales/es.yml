@@ -38,9 +38,30 @@ company:
   title: Compañia
   locations: Sedes
   contact: Conctacto
-  edit: Editar información
+  edit: Editar
+  name: Nombre
+  address: Dirección
+  url: Página Web
   phone: Teléfono
   email: Correo
+  status: Estado
+  status-options:
+    very-good: Muy bueno
+    good: Bueno
+    fair: Regular
+    bad: Malo
+    very-bad: Muy malo
+company edit.title: Editar
+location:
+  modal:
+    title: Agregar un nueva sede
+  name: Nombre
+  address: Dirección
+  phone: Telefono
+  email: Correo
+  employees: Empleados
+  status: Estado
+  add: Agregar Sede
 locations:
   title: Sedes
 menu:
@@ -62,5 +83,9 @@ reports:
   title: Reportes
 membership:
   title: Membresía
-  locationLimit: Limite de sedes
-  workersLimit: Limiete de Empleados
+  locationLimit: Límite de sedes
+  workersLimit: Límite de Empleados
+cancel: Cancelar
+save: Guardar
+button:
+  back: Atrás

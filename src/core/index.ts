@@ -1,7 +1,13 @@
 import { useThemeSettingsStore } from '~/store/themeSettings'
+import { useCompanyStore } from '~/store/company'
+import companyInitialData from '~/constant/company'
 
 export function setup() {
   const themeSettingsStore = useThemeSettingsStore()
+  const companyStore = useCompanyStore()
+
+  companyStore.fetchCompany(companyInitialData)
+
   if (localStorage.users === undefined) {
     const users = [
       {

@@ -9,7 +9,6 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   components: {
-    Icon,
     TransitionRoot,
     TransitionChild,
     Dialog,
