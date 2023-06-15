@@ -45,6 +45,7 @@ company:
   phone: Teléfono
   email: Correo
   status: Estado
+  equipment: Agentes Emisor
   status-options:
     very-good: Muy bueno
     good: Bueno
@@ -67,14 +68,43 @@ locations:
 menu:
   title: Menu
   dashboard: Dashboard
+  characterization: Caracterización
   company: Compañia
   activities: Actividades
   goals: Metas y Objetivos
   reports: Reportes
   companyLocations: Sedes
+  equipment: Fuentes de Emisión
+  inventory: Inventario
+  register-data: Ingreso de Datos
 activities:
   register: Registar Actividades
+  add: Agregar Actividad
+  location: Sede
+  activity: Actividad
+  amount: Cantidad
+  month: Mes
+  ho2: HO2
+  hc4: HC4
+  n20: N2O
+  modal:
+    title: Registrar una Actividad
+    location: Sede
+    activity: Actividad
+    amount: Cantidad
+    month: Mes
   processActivities: Liquidar Periodo
+equipments:
+  title: Fuentes de Emisión
+  add: Agregar
+  modal:
+    location: Sede
+    equipment-type: Tipo de equipo
+    name: Nombre
+    description: Descripción
+    branch: Marca
+    identification: Placa | Serial | Número de Identificación
+    title: Listado de máquinas y equipos registrados
 liquidation:
   title: Liquidar
 goals:
@@ -83,6 +113,8 @@ reports:
   title: Reportes
 membership:
   title: Membresía
+  update: Cambiar de Plan
+  benefits: Para obtener mejores resultados
   locationLimit: Límite de sedes
   workersLimit: Límite de Empleados
 cancel: Cancelar

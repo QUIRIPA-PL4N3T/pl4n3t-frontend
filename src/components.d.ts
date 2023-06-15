@@ -10,6 +10,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Accordion: typeof import('./components/Accordion/index.vue')['default']
+    ActivitiesTable: typeof import('./components/PlanetComponents/ActivitiesTable.vue')['default']
     Alert: typeof import('./components/Alert/index.vue')['default']
     Badge: typeof import('./components/Badge/index.vue')['default']
     Bar: typeof import('./components/ProgressBar/Bar.vue')['default']
@@ -24,6 +25,8 @@ declare module '@vue/runtime-core' {
     CompanyTable: typeof import('./components/PlanetComponents/CompanyTable.vue')['default']
     DesktopMenu: typeof import('./components/header/navTools/DesktopMenu.vue')['default']
     Dropdown: typeof import('./components/Dropdown/index.vue')['default']
+    EquimentTable: typeof import('./components/PlanetComponents/EquimentTable.vue')['default']
+    EquipmentTable: typeof import('./components/PlanetComponents/EquipmentTable.vue')['default']
     Fileinput: typeof import('./components/Fileinput/index.vue')['default']
     FooterMenu: typeof import('./components/PlanetFooter/FooterMenu.vue')['default']
     FooterPlanet: typeof import('./components/Settings/Tools/FooterPlanet.vue')['default']

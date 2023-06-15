@@ -1,12 +1,20 @@
 import { useThemeSettingsStore } from '~/store/themeSettings'
 import { useCompanyStore } from '~/store/company'
 import companyInitialData from '~/constant/company'
+import activitiesInitialData from '~/constant/activities'
+import emissionFactorsData from '~/constant/emission-factor'
+import { useEmissionFactorStore } from '~/store/emissionFactor'
 
 export function setup() {
+  const emissionFactorStore = useEmissionFactorStore()
   const themeSettingsStore = useThemeSettingsStore()
   const companyStore = useCompanyStore()
 
   companyStore.fetchCompany(companyInitialData)
+  emissionFactorStore.fetchActivities(emissionFactorsData)
+  activitiesInitialData.forEach((activity: any) => {
+    emissionFactorStore.addActivity(activity)
+  })
 
   if (localStorage.users === undefined) {
     const users = [

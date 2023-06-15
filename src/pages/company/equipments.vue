@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia'
 const companyStore = useCompanyStore()
 const emissionFactorStore = useEmissionFactorStore()
 const { optionsLocations } = storeToRefs(companyStore)
-const { optionsFactor, optionsMonths, activities } = storeToRefs(emissionFactorStore)
+const { optionsFactor, optionsMonths, equipments } = storeToRefs(emissionFactorStore)
 
 const empty: any = {
   id: 0,
@@ -23,7 +23,7 @@ const { t } = useI18n()
 function addActivity() {
   const emissionFactor = emissionFactorStore.getEmissionFactorById(Number(activity.activity))
   if (emissionFactor) {
-    const id = activities.value.length + 1
+    const id = equipments.value.length + 1
     emissionFactorStore.addActivity(
       {
         id,
@@ -43,19 +43,19 @@ function addActivity() {
 <template>
   <div class="w-full h-full">
     <div class="lg:col-span-4 col-span-12 space-y-5">
-      <Card :title="t('activities.modal.title')" noborder>
+      <Card :title="t('equipments.modal.title')" noborder>
         <template #header>
           <Modal
             ref="modal1"
-            :title="t('activities.modal.title')"
-            :label="t('activities.add')"
+            :title="t('equipments.modal.title')"
+            :label="t('equipments.add')"
             label-class="btn btn-dark btn-sm"
           >
             <form action="" @submit.prevent="addActivity">
               <div class="text-base text-slate-600 dark:text-slate-300">
                 <Select
                   v-model="activity.location"
-                  :label="t('activities.modal.location')"
+                  :label="t('equipments.modal.location')"
                   :options="optionsLocations"
                   type="text"
                   placeholder="..."
@@ -63,30 +63,35 @@ function addActivity() {
                 />
                 <Select
                   v-model="activity.activity"
-                  :label="t('activities.modal.activity')"
+                  :label="t('equipments.modal.equipment-type')"
                   :options="optionsFactor"
                   type="text"
                   placeholder="..."
                   name="activity"
                 />
-                <div class="my-2 flex flex-col">
-                  <label for="amount">{{ t('activities.modal.amount') }}</label>
-                  <input
-                    id="'amount"
-                    v-model="activity.amount"
-                    placeholder="..."
-                    type="number"
-                    name="amount"
-                    class="w-full input-control h-[40px]"
-                  >
-                </div>
-                <Select
-                  v-model="activity.month"
-                  :label="t('activities.modal.month')"
-                  :options="optionsMonths"
+                <Textinput
+                  :label="t('equipments.modal.name')"
                   type="text"
                   placeholder="..."
-                  name="month"
+                  name="phon"
+                />
+                <Textinput
+                  :label="t('equipments.modal.description')"
+                  type="text"
+                  placeholder="..."
+                  name="phon"
+                />
+                <Textinput
+                  :label="t('equipments.modal.branch')"
+                  type="text"
+                  placeholder="..."
+                  name="phon"
+                />
+                <Textinput
+                  :label="t('equipments.modal.identification')"
+                  type="text"
+                  placeholder="..."
+                  name="phon"
                 />
               </div>
               <div class="flex gap-2 justify-end mt-4">
@@ -105,14 +110,14 @@ function addActivity() {
             </form>
           </Modal>
         </template>
-        <ActivitiesTable />
+        <EquipmentTable />
       </Card>
     </div>
   </div>
 </template>
 
 <route lang="yaml">
-name: register
+name: equipments
 meta:
   layout: sidebar
   requiresAuth: true

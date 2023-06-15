@@ -18,7 +18,7 @@ export const menuItems = [
     link: '/dashboard',
   },
   {
-    title: 'menu.company',
+    title: 'menu.characterization',
     icon: 'heroicons-outline:document',
     link: '/company',
     child: [
@@ -33,7 +33,12 @@ export const menuItems = [
     ],
   },
   {
-    title: 'menu.activities',
+    title: 'menu.inventory',
+    icon: 'heroicons-outline:view-boards',
+    link: '/company/equipments',
+  },
+  {
+    title: 'menu.register-data',
     icon: 'heroicons-outline:clipboard-list',
     link: '/activities',
     child: [
