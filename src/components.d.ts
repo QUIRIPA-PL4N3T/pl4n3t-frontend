@@ -25,7 +25,6 @@ declare module '@vue/runtime-core' {
     CompanyTable: typeof import('./components/PlanetComponents/CompanyTable.vue')['default']
     DesktopMenu: typeof import('./components/header/navTools/DesktopMenu.vue')['default']
     Dropdown: typeof import('./components/Dropdown/index.vue')['default']
-    EquimentTable: typeof import('./components/PlanetComponents/EquimentTable.vue')['default']
     EquipmentTable: typeof import('./components/PlanetComponents/EquipmentTable.vue')['default']
     Fileinput: typeof import('./components/Fileinput/index.vue')['default']
     FooterMenu: typeof import('./components/PlanetFooter/FooterMenu.vue')['default']

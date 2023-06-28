@@ -3,7 +3,9 @@ import { storeToRefs } from 'pinia'
 import json from './location-headers.json'
 
 const companyStore = useCompanyStore()
+const basicStore = useBasicStore()
 const { company } = storeToRefs(companyStore)
+const { optionsLocationTypeList } = storeToRefs(basicStore)
 const router = useRouter()
 
 const { t } = useI18n()
@@ -37,6 +39,10 @@ function goEditCompany() {
                 type="text"
                 placeholder="..."
                 name="address"
+              />
+              <Select
+                label="Tipo de Sede"
+                :options="optionsLocationTypeList"
               />
               <Textinput
                 :label="t('location.phone')"

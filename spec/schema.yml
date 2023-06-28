@@ -1,0 +1,861 @@
+openapi: 3.0.3
+info:
+  title: Pl4N3T API
+  version: 1.0.0
+  description: API Documentation
+paths:
+  /api/accounts/{id}/:
+    delete:
+      operationId: accountsDestroy
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Usuario.
+          required: true
+      tags:
+        - Accounts
+      security:
+        - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/accounts/avatar/:
+    post:
+      operationId: accountsAvatarCreate
+      description: Anexar una imagen a una emergencia
+      summary: Anexar documento a un modelo de datos
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                avatar:
+                  type: string
+                  format: binary
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserModel'
+          description: ''
+  /api/accounts/current/:
+    get:
+      operationId: accountsCurrentRetrieve
+      description: Obtiene el Usuario Actual utilizando el token en el HEADER
+      summary: Obtiene el Usuario Actual utilizando el token en el HEADER
+      tags:
+        - Accounts
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserModel'
+          description: ''
+        '401':
+          description: Usted no tiene permiso para ver este usuario
+  /api/accounts/login/:
+    post:
+      operationId: accountsLoginCreate
+      description: Iniciar Sesión
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomTokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CustomTokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CustomTokenObtainPair'
+        required: true
+      security:
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenOutput'
+          description: ''
+  /api/accounts/logout/:
+    post:
+      operationId: accountsLogoutCreate
+      description: Cerrar sesión
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Logout'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Logout'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Logout'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          description: Cierre de sesión exitoso
+        '401':
+          description: Usted no tiene permiso para ver este usuario
+  /api/accounts/recover-password/:
+    post:
+      operationId: accountsRecoverPasswordCreate
+      description: Solicitar el cambio de contraseña
+      summary: Recuperar Contraseña
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPasswordRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ResetPasswordRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ResetPasswordRequest'
+        required: true
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResetPasswordRequest'
+          description: ''
+  /api/accounts/refresh/:
+    post:
+      operationId: accountsRefreshCreate
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /api/accounts/register/:
+    post:
+      operationId: accountsRegisterCreate
+      description: Registrar un nuevo Usuario
+      summary: Registrar un nuevo Usuario
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Register'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Register'
+        required: true
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserModel'
+          description: ''
+  /api/accounts/user/{username}/:
+    get:
+      operationId: accountsUserRetrieve
+      description: Obtiene la información de un usuario mediante el nombre usuario
+      summary: Obtiene la información de un usuario mediante el nombre usuario
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+      tags:
+        - Accounts
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserModel'
+          description: ''
+        '404':
+          description: El Usuario no existe
+    post:
+      operationId: accountsUserCreate
+      description: Actualiza los datos del usuario, solo el usuario puede actualizar
+        sus datos
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserModel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserModel'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserModel'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserModel'
+          description: ''
+        '404':
+          description: El Usuario no existe
+        '400':
+          description: Datos inválidos
+        '401':
+          description: Usted no tiene permiso para actualizar este usuario
+    delete:
+      operationId: accountsUserDestroy
+      description: Elimina un usuario, solo el usuario se puede eliminar a si mismo
+      summary: Elimina un usuario, solo el usuario se puede eliminar a si mismo
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+      tags:
+        - Accounts
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          description: Eliminación exitosa del usuario
+        '404':
+          description: El Usuario no existe
+        '400':
+          description: Usted no tiene permiso para eliminar este usuario
+  /api/main/city/:
+    get:
+      operationId: mainCityList
+      tags:
+        - Main
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/City'
+          description: ''
+  /api/main/configurations/:
+    get:
+      operationId: mainConfigurationsList
+      tags:
+        - Main
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Configuration'
+          description: ''
+  /api/main/document-type/:
+    get:
+      operationId: mainDocumentTypeList
+      tags:
+        - Main
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DocumentType'
+          description: ''
+  /api/main/economic-sector/:
+    get:
+      operationId: mainEconomicSectorList
+      tags:
+        - Main
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EconomicSector'
+          description: ''
+  /api/main/industry-type/:
+    get:
+      operationId: mainIndustryTypeList
+      tags:
+        - Main
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IndustryType'
+          description: ''
+  /api/main/location-type/:
+    get:
+      operationId: mainLocationTypeList
+      tags:
+        - Main
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LocationType'
+          description: ''
+  /api/main/state/:
+    get:
+      operationId: mainStateList
+      tags:
+        - Main
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/State'
+          description: ''
+  /api/main/unit-of-measure/:
+    get:
+      operationId: mainUnitOfMeasureList
+      tags:
+        - Main
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UnitOfMeasure'
+          description: ''
+  /documentation/schema.yml:
+    get:
+      operationId: documentationSchema.ymlRetrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+        - in: query
+          name: format
+          schema:
+            type: string
+            enum:
+              - json
+              - yaml
+        - in: query
+          name: lang
+          schema:
+            type: string
+            enum:
+              - en
+              - es
+      tags:
+        - documentation
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+components:
+  schemas:
+    BlankEnum:
+      enum:
+        - ''
+    City:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        state:
+          $ref: '#/components/schemas/State'
+        name:
+          type: string
+          title: Nombre del Municipio
+          maxLength: 255
+        dane_code:
+          type: string
+          title: Código DANE
+          maxLength: 3
+        slug:
+          type: string
+          readOnly: true
+          pattern: ^[-a-zA-Z0-9_]+$
+        coords_lat:
+          type: number
+          format: double
+          nullable: true
+        coords_long:
+          type: number
+          format: double
+          nullable: true
+        geo_location:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - Point
+            coordinates:
+              type: array
+              items:
+                type: number
+                format: float
+              example:
+                - 12.9721
+                - 77.5933
+              minItems: 2
+              maxItems: 3
+          nullable: true
+      required:
+        - dane_code
+        - id
+        - name
+        - slug
+        - state
+    Configuration:
+      type: object
+      properties:
+        key:
+          type: string
+          maxLength: 200
+        value:
+          type: string
+          maxLength: 200
+      required:
+        - key
+        - value
+    CustomTokenObtainPair:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+          writeOnly: true
+      required:
+        - email
+        - password
+    DocumentType:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Tipo de Documento
+          maxLength: 64
+        code:
+          type: string
+          title: Código
+          maxLength: 8
+      required:
+        - code
+        - id
+        - name
+    EconomicSector:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre del Sector
+          maxLength: 255
+      required:
+        - id
+        - name
+    IndustryType:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Tipo de Industria
+          maxLength: 255
+      required:
+        - id
+        - name
+    LocationType:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Tipo de sede
+          maxLength: 255
+      required:
+        - id
+        - name
+    Logout:
+      type: object
+      properties:
+        refresh_token:
+          type: string
+      required:
+        - refresh_token
+    MeasureTypeEnum:
+      enum:
+        - AREA
+        - LENGTH
+        - ANGLE
+        - TIME
+        - VELOCITY
+        - VOLUMEN
+        - SCALE
+        - WEIGHT
+        - ENERGY
+        - MASS
+        - TEMPERATURE
+        - POWER
+        - FREQUENCY
+        - ENERGY_CONSUMPTION
+      type: string
+      description: |-
+        * `` - Desconocido
+        * `AREA` - Area
+        * `LENGTH` - Longitud
+        * `ANGLE` - Ángulo
+        * `TIME` - Tiempo
+        * `VELOCITY` - Velocidad
+        * `VOLUMEN` - Volumen
+        * `SCALE` - Escala
+        * `WEIGHT` - Peso
+        * `ENERGY` - Energía
+        * `MASS` - Masa
+        * `TEMPERATURE` - Presión
+        * `POWER` - Potencia
+        * `FREQUENCY` - Frecuencia
+        * `ENERGY_CONSUMPTION` - Consumo de energía
+    Register:
+      type: object
+      properties:
+        first_name:
+          type: string
+          title: Nombre
+          maxLength: 150
+        last_name:
+          type: string
+          title: Apellidos
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: Correo Electrónico
+          maxLength: 254
+        password:
+          type: string
+          title: Contraseña
+          maxLength: 128
+      required:
+        - email
+        - password
+    ResetPasswordRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+        - email
+    State:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre del Departamento
+          maxLength: 255
+        dane_code:
+          type: string
+          title: Código DANE
+          maxLength: 3
+        geonames_code:
+          type: string
+          nullable: true
+          title: Código GeoNames
+          maxLength: 10
+        slug:
+          type: string
+          readOnly: true
+          pattern: ^[-a-zA-Z0-9_]+$
+      required:
+        - dane_code
+        - id
+        - name
+        - slug
+    TokenOutput:
+      type: object
+      properties:
+        refresh:
+          type: string
+          title: Refresh token
+        access:
+          type: string
+          title: Access token
+      required:
+        - access
+        - refresh
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+      required:
+        - access
+        - refresh
+    UnitOfMeasure:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          description: El(los) nombre(s) de una unidad de medida (udm) particular.
+            Los ejemplos incluirían lo siguiente:1) para el área udm - metros cuadrados
+            <br />2) para udm Time - segundos <br />3) para el área udm - metros <br
+            />4) Ángulo udm - grados.
+          maxLength: 256
+        slug:
+          type: string
+          maxLength: 32
+        symbol:
+          type: string
+          title: Símbolo
+          description: El símbolo utilizado para esta unidad de medida, como "ft"
+            para pies o "m" para metro.
+          maxLength: 8
+        measure_type:
+          title: Tipo de Medida
+          description: |-
+            Tipo de medida
+
+            * `` - Desconocido
+            * `AREA` - Area
+            * `LENGTH` - Longitud
+            * `ANGLE` - Ángulo
+            * `TIME` - Tiempo
+            * `VELOCITY` - Velocidad
+            * `VOLUMEN` - Volumen
+            * `SCALE` - Escala
+            * `WEIGHT` - Peso
+            * `ENERGY` - Energía
+            * `MASS` - Masa
+            * `TEMPERATURE` - Presión
+            * `POWER` - Potencia
+            * `FREQUENCY` - Frecuencia
+            * `ENERGY_CONSUMPTION` - Consumo de energía
+          oneOf:
+            - $ref: '#/components/schemas/MeasureTypeEnum'
+            - $ref: '#/components/schemas/BlankEnum'
+        name_standard_unit:
+          type: string
+          title: Nombre de la unidad Estándar
+          description: Nombre de las unidades estándar a las que se puede convertir
+            directamente esta unidad de medidaSi esta variable es NULL, entonces la
+            unidad estándar para este tipo de medida dada por el localcopia de la
+            lista de códigos StandardsUnits.
+          maxLength: 64
+        scale_to_standard_unit:
+          type: number
+          format: double
+          nullable: true
+          title: Escala para la unidad Estándar
+          description: Si el sistema de implementación utilizado para este objeto
+            no es compatible con NULL, la escala se establece en 0 es equivalente
+            a NULL tanto para la escala como para el desplazamiento.<br />Si X es
+            la unidad actual y S es la estándar, la escala de dos variables (ToStandardUnit)y
+            offset(ToStandardUnit) se puede usar para hacer la conversión de X a S
+            por:<br />S = compensación + escala*X <br />y, por el contrario, <br />X
+            = (desplazamiento S)/escala
+        offset_to_standard_unit:
+          type: number
+          format: double
+          nullable: true
+          title: Compensación a la unidad estándar
+          description: Consulte scaleToStandardUnit para obtener una descripción.
+            Nuevamente, esta variable es NULL y no es una conversión lineal es posible.
+            Si las dos unidades son solo una escala en diferencia, entonces este número
+            es cero (0). Si el sistema de implementación utilizado para este objeto
+            no es compatible con NULL, entonces el conjunto de escalado a 0 es equivalente
+            a NULL tanto para la escala como para el desplazamiento
+        formula:
+          type: string
+          description: Una fórmula algebraica (probablemente en algún lenguaje de
+            programación) que convierte esta unidad de medida (representada en la
+            fórmula por su uomSymbol) a la norma ISO (representada por su símbolo.
+            Este atributo de miembro no es obligatorio, pero es una pieza valiosa
+            de documentación
+          maxLength: 32
+      required:
+        - id
+        - measure_type
+        - symbol
+    UserModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          title: Nombre de usuario
+          description: 'Requerido. 150 carácteres como máximo. Únicamente letras,
+            dígitos y @/./+/-/_ '
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        first_name:
+          type: string
+          title: Nombre
+          maxLength: 150
+        last_name:
+          type: string
+          title: Apellidos
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: Correo Electrónico
+          maxLength: 254
+        avatar:
+          type: string
+          readOnly: true
+      required:
+        - avatar
+        - email
+        - id
+        - username
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+servers:
+  - url: http://localhost:8000

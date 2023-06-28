@@ -6,4 +6,10 @@ dist
 dist-ssr
 node_modules
 .idea/
+.env
+.env.development
+.env.production
 *.log
+
+# Generated API Client
+/src/api-client

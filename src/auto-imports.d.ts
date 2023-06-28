@@ -123,6 +123,7 @@ declare global {
   const useAttrs: typeof import('vue')['useAttrs']
   const useAuthStore: typeof import('./store/auth')['useAuthStore']
   const useBase64: typeof import('@vueuse/core')['useBase64']
+  const useBasicStore: typeof import('./store/basic')['useBasicStore']
   const useBattery: typeof import('@vueuse/core')['useBattery']
   const useBluetooth: typeof import('@vueuse/core')['useBluetooth']
   const useBreakpoints: typeof import('@vueuse/core')['useBreakpoints']
@@ -412,6 +413,7 @@ declare module 'vue' {
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useAuthStore: UnwrapRef<typeof import('./store/auth')['useAuthStore']>
     readonly useBase64: UnwrapRef<typeof import('@vueuse/core')['useBase64']>
+    readonly useBasicStore: UnwrapRef<typeof import('./store/basic')['useBasicStore']>
     readonly useBattery: UnwrapRef<typeof import('@vueuse/core')['useBattery']>
     readonly useBluetooth: UnwrapRef<typeof import('@vueuse/core')['useBluetooth']>
     readonly useBreakpoints: UnwrapRef<typeof import('@vueuse/core')['useBreakpoints']>

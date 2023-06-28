@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia'
 
 const { t } = useI18n()
-
+const { optionsStateList, optionCities, optionsIndustryTypeList, optionsEconomicSectorList } = useBasicStore()
 const companyStore = useCompanyStore()
 const { company } = storeToRefs(companyStore)
 </script>
@@ -54,7 +54,27 @@ const { company } = storeToRefs(companyStore)
             type="text"
             placeholder="..."
           />
-          <Select label="Country" name="hmi_country" />
+          <Select
+            label="Departamento"
+            :options="optionsStateList"
+          />
+
+          <Select
+            label="Ciudad"
+            :options="optionCities"
+          />
+
+          <Select
+            label="Sector Económico"
+            :options="optionsEconomicSectorList"
+          />
+
+          <Select
+            label="Tipo de Industria"
+            :options="optionsIndustryTypeList"
+          />
+
+          <!-- <Select label="Country" name="hmi_country" /> -->
         </div>
         <div class="flex justify-end">
           <div class="space-y-5">
