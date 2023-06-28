@@ -1,8 +1,21 @@
+<script setup lang="ts">
+import { storeToRefs } from 'pinia'
+import { useThemeSettingsStore } from '~/store/themeSettings'
+const themeSettingsStore = useThemeSettingsStore()
+const { isDark } = storeToRefs(themeSettingsStore)
+const toggleDark = () => {
+  themeSettingsStore.toggleDark()
+}
+</script>
+
 <template>
   <span
-
-    class="h-[28px] w-[28px] lg:h-[32px] lg:w-[32px] lg:bg-gray-500-f7 bg-slate-50 dark:bg-slate-900 lg:dark:bg-slate-900 dark:text-white text-slate-900 cursor-pointer rounded-full text-[20px] flex flex-col items-center justify-center"
+    class="lg:h-[32px] lg:w-[32px] lg:bg-gray-500-f7 bg-slate-50 lg:dark:bg-slate-900 dark:text-white text-slate-900 cursor-pointer rounded-full text-[20px] flex flex-col items-center justify-center"
+    @click="toggleDark"
   >
-    <Icon icon="heroicons-outline:moon" />
+    <Icon v-if="!isDark" icon="heroicons-outline:moon" />
+    <Icon v-else icon="heroicons-outline:sun" />
   </span>
 </template>
+
+<style lang=""></style>

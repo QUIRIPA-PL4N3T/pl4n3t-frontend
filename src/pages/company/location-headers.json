@@ -1,0 +1,34 @@
+[
+  {
+    "label": "Id",
+    "field": "id"
+  },
+  {
+    "label": "Order",
+    "field": "order"
+  },
+  {
+    "label": "Customer",
+    "field": "customer"
+  },
+  {
+    "label": "Date",
+    "field": "date"
+  },
+  {
+    "label": "Quantity",
+    "field": "quantity"
+  },
+  {
+    "label": "Amount",
+    "field": "amount"
+  },
+  {
+    "label": "Status",
+    "field": "status"
+  },
+  {
+    "label": "Action",
+    "field": "action"
+  }
+]

@@ -1,29 +1,123 @@
-textEmail: Correo
-textHinEmail: Correo
-textErrorRequirementEmail: Correo requerido
-textErrorEmail: Correo no valido
-textPassword: Contraseña
-textHinPassword: Contraseña
-textErrorPassword: Minimo 8 caracteres
+email: Correo
+hintEmail: Correo
+errorRequirementEmail: Correo requerido
+errorEmail: Correo no valido
+password: Contraseña
+hintPassword: Contraseña
+errorPassword: Minimo 8 caracteres
 forgotPassword: Restablecer Contraseña?
-textSignInSocial: O Continue con
+signInSocial: O Continue con
+dashboard:
+  title: Dashboard
 login:
-  text: Iniciar de sesion
-  textCheckBox: Keep me signed in
-  textButtonLogin: Ingresar
-  textFooter: No tienes una cuenta?
-  textLink: Crear Cuenta
+  text: Iniciar Sesión
+  checkBox: Mantener conectado
+  buttonLogin: Ingresar
+  footer: No tienes una cuenta?
+  link: Crear Cuenta
 register:
-  textFullName: Nombre Completo
-  textHinFullName: Nombre Completo
-  text: REGISTRASE
-  textCheckBox: Aceptas nuestros Términos y Condiciones y Política de Privacidad
-  textButtonLogin: Crear Cuenta
-  textFooter: Ya tienes una Cuenta?
-  textLink: Ingresar
+  fullName: Nombre Completo
+  hintFullName: Nombre Completo
+  title: Registrarse
+  description: Cree una cuenta para comenzar a usar PL4N3T
+  first-name: Nombres
+  last-name: Apellidos
+  checkBox: Aceptas nuestros Términos y Condiciones y Política de Privacidad
+  buttonLogin: Crear Cuenta
+  footer: Ya tienes una Cuenta?
+  link: Ingresar
 forgotPasswordScreen:
   text: Restablecer Contraseña
   textButton: Enviar correo de recuperacion
   textFooter1: Olvidalo,
   textFooter2: Al inicio de sesion
-  textLink: Ir
+  link: Ir
+copyright:
+  footer: COPYRIGHT ©; Amanecer en el Palmar, todos los derechos reservados
+company:
+  title: Compañia
+  locations: Sedes
+  contact: Conctacto
+  edit: Editar
+  name: Nombre
+  address: Dirección
+  url: Página Web
+  phone: Teléfono
+  email: Correo
+  status: Estado
+  equipment: Agentes Emisor
+  status-options:
+    very-good: Muy bueno
+    good: Bueno
+    fair: Regular
+    bad: Malo
+    very-bad: Muy malo
+company edit.title: Editar
+location:
+  modal:
+    title: Agregar un nueva sede
+  name: Nombre
+  address: Dirección
+  phone: Telefono
+  email: Correo
+  employees: Empleados
+  status: Estado
+  add: Agregar Sede
+locations:
+  title: Sedes
+menu:
+  title: Menu
+  dashboard: Dashboard
+  characterization: Caracterización
+  company: Compañia
+  activities: Actividades
+  goals: Metas y Objetivos
+  reports: Reportes
+  companyLocations: Sedes
+  equipment: Fuentes de Emisión
+  inventory: Inventario
+  register-data: Ingreso de Datos
+activities:
+  register: Registar Actividades
+  add: Agregar Actividad
+  location: Sede
+  activity: Actividad
+  amount: Cantidad
+  month: Mes
+  ho2: HO2
+  hc4: HC4
+  n20: N2O
+  modal:
+    title: Registrar una Actividad
+    location: Sede
+    activity: Actividad
+    amount: Cantidad
+    month: Mes
+  processActivities: Liquidar Periodo
+equipments:
+  title: Fuentes de Emisión
+  add: Agregar
+  modal:
+    location: Sede
+    equipment-type: Tipo de equipo
+    name: Nombre
+    description: Descripción
+    branch: Marca
+    identification: Placa | Serial | Número de Identificación
+    title: Listado de máquinas y equipos registrados
+liquidation:
+  title: Liquidar
+goals:
+  title: Metas
+reports:
+  title: Reportes
+membership:
+  title: Membresía
+  update: Cambiar de Plan
+  benefits: Para obtener mejores resultados
+  locationLimit: Límite de sedes
+  workersLimit: Límite de Empleados
+cancel: Cancelar
+save: Guardar
+button:
+  back: Atrás

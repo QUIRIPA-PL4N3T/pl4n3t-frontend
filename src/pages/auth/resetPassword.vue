@@ -20,12 +20,12 @@ function resetPassword() {
         <label class="flex justify-center text-2xl mt-10 text-slate-900">{{ t('forgotPasswordScreen.text') }}</label>
         <form class=" mb-4" @submit.prevent="resetPassword">
           <div class="flex flex-col  relative mb-2">
-            <label for="la">{{ t('textEmail') }}</label>
+            <label for="la">{{ t('email') }}</label>
             <input
               v-model="email"
               class="input"
               type="text"
-              :placeholder="t('textHinEmail')"
+              :placeholder="t('hintEmail')"
               onchange=""
             >
             <h2 v-if="textError" class="text-red-500">
@@ -43,7 +43,7 @@ function resetPassword() {
         <div class="flex justify-center items-center mt-7">
           <label class=" text-gray-500 text-sm mr-2">{{ t('forgotPasswordScreen.textFooter1') }}</label>
           <RouterLink class=" flex justify-center items-center" to="/auth/login">
-            <label class="text-sm mr-2 hover:cursor-pointer hover:underline ">{{ t ('forgotPasswordScreen.textLink') }}</label>
+            <label class="text-sm mr-2 hover:cursor-pointer hover:underline ">{{ t ('forgotPasswordScreen.link') }}</label>
           </RouterLink>
           <label class=" text-gray-500 text-sm mr-2">{{ t('forgotPasswordScreen.textFooter2') }}</label>
         </div>

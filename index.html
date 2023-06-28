@@ -1,25 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" class="">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <title>Vitesse Lite</title>
-  <meta name="description" content="Opinionated Vite Starter Template">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/logo-p.png" />
+  <link rel="stylesheet" type="text/css" href="/loader.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <title>Pl4n3t</title>
+  <meta name="description" content="Pl4n3t application">
 </head>
-<body class="font-sans dark:text-white dark:bg-hex-121212">
-  <div id="app"></div>
+<body class="font-Inter">
+  <!-- TODO: remove display none and implement loading element-->
+  <div id="loading-bg" style="display: none;">
+    <div class="loading-logo text-center">
+      <img src="/logo.png" alt="Logo" />
+    </div>
+    <div class="loading">
+      <div class="effect-1 effects"></div>
+      <div class="effect-2 effects"></div>
+      <div class="effect-3 effects"></div>
+    </div>
+  </div>
+  <div id="app" class="h-full"></div>
   <noscript>
     <div>Please enable JavaScript to use this application.</div>
   </noscript>
-  <script>
-    (function() {
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-      const setting = localStorage.getItem('color-schema') || 'auto'
-      if (setting === 'dark' || (prefersDark && setting !== 'light'))
-        document.documentElement.classList.toggle('dark', true)
-    })()
-  </script>
   <script type="module" src="/src/main.ts"></script>
 </body>
 </html>

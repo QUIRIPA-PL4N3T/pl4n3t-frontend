@@ -6,12 +6,14 @@ import {
   ListboxOption,
   ListboxOptions,
 } from '@headlessui/vue'
-import langImg1 from '../../../assets/images/flags/usa.png'
-import langImg2 from '../../../assets/images/flags/gn.png'
+import langImg1 from '~/assets/images/flags/es.svg'
+import langImg2 from '~/assets/images/flags/en.svg'
+import langImg3 from '~/assets/images/flags/pt.svg'
 
 const months = [
-  { name: 'En', image: langImg1 },
-  { name: 'Gn', image: langImg2 },
+  { name: 'Es', image: langImg1 },
+  { name: 'En', image: langImg2 },
+  { name: 'Pt', image: langImg3 },
 ]
 const selectLanguage = ref(months[0])
 </script>
@@ -23,7 +25,7 @@ const selectLanguage = ref(months[0])
         <ListboxButton
           class="relative w-full flex items-center cursor-pointer space-x-[6px] rtl:space-x-reverse"
         >
-          <span class="inline-block md:h-6 md:w-6 w-5 h-5 rounded-full "><img
+          <span class="inline-block md:h-6 md:w-6 w-4 h-4 rounded-full"><img
             :src="selectLanguage.image"
             alt=""
             class="h-full w-full object-cover rounded-full"
@@ -39,7 +41,7 @@ const selectLanguage = ref(months[0])
           leave-to-class="opacity-0"
         >
           <ListboxOptions
-            class="absolute min-w-[100px] ltr:right-0 rtl:left-0 md:top-[49px] top-[34px] w-auto max-h-60 overflow-auto border border-slate-200 dark:border-slate-700 rounded bg-white dark:bg-slate-800 mt-1"
+            class="absolute min-w-[100px] ltr:right-0 rtl:left-0 md:top-[50px] top-[38px] w-auto max-h-60 overflow-auto border border-slate-200 dark:border-slate-700 rounded bg-white dark:bg-slate-800 mt-1"
           >
             <ListboxOption
               v-for="item in months"
