@@ -46,6 +46,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserModel'
           description: ''
+  /api/accounts/change-password/:
+    post:
+      operationId: accountsChangePasswordCreate
+      description: Cambiar contraseña
+      summary: Cambiar Contraseña
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPassword'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ResetPassword'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ResetPassword'
+        required: true
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResetPassword'
+          description: ''
   /api/accounts/current/:
     get:
       operationId: accountsCurrentRetrieve
@@ -670,6 +699,16 @@ components:
       required:
         - email
         - password
+    ResetPassword:
+      type: object
+      properties:
+        token:
+          type: string
+        password:
+          type: string
+      required:
+        - password
+        - token
     ResetPasswordRequest:
       type: object
       properties:
