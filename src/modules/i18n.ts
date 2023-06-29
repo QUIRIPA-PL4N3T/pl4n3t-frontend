@@ -9,7 +9,7 @@ const messages = Object.fromEntries(
     }),
 )
 
-const i18n = createI18n({
+const instance = createI18n({
   legacy: false,
   locale: 'es',
   fallbackLocale: 'en',
@@ -17,4 +17,6 @@ const i18n = createI18n({
   messages,
 })
 
-export default i18n
+export const i18n = instance.global
+
+export default instance
