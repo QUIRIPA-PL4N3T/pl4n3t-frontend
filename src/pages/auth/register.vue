@@ -1,17 +1,33 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import logo from '~/assets/images/logo.png'
+import { handleError } from '~/utilities/utils'
 
 const { t } = useI18n()
 const authStore = useAuthStore()
 const checkbox = ref<boolean>(false)
 const router = useRouter()
-let typeInput = $ref<string>('password')
 const selectedCheckBox = $ref<boolean>(false)
-const showPassword = () => typeInput = typeInput === 'text' ? 'password' : 'text'
+let dialogVisible = $ref(false)
+let errorMessage = $ref('')
 
-async function register(value: any) {
-  await authStore.logIn(value)
+function showPassword(node: any) {
+  node.props.suffixIcon = node.props.suffixIcon === 'eye' ? 'eyeClosed' : 'eye'
+  node.props.type = node.props.type === 'password' ? 'text' : 'password'
+}
+
+async function onSubmit(value: any) {
+  try {
+    await authStore.createUser(value)
+    dialogVisible = true
+  }
+  catch (error) {
+    errorMessage = t(handleError(error))
+  }
+}
+
+function dialogConfirm() {
+  dialogVisible = false
   router.push('/auth/login')
 }
 </script>
@@ -39,35 +55,65 @@ async function register(value: any) {
               {{ t('register.description') }}
             </div>
           </div>
-          <form class=" mb-4" @submit.prevent="register">
-            <div class="flex flex-col  relative mb-2">
-              <label>{{ t('register.first-name') }}</label>
-              <input class="input" type="text" :placeholder="t('register.hintFullName')">
-            </div>
-            <div class="flex flex-col  relative mb-2">
-              <label>{{ t('register.last-name') }}</label>
-              <input class="input" type="text" :placeholder="t('register.hintFullName')">
-            </div>
-            <div class="flex flex-col  relative mb-2">
-              <label>{{ t('email') }}</label>
-              <input class="input" type="text" :placeholder="t('hintEmail')">
-            </div>
-            <div class="flex flex-col  relative mb-2">
-              <label>{{ t('password') }}</label>
-              <input class="input" :type="typeInput" :placeholder="t('hintPassword')">
-              <div class="text-xl absolute top-14 right-3">
-                <span class="cursor-pointer text-secondary-500" @click="showPassword">
-                  <Icon v-if="typeInput === 'password'" icon="heroicons-outline:eye" />
-                  <Icon v-else icon="heroicons-outline:eye-off" />
-                </span>
-              </div>
-            </div>
+          <el-alert v-if="errorMessage" :title="errorMessage" type="error" show-icon />
+          <FormKit type="form" :actions="false" autocomplete="off" :incomplete-message="false" @submit="onSubmit">
+            <FormKit
+              type="text"
+              autocomplete="first_name"
+              name="first_name"
+              :label="t('register.first-name')"
+              validation="required|length:3"
+              outer-class="mb-6"
+            />
+            <FormKit
+              type="text"
+              name="last_name"
+              :label="t('register.last-name')"
+              validation="required|length:3"
+              outer-class="mb-6"
+            />
+
+            <FormKit
+              type="text"
+              autocomplete="email"
+              name="email"
+              :label="t('email')"
+              placeholder="jondoe@email.com"
+              validation="required|email"
+              outer-class="mb-6"
+            />
+
+            <FormKit
+              type="password"
+              name="password"
+              :label="t('password')"
+              placeholder="********"
+              validation="required|length:8"
+              validation-visibility="live"
+              outer-class="mb-7"
+              suffix-icon="eyeClosed"
+              @suffix-icon-click="showPassword"
+            />
             <CheckBoxAuth
-              :label="t('register.checkBox')" :value="false" :model-value="checkbox" class="mt-3"
+              :label="t('register.checkBox')"
+              :value="false"
+              :model-value="checkbox"
+              class="mt-3"
               @on-selected="selectedCheckBox = !selectedCheckBox"
             />
-            <ButtonAuth class=" mt-10" :text="t('register.buttonLogin')" :on-change="register" />
-          </form>
+            <div class="border-transparent hover:border-slate-900 border-2 rounded mt-10">
+              <FormKit
+                type="submit"
+                :label="t('register.buttonLogin')"
+                :classes="{
+                  input: '$reset w-[99%] flex justify-center items-center justify-items-center h-11 bg-slate-900 text-white  rounded m-0.5',
+                  wrapper: '$reset',
+                  outer: '$reset',
+                }"
+              />
+            </div>
+          </FormKit>
+
           <SignInSocial class=" mt-5 mb-10" />
           <div class="flex justify-center items-center mt-7">
             <label class=" text-gray-500 text-sm mr-2">{{ t('register.footer') }}</label>
@@ -77,6 +123,26 @@ async function register(value: any) {
           </div>
         </div>
       </div>
+
+      <el-dialog v-model="dialogVisible" :title="t('register.success')" width="30%" center>
+        <span>
+          {{ t('register.account-activation') }}
+        </span>
+        <template #footer>
+          <span class="dialog-footer">
+            <el-button @click="dialogVisible = false">{{ t('cancel') }}</el-button>
+            <el-button type="primary" @click="dialogConfirm()">
+              {{ t('confirm') }}
+            </el-button>
+          </span>
+        </template>
+      </el-dialog>
     </div>
   </div>
 </template>
+
+<style>
+.formkit-suffix-icon {
+  @apply ml-3;
+}
+</style>

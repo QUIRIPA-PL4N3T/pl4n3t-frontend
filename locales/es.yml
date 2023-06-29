@@ -26,6 +26,8 @@ register:
   buttonLogin: Crear Cuenta
   footer: Ya tienes una Cuenta?
   link: Ingresar
+  success: ¡Usuario registrado!
+  account-activation: Debe ingresar a su correo para continuar con la activación de su cuenta
 forgotPasswordScreen:
   text: Restablecer Contraseña
   textButton: Enviar correo de recuperacion
@@ -121,3 +123,7 @@ cancel: Cancelar
 save: Guardar
 button:
   back: Atrás
+errors:
+  register:
+    exist: Ya existe un usuario registrado con este correo
+    password: Su contraseña no puede ser una clave utilizada comúnmente.

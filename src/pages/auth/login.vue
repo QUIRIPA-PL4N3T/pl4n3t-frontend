@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
+import { ElAlert } from 'element-plus'
+import { handleError } from '~/utilities/utils'
 
 const authStore = useAuthStore()
 const router = useRouter()
@@ -9,15 +11,22 @@ const typeInput = $ref<string>('password')
 const { isAuthenticated } = storeToRefs(authStore)
 const { t } = useI18n()
 
+let errorMessage = $ref('')
+
 function showPassword(node: any) {
   node.props.suffixIcon = node.props.suffixIcon === 'eye' ? 'eyeClosed' : 'eye'
   node.props.type = node.props.type === 'password' ? 'text' : 'password'
 }
 
 async function login(value: any) {
-  await authStore.logIn(value)
-  if (isAuthenticated.value)
-    router.push('/dashboard')
+  try {
+    await authStore.logIn(value)
+    if (isAuthenticated.value)
+      router.push('/dashboard')
+  }
+  catch (error: any) {
+    errorMessage = handleError(error)
+  }
 }
 </script>
 
@@ -36,6 +45,7 @@ async function login(value: any) {
             <Logo class="h-16 mt-8 m-auto" />
           </div>
           <label class="flex justify-center text-2xl mt-4 text-slate-900">{{ t('login.text') }}</label>
+          <ElAlert v-if="errorMessage" :title="errorMessage" type="error" show-icon />
           <FormKit
             type="form" :actions="false"
             :incomplete-message="false"
