@@ -5,11 +5,13 @@ import { setupLayouts } from 'virtual:generated-layouts'
 import generatedRoutes from 'virtual:generated-pages'
 import { createPinia } from 'pinia'
 import { defaultConfig, plugin } from '@formkit/vue'
+import ElementPlus from 'element-plus'
 import App from './App.vue'
 import './styles/tailwind.css'
 import './assets/scss/auth.scss'
 import './assets/scss/tailwind.scss'
 import 'vue-good-table-next/dist/vue-good-table-next.css'
+import 'element-plus/dist/index.css'
 import { i18n } from './modules/index'
 import isAuthGuard from './guard/authGuard'
 import { setup } from '~/core'
@@ -34,6 +36,7 @@ app.use(pinia)
 app.use(router)
 app.use(i18n)
 app.use(plugin, defaultConfig(config))
+app.use(ElementPlus)
 app.use(
   VueTippy,
   // optional

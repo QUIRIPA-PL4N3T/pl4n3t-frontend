@@ -21,6 +21,7 @@
     "@intlify/unplugin-vue-i18n": "^0.10.0",
     "@vueuse/core": "^9.13.0",
     "axios": "^1.4.0",
+    "element-plus": "^2.3.7",
     "eslint-config-prettier": "^8.8.0",
     "js-cookie": "^3.0.5",
     "pinia": "^2.0.35",
