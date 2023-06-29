@@ -5,12 +5,14 @@ import { useI18n } from 'vue-i18n'
 const authStore = useAuthStore()
 const router = useRouter()
 const checkbox = ref<boolean>(false)
-const textError = ref<string>()
-let typeInput = $ref<string>('password')
+const typeInput = $ref<string>('password')
 const { isAuthenticated } = storeToRefs(authStore)
 const { t } = useI18n()
 
-const showPassword = () => typeInput = typeInput === 'text' ? 'password' : 'text'
+function showPassword(node: any) {
+  node.props.suffixIcon = node.props.suffixIcon === 'eye' ? 'eyeClosed' : 'eye'
+  node.props.type = node.props.type === 'password' ? 'text' : 'password'
+}
 
 async function login(value: any) {
   await authStore.logIn(value)
@@ -34,38 +36,50 @@ async function login(value: any) {
             <Logo class="h-16 mt-8 m-auto" />
           </div>
           <label class="flex justify-center text-2xl mt-4 text-slate-900">{{ t('login.text') }}</label>
-          <form class=" mb-4" @submit.prevent="login">
-            <div class="flex flex-col  relative mb-2">
-              <label>{{ t('email') }}</label>
-              <input name="email" class="input" type="text" :placeholder="t('hintEmail')">
-              <h2 v-if="textError" class="text-red-500">
-                {{ textError }}
-              </h2>
+          <FormKit
+            type="form" :actions="false"
+            :incomplete-message="false"
+            @submit="login"
+          >
+            <FormKit
+              type="text"
+              name="email"
+              class="input"
+              :label="t('email')"
+              placeholder="jondoe@mail.com"
+              validation="required|email"
+              outer-class="my-6"
+            />
 
-              <div class="text-xl absolute top-14 right-3">
-                <span v-if="textError" class="text-red-500">
-                  <Icon icon="heroicons-outline:information-circle" />
-                </span>
-              </div>
-            </div>
-            <div class="flex flex-col  relative mb-2">
-              <label>{{ t('password') }}</label>
-              <input name="password" class="input" :type="typeInput" :placeholder="t('hintPassword')">
-              <div class="text-xl absolute top-14 right-3">
-                <span class="cursor-pointer text-secondary-500" @click="showPassword">
-                  <Icon v-if="typeInput === 'password'" icon="heroicons-outline:eye" />
-                  <Icon v-else icon="heroicons-outline:eye-off" />
-                </span>
-              </div>
-            </div>
+            <FormKit
+              :type="typeInput"
+              name="password"
+              :label="t('password')"
+              placeholder="********"
+              suffix-icon="eyeClosed"
+              validation="required|length:8"
+              outer-class="mb-4"
+              @suffix-icon-click="showPassword"
+            />
+
             <div class="flex justify-between mt-5">
               <CheckBoxAuth :label="t('login.checkBox')" :model-value="checkbox" :checked="false" :value="false" @on-selected="checkbox = !checkbox" />
               <RouterLink to="/auth/resetPassword">
                 <label>{{ t('forgotPassword') }}</label>
               </RouterLink>
             </div>
-            <ButtonAuth class=" mt-10" :text="t('login.buttonLogin')" />
-          </form>
+            <div class="border-transparent hover:border-slate-900 border-2 rounded mt-10">
+              <FormKit
+                type="submit"
+                :label="t('login.buttonLogin')"
+                :classes="{
+                  input: '$reset w-[99%] flex justify-center items-center justify-items-center h-11 bg-slate-900 text-white  rounded m-0.5',
+                  wrapper: '$reset',
+                  outer: '$reset',
+                }"
+              />
+            </div>
+          </FormKit>
           <SignInSocial class=" mt-5 mb-10" />
           <div class="flex justify-center items-center mt-7">
             <label class=" text-gray-500 text-sm mr-2">{{ t('login.footer') }}</label>
@@ -82,5 +96,9 @@ async function login(value: any) {
 <style>
 .auth-background {
   background-image: linear-gradient(135deg, #5c94ff 0%, #9332ff 100%);
+}
+
+.formkit-suffix-icon {
+  @apply ml-3;
 }
 </style>
