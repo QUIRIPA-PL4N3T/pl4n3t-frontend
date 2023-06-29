@@ -4,6 +4,7 @@ import { plugin as VueTippy } from 'vue-tippy'
 import { setupLayouts } from 'virtual:generated-layouts'
 import generatedRoutes from 'virtual:generated-pages'
 import { createPinia } from 'pinia'
+import { defaultConfig, plugin } from '@formkit/vue'
 import App from './App.vue'
 import './styles/tailwind.css'
 import './assets/scss/auth.scss'
@@ -12,6 +13,7 @@ import 'vue-good-table-next/dist/vue-good-table-next.css'
 import { i18n } from './modules/index'
 import isAuthGuard from './guard/authGuard'
 import { setup } from '~/core'
+import config from '~/formkit.config.js'
 
 const app = createApp(App)
 const pinia = createPinia()
@@ -31,6 +33,7 @@ const router = createRouter({
 app.use(pinia)
 app.use(router)
 app.use(i18n)
+app.use(plugin, defaultConfig(config))
 app.use(
   VueTippy,
   // optional

@@ -1,6 +1,12 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@formkit/icons':
+    specifier: ^0.17.3
+    version: 0.17.3
+  '@formkit/themes':
+    specifier: ^0.17.3
+    version: 0.17.3(tailwindcss@3.3.2)
   '@formkit/vue':
     specifier: ^0.17.3
     version: 0.17.3(tailwindcss@3.3.2)(vue@3.2.47)
@@ -733,6 +739,12 @@ packages:
       '@formkit/core': 0.17.3
       '@formkit/utils': 0.17.3
       '@formkit/validation': 0.17.3
+    dev: false
+
+  /@formkit/icons@0.17.3:
+    resolution: {integrity: sha512-/kiIIsvHKhEL7JV9ltDgI8+lUQXM6c4okdPyVCOfeMhQe9gs5djPeh7JWwPYD+RBudN2VrEgFHs1DrHNN5HkVg==}
+    dependencies:
+      '@formkit/core': 0.17.3
     dev: false
 
   /@formkit/inputs@0.17.3:

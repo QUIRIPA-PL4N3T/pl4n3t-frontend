@@ -1,9 +1,12 @@
 import colors from 'tailwindcss/colors'
 
+const FormKitVariants = require('@formkit/themes/tailwindcss')
+
 module.exports = {
   content: [
     './public/**/*.html',
-    './src/**/*.{vue,js,ts,jsx,tsx}',
+    './src/**/*.{html,vue,js,ts,jsx,tsx}',
+    './node_modules/@formkit/themes/dist/tailwindcss/genesis/index.cjs',
     './node_modules/vue-tailwind-datepicker/**/*.js',
   ],
   mode: 'jit',
@@ -175,5 +178,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [FormKitVariants],
 }
