@@ -7,10 +7,33 @@ const closeClass = 'w-[72px] close_sidebar'
 const shadowBase = ref(false)
 const themeSettingsStore = useThemeSettingsStore()
 const { sidebarCollapse, skin, semiDark, isMouseHovered, isDark } = storeToRefs(themeSettingsStore)
+const environmentStore = useEnvironmentStore()
+const { getEnvironments } = storeToRefs(environmentStore)
+
+
+const companies = [
+  { name: "sede 1" },
+  { name: "sede 2" },
+  { name: "sede 3" },
+  { name: "sede 4" },
+  { name: "sede 5" },
+  { name: "sede 6" },
+  { name: "sede 7" },
+  { name: "sede 8" },
+  { name: "sede 9" }
+]
+
+
+
+
+
+
+
+
 </script>
 
 <template>
-  <div :class="semiDark ? 'dark' : ''">
+  <div :class="semiDark ? 'dark ' : ''  ">
     <div
       :class="`sidebar-wrapper bg-white dark:bg-slate-800 ${
         skin === 'bordered'
@@ -117,6 +140,9 @@ const { sidebarCollapse, skin, semiDark, isMouseHovered, isDark } = storeToRefs(
         class="h-[60px] absolute top-[80px] nav-shadow z-[1] w-full transition-all duration-200 pointer-events-none"
         :class="[shadowBase ? ' opacity-100' : ' opacity-0']"
       />
+      <MenuEnvironment  />
+      <br>
+      <MenuLocationSearch  :items="companies" />
 
       <div class="sidebar-menu px-4 h-[calc(100%-80px)]">
         <NavigationMenu :items="menuItems" />

@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 export const useCompanyStore = defineStore('company', {
   state: () => ({
     company: <any>{},
+    currentLocation: <any>{},
   }),
   getters: {
     optionsLocations(): any {
@@ -11,6 +12,9 @@ export const useCompanyStore = defineStore('company', {
         value: location.id,
       }),
       )
+    },
+    getCurrentLocation(): any {
+      return this.currentLocation
     },
   },
   actions: {
@@ -22,6 +26,9 @@ export const useCompanyStore = defineStore('company', {
       if (location)
         return location.name
       return `location ${id}`
+    },
+    fetchCurrentLocation(data: any): any {
+      this.currentLocation = data
     },
   },
 })

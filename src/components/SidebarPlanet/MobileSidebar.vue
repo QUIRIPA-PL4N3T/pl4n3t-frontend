@@ -10,10 +10,24 @@ export default defineComponent({
     Icon,
   },
   data() {
+    const companies = [
+  { name: "sede 1" },
+  { name: "sede 2" },
+  { name: "sede 3" },
+  { name: "sede 4" },
+  { name: "sede 5" },
+  { name: "sede 6" },
+  { name: "sede 7" },
+  { name: "sede 8" },
+  { name: "sede 9" }
+]
+
     return {
       menuItems,
       openClass: 'w-[248px]',
       closeClass: 'w-[72px] close_sidebar',
+      companies
+      
     }
   },
   methods: {
@@ -51,6 +65,9 @@ export default defineComponent({
         @click="toggleMobilsidebar"
       ><Icon icon="heroicons:x-mark" /></span>
     </div>
+
+    <DropdownSearch  :items="companies"/>
+
 
     <div class="sidebar-menu px-4 h-[calc(100%-100px)]" data-simplebar>
       <NavigationMenu :items="menuItems" />
