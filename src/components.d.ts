@@ -26,7 +26,6 @@ declare module '@vue/runtime-core' {
     CompanyTable: typeof import('./components/PlanetComponents/CompanyTable.vue')['default']
     DesktopMenu: typeof import('./components/header/navTools/DesktopMenu.vue')['default']
     Dropdown: typeof import('./components/Dropdown/index.vue')['default']
-    DropdownSearch: typeof import('./components/DropdownSearch/index.vue')['default']
     ElAlert: typeof import('element-plus/lib')['ElAlert']
     ElButton: typeof import('element-plus/lib')['ElButton']
     ElDialog: typeof import('element-plus/lib')['ElDialog']

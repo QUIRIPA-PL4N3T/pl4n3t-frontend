@@ -16,7 +16,8 @@ import { i18n } from './modules/index'
 import isAuthGuard from './guard/authGuard'
 import { setup } from '~/core'
 import config from '~/formkit.config.js'
-import '@fortawesome/fontawesome-free/css/all.css'
+
+// import '@fortawesome/fontawesome-free/css/all.css'
 
 const app = createApp(App)
 const pinia = createPinia()

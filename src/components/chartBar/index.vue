@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import Chart from 'chart.js/auto';
+// import Chart from 'chart.js/auto';
 
 const { id } = defineProps<{ id: String }>()
 
@@ -58,10 +58,10 @@ const config = {
     },
 };
 onMounted(() => {
-    const chart = new Chart(
-        document.getElementById(id),
-        config
-    )
+    // const chart = new Chart(
+    //     document.getElementById(id),
+    //     config
+    // )
 })
 
 

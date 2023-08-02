@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
 
 const environments = [
-  'huella de carbono',
-  'huella hidrica',
-  'huella plastica',
+  'Huella de carbono',
+  'Huella hídrica',
+  'Huella plástica',
 ]
 
 export const useEnvironmentStore = defineStore('environment', {
