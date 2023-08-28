@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useClassificationStore } from '~/store/classification'
 
@@ -19,7 +19,7 @@ watch(selectedEnvironment, (newVal) => {
     <FormKit
       v-model="selectedEnvironment"
       type="select"
-      :label="t('general.manage')"
+      :label="`${t('general.manage')}:`"
       :options="optionsQuantificationTypes"
     />
   </div>

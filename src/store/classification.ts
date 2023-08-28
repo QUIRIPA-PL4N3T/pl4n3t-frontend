@@ -26,6 +26,7 @@ export const useClassificationStore = defineStore('classification', {
       // Fetch document types
         const { data: quantificationTypes } = await quantificationTypeApi.classificationsQuantificationTypesList()
         this.quantificationTypes = quantificationTypes
+        this.environment = this.quantificationTypes[0]
       }
       catch (error) {
         console.error(error)
