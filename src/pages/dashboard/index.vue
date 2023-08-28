@@ -1,14 +1,10 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 
-const { t } = useI18n()
-
 const emissionFactorStore = useEmissionFactorStore()
+const companyStore = useCompanyStore()
 const { statistics } = storeToRefs(emissionFactorStore)
-
-const sedes = [
-  { label: '1' },
-]
+const { company } = storeToRefs(companyStore)
 
 const show = $ref<boolean[]>([])
 function toggleGraphVisibility(index: number) {
@@ -30,7 +26,7 @@ function toggleGraphVisibility(index: number) {
                 <div class=" flex justify-between items-center h-36 bg-white lg:p-8  p-4 rounded-3xl shadow">
                   <div class="flex flex-col h-full justify-between text-xl font-bold">
                     <p>
-                      123,5
+                      0
                     </p>
                     <p>Ton CO2e</p>
                   </div>
@@ -45,15 +41,15 @@ function toggleGraphVisibility(index: number) {
               <div class="mt-4 mb-5 lg:ml-6 lg:mr-6">
                 <div class="flex mb-8">
                   <p class=" mr-2 font-bold text-6xl lg:text-4xl ">
-                    5
+                    {{ company.locations.length }}
                   </p>
                   <p>Sedes registradas</p>
                 </div>
                 <div class="flex flex-row items-end">
                   <p class=" mr-2 font-bold text-6xl lg:text-4xl">
-                    110
+                    0
                   </p>
-                  <p>Fuentes de emision en invierno</p>
+                  <p>Fuentes de emisión en invierno</p>
                 </div>
               </div>
               <div class=" lg:hidden h-px w-4/5 bg-black-400 border-dotted border-2 m-auto mt-4 mb-4 " />
@@ -62,19 +58,19 @@ function toggleGraphVisibility(index: number) {
                   <div class="flex flex-row justify-end mb-1">
                     <p>Progreso</p>
                   </div>
-                  <div v-for="company in item.companies" :key="company.name">
+                  <div v-for="location in item.companies" :key="location.name">
                     <div class="flex justify-between">
                       <div class=" flex justify-start items-start">
                         <img class=" h-7  mr-2 " src="https://cdn-icons-png.flaticon.com/512/4844/4844589.png" alt="">
-                        <p> {{ company.name }}</p>
+                        <p> {{ location.name }}</p>
                       </div>
                       <div class=" w-36 lg:w-32 ">
                         <div class="absolute h-4 w-36 bg-black-300 rounded lg:w-32" />
-                        <div :class="`relative h-4 z-10 w-${company.progress} bg-red-600 rounded `" />
+                        <div :class="`relative h-4 z-10 w-${location.progress} bg-red-600 rounded `" />
                         <p
                           class=" relative z-10 bottom-[15px] left-[110px] text-xs text-black-500 font-bold lg:left-[92px] "
                         >
-                          {{ company.progress }}%
+                          {{ location.progress }}%
                         </p>
                       </div>
                     </div>
@@ -83,10 +79,10 @@ function toggleGraphVisibility(index: number) {
               </div>
             </div>
             <p v-if="!show[i]" class="m-2" @click="toggleGraphVisibility(i)">
-              Ver graficas
+              Ver gráficas
             </p>
             <p v-if="show[i]" class="m-2" @click="toggleGraphVisibility(i)">
-              Ocultar grafica
+              Ocultar gráfica
             </p>
             <div v-if="show[i]" class=" flex flex-col p-3 m-2">
               <chart-bar :id="`chart${i}`" />

@@ -51,25 +51,25 @@ export const useEmissionFactorStore = defineStore('emissionFactor', {
           count: '720.15 KgCO2/Gal',
           bg: 'bg-[#E5F9FF] dark:bg-slate-900',
           companies: [
-            { name: 'empresa', progress: 20 },
+            { name: 'empresa', progress: 0 },
 
           ],
         },
         {
-          title: 'huella hidrica',
+          title: 'huella hídrica',
           count: '1.0013679 KgCH4/Gal',
           bg: 'bg-[#FFEDE5] dark:bg-slate-900',
           companies: [
-            { name: 'empresa', progress: 2 },
+            { name: 'empresa', progress: 0 },
 
           ],
         },
         {
-          title: 'huella plastica',
+          title: 'huella plástica',
           count: '0.0821 KgN2O/Gal',
           bg: 'bg-[#EAE5FF] dark:bg-slate-900',
           companies: [
-            { name: 'empresa', progress: 100 },
+            { name: 'empresa', progress: 0 },
 
           ],
         },

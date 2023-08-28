@@ -39,6 +39,9 @@ export const useCompanyStore = defineStore('company', {
     getCurrentLocation(): any {
       return this.currentLocation
     },
+    hasCompany(): boolean {
+      return this.companies.length > 0
+    },
   },
   actions: {
     async fetchCompany() {
