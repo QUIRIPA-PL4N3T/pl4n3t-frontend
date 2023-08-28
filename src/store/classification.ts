@@ -6,6 +6,7 @@ import type { QuantificationType } from '~/api-client'
 export const useClassificationStore = defineStore('classification', {
   state: () => ({
     quantificationTypes: useLocalStorage<QuantificationType[]>('quantificationTypes', []),
+    environment: <QuantificationType | null>(null),
   }),
   getters: {
     optionsQuantificationTypes(): any {
@@ -17,6 +18,9 @@ export const useClassificationStore = defineStore('classification', {
     },
   },
   actions: {
+    setEnvironment(environment: QuantificationType | null) {
+      this.environment = environment
+    },
     async fetchClassificationData() {
       try {
       // Fetch document types

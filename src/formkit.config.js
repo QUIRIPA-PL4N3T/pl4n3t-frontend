@@ -43,7 +43,7 @@ export default {
       },
       'family:dropdown': {
         dropdownWrapper: 'my-2 w-full drop-shadow-lg rounded [&::-webkit-scrollbar]:hidden',
-        inner: 'max-w-md relative flex ring-1 ring-gray-400 focus-within:ring-blue-500 focus-within:ring-2 rounded mb-1 formkit-disabled:focus-within:ring-gray-400 formkit-disabled:focus-within:ring-1 [&>span:first-child]:focus-within:text-blue-500',
+        inner: 'max-w-md relative flex ring-1 ring-gray-400 rounded mb-1 formkit-disabled:focus-within:ring-gray-400 formkit-disabled:focus-within:ring-1 [&>span:first-child]:focus-within:text-blue-500',
         input: 'w-full px-3 py-2',
         listbox: 'bg-white drop-shadow-lg rounded overflow-hidden',
         listboxButton: 'flex w-12 self-stretch justify-center mx-auto',
@@ -95,9 +95,9 @@ export default {
         suffixIcon: '$reset w-4 ml-1 flex self-stretch grow-0 shrink-0 [&>svg]:max-w-[1em] [&>svg]:max-h-[1em] [&>svg]:m-auto',
       },
       'select': {
-        inner: 'flex relative items-center rounded mb-1 ring-1 ring-gray-400 focus-within:ring-blue-500 focus-within:ring-2 [&>span:first-child]:focus-within:text-blue-500',
+        inner: 'flex relative items-center rounded mb-1 ring-1 ring-gray-400 focus-within:ring-2 [&>span:first-child]:focus-within:text-blue-500',
         input: 'w-full pl-3 pr-8 py-2 border-none text-base text-gray-700 placeholder-gray-400 formkit-multiple:p-0 data-[placeholder="true"]:text-gray-400 formkit-multiple:data-[placeholder="true"]:text-inherit',
-        selectIcon: 'flex p-[3px] shrink-0 w-5 mr-2 -ml-[1.5em] h-full pointer-events-none',
+        selectIcon: 'flex p-[3px] shrink-0 mr-2 h-full pointer-events-none',
         option: 'formkit-multiple:p-3 formkit-multiple:text-sm text-gray-700',
       },
       'textarea': {
@@ -171,7 +171,7 @@ export default {
         calendarIcon: 'flex w-8 grow-0 shrink-0 self-stretch select-none [&>svg]:w-full [&>svg]:m-auto [&>svg]:max-h-[1em] [&>svg]:max-w-[1em]',
       },
       'mask': {
-        inner: 'flex items-center max-w-md ring-1 ring-gray-400 focus-within:ring-blue-500 focus-within:ring-2 [&>label:first-child]:focus-within:text-blue-500 rounded mb-1',
+        inner: 'flex items-center max-w-md ring-1 ring-gray-400 focus-within:ring-2 [&>label:first-child]:focus-within:text-blue-500 rounded mb-1',
         input: 'w-full px-3 py-2 border-none text-base text-gray-700 placeholder-gray-400',
       },
       'rating': {
