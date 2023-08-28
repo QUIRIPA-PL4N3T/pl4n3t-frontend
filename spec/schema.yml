@@ -1862,6 +1862,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Brand'
+          readOnly: true
         country:
           type: integer
           nullable: true
@@ -1898,13 +1899,29 @@ components:
           nullable: true
           title: Correo Electrónico
           maxLength: 255
+        country_name:
+          type: string
+          readOnly: true
+        state_name:
+          type: string
+          readOnly: true
+        city_name:
+          type: string
+          readOnly: true
+        nit:
+          type: string
+          nullable: true
+          maxLength: 15
       required:
         - brands
+        - city_name
+        - country_name
         - id
         - locations
         - logo_absolute_url
         - members_roles
         - name
+        - state_name
     Configuration:
       type: object
       properties:
@@ -2540,6 +2557,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Brand'
+          readOnly: true
         country:
           type: integer
           nullable: true
@@ -2576,6 +2594,19 @@ components:
           nullable: true
           title: Correo Electrónico
           maxLength: 255
+        country_name:
+          type: string
+          readOnly: true
+        state_name:
+          type: string
+          readOnly: true
+        city_name:
+          type: string
+          readOnly: true
+        nit:
+          type: string
+          nullable: true
+          maxLength: 15
     PatchedEmissionsSource:
       type: object
       properties:

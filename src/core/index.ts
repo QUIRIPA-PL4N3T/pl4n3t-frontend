@@ -1,7 +1,6 @@
 import { useThemeSettingsStore } from '~/store/themeSettings'
 import { useCompanyStore } from '~/store/company'
 import { useBasicStore } from '~/store/basic'
-import companyInitialData from '~/constant/company'
 import activitiesInitialData from '~/constant/activities'
 import emissionFactorsData from '~/constant/emission-factor'
 import { useEmissionFactorStore } from '~/store/emissionFactor'
@@ -16,7 +15,7 @@ export async function setup() {
   const companyStore = useCompanyStore()
 
   basicStore.fetchBasicData()
-  companyStore.fetchCompany(companyInitialData)
+  companyStore.fetchCompany()
   emissionFactorStore.fetchActivities(emissionFactorsData)
   activitiesInitialData.forEach((activity: any) => {
     emissionFactorStore.addActivity(activity)

@@ -24,13 +24,17 @@ function goEditCompany() {
         <div class="flex flex-col md:flex-row gap-4">
           <div class="w-full flex md:w-1/6 align-middle justify-center">
             <a :href="company.website!">
-              <img :src="company.logo_absolute_url!" :alt="company.name" class="max-w-[300px]" style="width: 100%;">
+              <img v-if="company.logo_absolute_url" :src="company.logo_absolute_url!" :alt="company.name" class="max-w-[300px]" style="width: 100%;">
+              <img v-else :src="`https://ui-avatars.com/api/?background=a0a0a0&size=128&name=${company.name}`" alt="" class="rounded-full">
             </a>
           </div>
           <div class="w-full md:w-3/6">
             <h5>{{ t('company.contact') }}</h5>
             <p>{{ company.address }}</p>
-            <p>{{ `${company.city}, ${company.postal_code}, ${company.country}` }}</p>
+            <p>{{ `${company.city_name}, ${company.state_name}` }}</p>
+            <p class="uppercase">
+              {{ `${company.country_name}` }}
+            </p>
             <p>{{ `${t('company.phone')}: ${company.phone}` }}</p>
             <p>{{ `${t('company.email')}: ${company.email}` }}</p>
           </div>
@@ -42,7 +46,7 @@ function goEditCompany() {
         </div>
       </Card>
       <!-- EmptyCompanyCard.vue -->
-      <Card>
+      <Card v-else>
         <div class="empty-card flex gap-4">
           <img
             src="https://ui-avatars.com/api/?background=a0a0a0&size=128&name=+"
