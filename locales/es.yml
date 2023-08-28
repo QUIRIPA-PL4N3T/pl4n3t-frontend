@@ -4,7 +4,7 @@ errorRequirementEmail: Correo requerido
 errorEmail: Correo no valido
 password: Contraseña
 hintPassword: Contraseña
-errorPassword: Minimo 8 caracteres
+errorPassword: Mínimo 8 caracteres
 forgotPassword: Restablecer Contraseña?
 signInSocial: O Continue con
 dashboard:
@@ -30,16 +30,16 @@ register:
   account-activation: Debe ingresar a su correo para continuar con la activación de su cuenta
 forgotPasswordScreen:
   text: Restablecer Contraseña
-  textButton: Enviar correo de recuperacion
-  textFooter1: Olvidalo,
-  textFooter2: Al inicio de sesion
+  textButton: Enviar correo de recuperación
+  textFooter1: Olvídalo,
+  textFooter2: Al inicio de sesión
   link: Ir
 copyright:
   footer: COPYRIGHT ©; Amanecer en el Palmar, todos los derechos reservados
 company:
-  title: Compañia
+  title: Compañía
   locations: Sedes
-  contact: Conctacto
+  contact: Contacto
   edit: Editar
   name: Nombre
   address: Dirección
@@ -60,7 +60,7 @@ location:
     title: Agregar un nueva sede
   name: Nombre
   address: Dirección
-  phone: Telefono
+  phone: Teléfono
   email: Correo
   employees: Empleados
   status: Estado
@@ -71,7 +71,7 @@ menu:
   title: Menu
   dashboard: Dashboard
   characterization: Caracterización
-  company: Compañia
+  company: Compañía
   activities: Actividades
   goals: Metas y Objetivos
   reports: Reportes
@@ -80,7 +80,7 @@ menu:
   inventory: Inventario
   register-data: Ingreso de Datos
 activities:
-  register: Registar Actividades
+  register: Registrar Actividades
   add: Agregar Actividad
   location: Sede
   activity: Actividad
@@ -127,3 +127,10 @@ errors:
   register:
     exist: Ya existe un usuario registrado con este correo
     password: Su contraseña no puede ser una clave utilizada comúnmente.
+general:
+  origin_country: País de origen
+  country: País
+  state: Departamento
+  city: Ciudad
+  economic_sector: Sector Económico
+  industry_type: Tipo de Industria
