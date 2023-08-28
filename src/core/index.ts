@@ -4,6 +4,7 @@ import { useBasicStore } from '~/store/basic'
 import activitiesInitialData from '~/constant/activities'
 import emissionFactorsData from '~/constant/emission-factor'
 import { useEmissionFactorStore } from '~/store/emissionFactor'
+import { useClassificationStore } from '~/store/classification'
 
 export async function setup() {
   console.warn('load initial data')
@@ -13,9 +14,11 @@ export async function setup() {
   const themeSettingsStore = useThemeSettingsStore()
   const basicStore = useBasicStore()
   const companyStore = useCompanyStore()
+  const classificationStore = useClassificationStore()
 
   basicStore.fetchBasicData()
   companyStore.fetchCompany()
+  classificationStore.fetchClassificationData()
   emissionFactorStore.fetchActivities(emissionFactorsData)
   activitiesInitialData.forEach((activity: any) => {
     emissionFactorStore.addActivity(activity)
