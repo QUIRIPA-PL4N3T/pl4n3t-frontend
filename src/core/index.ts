@@ -6,11 +6,14 @@ import activitiesInitialData from '~/constant/activities'
 import emissionFactorsData from '~/constant/emission-factor'
 import { useEmissionFactorStore } from '~/store/emissionFactor'
 
-export function setup() {
+export async function setup() {
+  console.warn('load initial data')
+  const authStore = useAuthStore()
+  await authStore.refresh()
   const emissionFactorStore = useEmissionFactorStore()
   const themeSettingsStore = useThemeSettingsStore()
-  const companyStore = useCompanyStore()
   const basicStore = useBasicStore()
+  const companyStore = useCompanyStore()
 
   basicStore.fetchBasicData()
   companyStore.fetchCompany(companyInitialData)

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { useLocalStorage } from '@vueuse/core'
 import { mainApi } from '~/api'
-import type { City, DocumentType, EconomicSector, IndustryType, LocationType, State, UnitOfMeasure } from '~/api-client'
+import type { City, Country, DocumentType, EconomicSector, IndustryType, LocationType, State, UnitOfMeasure } from '~/api-client'
 
 export const useBasicStore = defineStore('basic', {
   state: () => ({
@@ -9,8 +9,9 @@ export const useBasicStore = defineStore('basic', {
     economicSectorList: useLocalStorage<EconomicSector[]>('economicSectorList', []),
     industryTypeList: useLocalStorage<IndustryType[]>('industryTypeList', []),
     locationTypeList: useLocalStorage<LocationType[]>('locationTypeList', []),
-    stateList: useLocalStorage<State[]>('stateList', []),
-    cityList: useLocalStorage<City[]>('cityList', []),
+    countryList: useLocalStorage<Country[]>('countries', []),
+    stateList: useLocalStorage<State[]>('states', []),
+    cityList: useLocalStorage<City[]>('cities', []),
     documentTypes: useLocalStorage<DocumentType[]>('documentTypes', []),
   }),
   getters: {
@@ -46,7 +47,13 @@ export const useBasicStore = defineStore('basic', {
         label: type.name,
       }))
     },
-    optionsStateList(): any {
+    optionsCountries(): any {
+      return this.countryList.map(country => ({
+        value: country.id,
+        label: country.name,
+      }))
+    },
+    optionsStates(): any {
       return this.stateList.map(state => ({
         value: state.id,
         label: state.name,
@@ -82,13 +89,9 @@ export const useBasicStore = defineStore('basic', {
         const { data: locationTypes } = await mainApi.mainLocationTypeList()
         this.locationTypeList = locationTypes
 
-        // Fetch states
-        const { data: states } = await mainApi.mainStateList()
-        this.stateList = states
-
-        // Fetch cities
-        const { data: cities } = await mainApi.mainCityList()
-        this.cityList = cities
+        // Fetch countries
+        const { data: countries } = await mainApi.mainCountriesList()
+        this.countryList = countries
       }
       catch (error) {
         console.error(error)
@@ -101,6 +104,28 @@ export const useBasicStore = defineStore('basic', {
     getUnitMeasureName(id: number): string {
       const unit = this.unitOfMeasureList.find(item => item.id === id)
       return unit ? unit.name! : ''
+    },
+    async getStatesByCountryId(id: number) {
+      // Fetch states by country
+      try {
+        const { data: states } = await mainApi.mainStateList({ country: id })
+        this.stateList = states
+      }
+      catch (error) {
+        console.warn(error)
+        this.stateList = []
+      }
+    },
+    async getCitiesByStateID(id: number) {
+      try {
+        // Fetch cities by state
+        const { data: cities } = await mainApi.mainCityList({ state: id })
+        this.cityList = cities
+      }
+      catch (error) {
+        console.warn(error)
+        this.cityList = []
+      }
     },
   },
 })
