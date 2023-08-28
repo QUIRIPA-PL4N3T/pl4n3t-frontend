@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import json from './location-headers.json'
 
 const companyStore = useCompanyStore()
 const { company } = storeToRefs(companyStore)
 const router = useRouter()
 
 const { t } = useI18n()
-const headers = json
 
 function goEditCompany() {
   router.push({ name: 'company-edit', params: { id: 0 } })
@@ -17,7 +15,7 @@ function goEditCompany() {
 <template>
   <div class="w-full h-full">
     <div class="lg:col-span-4 col-span-12 space-y-5">
-      <Card :title="company.name">
+      <Card v-if="company.id !== 0" :title="company.name">
         <template #header>
           <button type="button" class="btn btn-dark btn-sm" @click.prevent="goEditCompany">
             {{ t('company.edit') }}
@@ -25,21 +23,44 @@ function goEditCompany() {
         </template>
         <div class="flex flex-col md:flex-row gap-4">
           <div class="w-full flex md:w-1/6 align-middle justify-center">
-            <a :href="company.url">
-              <img :src="company.logo" :alt="company.name" class="max-w-[300px]" style="width: 100%;">
+            <a :href="company.website!">
+              <img :src="company.logo_absolute_url!" :alt="company.name" class="max-w-[300px]" style="width: 100%;">
             </a>
           </div>
           <div class="w-full md:w-3/6">
             <h5>{{ t('company.contact') }}</h5>
             <p>{{ company.address }}</p>
-            <p>{{ `${company.estate}, ${company.postalCode}, ${company.country}` }}</p>
+            <p>{{ `${company.city}, ${company.postal_code}, ${company.country}` }}</p>
             <p>{{ `${t('company.phone')}: ${company.phone}` }}</p>
             <p>{{ `${t('company.email')}: ${company.email}` }}</p>
           </div>
           <div class="flex flex-col w-full md:w-2/6 align-middle justify-center">
             <a href="/" class="font-bold text-sky-400">{{ t('membership.title') }}</a>
-            <p>{{ `${t('membership.locationLimit')}: ` }} {{ company.membership.locationLimit }}</p>
-            <p>{{ `${t('membership.workersLimit')}: ` }} {{ company.membership.locationLimit }}</p>
+            <p>{{ `${t('membership.locationLimit')}: ` }} ♾️ </p>
+            <p>{{ `${t('membership.workersLimit')}: ` }} ♾️ </p>
+          </div>
+        </div>
+      </Card>
+      <!-- EmptyCompanyCard.vue -->
+      <Card>
+        <div class="empty-card flex gap-4">
+          <img
+            src="https://ui-avatars.com/api/?background=a0a0a0&size=128&name=+"
+            alt=""
+            class="rounded-full"
+            width="128"
+            height="128"
+          >
+          <div>
+            <h4 class="card-title text-slate-900 dark:text-white">
+              No hay ninguna compañía registrada.
+            </h4>
+            <p class="text-sm font-light dark:text-slate-400">
+              Agrega tu primera compañía haciendo clic en el botón a continuación.
+            </p>
+            <button class="btn inline-flex justify-center btn-dark mt-3" @click.prevent="goEditCompany">
+              Agregar Compañía
+            </button>
           </div>
         </div>
       </Card>
