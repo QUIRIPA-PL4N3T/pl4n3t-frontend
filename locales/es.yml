@@ -54,6 +54,7 @@ company:
     fair: Regular
     bad: Malo
     very-bad: Muy malo
+    undefined: --
 company edit.title: Editar
 location:
   modal:
@@ -138,8 +139,11 @@ general:
   manage: Gestionar
   location: Sede
   new: Nuevo
+  brand: Marca
 brand edit:
   title: Editar Marca
+location edit:
+  title: Editar Sede
 brand:
   title: Marcas
   add: Nueva Marca
@@ -147,3 +151,5 @@ brand:
   description: Descripción
   logo: Logo
 delete: Eliminar
+edit: Editar
+view: Ver

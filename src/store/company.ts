@@ -1,28 +1,36 @@
 import { defineStore } from 'pinia'
-import { brandApi, companyApi } from '~/api'
+import { brandApi, companyApi, locationApi } from '~/api'
 import type {
   Brand,
   Company,
+  Location,
 } from '~/api-client'
 
 import {
   DEFAULT_BRAND,
   DEFAULT_COMPANY,
+  DEFAULT_LOCATION,
 } from '~/api/modelsDefaults'
 
 export const useCompanyStore = defineStore('company', {
   state: () => ({
     companies: <Company[]>[],
     currentBrand: <Brand>DEFAULT_BRAND,
+    currentLocation: <Location>DEFAULT_LOCATION,
     company: <Company>DEFAULT_COMPANY,
-    currentLocation: <any>{},
   }),
   getters: {
     brands(): Brand[] {
       return this.company.brands
     },
+    optionBrands(): any {
+      return this.company.brands.map((brand: Brand) => ({
+        label: brand.name,
+        value: brand.id,
+      }))
+    },
     optionsLocations(): any {
-      return this.company.locations.map((location: any) => ({
+      return this.company.locations.map((location: Location) => ({
         label: location.name,
         value: location.id,
       }),
@@ -62,6 +70,21 @@ export const useCompanyStore = defineStore('company', {
         this.currentBrand = DEFAULT_BRAND
       }
     },
+    async fetchLocation(id: number) {
+      // Fetch current location by id
+      if (id === 0) {
+        this.currentLocation = DEFAULT_LOCATION
+        return
+      }
+
+      try {
+        const { data: location } = await locationApi.companiesLocationsRetrieve({ id })
+        this.currentLocation = location
+      }
+      catch (error) {
+        this.currentLocation = DEFAULT_LOCATION
+      }
+    },
     async saveBrand(data: any) {
       // Create or update a brand
       if (data.logo === null)
@@ -81,9 +104,44 @@ export const useCompanyStore = defineStore('company', {
         console.error(error)
       }
     },
+    async saveLocation() {
+      // Create or update a location
+      this.currentLocation.company = this.company.id
+      try {
+        if (this.currentLocation.id === 0) {
+          const { data: location } = await locationApi.companiesLocationsCreate({ location: this.currentLocation })
+          this.currentLocation = location
+        }
+        else {
+          const { data: location } = await locationApi.companiesLocationsUpdate({
+            id: this.currentLocation.id,
+            location: this.currentLocation,
+          })
+          this.currentLocation = location
+        }
+        this.fetchCompany()
+      }
+      catch (error) {
+        console.error(error)
+      }
+    },
     async deleteBrand(id: number) {
-      await brandApi.companiesBrandsDestroy({ id })
-      this.fetchCompany()
+      try {
+        await brandApi.companiesBrandsDestroy({ id })
+        this.fetchCompany()
+      }
+      catch (error) {
+        console.error(error)
+      }
+    },
+    async deleteLocation(id: number) {
+      try {
+        await locationApi.companiesLocationsDestroy({ id })
+        this.fetchCompany()
+      }
+      catch (error) {
+        console.error(error)
+      }
     },
     async saveCompany() {
       try {

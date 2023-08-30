@@ -2399,12 +2399,29 @@ components:
         address:
           type: string
           title: Dirección
+        phone:
+          type: string
+          nullable: true
+          title: Teléfono
+          maxLength: 20
+        email:
+          type: string
+          format: email
+          nullable: true
+          title: Correo Electrónico
+          maxLength: 255
+        country:
+          type: integer
+          nullable: true
+          title: País
+        state:
+          type: integer
+          nullable: true
+          title: Departamento/Estado/Provincia
         city:
           type: integer
-        country:
-          type: string
-          title: Pais
-          maxLength: 255
+          nullable: true
+          title: Ciudad
         zip_code:
           type: string
           title: Código Postal
@@ -2438,11 +2455,14 @@ components:
           type: integer
           nullable: true
           title: Tipo de Sede
+        employees:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Empleados
       required:
         - address
-        - city
         - company
-        - country
         - id
         - name
         - zip_code
@@ -2755,12 +2775,29 @@ components:
         address:
           type: string
           title: Dirección
+        phone:
+          type: string
+          nullable: true
+          title: Teléfono
+          maxLength: 20
+        email:
+          type: string
+          format: email
+          nullable: true
+          title: Correo Electrónico
+          maxLength: 255
+        country:
+          type: integer
+          nullable: true
+          title: País
+        state:
+          type: integer
+          nullable: true
+          title: Departamento/Estado/Provincia
         city:
           type: integer
-        country:
-          type: string
-          title: Pais
-          maxLength: 255
+          nullable: true
+          title: Ciudad
         zip_code:
           type: string
           title: Código Postal
@@ -2794,6 +2831,11 @@ components:
           type: integer
           nullable: true
           title: Tipo de Sede
+        employees:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Empleados
     PatchedMember:
       type: object
       properties:

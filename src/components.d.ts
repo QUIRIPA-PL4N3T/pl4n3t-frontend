@@ -42,6 +42,7 @@ declare module '@vue/runtime-core' {
     Image: typeof import('./components/Image/index.vue')['default']
     InputGroup: typeof import('./components/InputGroup/index.vue')['default']
     Language: typeof import('./components/header/navTools/language.vue')['default']
+    LocationsTable: typeof import('./components/PlanetComponents/LocationsTable.vue')['default']
     Logo: typeof import('./components/header/navTools/Logo.vue')['default']
     MenuEnvironment: typeof import('./components/menuEnvironment/index.vue')['default']
     MenuLayout: typeof import('./components/Settings/Tools/MenuLayout.vue')['default']
