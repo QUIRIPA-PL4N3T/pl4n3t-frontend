@@ -493,16 +493,19 @@ paths:
         - Brands
       requestBody:
         content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Brand'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Brand'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Brand'
-        required: true
+              type: object
+              properties:
+                description:
+                  type: string
+                name:
+                  type: string
+                company:
+                  type: integer
+                logo:
+                  type: string
+                  format: binary
       security:
         - jwtAuth: []
       responses:
@@ -546,16 +549,19 @@ paths:
         - Brands
       requestBody:
         content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Brand'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Brand'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Brand'
-        required: true
+              type: object
+              properties:
+                description:
+                  type: string
+                name:
+                  type: string
+                company:
+                  type: integer
+                logo:
+                  type: string
+                  format: binary
       security:
         - jwtAuth: []
       responses:
@@ -578,15 +584,19 @@ paths:
         - Brands
       requestBody:
         content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedBrand'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedBrand'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PatchedBrand'
+              type: object
+              properties:
+                description:
+                  type: string
+                name:
+                  type: string
+                company:
+                  type: integer
+                logo:
+                  type: string
+                  format: binary
       security:
         - jwtAuth: []
       responses:
@@ -753,6 +763,65 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/companies/company-logo/{id}/:
+    put:
+      operationId: companiesCompanyLogoUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Compañía.
+          required: true
+      tags:
+        - Companies
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                logo:
+                  type: string
+                  format: binary
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyLogo'
+          description: ''
+    patch:
+      operationId: companiesCompanyLogoPartialUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Compañía.
+          required: true
+      tags:
+        - Companies
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                logo:
+                  type: string
+                  format: binary
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyLogo'
+          description: ''
   /api/companies/company-users/:
     get:
       operationId: companiesCompanyUsersList
@@ -1735,10 +1804,15 @@ components:
         logo:
           type: string
           format: uri
+          writeOnly: true
           nullable: true
+        logo_absolute_url:
+          type: string
+          readOnly: true
       required:
         - company
         - id
+        - logo_absolute_url
         - name
     City:
       type: object
@@ -1912,6 +1986,10 @@ components:
           type: string
           nullable: true
           maxLength: 15
+        logo:
+          type: string
+          format: uri
+          nullable: true
       required:
         - brands
         - city_name
@@ -1922,6 +2000,13 @@ components:
         - members_roles
         - name
         - state_name
+    CompanyLogo:
+      type: object
+      properties:
+        logo:
+          type: string
+          format: uri
+          nullable: true
     Configuration:
       type: object
       properties:
@@ -2468,26 +2553,6 @@ components:
         * `October` - Octubre
         * `November` - Noviembre
         * `December` - Diciembre
-    PatchedBrand:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        company:
-          type: integer
-        name:
-          type: string
-          title: Nombre de la Marca
-          maxLength: 255
-        description:
-          type: string
-          nullable: true
-          title: Descripción
-        logo:
-          type: string
-          format: uri
-          nullable: true
     PatchedCompany:
       type: object
       properties:
@@ -2607,6 +2672,10 @@ components:
           type: string
           nullable: true
           maxLength: 15
+        logo:
+          type: string
+          format: uri
+          nullable: true
     PatchedEmissionsSource:
       type: object
       properties:

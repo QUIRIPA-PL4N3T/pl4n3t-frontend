@@ -137,3 +137,13 @@ general:
   nit: NIT
   manage: Gestionar
   location: Sede
+  new: Nuevo
+brand edit:
+  title: Editar Marca
+brand:
+  title: Marcas
+  add: Nueva Marca
+  name: Nombre
+  description: Descripción
+  logo: Logo
+delete: Eliminar

@@ -10,11 +10,18 @@ const { t } = useI18n()
 function goEditCompany() {
   router.push({ name: 'company-edit', params: { id: 0 } })
 }
+
+function goEditBrand(id: number) {
+  router.push({
+    name: 'brand-edit',
+    params: { id },
+  })
+}
 </script>
 
 <template>
   <div class="w-full h-full">
-    <div class="lg:col-span-4 col-span-12 space-y-5">
+    <div class="lg:col-span-4 col-span-12 space-y-5 text-gray-700">
       <Card v-if="company.id !== 0" :title="company.name">
         <template #header>
           <button type="button" class="btn btn-dark btn-sm" @click.prevent="goEditCompany">
@@ -23,7 +30,7 @@ function goEditCompany() {
         </template>
         <div class="flex flex-col md:flex-row gap-4">
           <div class="w-full flex md:w-1/6 align-middle justify-center">
-            <a :href="company.website!">
+            <a :href="company.website!" target="_blank">
               <img v-if="company.logo_absolute_url" :src="company.logo_absolute_url!" :alt="company.name" class="max-w-[300px]" style="width: 100%;">
               <img v-else :src="`https://ui-avatars.com/api/?background=a0a0a0&size=128&name=${company.name}`" alt="" class="rounded-full">
             </a>
@@ -65,6 +72,41 @@ function goEditCompany() {
             <button class="btn inline-flex justify-center btn-dark mt-3" @click.prevent="goEditCompany">
               Agregar Compañía
             </button>
+          </div>
+        </div>
+      </Card>
+
+      <!-- Company Brands -->
+      <Card :title="t('brand.title') ">
+        <div
+          class="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-5"
+        >
+          <button
+            v-for="(brand, i) in company.brands"
+            :key="i"
+            class="relative flex items-center justify-center"
+            @click.prevent="goEditBrand(brand.id)"
+          >
+            <Image
+              :src="brand.logo_absolute_url"
+              alt="{{ brand.name }}"
+              image-class="rounded-md border-2 border-slate-300 w-[163px] h-[163px] object-contain object-center p-3"
+            />
+          </button>
+          <div>
+            <div class="relative">
+              <button
+                class="relative flex items-center justify-center"
+                @click.prevent="goEditBrand(0)"
+              >
+                <img
+                  src="https://ui-avatars.com/api/?background=EEEEEE&size=163&name=+"
+                  :alt="t('general.new')"
+                  class="max-w-full block rounded-md border-2 border-slate-200"
+                >
+                <Icon icon="heroicons-outline:plus" class="absolute z-10 bg-white p-1 rounded-full text-4xl" />
+              </button>
+            </div>
           </div>
         </div>
       </Card>

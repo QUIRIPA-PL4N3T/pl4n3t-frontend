@@ -1,34 +1,26 @@
 import { defineStore } from 'pinia'
-import { companyApi } from '~/api'
-import type { Company } from '~/api-client'
-import { SizeEnum } from '~/api-client'
+import { brandApi, companyApi } from '~/api'
+import type {
+  Brand,
+  Company,
+} from '~/api-client'
 
-export const DEFAULT_COMPANY: Company = {
-  id: 0,
-  name: '',
-  description: null,
-  industry: null,
-  size: SizeEnum.Small,
-  website: null,
-  geo_location: null,
-  economic_sector: null,
-  industry_type: null,
-  logo_absolute_url: '',
-  locations: [],
-  members_roles: [],
-  brands: [],
-  city_name: '',
-  state_name: '',
-  country_name: '',
-}
+import {
+  DEFAULT_BRAND,
+  DEFAULT_COMPANY,
+} from '~/api/modelsDefaults'
 
 export const useCompanyStore = defineStore('company', {
   state: () => ({
     companies: <Company[]>[],
+    currentBrand: <Brand>DEFAULT_BRAND,
     company: <Company>DEFAULT_COMPANY,
     currentLocation: <any>{},
   }),
   getters: {
+    brands(): Brand[] {
+      return this.company.brands
+    },
     optionsLocations(): any {
       return this.company.locations.map((location: any) => ({
         label: location.name,
@@ -54,6 +46,44 @@ export const useCompanyStore = defineStore('company', {
       }
       if (this.companies.length > 0)
         this.company = this.companies[0]
+    },
+    async fetchBrand(id: number) {
+      // Fetch current brand by id
+      if (id === 0) {
+        this.currentBrand = DEFAULT_BRAND
+        return
+      }
+
+      try {
+        const { data: brand } = await brandApi.companiesBrandsRetrieve({ id })
+        this.currentBrand = brand
+      }
+      catch (error) {
+        this.currentBrand = DEFAULT_BRAND
+      }
+    },
+    async saveBrand(data: any) {
+      // Create or update a brand
+      if (data.logo === null)
+        delete data.logo
+      try {
+        if (this.currentBrand.id === 0) {
+          const { data: brand } = await brandApi.companiesBrandsCreate(data)
+          this.currentBrand = brand
+        }
+        else {
+          const { data: brand } = await brandApi.companiesBrandsUpdate(data)
+          this.currentBrand = brand
+        }
+        this.fetchCompany()
+      }
+      catch (error) {
+        console.error(error)
+      }
+    },
+    async deleteBrand(id: number) {
+      await brandApi.companiesBrandsDestroy({ id })
+      this.fetchCompany()
     },
     async saveCompany() {
       try {
