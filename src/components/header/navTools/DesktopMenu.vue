@@ -59,15 +59,15 @@ export default {
           :key="index"
           :class="childitem.submenu ? 'menu-item-has-children' : ''"
         >
-          <router-link v-if="!childitem.submenu" :to="childitem.childlink">
+          <router-link v-if="!childitem.submenu" :to="childitem.childLink">
             <div class="flex space-x-2 items-start rtl:space-x-reverse">
               <Icon :icon="childitem.childicon" class="leading-[1] text-base" />
-              <span class="leading-[1]">{{ childitem.childtitle }}</span>
+              <span class="leading-[1]">{{ childitem.childTitle }}</span>
             </div>
           </router-link>
 
           <a v-if="childitem.submenu" href="javascript: void(0);">{{
-            childitem.childtitle
+            childitem.childTitle
           }}</a>
 
           <ul v-if="childitem.submenu" class="sub-menu">
@@ -98,7 +98,7 @@ export default {
               v-for="(ms_item, ms_i) in m_item.singleMegamenu"
               :key="ms_i"
               v-slot="{ isActive }"
-              :to="ms_item.m_childlink"
+              :to="ms_item.m_childLink"
               class="flex items-center space-x-2 text-[15px] leading-6 rtl:space-x-reverse"
             >
               <span
@@ -112,7 +112,7 @@ export default {
                     ? ' text-slate-900 dark:text-white font-medium'
                     : 'text-slate-600 dark:text-slate-300'
                 "
-              >{{ ms_item.m_childtitle }}</span>
+              >{{ ms_item.m_childTitle }}</span>
             </router-link>
           </div>
         </div>

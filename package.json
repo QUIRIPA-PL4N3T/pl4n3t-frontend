@@ -79,7 +79,6 @@
     ]
   },
   "eslintIgnore": [
-    "**/*.scss",
-    "src/components"
+    "**/*.scss"
   ]
 }

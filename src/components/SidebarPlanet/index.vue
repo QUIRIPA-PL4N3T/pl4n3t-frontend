@@ -10,7 +10,7 @@ const { sidebarCollapse, skin, semiDark, isMouseHovered, isDark } = storeToRefs(
 </script>
 
 <template>
-  <div :class="semiDark ? 'dark' : ''">
+  <div :class="semiDark ? 'dark ' : '' ">
     <div
       :class="`sidebar-wrapper bg-white dark:bg-slate-800 ${
         skin === 'bordered'
@@ -41,65 +41,17 @@ const { sidebarCollapse, skin, semiDark, isMouseHovered, isDark } = storeToRefs(
 
         `"
       >
-        <router-link
-          v-if="
-            !sidebarCollapse
-              || isMouseHovered
-          "
-          to="/auth/login"
-        >
-          <img
-            v-if="
-              !isDark
-                && !semiDark
-            "
-            src="../../assets/images/logo.png"
-            alt=""
-          >
-
-          <img
-            v-if="
-              isDark
-                || semiDark
-            "
-            src="../../assets/images/logo.png"
-            alt=""
-          >
+        <router-link v-if="!sidebarCollapse || isMouseHovered" to="/auth/login">
+          <img v-if="!isDark && !semiDark" src="../../assets/images/logo.png" alt="">
+          <img v-if="isDark || semiDark" src="../../assets/images/logo.png" alt="">
         </router-link>
-        <router-link
-          v-if="
-            sidebarCollapse
-              && !isMouseHovered
-          "
-          to="/auth/login"
-        >
-          <img
-            v-if="
-              !isDark
-                && !semiDark
-            "
-            src="../../assets/images/logo.png"
-            alt=""
-          >
-          <img
-            v-if="
-              isDark
-                || semiDark
-            "
-            src="../../assets/images/logo.png"
-            alt=""
-          >
+        <router-link v-if="sidebarCollapse && !isMouseHovered" to="/auth/login">
+          <img v-if=" !isDark && !semiDark" src="../../assets/images/logo.png" alt="">
+          <img v-if="isDark || semiDark" src="../../assets/images/logo.png" alt="">
         </router-link>
         <span
-          v-if="
-            !sidebarCollapse
-              || isMouseHovered
-          "
-          class="cursor-pointer text-slate-900 dark:text-white text-2xl"
-          @click="
-            sidebarCollapse
-              = !sidebarCollapse
-          "
+          v-if="!sidebarCollapse || isMouseHovered" class="cursor-pointer text-slate-900 dark:text-white text-2xl"
+          @click="sidebarCollapse = !sidebarCollapse"
         >
           <!-- <Icon icon="heroicons-outline:menu-alt-3"
         /> -->
@@ -117,10 +69,15 @@ const { sidebarCollapse, skin, semiDark, isMouseHovered, isDark } = storeToRefs(
         class="h-[60px] absolute top-[80px] nav-shadow z-[1] w-full transition-all duration-200 pointer-events-none"
         :class="[shadowBase ? ' opacity-100' : ' opacity-0']"
       />
-
+      <div>
+        <MenuEnvironment />
+      </div>
+      <div class="pt-2">
+        <MenuLocationSearch />
+      </div>
       <div class="sidebar-menu px-4 h-[calc(100%-80px)]">
         <NavigationMenu :items="menuItems" />
-    </div>
+      </div>
     </div>
   </div>
 </template>

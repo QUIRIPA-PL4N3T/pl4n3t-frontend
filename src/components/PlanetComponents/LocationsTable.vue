@@ -5,6 +5,7 @@ import { VueGoodTable } from 'vue-good-table-next'
 const { t } = useI18n()
 const companyStore = useCompanyStore()
 const { company } = storeToRefs(companyStore)
+const router = useRouter()
 
 const current = ref(1)
 const perpage = ref(10)
@@ -45,6 +46,17 @@ const columns = ref([
     field: 'action',
   },
 ])
+
+function editItem(id: number) {
+  router.push({
+    name: 'location-edit',
+    params: { id },
+  })
+}
+
+async function deleteItem(id: number) {
+  await companyStore.deleteLocation(id)
+}
 </script>
 
 <template>
@@ -101,27 +113,19 @@ const columns = ref([
           <div class="flex space-x-3 justify-center rtl:space-x-reverse">
             <Tooltip placement="top" arrow theme="dark">
               <template #button>
-                <div class="action-btn">
-                  <Icon icon="heroicons:eye" />
-                </div>
-              </template>
-              <span> View</span>
-            </Tooltip>
-            <Tooltip placement="top" arrow theme="dark">
-              <template #button>
-                <div class="action-btn">
+                <div class="action-btn" @click="editItem(props.row.id)">
                   <Icon icon="heroicons:pencil-square" />
                 </div>
               </template>
-              <span> Edit</span>
+              <span> {{ t('edit') }}</span>
             </Tooltip>
             <Tooltip placement="top" arrow theme="danger-500">
               <template #button>
-                <div class="action-btn">
+                <div class="action-btn" @click="deleteItem(props.row.id)">
                   <Icon icon="heroicons:trash" />
                 </div>
               </template>
-              <span>Delete</span>
+              <span>{{ t('delete') }}</span>
             </Tooltip>
           </div>
         </span>

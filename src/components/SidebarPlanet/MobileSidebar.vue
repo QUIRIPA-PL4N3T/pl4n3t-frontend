@@ -10,15 +10,29 @@ export default defineComponent({
     Icon,
   },
   data() {
+    const companies = [
+      { name: 'sede 1' },
+      { name: 'sede 2' },
+      { name: 'sede 3' },
+      { name: 'sede 4' },
+      { name: 'sede 5' },
+      { name: 'sede 6' },
+      { name: 'sede 7' },
+      { name: 'sede 8' },
+      { name: 'sede 9' },
+    ]
+
     return {
       menuItems,
       openClass: 'w-[248px]',
       closeClass: 'w-[72px] close_sidebar',
+      companies,
+
     }
   },
   methods: {
-    toggleMobilsidebar() {
-      themeSettingsStore.toggleMobilsidebar()
+    toggleMobileSidebar() {
+      themeSettingsStore.toggleMobileSidebar()
     },
   },
 })
@@ -48,11 +62,19 @@ export default defineComponent({
       </router-link>
       <span
         class="cursor-pointer text-slate-900 dark:text-white text-2xl"
-        @click="toggleMobilsidebar"
+        @click="toggleMobileSidebar"
       ><Icon icon="heroicons:x-mark" /></span>
     </div>
 
+    <DropdownSearch :items="companies" />
+
     <div class="sidebar-menu px-4 h-[calc(100%-100px)]" data-simplebar>
+      <div>
+        <MenuEnvironment />
+      </div>
+      <div class="pt-2">
+        <MenuLocationSearch />
+      </div>
       <NavigationMenu :items="menuItems" />
       <div
         v-if="!$store.themeSettingsStore.sidebarCollapse"

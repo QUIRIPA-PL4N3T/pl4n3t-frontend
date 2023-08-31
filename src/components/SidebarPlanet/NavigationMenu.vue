@@ -1,73 +1,94 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-const { t } = useI18n()
-const props = defineProps({
-    title: {
-      type: String,
-      default: '',
-    },
-    icon: {
-      type: String,
-      default: '',
-    },
-    link: {
-      type: String,
-      default: '',
-    },
-    items: { 
-      type: Array,
-      required: true 
-    },
-    childrenLinks: { 
-      type: Array, 
-      default: null 
-    },
-  })
 
+interface Child {
+  childTitle: string
+  childLink: string
+}
+
+interface MenuItem {
+  child?: Child[]
+  link?: string
+  icon?: string
+  title?: string
+  isHeader?: boolean
+  childLink?: string
+  childTitle?: string
+  requiredCompany?: boolean
+  requiredData?: boolean
+}
+
+const props = defineProps({
+  title: {
+    type: String,
+    default: '',
+  },
+  icon: {
+    type: String,
+    default: '',
+  },
+  link: {
+    type: String,
+    default: '',
+  },
+  items: {
+    type: Array as PropType<MenuItem[]>,
+    required: true,
+  },
+  childrenLinks: {
+    type: Array,
+    default: null,
+  },
+})
+
+const { t } = useI18n()
 const themeSettingsStore = useThemeSettingsStore()
-const { mobilSidebar } = storeToRefs(themeSettingsStore)
+const companyStore = useCompanyStore()
+const { hasCompany } = storeToRefs(companyStore)
+
+const { mobileSidebar } = storeToRefs(themeSettingsStore)
 let activeSubmenu = $ref(null)
 const router = useRouter()
 
 watch(() => router.currentRoute.value, () => {
-      if (mobilSidebar.value)
-        mobilSidebar.value = false
+  if (mobileSidebar.value)
+    mobileSidebar.value = false
 
-      props.items.map((item: any) => {
-        if (item.link === router.currentRoute.value.name)
-          activeSubmenu = null
-      })
+  props.items.forEach((item: any) => {
+    if (item.link === router.currentRoute.value.name)
+      activeSubmenu = null
   })
+})
 
-const beforeEnter = (element: any) => {
-      requestAnimationFrame(() => {
-        if (!element.style.height)
-          element.style.height = '0px'
+function beforeEnter(element: any) {
+  requestAnimationFrame(() => {
+    if (!element.style.height)
+      element.style.height = '0px'
 
-        element.style.display = null
-      })
-    }
+    element.style.display = null
+  })
+}
 
-const enter = (element: any) => {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          element.style.height = `${element.scrollHeight}px`
-        })
-      })
-    }
+function enter(element: any) {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      element.style.height = `${element.scrollHeight}px`
+    })
+  })
+}
 
-const afterEnter = (element: any) => {
+function afterEnter(element: any) {
   element.style.height = null
 }
 
-const beforeLeave = (element: any) => {
+function beforeLeave(element: any) {
   requestAnimationFrame(() => {
     if (!element.style.height)
       element.style.height = `${element.offsetHeight}px`
   })
 }
 
-const leave = (element: any) => {
+function leave(element: any) {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       element.style.height = '0px'
@@ -75,11 +96,11 @@ const leave = (element: any) => {
   })
 }
 
-const afterLeave = (element: any) => {
+function afterLeave(element: any) {
   element.style.height = null
 }
 
-const toggleSubmenu = (index: any) => {
+function toggleSubmenu(index: any) {
   if (activeSubmenu === index)
     activeSubmenu = null
   else
@@ -92,103 +113,99 @@ const toggleSubmenu = (index: any) => {
     <li
       v-for="(item, i) in items"
       :key="i"
-      :class="`
-      ${item.child ? 'item-has-children' : ''}
-      ${activeSubmenu === i ? 'open' : ''}
-      ${$route.name === item.link ? 'menu-item-active' : ''}
-
-      `"
+      :class="`${item.child ? 'item-has-children' : ''} ${activeSubmenu === i ? 'open' : ''} ${$route.name === item.link ? 'menu-item-active' : ''}`"
       class="single-sidebar-menu"
     >
-      <!-- ?? single menu with no children !!  -->
-
-      <router-link
-        v-if="!item.child && !item.isHeader"
-        :to="`${item.link}`"
-        class="menu-link"
-      >
-        <span v-if="item.icon" class="menu-icon">
-          <Icon :icon="item.icon" /></span>
-        <div v-if="item.title" class="text-box">
-          {{ t(item.title) }}
-        </div>
-      </router-link>
-
-      <!-- ?? only for menu label ??  -->
-      <div v-else-if="item.isHeader && !item.child" class="menulabel">
-        {{ t(item.title) }}
-      </div>
-      <!-- !!sub menu parent li !! -->
-      <div
-        v-else
-        class="menu-link"
-        :class="
-          activeSubmenu === i ? 'parent_active not-collapsed' : 'collapsed'
-        "
-        @click="toggleSubmenu(i)"
-      >
-        <div class="flex-1 flex items-start">
-          <span v-show="item.icon" class="menu-icon">
+      <template v-if="item.requiredCompany === false || (item.requiredCompany === true && hasCompany)">
+        <!-- ?? single menu with no children !!  -->
+        <router-link
+          v-if="!item.child && !item.isHeader"
+          :to="`${item.link}`"
+          class="menu-link"
+        >
+          <span v-if="item.icon" class="menu-icon">
             <Icon :icon="item.icon" /></span>
           <div v-if="item.title" class="text-box">
             {{ t(item.title) }}
           </div>
+        </router-link>
+
+        <!-- ?? only for menu label ??  -->
+        <div v-else-if="item.isHeader && !item.child" class="menu-label">
+          {{ t(item.title!) }}
         </div>
-        <div class="flex-0">
-          <div
-            class="menu-arrow transform transition-all duration-300"
-            :class="
-              activeSubmenu === i
-                ? ' ltr:rotate-90 rtl:rotate-90'
-                : 'rtl:rotate-180'
-            "
-          >
-            <Icon icon="heroicons-outline:chevron-right" />
+        <!-- !!sub menu parent li !! -->
+        <div
+          v-else
+          class="menu-link"
+          :class="
+            activeSubmenu === i ? 'parent_active not-collapsed' : 'collapsed'
+          "
+          @click="toggleSubmenu(i)"
+        >
+          <div class="flex-1 flex items-start">
+            <span v-show="item.icon" class="menu-icon">
+              <Icon :icon="item.icon" /></span>
+            <div v-if="item.title" class="text-box">
+              {{ t(item.title) }}
+            </div>
+          </div>
+          <div class="flex-0">
+            <div
+              class="menu-arrow transform transition-all duration-300"
+              :class="
+                activeSubmenu === i
+                  ? ' ltr:rotate-90 rtl:rotate-90'
+                  : 'rtl:rotate-180'
+              "
+            >
+              <Icon icon="heroicons-outline:chevron-right" />
+            </div>
           </div>
         </div>
-      </div>
-      <Transition
-        enter-active-class="submenu_enter-active"
-        leave-active-class="submenu_leave-active"
-        @before-enter="beforeEnter"
-        @enter="enter"
-        @after-enter="afterEnter"
-        @before-leave="beforeLeave"
-        @leave="leave"
-        @after-leave="afterLeave"
-      >
-        <!-- !! SubMenu !! -->
-        <ul v-if="i === activeSubmenu" calss="sub-menu ">
-          <li
-            v-for="(ci, index) in item.child"
-            :key="index"
-            class="block ltr:pl-4 rtl:pr-4 ltr:pr-1 rtl:-l-1 mb-4 first:mt-4"
-          >
-            <router-link v-slot="{ isActive }" :to="ci.childlink">
-              <span
-                class="text-sm flex space-x-3 rtl:space-x-reverse items-center transition-all duration-150"
-                :class="
-                  isActive
-                    ? ' text-slate-900 dark:text-white font-medium'
-                    : 'text-slate-600 dark:text-slate-300'
-                "
-              >
+        <Transition
+          enter-active-class="submenu_enter-active"
+          leave-active-class="submenu_leave-active"
+          @before-enter="beforeEnter"
+          @enter="enter"
+          @after-enter="afterEnter"
+          @before-leave="beforeLeave"
+          @leave="leave"
+          @after-leave="afterLeave"
+        >
+          <!-- !! SubMenu !! -->
+          <ul v-if="i === activeSubmenu" class="sub-menu ">
+            <li
+              v-for="(children, index) in item.child"
+              :key="index"
+              class="block ltr:pl-4 rtl:pr-4 ltr:pr-1 rtl:-l-1 mb-4 first:mt-4"
+            >
+              <router-link v-slot="{ isActive }" :to="children.childLink">
                 <span
-                  class="h-2 w-2 rounded-full border border-slate-600 dark:border-slate-300 inline-block flex-none"
+                  class="text-sm flex space-x-3 rtl:space-x-reverse items-center transition-all duration-150"
                   :class="
                     isActive
-                      ? ' bg-slate-900 dark:bg-slate-300 ring-4 ring-opacity-[15%] ring-black-500 dark:ring-slate-300 dark:ring-opacity-20'
-                      : ''
+                      ? ' text-slate-900 dark:text-white font-medium'
+                      : 'text-slate-600 dark:text-slate-300'
                   "
-                />
-                <span class="flex-1">
-                  {{ t(ci.childtitle) }}
+                >
+                  <span
+                    class="h-2 w-2 rounded-full border border-slate-600 dark:border-slate-300 inline-block flex-none"
+                    :class="
+                      isActive
+                        ? ' bg-slate-900 dark:bg-slate-300 ring-4 ring-opacity-[15%] ring-black-500 dark:ring-slate-300 dark:ring-opacity-20'
+                        : ''
+                    "
+                  />
+                  <span class="flex-1">
+                    {{ t(children.childTitle) }}
+                  </span>
                 </span>
-              </span>
-            </router-link>
-          </li>
-        </ul>
-      </Transition>
+              </router-link>
+            </li>
+          </ul>
+        </Transition>
+      </template>
     </li>
   </ul>
 </template>
@@ -210,7 +227,7 @@ const toggleSubmenu = (index: any) => {
 // single sidebar menu css
 .single-sidebar-menu {
   @apply relative;
-  .menulabel {
+  .menu-label {
     @apply text-slate-800 dark:text-slate-300 text-xs font-semibold uppercase mb-4 mt-4;
   }
   > .menu-link {
@@ -228,7 +245,7 @@ const toggleSubmenu = (index: any) => {
 }
 
 // close sidebar css
-.close_sidebar .menulabel {
+.close_sidebar .menu-label {
   @apply hidden;
 }
 

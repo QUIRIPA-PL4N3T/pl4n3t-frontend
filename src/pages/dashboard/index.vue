@@ -1,65 +1,94 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import widget1 from '~/assets/images/all-img/widget-bg-1.png'
-
-const { t } = useI18n()
 
 const emissionFactorStore = useEmissionFactorStore()
+const companyStore = useCompanyStore()
 const { statistics } = storeToRefs(emissionFactorStore)
+const { company } = storeToRefs(companyStore)
+
+const show = $ref<boolean[]>([])
+function toggleGraphVisibility(index: number) {
+  show[index] = !show[index]
+}
 </script>
 
 <template>
   <div>
-    <div class="grid grid-cols-12 gap-5 mb-5">
-      <div class="2xl:col-span-3 lg:col-span-4 col-span-12">
-        <div
-          class="bg-no-repeat bg-cover bg-center p-4 rounded-[6px] relative"
-          :style="{
-            backgroundImage:
-              `url(${widget1})`,
-          }"
-        >
-          <div class="max-w-[169px]">
-            <div class="text-xl font-medium text-slate-900 mb-2">
-              {{ t('membership.update') }}
-            </div>
-            <p class="text-sm text-slate-800">
-              {{ t('membership.benefits') }}
+    <div class="grid grid-cols-12 gap-5 mb-5 bg-">
+      <div class="col-span-12 bg-transparent ">
+        <div class="grid col-span-1 gap-5 ">
+          <div v-for="(item, i) in statistics" :key="i" class="py-[10px] px-4 rounded-[6px] shadow" :class="item.bg">
+            <p class=" m-2 uppercase font-bold">
+              {{ item.title }}
             </p>
-          </div>
-          <div
-            class="absolute top-1/2 -translate-y-1/2 ltr:right-6 rtl:left-6 mt-2 h-12 w-12 bg-white text-slate-900 rounded-full text-xs font-medium flex flex-col items-center justify-center"
-          >
-            Now
-          </div>
-        </div>
-      </div>
-      <div class="2xl:col-span-9 lg:col-span-8 col-span-12">
-        <Card body-class="p-4">
-          <div class="grid md:grid-cols-3 col-span-1 gap-4">
-            <div
-              v-for="(item, i) in statistics"
-              :key="i"
-              class="py-[18px] px-4 rounded-[6px]"
-              :class="item.bg"
-            >
-              <div class="flex items-center space-x-6 rtl:space-x-reverse">
-                <div class="flex-1">
-                  <div
-                    class="text-slate-800 dark:text-slate-300 text-sm mb-1 font-medium"
-                  >
-                    {{ item.title }}
+            <div class=" lg:flex">
+              <div class="flex-1">
+                <div class=" flex justify-between items-center h-36 bg-white lg:p-8  p-4 rounded-3xl shadow">
+                  <div class="flex flex-col h-full justify-between text-xl font-bold">
+                    <p>
+                      0
+                    </p>
+                    <p>Ton CO2e</p>
                   </div>
-                  <div
-                    class="text-slate-900 dark:text-white text-lg font-medium"
+                  <img
+                    class=" h-14 "
+                    src="https://static.vecteezy.com/system/resources/previews/009/372/149/non_2x/cloud-illustration-design-elements-for-web-interface-weather-forecast-or-cloud-storage-applications-white-clouds-set-isolated-on-blue-background-vector-illustration-clouds-silhouettes-free-png.png"
+                    alt=""
                   >
-                    {{ item.count }}
+                </div>
+              </div>
+              <div class=" lg:hidden h-px w-4/5 bg-black-400 border-dotted border-2 m-auto mt-4 mb-4" />
+              <div class="mt-4 mb-5 lg:ml-6 lg:mr-6">
+                <div class="flex mb-8">
+                  <p class=" mr-2 font-bold text-6xl lg:text-4xl ">
+                    {{ company.locations.length }}
+                  </p>
+                  <p>Sedes registradas</p>
+                </div>
+                <div class="flex flex-row items-end">
+                  <p class=" mr-2 font-bold text-6xl lg:text-4xl">
+                    0
+                  </p>
+                  <p>Fuentes de emisión en invierno</p>
+                </div>
+              </div>
+              <div class=" lg:hidden h-px w-4/5 bg-black-400 border-dotted border-2 m-auto mt-4 mb-4 " />
+              <div class="flex-1">
+                <div class=" flex-col justify-between items-center  bg-white lg:p-8  p-4 rounded-3xl shadow-xl">
+                  <div class="flex flex-row justify-end mb-1">
+                    <p>Progreso</p>
+                  </div>
+                  <div v-for="location in item.companies" :key="location.name">
+                    <div class="flex justify-between">
+                      <div class=" flex justify-start items-start">
+                        <img class=" h-7  mr-2 " src="https://cdn-icons-png.flaticon.com/512/4844/4844589.png" alt="">
+                        <p> {{ location.name }}</p>
+                      </div>
+                      <div class=" w-36 lg:w-32 ">
+                        <div class="absolute h-4 w-36 bg-black-300 rounded lg:w-32" />
+                        <div :class="`relative h-4 z-10 w-${location.progress} bg-red-600 rounded `" />
+                        <p
+                          class=" relative z-10 bottom-[15px] left-[110px] text-xs text-black-500 font-bold lg:left-[92px] "
+                        >
+                          {{ location.progress }}%
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            <p v-if="!show[i]" class="m-2" @click="toggleGraphVisibility(i)">
+              Ver gráficas
+            </p>
+            <p v-if="show[i]" class="m-2" @click="toggleGraphVisibility(i)">
+              Ocultar gráfica
+            </p>
+            <div v-if="show[i]" class=" flex flex-col p-3 m-2">
+              <chart-bar :id="`chart${i}`" />
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
     </div>
   </div>

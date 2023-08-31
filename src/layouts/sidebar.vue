@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia'
 
 const themeSettingsStore = useThemeSettingsStore()
 
-const { menuLayout, sidebarHidden, sidebarCollapse, mobilSidebar } = storeToRefs(themeSettingsStore)
+const { menuLayout, sidebarHidden, sidebarCollapse, mobileSidebar } = storeToRefs(themeSettingsStore)
 const { width } = useWindowSize()
 
 function switchHeaderClass() {
@@ -26,14 +26,14 @@ function switchHeaderClass() {
     <!-- main sidebar end -->
     <Transition name="mobilemenu">
       <MobileSidebar
-        v-if="width < 1280 && mobilSidebar"
+        v-if="width < 1280 && mobileSidebar"
       />
     </Transition>
     <Transition name="overlay-fade">
       <div
-        v-if="width < 1280 && mobilSidebar"
+        v-if="width < 1280 && mobileSidebar"
         class="overlay bg-slate-900 bg-opacity-70 backdrop-filter backdrop-blur-[3px] backdrop-brightness-10 fixed inset-0 z-[999]"
-        @click="mobilSidebar = false"
+        @click="mobileSidebar = false"
       />
     </Transition>
     <main class="flex-1 h-full">

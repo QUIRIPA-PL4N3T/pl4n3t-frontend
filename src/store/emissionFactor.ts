@@ -1,5 +1,15 @@
 import { defineStore } from 'pinia'
 
+export interface companyInterface {
+  title: string
+  count: string
+  bg: string
+  companies: {
+    name: string
+    progress: number
+  }[]
+}
+
 const months: string[] = [
   'Enero',
   'Febrero',
@@ -34,22 +44,34 @@ export const useEmissionFactorStore = defineStore('emissionFactor', {
       }),
       )
     },
-    statistics(): any {
+    statistics(): companyInterface[] {
       return [
         {
-          title: 'CO2',
+          title: 'huella de carbono organizacional',
           count: '720.15 KgCO2/Gal',
           bg: 'bg-[#E5F9FF] dark:bg-slate-900',
+          companies: [
+            { name: 'empresa', progress: 0 },
+
+          ],
         },
         {
-          title: 'CH4',
+          title: 'huella hídrica',
           count: '1.0013679 KgCH4/Gal',
           bg: 'bg-[#FFEDE5] dark:bg-slate-900',
+          companies: [
+            { name: 'empresa', progress: 0 },
+
+          ],
         },
         {
-          title: 'N2O',
+          title: 'huella plástica',
           count: '0.0821 KgN2O/Gal',
           bg: 'bg-[#EAE5FF] dark:bg-slate-900',
+          companies: [
+            { name: 'empresa', progress: 0 },
+
+          ],
         },
       ]
     },
