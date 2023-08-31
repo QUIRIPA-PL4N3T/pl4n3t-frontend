@@ -107,7 +107,7 @@ equipments:
     description: Descripción
     branch: Marca
     identification: Placa | Serial | Número de Identificación
-    title: Listado de máquinas y equipos registrados
+    title: Fuentes de emisión de la organización registradas
 liquidation:
   title: Liquidar
 goals:
@@ -144,6 +144,8 @@ brand edit:
   title: Editar Marca
 location edit:
   title: Editar Sede
+emission source-edit:
+  title: Inventario GEI
 brand:
   title: Marcas
   add: Nueva Marca
@@ -153,3 +155,12 @@ brand:
 delete: Eliminar
 edit: Editar
 view: Ver
+equipment:
+  add: Agregar
+  name: Nombre
+  code: Código
+  description: Descripción
+  group: Grupo
+  source_type: Tipo de fuente de emisión (Fija o Móvil)
+  factor_type: Tipo de Factor de Emisión
+  emission_factor: Factor de Emisión

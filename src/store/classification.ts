@@ -1,16 +1,49 @@
 import { defineStore } from 'pinia'
 import { useLocalStorage } from '@vueuse/core'
-import { quantificationTypeApi } from '~/api'
-import type { QuantificationType } from '~/api-client'
+import { emissionFactorApi, emissionSourceGroupApi, quantificationTypeApi, sourceTypeApi } from '~/api'
+import type { EmissionFactor, EmissionSourceGroup, FactorType, QuantificationType, SourceType } from '~/api-client'
 
 export const useClassificationStore = defineStore('classification', {
   state: () => ({
     quantificationTypes: useLocalStorage<QuantificationType[]>('quantificationTypes', []),
-    environment: <QuantificationType | null>(null),
+    classificationGroups: useLocalStorage<EmissionSourceGroup[]>('classificationGroups', []),
+    factorTypes: useLocalStorage<FactorType[]>('emissionFactorTypes', []),
+    emissionFactors: useLocalStorage<EmissionFactor[]>('emissionFactors', []),
+    filteredEmissionFactors: useLocalStorage<EmissionFactor[]>('filteredEmissionFactors', []),
+    sourceTypes: useLocalStorage<SourceType[]>('sourceTypes', []),
+    environment: useLocalStorage<QuantificationType | null>('environment', null),
   }),
   getters: {
     optionsQuantificationTypes(): any {
       return this.quantificationTypes.map((type: any) => ({
+        label: type.name,
+        value: type.id,
+      }),
+      )
+    },
+    optionGroups(): any {
+      return this.classificationGroups.map((type: any) => ({
+        label: type.name,
+        value: type.id,
+      }),
+      )
+    },
+    optionFactorTypes(): any {
+      return this.factorTypes.map((type: any) => ({
+        label: type.name,
+        value: type.id,
+      }),
+      )
+    },
+    optionSourceTypes(): any {
+      return this.sourceTypes.map((type: any) => ({
+        label: type.name,
+        value: type.id,
+      }),
+      )
+    },
+    optionsFilteredEmissionFactors(): any {
+      return this.filteredEmissionFactors.map((type: any) => ({
         label: type.name,
         value: type.id,
       }),
@@ -21,12 +54,31 @@ export const useClassificationStore = defineStore('classification', {
     setEnvironment(environment: QuantificationType | null) {
       this.environment = environment
     },
+    setEmissionTypesByGroup(id: number) {
+      const group = this.classificationGroups.find(item => item.id === id)
+      if (group?.emission_factor_types)
+        this.factorTypes = group.emission_factor_types
+      else
+        this.factorTypes = []
+    },
+    filterEmissionFactorByType(id: number) {
+      this.filteredEmissionFactors = this.emissionFactors.filter(item => item.factor_type === id)
+    },
     async fetchClassificationData() {
       try {
       // Fetch document types
         const { data: quantificationTypes } = await quantificationTypeApi.classificationsQuantificationTypesList()
         this.quantificationTypes = quantificationTypes
         this.environment = this.quantificationTypes[0]
+
+        const { data: classificationGroups } = await emissionSourceGroupApi.classificationsEmissionSourceGroupsList()
+        this.classificationGroups = classificationGroups
+
+        const { data: emissionFactors } = await emissionFactorApi.emissionsEmissionFactorsList()
+        this.emissionFactors = emissionFactors
+
+        const { data: sourceTypes } = await sourceTypeApi.emissionsSourceTypesList()
+        this.sourceTypes = sourceTypes
       }
       catch (error) {
         console.error(error)

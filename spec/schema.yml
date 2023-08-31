@@ -2138,10 +2138,11 @@ components:
         category_name:
           type: string
           readOnly: true
-        emission_factor_type:
+        emission_factor_types:
           type: array
           items:
-            type: integer
+            $ref: '#/components/schemas/FactorType'
+          readOnly: true
         emission_factor_type_names:
           type: array
           items:
@@ -2150,6 +2151,7 @@ components:
         - category
         - category_name
         - emission_factor_type_names
+        - emission_factor_types
         - id
         - name
     EmissionsSource:
@@ -2200,8 +2202,16 @@ components:
               minItems: 2
               maxItems: 3
           nullable: true
+        factor_type:
+          type: integer
+          title: Factor de Emisión
+        emission_factor:
+          type: integer
+          title: Factor de Emisión
       required:
         - code
+        - emission_factor
+        - factor_type
         - id
         - location
         - name
@@ -2460,9 +2470,15 @@ components:
           maximum: 2147483647
           minimum: -2147483648
           title: Empleados
+        emission_source_locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmissionsSource'
+          readOnly: true
       required:
         - address
         - company
+        - emission_source_locations
         - id
         - name
         - zip_code
@@ -2744,6 +2760,12 @@ components:
               minItems: 2
               maxItems: 3
           nullable: true
+        factor_type:
+          type: integer
+          title: Factor de Emisión
+        emission_factor:
+          type: integer
+          title: Factor de Emisión
     PatchedEmissionsSourceMonthEntry:
       type: object
       properties:
@@ -2836,6 +2858,11 @@ components:
           maximum: 2147483647
           minimum: -2147483648
           title: Empleados
+        emission_source_locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmissionsSource'
+          readOnly: true
     PatchedMember:
       type: object
       properties:

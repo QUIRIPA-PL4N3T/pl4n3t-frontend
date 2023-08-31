@@ -30,11 +30,17 @@ export const useCompanyStore = defineStore('company', {
       }))
     },
     optionsLocations(): any {
-      return this.company.locations.map((location: Location) => ({
+      const emptyLocation = {
+        label: 'Seleccione una Sede',
+        value: null,
+      }
+
+      const locations = this.company.locations.map((location: Location) => ({
         label: location.name,
         value: location.id,
-      }),
-      )
+      }))
+
+      return [emptyLocation, ...locations]
     },
     getCurrentLocation(): any {
       return this.currentLocation

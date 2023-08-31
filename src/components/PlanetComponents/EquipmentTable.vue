@@ -2,9 +2,10 @@
 import { storeToRefs } from 'pinia'
 import { VueGoodTable } from 'vue-good-table-next'
 
+const router = useRouter()
 const { t } = useI18n()
-const emissionFactorStore = useEmissionFactorStore()
-const { activities } = storeToRefs(emissionFactorStore)
+const emissionSourceStore = useEmissionSourceStore()
+const { locationEquipments } = storeToRefs(emissionSourceStore)
 
 const current = ref(1)
 const perpage = ref(10)
@@ -16,47 +17,49 @@ const columns = ref([
     field: 'id',
   },
   {
-    label: t('activities.month'),
-    field: 'month',
+    label: t('equipment.name'),
+    field: 'name',
   },
   {
-    label: t('activities.location'),
-    field: 'location',
+    label: t('equipment.code'),
+    field: 'code',
   },
   {
-    label: t('activities.activity'),
-    field: 'activity',
+    label: t('equipment.description'),
+    field: 'description',
   },
 
   {
-    label: t('activities.amount'),
-    field: 'amount',
+    label: t('equipment.group'),
+    field: 'group',
   },
   {
-    label: t('activities.ho2'),
-    field: 'valueHO2',
-  },
-  {
-    label: t('activities.hc4'),
-    field: 'valueCH4',
-  },
-  {
-    label: t('activities.n20'),
-    field: 'valueN2O',
+    label: t('equipment.source_type'),
+    field: 'source_type',
   },
   {
     label: 'Action',
     field: 'action',
   },
 ])
+function editItem(id: number) {
+  router.push({
+    name: 'emission-source-edit',
+    params: { id },
+  })
+}
+
+async function deleteItem(id: number) {
+  await emissionSourceStore.deleteEmissionSource(id)
+}
 </script>
 
 <template>
-  <div v-if="activities">
+  <div v-if="locationEquipments">
     <VueGoodTable
       :columns="columns"
       style-class=" vgt-table  lesspadding2 centered "
-      :rows="activities"
+      :rows="locationEquipments"
       :pagination-options="{
         enabled: true,
         perPage: perpage,
@@ -84,15 +87,7 @@ const columns = ref([
           <div class="flex space-x-3 justify-center rtl:space-x-reverse">
             <Tooltip placement="top" arrow theme="dark">
               <template #button>
-                <div class="action-btn">
-                  <Icon icon="heroicons:eye" />
-                </div>
-              </template>
-              <span> View</span>
-            </Tooltip>
-            <Tooltip placement="top" arrow theme="dark">
-              <template #button>
-                <div class="action-btn">
+                <div class="action-btn" @click="editItem(props.row.id)">
                   <Icon icon="heroicons:pencil-square" />
                 </div>
               </template>
@@ -100,7 +95,7 @@ const columns = ref([
             </Tooltip>
             <Tooltip placement="top" arrow theme="danger-500">
               <template #button>
-                <div class="action-btn">
+                <div class="action-btn" @click="deleteItem(props.row.id)">
                   <Icon icon="heroicons:trash" />
                 </div>
               </template>

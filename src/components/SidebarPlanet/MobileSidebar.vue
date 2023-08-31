@@ -69,6 +69,12 @@ export default defineComponent({
     <DropdownSearch :items="companies" />
 
     <div class="sidebar-menu px-4 h-[calc(100%-100px)]" data-simplebar>
+      <div>
+        <MenuEnvironment />
+      </div>
+      <div class="pt-2">
+        <MenuLocationSearch />
+      </div>
       <NavigationMenu :items="menuItems" />
       <div
         v-if="!$store.themeSettingsStore.sidebarCollapse"

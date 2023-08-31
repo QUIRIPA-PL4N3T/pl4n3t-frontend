@@ -1,5 +1,5 @@
 import { SizeEnum } from '~/api-client'
-import type { Brand, Company, Location } from '~/api-client'
+import type { Brand, Company, EmissionsSource, Location } from '~/api-client'
 
 export const DEFAULT_COMPANY: Company = {
   id: 0,
@@ -41,4 +41,19 @@ export const DEFAULT_LOCATION: Location = {
   geo_location: null,
   brand: 0,
   location_type: null,
+  emission_source_locations: [],
+}
+
+export const DEFAULT_EMISSIONS_SOURCE: EmissionsSource = {
+  id: 0,
+  name: '',
+  code: '',
+  description: null,
+  location: 0,
+  image: null,
+  group: 0,
+  source_type: 0,
+  factor_type: 0,
+  emission_factor: 0,
+  geo_location: null,
 }
