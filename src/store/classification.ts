@@ -64,8 +64,11 @@ export const useClassificationStore = defineStore('classification', {
       else
         this.factorTypes = []
     },
-    filterEmissionFactorByType(id: number) {
-      this.filteredEmissionFactors = this.emissionFactors.filter(item => item.factor_type === id)
+    filterEmissionFactorByType(id: number, source_type?: number) {
+      if (source_type)
+        this.filteredEmissionFactors = this.emissionFactors.filter(item => item.factor_type === id && item.source_type === source_type)
+      else
+        this.filteredEmissionFactors = this.emissionFactors.filter(item => item.factor_type === id)
     },
     async fetchClassificationData() {
       try {

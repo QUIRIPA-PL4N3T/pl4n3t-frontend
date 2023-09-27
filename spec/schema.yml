@@ -2015,7 +2015,6 @@ components:
           maxLength: 200
         value:
           type: string
-          maxLength: 200
       required:
         - key
         - value
@@ -2150,6 +2149,11 @@ components:
         allow_inventory:
           type: boolean
           title: Permitir registro de inventario
+        form_name:
+          type: string
+          nullable: true
+          title: Nombre del Formulario
+          maxLength: 255
         classification:
           type: string
           readOnly: true
@@ -2215,6 +2219,34 @@ components:
         emission_factor:
           type: integer
           title: Factor de Emisión
+        vehicle_type:
+          type: string
+          nullable: true
+          title: Tipo de Vehículo
+          maxLength: 128
+        vehicle_load:
+          type: string
+          nullable: true
+          title: Tipo de Carga
+          maxLength: 128
+        vehicle_fuel:
+          type: string
+          nullable: true
+          title: Tipo de Combustible
+          maxLength: 128
+        vehicle_capacity:
+          type: number
+          format: double
+          title: Capacidad
+        vehicle_efficiency:
+          type: number
+          format: double
+          title: Eficiencia del Vehículo
+        vehicle_efficiency_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida
+          maxLength: 128
       required:
         - code
         - emission_factor
@@ -2773,6 +2805,34 @@ components:
         emission_factor:
           type: integer
           title: Factor de Emisión
+        vehicle_type:
+          type: string
+          nullable: true
+          title: Tipo de Vehículo
+          maxLength: 128
+        vehicle_load:
+          type: string
+          nullable: true
+          title: Tipo de Carga
+          maxLength: 128
+        vehicle_fuel:
+          type: string
+          nullable: true
+          title: Tipo de Combustible
+          maxLength: 128
+        vehicle_capacity:
+          type: number
+          format: double
+          title: Capacidad
+        vehicle_efficiency:
+          type: number
+          format: double
+          title: Eficiencia del Vehículo
+        vehicle_efficiency_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida
+          maxLength: 128
     PatchedEmissionsSourceMonthEntry:
       type: object
       properties:

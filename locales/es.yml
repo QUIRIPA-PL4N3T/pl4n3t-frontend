@@ -157,10 +157,17 @@ edit: Editar
 view: Ver
 equipment:
   add: Agregar
-  name: Nombre
+  name: Nombre / Marcar / Modelo
   code: Código
   description: Descripción
   group: Grupo
   source_type: Tipo de fuente de emisión (Fija o Móvil)
   factor_type: Tipo de Factor de Emisión
   emission_factor: Factor de Emisión
+  vehicle_type: Clase de Vehículo
+  vehicle_fuel_type: Tipo de Combustible
+  vehicle_fuel: Combustible
+  vehicle_load_type: Tipo de Vehículo
+  vehicle_efficiency_unit: Unidad
+  vehicle_capacity: Capacidad
+  vehicle_efficiency: Eficiencia del Vehículo

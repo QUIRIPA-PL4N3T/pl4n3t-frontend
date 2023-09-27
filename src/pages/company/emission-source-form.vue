@@ -1,19 +1,28 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import type { EmissionSourceGroup } from '~/api-client'
 
 const props = defineProps<{ id?: string }>()
 
+const selectedGroup = ref<EmissionSourceGroup | undefined>(undefined)
 const selectedGroupId = ref(0)
 const selectedFactorTypeId = ref(0)
+const disabledSourceType = ref<boolean>(false)
 
 const { t } = useI18n()
 const authStore = useAuthStore()
+const basicStore = useBasicStore()
 
 const { user } = storeToRefs(authStore)
 const emissionSourceStore = useEmissionSourceStore()
 const classificationStore = useClassificationStore()
 const { inventoriableClassificationGroups, optionFactorTypes, optionsFilteredEmissionFactors, optionSourceTypes } = storeToRefs(classificationStore)
 const { currentEquipment } = storeToRefs(emissionSourceStore)
+const {
+  optionsVehicleTypeList,
+  optionsVehicleLoadList,
+  optionsVehicleEfficiencyUnitList,
+} = storeToRefs(basicStore)
 
 async function save() {
   await emissionSourceStore.saveEmissionSource()
@@ -29,23 +38,59 @@ watch(() => user.value, () => {
 })
 
 watch(() => selectedFactorTypeId.value, () => {
-  classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value)
+  classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value, currentEquipment.value.source_type)
 })
 
 watch(() => currentEquipment.value.group, () => {
   selectedGroupId.value = currentEquipment.value.group || 0
+  setSelectGroupById(selectedGroupId.value)
 })
 
-function selectGroup(id: number) {
-  selectedGroupId.value = id
-  classificationStore.setEmissionTypesByGroup(id)
+function setSelectGroup(group: EmissionSourceGroup) {
+  selectedGroupId.value = group.id
+  classificationStore.setEmissionTypesByGroup(group.id)
+  selectedGroup.value = group
+
+  switch (selectedGroup.value?.form_name) {
+    case 'ORGANIZATION_VEHICLES':
+      currentEquipment.value.source_type = 2
+      disabledSourceType.value = true
+      break
+    default:
+      break
+  }
+}
+
+function setSelectGroupById(id: number) {
+  if (id !== 0)
+    selectedGroup.value = inventoriableClassificationGroups.value.find(group => group.id === id)
 }
 
 function filterEmissionFactors() {
   classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value)
 }
 
+function emissionFactorTypeLabel(): string {
+  switch (selectedGroup.value?.form_name) {
+    case 'ORGANIZATION_VEHICLES':
+      return t('equipment.vehicle_fuel_type')
+    default:
+      return t('equipment.factor_type')
+  }
+}
+
+function emissionFactorLabel(): string {
+  switch (selectedGroup.value?.form_name) {
+    case 'ORGANIZATION_VEHICLES':
+      return t('equipment.vehicle_fuel')
+    default:
+      return t('equipment.emission_factor')
+  }
+}
+
 emissionSourceStore.fetchEmissionSource(Number(props.id))
+
+setSelectGroupById(currentEquipment.value.group!)
 </script>
 
 <template>
@@ -63,7 +108,7 @@ emissionSourceStore.fetchEmissionSource(Number(props.id))
             <button
               class="relative flex w-40 hover:bg-black-100 justify-center h-full"
               :class="{ 'border-blue-500 bg-black-200 border-2': group.id === selectedGroupId }"
-              @click.prevent="selectGroup(group.id)"
+              @click.prevent="setSelectGroup(group)"
             >
               <div class="flex flex-col h-full items-center p-2">
                 <Image
@@ -109,6 +154,7 @@ emissionSourceStore.fetchEmissionSource(Number(props.id))
                   name="code"
                 />
                 <FormKit
+                  v-if="selectedGroup && ['ORGANIZATION_VEHICLES'].includes(selectedGroup.form_name!)"
                   :label="t('equipment.name')"
                   outer-class="w-full"
                   inner-class="max-w-xl"
@@ -119,6 +165,7 @@ emissionSourceStore.fetchEmissionSource(Number(props.id))
               </div>
               <div class="pb-5">
                 <FormKit
+                  :disabled="disabledSourceType"
                   :label="t('equipment.source_type')"
                   type="select"
                   placeholder="..."
@@ -126,10 +173,58 @@ emissionSourceStore.fetchEmissionSource(Number(props.id))
                   name="source_type"
                 />
               </div>
+              <div
+                v-if="selectedGroup && ['ORGANIZATION_VEHICLES'].includes(selectedGroup.form_name!)"
+                class="grid grid-cols-1 md:grid-cols-2 gap-x-4"
+              >
+                <div class="pb-5">
+                  <FormKit
+                    :label="t('equipment.vehicle_type')"
+                    type="select"
+                    placeholder="..."
+                    :options="optionsVehicleTypeList"
+                    name="vehicle_type"
+                  />
+                </div>
+                <div class="pb-5">
+                  <FormKit
+                    :label="t('equipment.vehicle_load_type')"
+                    type="select"
+                    placeholder="..."
+                    :options="optionsVehicleLoadList"
+                    name="vehicle_load"
+                  />
+                </div>
+                <div class="pb-5 col-span-2">
+                  <FormKit
+                    type="number"
+                    :label="`${t('equipment.vehicle_capacity')} ${currentEquipment.vehicle_load || ''}`"
+                    number
+                    name="vehicle_capacity"
+                  />
+                </div>
+                <div class="pb-5">
+                  <FormKit
+                    type="number"
+                    :label="t('equipment.vehicle_efficiency')"
+                    number
+                    name="vehicle_efficiency"
+                  />
+                </div>
+                <div class="pb-5">
+                  <FormKit
+                    :label="t('equipment.vehicle_efficiency_unit')"
+                    type="select"
+                    placeholder="..."
+                    :options="optionsVehicleEfficiencyUnitList"
+                    name="vehicle_efficiency_unit"
+                  />
+                </div>
+              </div>
               <div class="flex gap-4 pb-5">
                 <FormKit
                   v-model="selectedFactorTypeId"
-                  :label="t('equipment.factor_type')"
+                  :label="emissionFactorTypeLabel()"
                   outer-class="w-full"
                   type="select"
                   placeholder="..."
@@ -138,7 +233,7 @@ emissionSourceStore.fetchEmissionSource(Number(props.id))
                   @onchange="filterEmissionFactors"
                 />
                 <FormKit
-                  :label="t('equipment.emission_factor')"
+                  :label="emissionFactorLabel()"
                   outer-class="w-full"
                   type="select"
                   placeholder="..."

@@ -12,6 +12,10 @@ export const useBasicStore = defineStore('basic', {
     countryList: useLocalStorage<Country[]>('countries', []),
     stateList: useLocalStorage<State[]>('states', []),
     cityList: useLocalStorage<City[]>('cities', []),
+    vehicleTypeList: useLocalStorage<String[]>('vehicleTypeList', []),
+    vehicleLoadList: useLocalStorage<String[]>('vehicleLoadList', []),
+    vehicleFuelList: useLocalStorage<String[]>('vehicleFuelList', []),
+    vehicleEfficiencyUnitList: useLocalStorage<String[]>('vehicleEfficiencyUnitList', []),
     documentTypes: useLocalStorage<DocumentType[]>('documentTypes', []),
   }),
   getters: {
@@ -65,6 +69,30 @@ export const useBasicStore = defineStore('basic', {
         label: city.name,
       }))
     },
+    optionsVehicleTypeList(): any {
+      return this.vehicleTypeList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionsVehicleFuelList(): any {
+      return this.vehicleFuelList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionsVehicleLoadList(): any {
+      return this.vehicleLoadList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionsVehicleEfficiencyUnitList(): any {
+      return this.vehicleEfficiencyUnitList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
   },
   actions: {
     async fetchBasicData() {
@@ -92,6 +120,21 @@ export const useBasicStore = defineStore('basic', {
         // Fetch countries
         const { data: countries } = await mainApi.mainCountriesList()
         this.countryList = countries
+
+        // Fetch configurations list
+        const { data: configurations } = await mainApi.mainConfigurationsList()
+
+        const vehicleTypeListStr: any = configurations.find((config: any) => config.key === 'VEHICLE_TYPE_LIST')
+        this.vehicleTypeList = vehicleTypeListStr.value.split(',')
+
+        const vehicleLoadListStr: any = configurations.find((config: any) => config.key === 'VEHICLE_LOAD_LIST')
+        this.vehicleLoadList = vehicleLoadListStr.value.split(',')
+
+        const vehicleFuelListStr: any = configurations.find((config: any) => config.key === 'VEHICLE_FUEL_LIST')
+        this.vehicleFuelList = vehicleFuelListStr.value.split(',')
+
+        const vehicleEfficiencyUnitListStr: any = configurations.find((config: any) => config.key === 'VEHICLE_EFFICIENCY_UNIT_LIST')
+        this.vehicleEfficiencyUnitList = vehicleEfficiencyUnitListStr.value.split(',')
       }
       catch (error) {
         console.error(error)
