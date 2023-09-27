@@ -14,6 +14,9 @@ export const useClassificationStore = defineStore('classification', {
     environment: useLocalStorage<QuantificationType | null>('environment', null),
   }),
   getters: {
+    inventoriableClassificationGroups(): EmissionSourceGroup[] {
+      return this.classificationGroups.filter(group => group.allow_inventory)
+    },
     optionsQuantificationTypes(): any {
       return this.quantificationTypes.map((type: any) => ({
         label: type.name,

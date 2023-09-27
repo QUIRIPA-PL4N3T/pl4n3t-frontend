@@ -33,6 +33,7 @@ module.exports = {
       colors: {
         'vtd-primary': colors.sky,
         'vtd-secondary': colors.gray,
+        'pink': '#f0396c',
         'primary': {
           50: '#F6F8FF',
           100: '#EDF0FF',

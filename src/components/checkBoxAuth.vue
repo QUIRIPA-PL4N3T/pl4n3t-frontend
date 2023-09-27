@@ -5,10 +5,18 @@ const {
   label,
   checked = false,
   disabled = false,
-  name = 'checkebox',
+  name = 'checkbox',
   activeClass = 'ing-black-500  bg-slate-900 dark:bg-slate-700 dark:ring-slate-700',
   value,
-} = defineProps<{ label: String; checked?: boolean; disabled?: boolean; name?: string; value: boolean; activeClass?: String }>()
+} = defineProps<{
+  label: String
+  checked?: boolean
+  disabled?: boolean
+  name?: string
+  value: boolean
+  activeClass?: String
+}>()
+
 const emit = defineEmits<{
   (event: 'onSelected', value: boolean): void
 }>()
@@ -17,6 +25,7 @@ const ck = ref(checked)
 
 function onChange() {
   ck.value = !ck.value
+  return ck.value
 }
 </script>
 

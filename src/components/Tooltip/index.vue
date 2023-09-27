@@ -105,9 +105,9 @@ export default {
   </button>
 
   <tippy
+    v-if="$slots.default"
     :placement="placement"
     :arrow="arrow"
-    v-if="$slots.default"
     :theme="theme"
     :animation="animation"
     :trigger="trigger"
@@ -123,9 +123,9 @@ export default {
       {{ title }}
     </button>
 
-    <button v-if="$slots.button" class="inline-block">
+    <div v-if="$slots.button" class="h-full">
       <slot name="button" />
-    </button>
+    </div>
 
     <template #content>
       <slot />

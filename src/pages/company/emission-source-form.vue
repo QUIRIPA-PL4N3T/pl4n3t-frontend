@@ -12,7 +12,7 @@ const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
 const emissionSourceStore = useEmissionSourceStore()
 const classificationStore = useClassificationStore()
-const { classificationGroups, optionFactorTypes, optionsFilteredEmissionFactors, optionSourceTypes } = storeToRefs(classificationStore)
+const { inventoriableClassificationGroups, optionFactorTypes, optionsFilteredEmissionFactors, optionSourceTypes } = storeToRefs(classificationStore)
 const { currentEquipment } = storeToRefs(emissionSourceStore)
 
 async function save() {
@@ -53,24 +53,33 @@ emissionSourceStore.fetchEmissionSource(Number(props.id))
     <Card :title="currentEquipment.name">
       <label class="ltr:inline-block rtl:block input-label" for="phon">{{ t('equipment.group') }}</label>
       <div class="flex gap-3 items-stretch overflow-auto pb-5">
-        <button
-          v-for="(group, i) in classificationGroups"
+        <Tooltip
+          v-for="(group, i) in inventoriableClassificationGroups"
           :key="i"
-          class="relative flex w-40"
-          :class="{ 'border-blue-500 border-2': group.id === selectedGroupId }"
-          @click.prevent="selectGroup(group.id)"
+          placement="bottom"
+          btn-class="relative flex w-40 hover:bg-black-100"
         >
-          <div class="flex flex-col h-full">
-            <Image
-              :src="group.icon!"
-              alt="{{ brand.name }}"
-              image-class="rounded-md border-2 border-slate-100 max-w-full h-[80px] object-contain object-center p-3"
-            />
-            <span class="text-xs pt-2">
-              {{ group.name }}
-            </span>
-          </div>
-        </button>
+          <template #button>
+            <button
+              class="relative flex w-40 hover:bg-black-100 justify-center h-full"
+              :class="{ 'border-blue-500 bg-black-200 border-2': group.id === selectedGroupId }"
+              @click.prevent="selectGroup(group.id)"
+            >
+              <div class="flex flex-col h-full items-center p-2">
+                <Image
+                  :src="group.icon!"
+                  alt="{{ brand.name }}"
+                  image-class="rounded-md border-2 border-slate-100 max-w-full h-[80px] object-contain object-center p-3"
+                />
+                <span class="text-pink">{{ group.classification }}</span>
+                <span class="text-xs pt-2">
+                  {{ group.name }}
+                </span>
+              </div>
+            </button>
+          </template>
+          <div class="text-white text-sm" v-html="group.description" />
+        </Tooltip>
       </div>
       <hr>
       <div class="flex flex-row gap-4 pt-5">
@@ -92,20 +101,20 @@ emissionSourceStore.fetchEmissionSource(Number(props.id))
                   name="group"
                 />
                 <FormKit
-                  :label="t('equipment.name')"
-                  outer-class="w-full"
-                  inner-class="max-w-xl"
-                  type="text"
-                  placeholder="..."
-                  name="name"
-                />
-                <FormKit
                   :label="t('equipment.code')"
                   outer-class="w-full"
                   inner-class="max-w-xl"
                   type="text"
                   placeholder="..."
                   name="code"
+                />
+                <FormKit
+                  :label="t('equipment.name')"
+                  outer-class="w-full"
+                  inner-class="max-w-xl"
+                  type="text"
+                  placeholder="..."
+                  name="name"
                 />
               </div>
               <div class="pb-5">

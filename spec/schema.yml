@@ -2147,9 +2147,16 @@ components:
           type: array
           items:
             type: string
+        allow_inventory:
+          type: boolean
+          title: Permitir registro de inventario
+        classification:
+          type: string
+          readOnly: true
       required:
         - category
         - category_name
+        - classification
         - emission_factor_type_names
         - emission_factor_types
         - id
