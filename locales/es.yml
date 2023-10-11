@@ -218,3 +218,6 @@ equipment:
   asset_leased_label: Bien Arrendado
   asset_duration_label: unidad
   asset_duration_value_label: Duración del contrato de arrendamiento
+  product_name: Nombre del Producto
+  shelf_life_label: Estimación Vida útil del producto
+  shelf_life_unit_label: Unidad
