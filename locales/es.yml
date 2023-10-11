@@ -196,3 +196,7 @@ equipment:
       * Implementación de medidas para reducir el consumo.
   fuel_storage_label: Almacenamiento de Combustible
   fuel_storage_management_label: Gestión del Combustible
+  electricity_supplier_label: Nombre del proveedor de electricidad
+  electricity_source_label: Fuente de generación de electricidad
+  electricity_generation_question: ¿Existe un factor de emisión específico asociado a ala generación de electricidad del proveedor?
+  electricity_type: Tipo de Electricidad

@@ -19,6 +19,7 @@ export const useBasicStore = defineStore('basic', {
     fuelStorageList: useLocalStorage<String[]>('fuelStorageList', []),
     fuelStorageManagementList: useLocalStorage<String[]>('fuelStorageManagementList', []),
     vehicleEfficiencyUnitList: useLocalStorage<String[]>('vehicleEfficiencyUnitList', []),
+    electricitySourceList: useLocalStorage<String[]>('electricitySourceList', []),
     documentTypes: useLocalStorage<DocumentType[]>('documentTypes', []),
   }),
   getters: {
@@ -114,6 +115,12 @@ export const useBasicStore = defineStore('basic', {
         label: type,
       }))
     },
+    optionsElectricitySourceList(): any {
+      return this.electricitySourceList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
   },
   actions: {
     async fetchBasicData() {
@@ -165,6 +172,9 @@ export const useBasicStore = defineStore('basic', {
 
         const fuelStorageManagementStr: any = configurations.find((config: any) => config.key === 'FUEL_STORAGE_MANAGEMENT_LIST')
         this.fuelStorageManagementList = fuelStorageManagementStr.value.split(',')
+
+        const electricitySourceStr: any = configurations.find((config: any) => config.key === 'ELECTRICITY_SOURCE_LIST')
+        this.electricitySourceList = electricitySourceStr.value.split(',')
       }
       catch (error) {
         console.error(error)
