@@ -208,3 +208,10 @@ equipment:
   waste_operation_label: ¿Que tipo de desperdicios se generan en las operaciones de la organización?
   waste_register_label: Seleccione el los desperdicios generados de los cuales se lleva seguimiento y registro
   waste_management_label: ¿como se manejan los desperdicios de las operaciones?
+  good_and_service_label: Adquisición de
+  goods_and_service_monitoring_label: ¿Se registran y monitorean las emisiones de GEI?
+  service_label: Servicio Adquirido
+  goods_label: Bien Adquirido
+  supplier_name: Nombre del Proveedor
+  emission_factor_type: Emisión
+  goods_and_service_origin_label: Origen

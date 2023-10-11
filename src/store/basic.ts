@@ -28,6 +28,11 @@ export const useBasicStore = defineStore('basic', {
     wasteManagementList: useLocalStorage<String[]>('wasteManagementList', []),
     wasteRegisterList: useLocalStorage<String[]>('wasteRegisterList', []),
     operationWasteList: useLocalStorage<String[]>('operationWasteList', []),
+    goodsAndServiceOriginList: useLocalStorage<String[]>('goodsAndServiceOriginList', []),
+    serviceAcquiredList: useLocalStorage<String[]>('serviceAcquiredList', []),
+    goodsAcquiredList: useLocalStorage<String[]>('goodsAcquiredList', []),
+    goodsAndServiceList: useLocalStorage<String[]>('goodsAndServiceList', []),
+    supplierActionImplementationList: useLocalStorage<String[]>('supplierActionImplementationList', []),
   }),
   getters: {
     optionsEconomicSectorList(): any {
@@ -176,6 +181,36 @@ export const useBasicStore = defineStore('basic', {
         label: '',
       }))
     },
+    optionsGoodsAndServiceOriginList(): any {
+      return this.goodsAndServiceOriginList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionsServiceAcquiredList(): any {
+      return this.serviceAcquiredList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionsGoodsAcquiredList(): any {
+      return this.goodsAcquiredList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionsGoodsAndServiceList(): any {
+      return this.goodsAndServiceList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionSupplierActionImplementationList(): any {
+      return this.supplierActionImplementationList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
   },
   actions: {
     async fetchBasicData() {
@@ -251,6 +286,21 @@ export const useBasicStore = defineStore('basic', {
 
         const operationWasteStr: any = configurations.find((config: any) => config.key === 'OPERATION_WASTE_LIST')
         this.operationWasteList = operationWasteStr.value.split(',')
+
+        const goodsAndServiceOriginStr: any = configurations.find((config: any) => config.key === 'GOODS_AND_SERVICES_ORIGIN_LIST')
+        this.goodsAndServiceOriginList = goodsAndServiceOriginStr.value.split(',')
+
+        const serviceAcquiredStr: any = configurations.find((config: any) => config.key === 'SERVICE_ACQUIRED_LIST')
+        this.serviceAcquiredList = serviceAcquiredStr.value.split(',')
+
+        const goodsAcquiredStr: any = configurations.find((config: any) => config.key === 'GOODS_ACQUIRED_LIST')
+        this.goodsAcquiredList = goodsAcquiredStr.value.split(',')
+
+        const goodsAndServiceStr: any = configurations.find((config: any) => config.key === 'GOODS_AND_SERVICES_LIST')
+        this.goodsAndServiceList = goodsAndServiceStr.value.split(',')
+
+        const supplierActionImplementationStr: any = configurations.find((config: any) => config.key === 'SUPPLIER_ACTIONS_IMPLEMENTATION_LIST')
+        this.supplierActionImplementationList = supplierActionImplementationStr.value.split(',')
       }
       catch (error) {
         console.error(error)
