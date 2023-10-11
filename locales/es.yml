@@ -221,3 +221,4 @@ equipment:
   product_name: Nombre del Producto
   shelf_life_label: Estimación Vida útil del producto
   shelf_life_unit_label: Unidad
+  investment_type_label: Tipo de Inversión

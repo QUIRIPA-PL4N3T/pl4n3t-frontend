@@ -35,6 +35,7 @@ export const useBasicStore = defineStore('basic', {
     supplierActionImplementationList: useLocalStorage<String[]>('supplierActionImplementationList', []),
     assetLeasedList: useLocalStorage<String[]>('assetLeasedList', []),
     durationList: useLocalStorage<String[]>('durationList', []),
+    investmentList: useLocalStorage<String[]>('investmentList', []),
   }),
   getters: {
     optionsEconomicSectorList(): any {
@@ -225,6 +226,12 @@ export const useBasicStore = defineStore('basic', {
         label: type,
       }))
     },
+    optionInvestmentList(): any {
+      return this.investmentList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
   },
   actions: {
     async fetchBasicData() {
@@ -321,6 +328,9 @@ export const useBasicStore = defineStore('basic', {
 
         const durationStr: any = configurations.find((config: any) => config.key === 'DURATION_LIST')
         this.durationList = durationStr.value.split(',')
+
+        const investmentStr: any = configurations.find((config: any) => config.key === 'INVESTMENT_LIST')
+        this.investmentList = investmentStr.value.split(',')
       }
       catch (error) {
         console.error(error)
