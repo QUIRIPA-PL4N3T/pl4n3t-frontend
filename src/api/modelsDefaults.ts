@@ -1,5 +1,12 @@
 import { SizeEnum } from '~/api-client'
-import type { Brand, Company, EmissionsSource, Location } from '~/api-client'
+import type {
+  Brand,
+  Company,
+  DocumentsApiDocumentsCreateRequest,
+  EmissionsSource,
+  Location,
+}
+  from '~/api-client'
 
 export const DEFAULT_COMPANY: Company = {
   id: 0,
@@ -56,4 +63,13 @@ export const DEFAULT_EMISSIONS_SOURCE: EmissionsSource = {
   factor_type: 0,
   emission_factor: 0,
   geo_location: null,
+  documents: [],
+}
+
+export const DEFAULT_DOCUMENT: DocumentsApiDocumentsCreateRequest = {
+  objectPk: 0,
+  objectType: 'emission-source',
+  file: undefined,
+  title: '',
+  tags: '',
 }

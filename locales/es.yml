@@ -96,7 +96,7 @@ activities:
     activity: Actividad
     amount: Cantidad
     month: Mes
-  processActivities: Liquidar Periodo
+  processActivities: Cuantificar Periodo
 equipments:
   title: Fuentes de Emisión
   add: Agregar
@@ -109,7 +109,7 @@ equipments:
     identification: Placa | Serial | Número de Identificación
     title: Fuentes de emisión de la organización registradas
 liquidation:
-  title: Liquidar
+  title: Cuantificar
 goals:
   title: Metas
 reports:
@@ -145,7 +145,7 @@ brand edit:
 location edit:
   title: Editar Sede
 emission source-edit:
-  title: Inventario GEI
+  title: Registro de Inventario
 brand:
   title: Marcas
   add: Nueva Marca
@@ -155,6 +155,8 @@ brand:
 delete: Eliminar
 edit: Editar
 view: Ver
+yes: Si
+no: No
 equipment:
   add: Agregar
   name: Nombre / Marcar / Modelo
@@ -171,3 +173,22 @@ equipment:
   vehicle_efficiency_unit: Unidad
   vehicle_capacity: Capacidad
   vehicle_efficiency: Eficiencia del Vehículo
+  save:
+    success: Fuente de emisión guardada correctamente
+    error: La Fuente de emisión no ha podido ser guardada
+  attach:
+    label: Adjuntar Soportes
+    help: Por favor seleccione los documentos soporte como (hoja de vida, certificados, mantenimientos u otros)
+  process_label: Seleccione el proceso o actividad
+  type: Seleccione el equipo
+  vapor_generation_question: ¿Existe un factor de emisión especifico asociado a la generación de vapor?
+  efficiency_label: Eficiencia energética del equipo o sistema que usa el combustible
+  efficiency_unit_label: unidad de medida
+  description_help: |
+    Amplía la información sobre el proceso / actividad para la cual se usa el combustible, teniendo en cuenta aspectos como:
+
+      * Para qué propósitos se utiliza el combustible.
+      * Variación estacional en el consumo de combustible.
+      * Implementación de medidas para reducir el consumo.
+  fuel_storage_label: Almacenamiento de Combustible
+  fuel_storage_management_label: Gestión del Combustible

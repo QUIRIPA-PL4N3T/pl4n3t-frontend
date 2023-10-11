@@ -5,6 +5,7 @@ import {
   CompanyEmissionSourceEntriesApi,
   CompanyEmissionSourcesApi,
   CompanyMembersApi,
+  DocumentsApi,
   EmissionFactorsApi,
   EmissionSourceGroupsApi,
   FactorTypesApi,
@@ -37,3 +38,4 @@ export const isoCategoryApi = new ISOCategoriesApi(undefined, apiUrl, axiosInsta
 export const locationApi = new LocationsApi(undefined, apiUrl, axiosInstance)
 export const quantificationTypeApi = new QuantificationTypesApi(undefined, apiUrl, axiosInstance)
 export const sourceTypeApi = new SourceTypesApi(undefined, apiUrl, axiosInstance)
+export const documentApi = new DocumentsApi(undefined, apiUrl, axiosInstance)

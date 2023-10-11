@@ -15,6 +15,9 @@ export const useBasicStore = defineStore('basic', {
     vehicleTypeList: useLocalStorage<String[]>('vehicleTypeList', []),
     vehicleLoadList: useLocalStorage<String[]>('vehicleLoadList', []),
     vehicleFuelList: useLocalStorage<String[]>('vehicleFuelList', []),
+    methodologiesList: useLocalStorage<String[]>('methodologiesList', []),
+    fuelStorageList: useLocalStorage<String[]>('fuelStorageList', []),
+    fuelStorageManagementList: useLocalStorage<String[]>('fuelStorageManagementList', []),
     vehicleEfficiencyUnitList: useLocalStorage<String[]>('vehicleEfficiencyUnitList', []),
     documentTypes: useLocalStorage<DocumentType[]>('documentTypes', []),
   }),
@@ -93,6 +96,24 @@ export const useBasicStore = defineStore('basic', {
         label: type,
       }))
     },
+    optionsMethodologiesList(): any {
+      return this.methodologiesList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionsFuelStorageList(): any {
+      return this.fuelStorageList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionsFuelStorageManagementList(): any {
+      return this.fuelStorageManagementList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
   },
   actions: {
     async fetchBasicData() {
@@ -135,6 +156,15 @@ export const useBasicStore = defineStore('basic', {
 
         const vehicleEfficiencyUnitListStr: any = configurations.find((config: any) => config.key === 'VEHICLE_EFFICIENCY_UNIT_LIST')
         this.vehicleEfficiencyUnitList = vehicleEfficiencyUnitListStr.value.split(',')
+
+        const methodologiesListStr: any = configurations.find((config: any) => config.key === 'METHODOLOGIES_LIST')
+        this.methodologiesList = methodologiesListStr.value.split(',')
+
+        const fuelStorageStr: any = configurations.find((config: any) => config.key === 'FUEL_STORAGE_LIST')
+        this.fuelStorageList = fuelStorageStr.value.split(',')
+
+        const fuelStorageManagementStr: any = configurations.find((config: any) => config.key === 'FUEL_STORAGE_MANAGEMENT_LIST')
+        this.fuelStorageManagementList = fuelStorageManagementStr.value.split(',')
       }
       catch (error) {
         console.error(error)

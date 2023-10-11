@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import { useToast } from 'vue-toastification'
 import type { EmissionSourceGroup } from '~/api-client'
 
 const props = defineProps<{ id?: string }>()
@@ -11,25 +12,45 @@ const disabledSourceType = ref<boolean>(false)
 
 const { t } = useI18n()
 const authStore = useAuthStore()
-const basicStore = useBasicStore()
+const toast = useToast()
 
 const { user } = storeToRefs(authStore)
 const emissionSourceStore = useEmissionSourceStore()
 const classificationStore = useClassificationStore()
-const { inventoriableClassificationGroups, optionFactorTypes, optionsFilteredEmissionFactors, optionSourceTypes } = storeToRefs(classificationStore)
+const documentStore = useDocumentsStore()
+
+const { inventoriableClassificationGroups } = storeToRefs(classificationStore)
 const { currentEquipment } = storeToRefs(emissionSourceStore)
-const {
-  optionsVehicleTypeList,
-  optionsVehicleLoadList,
-  optionsVehicleEfficiencyUnitList,
-} = storeToRefs(basicStore)
+const { documentItem } = storeToRefs(documentStore)
 
 async function save() {
-  await emissionSourceStore.saveEmissionSource()
+  try {
+    await emissionSourceStore.saveEmissionSource()
+    toast.success(t('equipment.save.success'), {
+      timeout: 2000,
+    })
+  }
+  catch (error) {
+    console.error(error)
+    toast.error(t('equipment.save.error'))
+  }
 }
 
 async function deleteEmissionFactor(id: number) {
   await emissionSourceStore.deleteEmissionSource(id)
+}
+
+async function uploadDocument(event: Event) {
+  const inputElement = event.target as HTMLInputElement
+  if (inputElement.files && inputElement.files.length > 0) {
+    const file: File = inputElement.files[0]
+    documentItem.value.objectPk = currentEquipment.value.id
+    documentItem.value.objectType = 'emission-source'
+    documentItem.value.file = file
+    documentItem.value.title = file.name
+    await documentStore.uploadDocument()
+    emissionSourceStore.fetchEmissionSource(Number(props.id))
+  }
 }
 
 watch(() => user.value, () => {
@@ -66,28 +87,6 @@ function setSelectGroupById(id: number) {
     selectedGroup.value = inventoriableClassificationGroups.value.find(group => group.id === id)
 }
 
-function filterEmissionFactors() {
-  classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value)
-}
-
-function emissionFactorTypeLabel(): string {
-  switch (selectedGroup.value?.form_name) {
-    case 'ORGANIZATION_VEHICLES':
-      return t('equipment.vehicle_fuel_type')
-    default:
-      return t('equipment.factor_type')
-  }
-}
-
-function emissionFactorLabel(): string {
-  switch (selectedGroup.value?.form_name) {
-    case 'ORGANIZATION_VEHICLES':
-      return t('equipment.vehicle_fuel')
-    default:
-      return t('equipment.emission_factor')
-  }
-}
-
 emissionSourceStore.fetchEmissionSource(Number(props.id))
 
 setSelectGroupById(currentEquipment.value.group!)
@@ -116,7 +115,6 @@ setSelectGroupById(currentEquipment.value.group!)
                   alt="{{ brand.name }}"
                   image-class="rounded-md border-2 border-slate-100 max-w-full h-[80px] object-contain object-center p-3"
                 />
-                <span class="text-pink">{{ group.classification }}</span>
                 <span class="text-xs pt-2">
                   {{ group.name }}
                 </span>
@@ -145,110 +143,32 @@ setSelectGroupById(currentEquipment.value.group!)
                   type="hidden"
                   name="group"
                 />
-                <FormKit
-                  :label="t('equipment.code')"
-                  outer-class="w-full"
-                  inner-class="max-w-xl"
-                  type="text"
-                  placeholder="..."
-                  name="code"
-                />
-                <FormKit
-                  v-if="selectedGroup && ['ORGANIZATION_VEHICLES'].includes(selectedGroup.form_name!)"
-                  :label="t('equipment.name')"
-                  outer-class="w-full"
-                  inner-class="max-w-xl"
-                  type="text"
-                  placeholder="..."
-                  name="name"
-                />
               </div>
-              <div class="pb-5">
-                <FormKit
-                  :disabled="disabledSourceType"
-                  :label="t('equipment.source_type')"
-                  type="select"
-                  placeholder="..."
-                  :options="optionSourceTypes"
-                  name="source_type"
-                />
-              </div>
-              <div
-                v-if="selectedGroup && ['ORGANIZATION_VEHICLES'].includes(selectedGroup.form_name!)"
-                class="grid grid-cols-1 md:grid-cols-2 gap-x-4"
-              >
-                <div class="pb-5">
-                  <FormKit
-                    :label="t('equipment.vehicle_type')"
-                    type="select"
-                    placeholder="..."
-                    :options="optionsVehicleTypeList"
-                    name="vehicle_type"
-                  />
-                </div>
-                <div class="pb-5">
-                  <FormKit
-                    :label="t('equipment.vehicle_load_type')"
-                    type="select"
-                    placeholder="..."
-                    :options="optionsVehicleLoadList"
-                    name="vehicle_load"
-                  />
-                </div>
-                <div class="pb-5 col-span-2">
-                  <FormKit
-                    type="number"
-                    :label="`${t('equipment.vehicle_capacity')} ${currentEquipment.vehicle_load || ''}`"
-                    number
-                    name="vehicle_capacity"
-                  />
-                </div>
-                <div class="pb-5">
-                  <FormKit
-                    type="number"
-                    :label="t('equipment.vehicle_efficiency')"
-                    number
-                    name="vehicle_efficiency"
-                  />
-                </div>
-                <div class="pb-5">
-                  <FormKit
-                    :label="t('equipment.vehicle_efficiency_unit')"
-                    type="select"
-                    placeholder="..."
-                    :options="optionsVehicleEfficiencyUnitList"
-                    name="vehicle_efficiency_unit"
-                  />
-                </div>
-              </div>
-              <div class="flex gap-4 pb-5">
-                <FormKit
-                  v-model="selectedFactorTypeId"
-                  :label="emissionFactorTypeLabel()"
-                  outer-class="w-full"
-                  type="select"
-                  placeholder="..."
-                  name="factor_type"
-                  :options="optionFactorTypes"
-                  @onchange="filterEmissionFactors"
-                />
-                <FormKit
-                  :label="emissionFactorLabel()"
-                  outer-class="w-full"
-                  type="select"
-                  placeholder="..."
-                  name="emission_factor"
-                  :options="optionsFilteredEmissionFactors"
-                />
-              </div>
+            </div>
+            <FuelUseFields v-if="selectedGroup && ['FUEL'].includes(selectedGroup.form_name!)" />
+            <OrganizationVehicleFields v-if="selectedGroup && ['ORGANIZATION_VEHICLES'].includes(selectedGroup.form_name!)" />
+
+            <!-- Attachment Section -->
+            <div class="mb-5">
+              <ul>
+                <li v-for="document in currentEquipment.documents" :key="document.id" class="underline text-blue-500">
+                  <a :href="document.file_url" target="_blank">{{ document.title }}</a>
+                </li>
+              </ul>
+            </div>
+            <div>
               <FormKit
-                :label="t('equipment.description')"
-                type="textarea"
-                placeholder="..."
-                name="description"
+                type="file"
+                :label="t('equipment.attach.label')"
+                :help="t('equipment.attach.help')"
+                :disabled="currentEquipment.id === 0"
+                name=""
+                accept=".jpg,.png,.pdf"
+                @change="uploadDocument"
               />
             </div>
-            <div class="text-base text-slate-600 dark:text-slate-300" />
+            <!-- End attachment Section -->
+            <div class="text-base text-slate-600 dark:text-slate-300 mb-5" />
             <div v-show="selectedGroupId !== 0" class="flex justify-end gap-2 pt-3">
               <Button
                 :text="t('delete')"
