@@ -146,8 +146,15 @@ setSelectGroupById(currentEquipment.value.group!)
               </div>
             </div>
             <FuelUseFields v-if="selectedGroup && ['FUEL'].includes(selectedGroup.form_name!)" />
-            <OrganizationVehicleFields v-if="selectedGroup && ['ORGANIZATION_VEHICLES'].includes(selectedGroup.form_name!)" />
-
+            <OrganizationVehicleFields v-else-if="selectedGroup && ['ORGANIZATION_VEHICLES'].includes(selectedGroup.form_name!)" />
+            <ElectricityFields v-else-if="selectedGroup && ['ELECTRICITY'].includes(selectedGroup.form_name!)" />
+            <RefrigerantFields v-else-if="selectedGroup && ['REFRIGERANTS'].includes(selectedGroup.form_name!)" />
+            <WasteFields v-else-if="selectedGroup && ['WASTE'].includes(selectedGroup.form_name!)" />
+            <ServiceFields v-else-if="selectedGroup && ['SERVICES'].includes(selectedGroup.form_name!)" />
+            <LeasedAssetFields v-else-if="selectedGroup && ['LEASED_ASSETS'].includes(selectedGroup.form_name!)" />
+            <TransportationFields v-else-if="selectedGroup && ['TRANSPORTATION'].includes(selectedGroup.form_name!)" />
+            <ProductFields v-else-if="selectedGroup && ['PRODUCTS'].includes(selectedGroup.form_name!)" />
+            <InvestmentFields v-else-if="selectedGroup && ['INVESTMENTS'].includes(selectedGroup.form_name!)" />
             <!-- Attachment Section -->
             <div class="mb-5">
               <ul>
