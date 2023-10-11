@@ -32,15 +32,9 @@ watch(() => selectedFactorTypeId.value, () => {
 })
 
 const activities = [
-  'Actividad 1',
-  'Actividad 2',
-  'Actividad 3',
-]
-
-const equipments = [
-  'Equipo 1',
-  'Equipo 2',
-  'Equipo 3',
+  'Producto 1',
+  'Producto 2',
+  'Producto 3',
 ]
 </script>
 
