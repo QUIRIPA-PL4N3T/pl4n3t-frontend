@@ -114,6 +114,10 @@ goals:
   title: Metas
 reports:
   title: Reportes
+  period: Período
+  methodology: Metodología
+  format: Formato del Informe
+  generate: Generar Informe
 membership:
   title: Membresía
   update: Cambiar de Plan
