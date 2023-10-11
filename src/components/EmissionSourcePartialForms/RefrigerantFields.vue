@@ -136,7 +136,7 @@ watch(() => optionFactorTypes.value, () => {
     <div class="mb-5 flex w-full gap-5">
       <FormKit
         type="checkbox"
-        :label="t('equipment.fuel_storage_label')"
+        :label="t('equipment.refrigerant_final_disposal')"
         :options="optionsRefrigerantDisposalList"
         name="fuel_storage"
         outer-class="flex-1"
@@ -145,7 +145,7 @@ watch(() => optionFactorTypes.value, () => {
 
       <FormKit
         type="checkbox"
-        :label="t('equipment.fuel_storage_management_label')"
+        :label="t('equipment.maintenance_actions')"
         :options="optionsRefrigerantMaintenanceAndRepairList"
         outer-class="flex-1"
         fieldset-class="p-3"

@@ -205,6 +205,8 @@ equipment:
   refrigerant_leaks_label: ¿Existen Fugas del refrigerante en el equipo?
   refrigerant_convert_label: ¿Se han realizado conversiones a refrigerantes con menor potencial de calentamiento global (PCG)?
   refrigerant_capacity_label: Capacidad de refrigerante en el equipo
+  refrigerant_final_disposal: ¿De qué manera realiza la disposición final de refrigerantes?
+  maintenance_actions: ¿Cuál de las siguientes acciones realiza para el mantenimiento y reparaciones del equipo?
   waste_operation_label: ¿Que tipo de desperdicios se generan en las operaciones de la organización?
   waste_register_label: Seleccione el los desperdicios generados de los cuales se lleva seguimiento y registro
   waste_management_label: ¿como se manejan los desperdicios de las operaciones?
