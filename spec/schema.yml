@@ -1386,6 +1386,128 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/documents/{objectType}/{objectPk}/:
+    post:
+      operationId: documentsCreate
+      description: 'Anexa un documento a un modelo de datos: emission-source'
+      summary: Anexar documento a un modelo de datos
+      parameters:
+        - in: path
+          name: objectPk
+          schema:
+            type: integer
+          description: Id del objeto al que se va anexar el documento
+          required: true
+        - in: path
+          name: objectType
+          schema:
+            type: string
+          description: 'Tipo de objeto a que al que se va anexar el documento: emission-source'
+          required: true
+      tags:
+        - documents
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                title:
+                  type: string
+                tags:
+                  type: string
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+  /api/documents/{id}/:
+    put:
+      operationId: documentsUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this document.
+          required: true
+      tags:
+        - documents
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Document'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Document'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+    patch:
+      operationId: documentsPartialUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this document.
+          required: true
+      tags:
+        - documents
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDocument'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDocument'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDocument'
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+    delete:
+      operationId: documentsDestroy
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this document.
+          required: true
+      tags:
+        - documents
+      security:
+        - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/emissions/emission-factors/:
     get:
       operationId: emissionsEmissionFactorsList
@@ -2051,6 +2173,65 @@ components:
       required:
         - email
         - password
+    Document:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        file:
+          type: string
+        file_type:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          nullable: true
+          maxLength: 200
+        user_created:
+          type: integer
+          readOnly: true
+          title: Subido por
+        updated:
+          type: string
+          format: date-time
+          readOnly: true
+          title: Last Updated
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+          title: Fecha de creación
+        tags:
+          type: string
+          nullable: true
+          description: Una Lista separada por comas
+          maxLength: 200
+        is_multimedia:
+          type: boolean
+          title: Es un Archivo Multimedia
+        file_url:
+          type: string
+          format: uri
+          readOnly: true
+        thumbnails_url:
+          type: string
+          format: uri
+          readOnly: true
+        size:
+          type: integer
+          readOnly: true
+          title: Tamaño
+      required:
+        - created
+        - file
+        - file_type
+        - file_url
+        - id
+        - size
+        - thumbnails_url
+        - updated
+        - user_created
     DocumentType:
       type: object
       properties:
@@ -2247,8 +2428,15 @@ components:
           nullable: true
           title: Unidad de Medida
           maxLength: 128
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+          readOnly: true
+          nullable: true
       required:
         - code
+        - documents
         - emission_factor
         - factor_type
         - id
@@ -2751,6 +2939,55 @@ components:
           type: string
           format: uri
           nullable: true
+    PatchedDocument:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        file:
+          type: string
+        file_type:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          nullable: true
+          maxLength: 200
+        user_created:
+          type: integer
+          readOnly: true
+          title: Subido por
+        updated:
+          type: string
+          format: date-time
+          readOnly: true
+          title: Last Updated
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+          title: Fecha de creación
+        tags:
+          type: string
+          nullable: true
+          description: Una Lista separada por comas
+          maxLength: 200
+        is_multimedia:
+          type: boolean
+          title: Es un Archivo Multimedia
+        file_url:
+          type: string
+          format: uri
+          readOnly: true
+        thumbnails_url:
+          type: string
+          format: uri
+          readOnly: true
+        size:
+          type: integer
+          readOnly: true
+          title: Tamaño
     PatchedEmissionsSource:
       type: object
       properties:
@@ -2833,6 +3070,12 @@ components:
           nullable: true
           title: Unidad de Medida
           maxLength: 128
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+          readOnly: true
+          nullable: true
     PatchedEmissionsSourceMonthEntry:
       type: object
       properties:
