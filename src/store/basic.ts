@@ -5,6 +5,7 @@ import type { City, Country, DocumentType, EconomicSector, IndustryType, Locatio
 
 export const useBasicStore = defineStore('basic', {
   state: () => ({
+    documentTypes: useLocalStorage<DocumentType[]>('documentTypes', []),
     unitOfMeasureList: useLocalStorage<UnitOfMeasure[]>('unitOfMeasureList', []),
     economicSectorList: useLocalStorage<EconomicSector[]>('economicSectorList', []),
     industryTypeList: useLocalStorage<IndustryType[]>('industryTypeList', []),
@@ -20,7 +21,10 @@ export const useBasicStore = defineStore('basic', {
     fuelStorageManagementList: useLocalStorage<String[]>('fuelStorageManagementList', []),
     vehicleEfficiencyUnitList: useLocalStorage<String[]>('vehicleEfficiencyUnitList', []),
     electricitySourceList: useLocalStorage<String[]>('electricitySourceList', []),
-    documentTypes: useLocalStorage<DocumentType[]>('documentTypes', []),
+    refrigerantSourceList: useLocalStorage<String[]>('refrigerantSourceList', []),
+    refrigerantDisposalList: useLocalStorage<String[]>('refrigerantDisposalList', []),
+    refrigerantMaintenanceAndRepairList: useLocalStorage<String[]>('refrigerantMaintenanceAndRepairList', []),
+    refrigerantCapacityUnitList: useLocalStorage<String[]>('refrigerantCapacityUnitList', []),
   }),
   getters: {
     optionsEconomicSectorList(): any {
@@ -121,6 +125,30 @@ export const useBasicStore = defineStore('basic', {
         label: type,
       }))
     },
+    optionsRefrigerantSourceList(): any {
+      return this.refrigerantSourceList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionsRefrigerantDisposalList(): any {
+      return this.refrigerantDisposalList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionsRefrigerantMaintenanceAndRepairList(): any {
+      return this.refrigerantMaintenanceAndRepairList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionsRefrigerantCapacityUnitList(): any {
+      return this.refrigerantCapacityUnitList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
   },
   actions: {
     async fetchBasicData() {
@@ -175,6 +203,18 @@ export const useBasicStore = defineStore('basic', {
 
         const electricitySourceStr: any = configurations.find((config: any) => config.key === 'ELECTRICITY_SOURCE_LIST')
         this.electricitySourceList = electricitySourceStr.value.split(',')
+
+        const refrigerantSourceStr: any = configurations.find((config: any) => config.key === 'REFRIGERANT_SOURCE_LIST')
+        this.refrigerantSourceList = refrigerantSourceStr.value.split(',')
+
+        const refrigerantDisposalStr: any = configurations.find((config: any) => config.key === 'FINAL_REFRIGERANT_DISPOSAL_LIST')
+        this.refrigerantDisposalList = refrigerantDisposalStr.value.split(',')
+
+        const refrigerantMaintenanceAndRepairStr: any = configurations.find((config: any) => config.key === 'REFRIGERANT_MAINTENANCE_AND_REPAIR_LIST')
+        this.refrigerantMaintenanceAndRepairList = refrigerantMaintenanceAndRepairStr.value.split(',')
+
+        const refrigerantCapacityUnitStr: any = configurations.find((config: any) => config.key === 'REFRIGERANT_CAPACITY_UNIT_LIST')
+        this.refrigerantCapacityUnitList = refrigerantCapacityUnitStr.value.split(',')
       }
       catch (error) {
         console.error(error)

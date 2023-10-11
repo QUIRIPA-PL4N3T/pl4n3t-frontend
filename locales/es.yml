@@ -200,3 +200,8 @@ equipment:
   electricity_source_label: Fuente de generación de electricidad
   electricity_generation_question: ¿Existe un factor de emisión específico asociado a ala generación de electricidad del proveedor?
   electricity_type: Tipo de Electricidad
+  refrigerant_source_type_label: Equipo
+  refrigerant_type: Tipo de Refrigerante
+  refrigerant_leaks_label: ¿Existen Fugas del refrigerante en el equipo?
+  refrigerant_convert_label: ¿Se han realizado conversiones a refrigerantes con menor potencial de calentamiento global (PCG)?
+  refrigerant_capacity_label: Capacidad de refrigerante en el equipo
