@@ -25,6 +25,9 @@ export const useBasicStore = defineStore('basic', {
     refrigerantDisposalList: useLocalStorage<String[]>('refrigerantDisposalList', []),
     refrigerantMaintenanceAndRepairList: useLocalStorage<String[]>('refrigerantMaintenanceAndRepairList', []),
     refrigerantCapacityUnitList: useLocalStorage<String[]>('refrigerantCapacityUnitList', []),
+    wasteManagementList: useLocalStorage<String[]>('wasteManagementList', []),
+    wasteRegisterList: useLocalStorage<String[]>('wasteRegisterList', []),
+    operationWasteList: useLocalStorage<String[]>('operationWasteList', []),
   }),
   getters: {
     optionsEconomicSectorList(): any {
@@ -149,6 +152,30 @@ export const useBasicStore = defineStore('basic', {
         label: type,
       }))
     },
+    optionsWasteManagementList(): any {
+      return this.wasteManagementList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionsWasteRegisterList(): any {
+      return this.wasteRegisterList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionsOperationWasteList(): any {
+      return this.operationWasteList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionsOperationWasteEmptyLabelList(): any {
+      return this.operationWasteList.map(type => ({
+        value: type,
+        label: '',
+      }))
+    },
   },
   actions: {
     async fetchBasicData() {
@@ -215,6 +242,15 @@ export const useBasicStore = defineStore('basic', {
 
         const refrigerantCapacityUnitStr: any = configurations.find((config: any) => config.key === 'REFRIGERANT_CAPACITY_UNIT_LIST')
         this.refrigerantCapacityUnitList = refrigerantCapacityUnitStr.value.split(',')
+
+        const wasteManagementStr: any = configurations.find((config: any) => config.key === 'WASTE_MANAGEMENT_LIST')
+        this.wasteManagementList = wasteManagementStr.value.split(',')
+
+        const wasteRegisterStr: any = configurations.find((config: any) => config.key === 'WASTE_REGISTER_LIST')
+        this.wasteRegisterList = wasteRegisterStr.value.split(',')
+
+        const operationWasteStr: any = configurations.find((config: any) => config.key === 'OPERATION_WASTE_LIST')
+        this.operationWasteList = operationWasteStr.value.split(',')
       }
       catch (error) {
         console.error(error)
