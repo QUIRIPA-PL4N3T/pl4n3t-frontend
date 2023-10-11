@@ -146,7 +146,7 @@ const equipments = [
         type="number"
         :label="t('equipment.efficiency_label')"
         number
-        name="vehicle_efficiency"
+        name="fuel_efficiency"
       />
     </div>
     <div class="mb-5">
@@ -154,7 +154,7 @@ const equipments = [
         :label="t('equipment.efficiency_unit_label')"
         type="text"
         placeholder="..."
-        name="vehicle_efficiency_unit"
+        name="fuel_efficiency_unit"
       />
     </div>
     <div class="mb-5">
