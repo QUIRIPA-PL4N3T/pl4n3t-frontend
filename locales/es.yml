@@ -215,3 +215,6 @@ equipment:
   supplier_name: Nombre del Proveedor
   emission_factor_type: Emisión
   goods_and_service_origin_label: Origen
+  asset_leased_label: Bien Arrendado
+  asset_duration_label: unidad
+  asset_duration_value_label: Duración del contrato de arrendamiento

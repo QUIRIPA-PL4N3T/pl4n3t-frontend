@@ -33,6 +33,8 @@ export const useBasicStore = defineStore('basic', {
     goodsAcquiredList: useLocalStorage<String[]>('goodsAcquiredList', []),
     goodsAndServiceList: useLocalStorage<String[]>('goodsAndServiceList', []),
     supplierActionImplementationList: useLocalStorage<String[]>('supplierActionImplementationList', []),
+    assetLeasedList: useLocalStorage<String[]>('assetLeasedList', []),
+    durationList: useLocalStorage<String[]>('durationList', []),
   }),
   getters: {
     optionsEconomicSectorList(): any {
@@ -211,6 +213,18 @@ export const useBasicStore = defineStore('basic', {
         label: type,
       }))
     },
+    optionAssetLeasedList(): any {
+      return this.assetLeasedList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionDurationList(): any {
+      return this.durationList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
   },
   actions: {
     async fetchBasicData() {
@@ -301,6 +315,12 @@ export const useBasicStore = defineStore('basic', {
 
         const supplierActionImplementationStr: any = configurations.find((config: any) => config.key === 'SUPPLIER_ACTIONS_IMPLEMENTATION_LIST')
         this.supplierActionImplementationList = supplierActionImplementationStr.value.split(',')
+
+        const assetLeasedStr: any = configurations.find((config: any) => config.key === 'ASSETS_LEASED_LIST')
+        this.assetLeasedList = assetLeasedStr.value.split(',')
+
+        const durationStr: any = configurations.find((config: any) => config.key === 'DURATION_LIST')
+        this.durationList = durationStr.value.split(',')
       }
       catch (error) {
         console.error(error)
