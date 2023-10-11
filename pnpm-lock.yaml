@@ -19,6 +19,9 @@ dependencies:
   '@intlify/unplugin-vue-i18n':
     specifier: ^0.10.0
     version: 0.10.0(vue-i18n@9.2.2)
+  '@vueform/multiselect':
+    specifier: ^2.6.2
+    version: 2.6.2
   '@vueuse/core':
     specifier: ^9.13.0
     version: 9.13.0(vue@3.2.47)
@@ -55,6 +58,9 @@ dependencies:
   vue-tippy:
     specifier: v6
     version: 6.0.0(vue@3.2.47)
+  vue-toastification:
+    specifier: 2.0.0-rc.5
+    version: 2.0.0-rc.5(vue@3.2.47)
 
 devDependencies:
   '@antfu/eslint-config':
@@ -2115,6 +2121,10 @@ packages:
       '@vue/compiler-dom': 3.3.4
       '@vue/server-renderer': 3.3.4(vue@3.2.47)
     dev: true
+
+  /@vueform/multiselect@2.6.2:
+    resolution: {integrity: sha512-4BFvXyzyi0Pqi/lsYdGwONsQy+ypiVzuQbmoDUlttTxuoujFtf9AdeHi1ZhfIorXG9BiysK1HcQSfYB6USgwfQ==}
+    dev: false
 
   /@vueuse/core@9.13.0(vue@3.2.47):
     resolution: {integrity: sha512-pujnclbeHWxxPRqXWmdkKV5OX4Wk4YeK7wusHqRwU0Q7EFusHoqNA/aPhB6KCh9hEqJkLAJo7bb0Lh9b+OIVzw==}
@@ -7211,6 +7221,14 @@ packages:
       vue: ^3.2.0
     dependencies:
       tippy.js: 6.3.7
+      vue: 3.2.47
+    dev: false
+
+  /vue-toastification@2.0.0-rc.5(vue@3.2.47):
+    resolution: {integrity: sha512-q73e5jy6gucEO/U+P48hqX+/qyXDozAGmaGgLFm5tXX4wJBcVsnGp4e/iJqlm9xzHETYOilUuwOUje2Qg1JdwA==}
+    peerDependencies:
+      vue: ^3.0.2
+    dependencies:
       vue: 3.2.47
     dev: false
 
