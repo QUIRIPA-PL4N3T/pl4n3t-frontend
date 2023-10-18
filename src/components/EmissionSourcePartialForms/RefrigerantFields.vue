@@ -87,6 +87,7 @@ watch(() => optionFactorTypes.value, () => {
         type="select"
         placeholder="..."
         name="emission_factor"
+        :help="t('equipment.refrigerant_type_help')"
         :options="optionsFilteredEmissionFactors"
       />
     </div>
