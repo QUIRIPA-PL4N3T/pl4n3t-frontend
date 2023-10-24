@@ -7,7 +7,7 @@ const classificationStore = useClassificationStore()
 const authStore = useAuthStore()
 
 const { user } = storeToRefs(authStore)
-const { classificationGroups } = storeToRefs(classificationStore)
+const { inventoriableClassificationGroups } = storeToRefs(classificationStore)
 const emissionSourceStore = useEmissionSourceStore()
 const { environLocation } = storeToRefs(emissionSourceStore)
 
@@ -36,7 +36,7 @@ const { t } = useI18n()
       <Card :title="t('equipments.modal.title')" noborder>
         <div class="flex gap-3 items-baseline overflow-auto">
           <button
-            v-for="(group, i) in classificationGroups"
+            v-for="(group, i) in inventoriableClassificationGroups"
             :key="i"
             class="relative flex items-center justify-center w-1/6"
             @click.prevent="filterByGroup(group.id)"

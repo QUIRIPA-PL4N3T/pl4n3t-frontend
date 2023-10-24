@@ -2137,6 +2137,9 @@ components:
           maxLength: 200
         value:
           type: string
+        company:
+          type: integer
+          nullable: true
       required:
         - key
         - value
@@ -2330,6 +2333,9 @@ components:
         allow_inventory:
           type: boolean
           title: Permitir registro de inventario
+        enabled:
+          type: boolean
+          title: ¿Grupo de clasificación activo?
         form_name:
           type: string
           nullable: true
@@ -2354,10 +2360,12 @@ components:
           readOnly: true
         name:
           type: string
+          nullable: true
           title: Nombre
           maxLength: 255
         code:
           type: string
+          nullable: true
           title: Código
           maxLength: 255
         description:
@@ -2428,20 +2436,42 @@ components:
           nullable: true
           title: Unidad de Medida
           maxLength: 128
+        electricity_supplier:
+          type: string
+          nullable: true
+          title: Proveedor de Electricidad
+          maxLength: 256
+        electricity_source:
+          type: string
+          nullable: true
+          title: Fuente de generación
+          maxLength: 256
+        electricity_efficiency:
+          type: number
+          format: double
+          nullable: true
+          title: Eficiencia Energética
+        electricity_efficiency_unit:
+          type: string
+          nullable: true
+          title: Unidad Eficiencia Energética
+          maxLength: 256
         documents:
           type: array
           items:
             $ref: '#/components/schemas/Document'
           readOnly: true
           nullable: true
+        emission_source_name:
+          type: string
+          readOnly: true
       required:
-        - code
         - documents
         - emission_factor
+        - emission_source_name
         - factor_type
         - id
         - location
-        - name
         - source_type
     EmissionsSourceMonthEntry:
       type: object
@@ -2996,10 +3026,12 @@ components:
           readOnly: true
         name:
           type: string
+          nullable: true
           title: Nombre
           maxLength: 255
         code:
           type: string
+          nullable: true
           title: Código
           maxLength: 255
         description:
@@ -3070,12 +3102,35 @@ components:
           nullable: true
           title: Unidad de Medida
           maxLength: 128
+        electricity_supplier:
+          type: string
+          nullable: true
+          title: Proveedor de Electricidad
+          maxLength: 256
+        electricity_source:
+          type: string
+          nullable: true
+          title: Fuente de generación
+          maxLength: 256
+        electricity_efficiency:
+          type: number
+          format: double
+          nullable: true
+          title: Eficiencia Energética
+        electricity_efficiency_unit:
+          type: string
+          nullable: true
+          title: Unidad Eficiencia Energética
+          maxLength: 256
         documents:
           type: array
           items:
             $ref: '#/components/schemas/Document'
           readOnly: true
           nullable: true
+        emission_source_name:
+          type: string
+          readOnly: true
     PatchedEmissionsSourceMonthEntry:
       type: object
       properties:

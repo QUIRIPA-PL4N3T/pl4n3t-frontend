@@ -78,7 +78,7 @@ export const useClassificationStore = defineStore('classification', {
         this.environment = this.quantificationTypes[0]
 
         const { data: classificationGroups } = await emissionSourceGroupApi.classificationsEmissionSourceGroupsList()
-        this.classificationGroups = classificationGroups
+        this.classificationGroups = classificationGroups.filter(group => group.enabled)
 
         const { data: emissionFactors } = await emissionFactorApi.emissionsEmissionFactorsList()
         this.emissionFactors = emissionFactors
