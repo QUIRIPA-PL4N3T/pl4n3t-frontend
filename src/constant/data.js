@@ -43,18 +43,14 @@ export const menuItems = [
   {
     title: 'menu.register-data',
     icon: 'heroicons-outline:clipboard-list',
-    link: '/activities',
+    link: '/activities/register',
     requiredCompany: true,
-    child: [
-      {
-        childTitle: 'activities.register',
-        childLink: '/activities/register',
-      },
-      {
-        childTitle: 'activities.processActivities',
-        childLink: '/activities/liquidation',
-      },
-    ],
+  },
+  {
+    title: 'activities.processActivities',
+    icon: 'heroicons-outline:cog',
+    link: '/activities/liquidation',
+    requiredCompany: true,
   },
   {
     title: 'menu.reports',
