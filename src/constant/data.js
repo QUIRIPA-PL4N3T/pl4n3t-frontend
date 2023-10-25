@@ -53,18 +53,27 @@ export const menuItems = [
     requiredCompany: true,
   },
   {
+    title: 'analytics.title',
+    icon: 'heroicons-outline:calculator',
+    link: '/analytics/',
+    requiredCompany: true,
+  },
+  {
     title: 'menu.reports',
     icon: 'heroicons:document',
     link: '/reports',
     requiredCompany: true,
     requiredData: true,
-  },
-  {
-    title: 'menu.goals',
-    icon: 'heroicons:arrow-trending-up',
-    link: '/goals',
-    requiredCompany: true,
-    requiredData: true,
+    child: [
+      {
+        childTitle: 'reports.generate',
+        childLink: '/reports/',
+      },
+      {
+        childTitle: 'menu.goals',
+        childLink: '/goals/',
+      },
+    ],
   },
 ]
 // menu settings

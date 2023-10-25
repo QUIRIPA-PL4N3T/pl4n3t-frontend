@@ -161,6 +161,8 @@ edit: Editar
 view: Ver
 yes: Sí
 no: No
+analytics:
+  title: Análisis
 equipment:
   add: Agregar
   name: Nombre / Marcar / Modelo
@@ -211,7 +213,13 @@ equipment:
   maintenance_actions: ¿Cuál de las siguientes acciones realiza para el mantenimiento y reparaciones del equipo?
   waste_operation_label: ¿Que tipo de desperdicios se generan en las operaciones de la organización?
   waste_register_label: Seleccione el los desperdicios generados de los cuales se lleva seguimiento y registro
-  waste_management_label: ¿como se manejan los desperdicios de las operaciones?
+  waste_type_label: ¿A cuál de las siguientes clase de residuo pertenece la fuente de emisión?
+  waste_organic_label: ¿Cuál es el tipo de residuo?
+  waste_inorganic_label: ¿Cuál es el tipo de residuo?
+  waste_danger_label: ¿Cuál es el tipo de residuo?
+  waste_management_organic_label: ¿Cómo se gestiona el residuo orgánico?
+  waste_management_inorganic_label: ¿Cómo se gestiona el residuo inorgánico?
+  waste_management_danger_label: ¿Cómo se gestiona el residuo peligroso?
   good_and_service_label: Adquisición de
   goods_and_service_monitoring_label: ¿Se registran y monitorean las emisiones de GEI?
   service_label: Servicio Adquirido
