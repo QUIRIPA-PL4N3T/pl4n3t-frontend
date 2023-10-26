@@ -25,7 +25,6 @@ export const useBasicStore = defineStore('basic', {
     refrigerantDisposalList: useLocalStorage<String[]>('refrigerantDisposalList', []),
     refrigerantMaintenanceAndRepairList: useLocalStorage<String[]>('refrigerantMaintenanceAndRepairList', []),
     refrigerantCapacityUnitList: useLocalStorage<String[]>('refrigerantCapacityUnitList', []),
-    wasteManagementList: useLocalStorage<String[]>('wasteManagementList', []),
     wasteRegisterList: useLocalStorage<String[]>('wasteRegisterList', []),
     operationWasteList: useLocalStorage<String[]>('operationWasteList', []),
     goodsAndServiceOriginList: useLocalStorage<String[]>('goodsAndServiceOriginList', []),
@@ -36,6 +35,13 @@ export const useBasicStore = defineStore('basic', {
     assetLeasedList: useLocalStorage<String[]>('assetLeasedList', []),
     durationList: useLocalStorage<String[]>('durationList', []),
     investmentList: useLocalStorage<String[]>('investmentList', []),
+    wasteTypeList: useLocalStorage<String[]>('wasteTypeList', []),
+    wasteOrganicList: useLocalStorage<String[]>('wasteOrganicList', []),
+    wasteInorganicList: useLocalStorage<String[]>('wasteInorganicList', []),
+    wasteDangerList: useLocalStorage<String[]>('wasteDangerList', []),
+    wasteManagementOrganicList: useLocalStorage<String[]>('wasteManagementOrganicList', []),
+    wasteManagementInorganicList: useLocalStorage<String[]>('wasteManagementInorganicList', []),
+    wasteManagementDangerList: useLocalStorage<String[]>('wasteManagementDangerList', []),
   }),
   getters: {
     optionsEconomicSectorList(): any {
@@ -160,12 +166,6 @@ export const useBasicStore = defineStore('basic', {
         label: type,
       }))
     },
-    optionsWasteManagementList(): any {
-      return this.wasteManagementList.map(type => ({
-        value: type,
-        label: type,
-      }))
-    },
     optionsWasteRegisterList(): any {
       return this.wasteRegisterList.map(type => ({
         value: type,
@@ -228,6 +228,48 @@ export const useBasicStore = defineStore('basic', {
     },
     optionInvestmentList(): any {
       return this.investmentList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionWasteTypeList(): any {
+      return this.wasteTypeList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionWasteOrganicList(): any {
+      return this.wasteOrganicList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionWasteInorganicList(): any {
+      return this.wasteInorganicList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionWasteDangerList(): any {
+      return this.wasteDangerList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionWasteManagementOrganicList(): any {
+      return this.wasteManagementOrganicList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionWasteManagementInorganicList(): any {
+      return this.wasteManagementInorganicList.map(type => ({
+        value: type,
+        label: type,
+      }))
+    },
+    optionWasteManagementDangerList(): any {
+      return this.wasteManagementDangerList.map(type => ({
         value: type,
         label: type,
       }))
@@ -299,8 +341,26 @@ export const useBasicStore = defineStore('basic', {
         const refrigerantCapacityUnitStr: any = configurations.find((config: any) => config.key === 'REFRIGERANT_CAPACITY_UNIT_LIST')
         this.refrigerantCapacityUnitList = refrigerantCapacityUnitStr.value.split(',')
 
-        const wasteManagementStr: any = configurations.find((config: any) => config.key === 'WASTE_MANAGEMENT_LIST')
-        this.wasteManagementList = wasteManagementStr.value.split(',')
+        const wasteTypeStr: any = configurations.find((config: any) => config.key === 'WASTE_TYPE_LIST')
+        this.wasteTypeList = wasteTypeStr.value.split(',')
+
+        const wasteOrganicStr: any = configurations.find((config: any) => config.key === 'WASTE_ORGANIC_LIST')
+        this.wasteOrganicList = wasteOrganicStr.value.split(',')
+
+        const wasteInorganicStr: any = configurations.find((config: any) => config.key === 'WASTE_INORGANIC_LIST')
+        this.wasteInorganicList = wasteInorganicStr.value.split(',')
+
+        const wasteDangerStr: any = configurations.find((config: any) => config.key === 'WASTE_DANGER_LIST')
+        this.wasteDangerList = wasteDangerStr.value.split(',')
+
+        const wasteManagementOrganicStr: any = configurations.find((config: any) => config.key === 'WASTE_MANAGEMENT_ORGANIC_LIST')
+        this.wasteManagementOrganicList = wasteManagementOrganicStr.value.split(',')
+
+        const wasteManagementInorganicStr: any = configurations.find((config: any) => config.key === 'WASTE_MANAGEMENT_INORGANIC_LIST')
+        this.wasteManagementInorganicList = wasteManagementInorganicStr.value.split(',')
+
+        const wasteManagementDangerStr: any = configurations.find((config: any) => config.key === 'WASTE_MANAGEMENT_DANGER_LIST')
+        this.wasteManagementDangerList = wasteManagementDangerStr.value.split(',')
 
         const wasteRegisterStr: any = configurations.find((config: any) => config.key === 'WASTE_REGISTER_LIST')
         this.wasteRegisterList = wasteRegisterStr.value.split(',')

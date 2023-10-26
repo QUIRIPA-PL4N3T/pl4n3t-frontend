@@ -3,86 +3,116 @@ import { storeToRefs } from 'pinia'
 
 const selectedFactorTypeId = ref(0)
 const sourceTypeId = ref(0)
+const wasteTypeId = ref('')
+const wasteOptions = ref([])
+const wasteManagementOptions = ref([])
 const classificationStore = useClassificationStore()
 const basicStorage = useBasicStore()
 
 const { t } = useI18n()
 
 const {
-  optionsWasteManagementList,
-  optionsWasteRegisterList,
-  optionsOperationWasteList,
-  optionsOperationWasteEmptyLabelList,
+  optionWasteTypeList,
+  optionWasteOrganicList,
+  optionWasteInorganicList,
+  optionWasteDangerList,
+  optionWasteManagementOrganicList,
+  optionWasteManagementInorganicList,
+  optionWasteManagementDangerList,
 } = storeToRefs(basicStorage)
 
-const {
-  optionFactorTypes,
-  optionsFilteredEmissionFactors,
-  optionSourceTypes,
-} = storeToRefs(classificationStore)
+// const {
+//   optionFactorTypes,
+//   optionsFilteredEmissionFactors,
+//   optionSourceTypes,
+// } = storeToRefs(classificationStore)
 
-function filterEmissionFactors() {
-  classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value)
+// function filterEmissionFactors() {
+//   classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value)
+// }
+
+function setWasteOptions(): any {
+  switch (wasteTypeId.value.trim()) {
+    case 'Residuos orgánicos':
+      wasteOptions.value = optionWasteOrganicList.value
+      break
+    case 'Residuos inorgánicos':
+      wasteOptions.value = optionWasteInorganicList.value
+      break
+    case 'Residuos peligrosos':
+      wasteOptions.value = optionWasteDangerList.value
+      break
+    default:
+      wasteOptions.value = []
+  }
 }
+
+function setWasteManagementOptions(): any {
+  switch (wasteTypeId.value) {
+    case 'Residuos orgánicos':
+      wasteManagementOptions.value = optionWasteManagementOrganicList.value
+      break
+    case 'Residuos inorgánicos':
+      wasteManagementOptions.value = optionWasteManagementInorganicList.value
+      break
+    case 'Residuos peligrosos':
+      wasteManagementOptions.value = optionWasteManagementDangerList.value
+      break
+    default:
+      wasteManagementOptions.value = []
+      break
+  }
+}
+
+watch(() => wasteTypeId.value, () => {
+  setWasteOptions()
+  setWasteManagementOptions()
+})
 
 watch(() => selectedFactorTypeId.value, () => {
   classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value, sourceTypeId.value)
 })
 
-watch(() => optionFactorTypes.value, () => {
-  if (optionFactorTypes.value.length === 1)
-    selectedFactorTypeId.value = optionFactorTypes.value[0]
-})
+// watch(() => optionFactorTypes.value, () => {
+//   if (optionFactorTypes.value.length === 1)
+//     selectedFactorTypeId.value = optionFactorTypes.value[0]
+// })
 </script>
 
 <template>
   <div>
-    <div class="mb-5 flex w-full gap-5">
-      <FormKit
-        type="checkbox"
-        :label="t('equipment.waste_operation_label')"
-        :options="optionsWasteRegisterList"
-        name="fuel_storage"
-        outer-class="flex-1"
-        fieldset-class="p-3"
-      />
+    <div class="mb-5 flex-col w-full gap-5">
+      <div class="w-full pb-5">
+        <FormKit
+          v-model="wasteTypeId"
+          :label="t('equipment.waste_type_label')"
+          type="select"
+          placeholder="..."
+          :options="optionWasteTypeList"
+          name="electricity_source"
+        />
+      </div>
+      <div class="flex flex-col md:flex-row gap-4">
+        <FormKit
+          v-model="sourceTypeId"
+          :label="t('equipment.waste_type_label')"
+          type="select"
+          placeholder="..."
+          :options="wasteOptions"
+          name="electricity_source"
+        />
 
-      <FormKit
-        type="checkbox"
-        :label="t('equipment.waste_register_label')"
-        :options="optionsOperationWasteList"
-        outer-class="flex-1"
-        fieldset-class="p-3"
-        name="fuel_storage_management"
-      />
+        <FormKit
+          type="checkbox"
+          :label="t('equipment.waste_register_label')"
+          :options="wasteManagementOptions"
+          outer-class="flex-1"
+          fieldset-class="p-3"
+          name="fuel_storage_management"
+        />
+      </div>
     </div>
-    <div>
-      <table>
-        <thead>
-          <tr width="10%">
-            <th v-for="column in optionsWasteManagementList" :key="column.value">
-              {{ column.label }}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td v-for="column in optionsWasteManagementList" :key="column.value">
-              <FormKit
-                type="checkbox"
-                class="flex justify-center"
-                on-value="false"
-                off-value="true"
-                :options="optionsOperationWasteEmptyLabelList"
-                outer-class="flex-1"
-                fieldset-class="$reset p-3 flex justify-center"
-                name="fuel_storage_management"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div />
     <div class="mb-5">
       <FormKit
         :label="t('equipment.description')"
