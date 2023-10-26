@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 
+const { t } = useI18n()
+
 const selectedFactorTypeId = ref(0)
 const sourceTypeId = ref(0)
 const wasteTypeId = ref('')
-const wasteOptions = ref([])
-const wasteManagementOptions = ref([])
+const wasteOptions = ref<string[]>([t('no_apply')])
+const wasteManagementOptions = ref<string[]>([t('no_apply')])
 const classificationStore = useClassificationStore()
 const basicStorage = useBasicStore()
-
-const { t } = useI18n()
 
 const {
   optionWasteTypeList,
@@ -43,7 +43,7 @@ function setWasteOptions(): any {
       wasteOptions.value = optionWasteDangerList.value
       break
     default:
-      wasteOptions.value = []
+      wasteOptions.value = [t('no_apply')]
   }
 }
 
@@ -59,7 +59,7 @@ function setWasteManagementOptions(): any {
       wasteManagementOptions.value = optionWasteManagementDangerList.value
       break
     default:
-      wasteManagementOptions.value = []
+      wasteManagementOptions.value = [t('no_apply')]
       break
   }
 }
