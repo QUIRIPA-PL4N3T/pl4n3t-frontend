@@ -18,6 +18,7 @@ export const useThemeSettingsStore = defineStore('themeSettings', {
     isMouseHovered: false,
     footerType: 'static',
     direction: false,
+    navbarColor: '',
     chartColors: {
       title: 'red',
     },

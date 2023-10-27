@@ -1,76 +1,72 @@
-<script>
+<script setup lang="ts">
+import { storeToRefs } from 'pinia'
 import { MenuItem } from '@headlessui/vue'
-import profileImg from '~/assets/images/all-img/user.png'
 
-export default {
-  components: {
-    MenuItem,
+const { t } = useI18n()
+const authStore = useAuthStore()
+const { fullName, uiAvatar } = storeToRefs(authStore)
+const router = useRouter()
+
+const ProfileMenu = [
+  {
+    label: t('menu.profile'),
+    icon: 'heroicons-outline:user',
+    link: () => {
+      router.push('profile')
+    },
   },
-  data() {
-    return {
-      profileImg,
-      ProfileMenu: [
-        {
-          label: 'Profile',
-          icon: 'heroicons-outline:user',
-          link: () => {
-            this.$router.push('profile')
-          },
-        },
-        {
-          label: 'Chat',
-          icon: 'heroicons-outline:chat',
-          link: () => {
-            this.$router.push('chat')
-          },
-        },
-        {
-          label: 'Email',
-          icon: 'heroicons-outline:mail',
-          link: () => {
-            this.$router.push('email')
-          },
-        },
-        {
-          label: 'Todo',
-          icon: 'heroicons-outline:clipboard-check',
-          link: () => {
-            this.$router.push('todo')
-          },
-        },
-        {
-          label: 'Settings',
-          icon: 'heroicons-outline:cog',
-          link: () => {
-            this.$router.push('settings')
-          },
-        },
-        {
-          label: 'Price',
-          icon: 'heroicons-outline:credit-card',
-          link: () => {
-            this.$router.push('pricing')
-          },
-        },
-        {
-          label: 'Faq',
-          icon: 'heroicons-outline:information-circle',
-          link: () => {
-            this.$router.push('faq')
-          },
-        },
-        {
-          label: 'Logout',
-          icon: 'heroicons-outline:login',
-          link: () => {
-            this.$router.push('/')
-            localStorage.removeItem('activeUser')
-          },
-        },
-      ],
-    }
+  // {
+  //   label: t('menu.chat'),
+  //   icon: 'heroicons-outline:chat',
+  //   link: () => {
+  //     router.push('chat')
+  //   },
+  // },
+  // {
+  //   label: t('menu.email'),
+  //   icon: 'heroicons-outline:mail',
+  //   link: () => {
+  //     router.push('email')
+  //   },
+  // },
+  // {
+  //   label: t('menu.todo'),
+  //   icon: 'heroicons-outline:clipboard-check',
+  //   link: () => {
+  //     router.push('todo')
+  //   },
+  // },
+  {
+    label: t('menu.settings'),
+    icon: 'heroicons-outline:cog',
+    link: () => {
+      router.push('settings')
+    },
   },
-}
+  {
+    label: t('menu.membership'),
+    icon: 'heroicons-outline:credit-card',
+    link: () => {
+      router.push('membership')
+    },
+  },
+  // {
+  //   label: t('menu.faq'),
+  //   icon: 'heroicons-outline:information-circle',
+  //   link: () => {
+  //     router.push('faq')
+  //   },
+  // },
+  {
+    label: t('menu.logout'),
+    icon: 'heroicons-outline:login',
+    link: () => {
+      authStore.logOut()
+      router.push('/')
+      localStorage.removeItem('activeUser')
+    },
+  },
+]
 </script>
 
 <template>
@@ -79,7 +75,7 @@ export default {
       <div class="flex-1 ltr:mr-[10px] rtl:ml-[10px]">
         <div class="lg:h-8 lg:w-8 h-7 w-7 rounded-full">
           <img
-            :src="profileImg"
+            :src="uiAvatar"
             alt=""
             class="block w-full h-full object-cover rounded-full"
           >
@@ -90,7 +86,7 @@ export default {
       >
         <span
           class="overflow-hidden text-ellipsis whitespace-nowrap w-[85px] block"
-        >Albert Flores</span>
+        >{{ fullName }}</span>
         <span class="text-base inline-block ltr:ml-[10px] rtl:mr-[10px]"><Icon icon="heroicons-outline:chevron-down" /></span>
       </div>
     </div>

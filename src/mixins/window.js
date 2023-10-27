@@ -1,3 +1,7 @@
+// NOTE: This mixin has been replaced with 'windowMixin.ts'.
+// Please use the 'useWindow' mixin from 'windowMixin.ts' for window-related functionality.
+// This file is no longer in use and can be safely removed from your project.
+
 export default {
   data() {
     return {

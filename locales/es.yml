@@ -70,6 +70,14 @@ locations:
   title: Sedes
 menu:
   title: Menu
+  profile: Perfil
+  chat: Chat
+  email: correo
+  todo: Tareas
+  settings: Configuración
+  membership: Membresía
+  faq: FAQ
+  logout: Salir
   dashboard: Dashboard
   characterization: Caracterización
   company: Compañía
