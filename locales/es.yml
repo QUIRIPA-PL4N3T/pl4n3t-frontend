@@ -182,6 +182,7 @@ equipment:
   source_type_help: Tipo de fuente de emisión
   factor_type: Tipo de Factor de Emisión
   emission_factor: Factor de Emisión
+  emission_factor_unit: Unidad de medida
   vehicle_type: Clase de Vehículo
   vehicle_fuel_type: Tipo de Combustible
   vehicle_fuel: Combustible
