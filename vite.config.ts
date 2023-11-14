@@ -16,6 +16,7 @@ import Shiki from 'markdown-it-shikiji'
 import WebfontDownload from 'vite-plugin-webfont-dl'
 import VueRouter from 'unplugin-vue-router/vite'
 import { VueRouterAutoImports } from 'unplugin-vue-router'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineConfig({
   resolve: {
@@ -69,6 +70,7 @@ export default defineConfig({
       // allow auto import and register components used in markdown
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       dts: 'src/components.d.ts',
+      resolvers: [ElementPlusResolver({ ssr: true })],
     }),
 
     // https://github.com/antfu/unocss
