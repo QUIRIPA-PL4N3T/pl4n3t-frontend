@@ -61,6 +61,7 @@ export default defineConfig({
         'src/stores',
       ],
       vueTemplate: true,
+      resolvers: [ElementPlusResolver({ ssr: true })],
     }),
 
     // https://github.com/antfu/unplugin-vue-components
@@ -168,5 +169,16 @@ export default defineConfig({
   ssr: {
     // TODO: workaround until they support native ESM
     noExternal: ['workbox-window', /vue-i18n/],
+  },
+
+  build: {
+    rollupOptions: {
+      onwarn(warning, warn) {
+        if (warning.message && warning.message.includes('@formkit/inputs'))
+          return
+
+        warn(warning)
+      },
+    },
   },
 })

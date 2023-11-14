@@ -1,9 +1,9 @@
 import { generateClasses } from '@formkit/themes'
 import { genesisIcons } from '@formkit/icons'
-import { es } from '@formkit/i18n'
+import { en, es } from '@formkit/i18n'
 
 export default {
-  locales: { es },
+  locales: { es, en },
   locale: 'es',
   icons: {
     ...genesisIcons,
