@@ -1,5 +1,5 @@
 <script>
-import { HMenu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import { Menu as HMenu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 
 export default {
   components: {
