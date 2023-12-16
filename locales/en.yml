@@ -1,14 +1,29 @@
-button:
-  about: About
-  back: Back
-  go: GO
-  home: Home
-  toggle_dark: Toggle dark mode
-  toggle_langs: Change languages
-intro:
-  desc: Opinionated Vite Starter Template
-  dynamic-route: Demo of dynamic route
-  hi: Hi, {name}!
-  aka: Also known as
-  whats-your-name: What's your name?
-not-found: Not found
+email: Email
+hintEmail: Email
+errorRequirementEmail: Email is required
+errorEmail: email must be a valid email
+password: Password
+hintPassword: Password
+errorPassword: password must be at least 8 characters
+forgotPassword: Forgot Password?
+signInSocial: Or continue with
+login:
+  text: Sign in
+  checkBox: Keep me signed in
+  buttonLogin: Sign in
+  footer: DON´T HAVE AN ACCOUNT? SIGN UP
+  link: SIGN UP
+register:
+  fullName: Full Name
+  hintFullName: Full Name
+  text: Sign up
+  checkBox: You accept our Terms and Conditions and Privacy Policy
+  buttonLogin: Create An Account
+  footer: ALREADY REGISTERED?
+  link: SIGN IP
+forgotPasswordScreen:
+  text: Forgot Your Password
+  textButton: send Recovery Email
+  textFooter1: FORGET IT,
+  textFooter2: TO THE SIGN IN
+  link: SIGN UP

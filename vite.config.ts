@@ -8,7 +8,6 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Markdown from 'unplugin-vue-markdown/vite'
 import VueMacros from 'unplugin-vue-macros/vite'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
-import { VitePWA } from 'vite-plugin-pwa'
 import VueDevTools from 'vite-plugin-vue-devtools'
 import LinkAttributes from 'markdown-it-link-attributes'
 import Unocss from 'unocss/vite'
@@ -17,6 +16,7 @@ import WebfontDownload from 'vite-plugin-webfont-dl'
 import VueRouter from 'unplugin-vue-router/vite'
 import { VueRouterAutoImports } from 'unplugin-vue-router'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import Inspect from 'vite-plugin-inspect'
 
 export default defineConfig({
   resolve: {
@@ -24,7 +24,13 @@ export default defineConfig({
       '~/': `${path.resolve(__dirname, 'src')}/`,
     },
   },
-
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "~/styles/element/index.scss" as *;`,
+      },
+    },
+  },
   plugins: [
     VueMacros({
       plugins: {
@@ -70,8 +76,14 @@ export default defineConfig({
       extensions: ['vue', 'md'],
       // allow auto import and register components used in markdown
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+      resolvers: [
+        ElementPlusResolver({
+          importStyle: 'sass',
+          directives: true,
+          version: '1.3.0-beta.10',
+        }),
+      ],
       dts: 'src/components.d.ts',
-      resolvers: [ElementPlusResolver({ ssr: true })],
     }),
 
     // https://github.com/antfu/unocss
@@ -101,35 +113,6 @@ export default defineConfig({
       },
     }),
 
-    // https://github.com/antfu/vite-plugin-pwa
-    VitePWA({
-      registerType: 'autoUpdate',
-      includeAssets: ['logo.png', 'logo-p.png'],
-      manifest: {
-        name: 'Vitesse',
-        short_name: 'Vitesse',
-        theme_color: '#ffffff',
-        icons: [
-          {
-            src: '/pwa-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
-          {
-            src: '/pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-          {
-            src: '/pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable',
-          },
-        ],
-      },
-    }),
-
     // https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n
     VueI18n({
       runtimeOnly: true,
@@ -143,6 +126,9 @@ export default defineConfig({
 
     // https://github.com/webfansplz/vite-plugin-vue-devtools
     VueDevTools(),
+
+    // https://github.com/antfu/vite-plugin-inspect
+    Inspect(),
   ],
 
   // https://github.com/antfu/vite-ssg
@@ -159,7 +145,15 @@ export default defineConfig({
 
   ssr: {
     // TODO: workaround until they support native ESM
-    noExternal: ['workbox-window', /vue-i18n/],
+    noExternal: ['workbox-window', 'element-plus', /vue-i18n/],
+  },
+
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    deps: {
+      inline: ['element-plus'],
+    },
   },
 
   build: {

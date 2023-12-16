@@ -1,11 +1,8 @@
 <template>
-  <main
-    px-4 py-10
-    text="center gray-700 dark:gray-200"
-  >
-    <RouterView />
+  <main class="text-center text-gray-700 dark:text-gray-200">
+    <router-view />
     <TheFooter />
-    <div mx-auto mt-5 text-center text-sm opacity-50>
+    <div class="mx-auto mt-5 text-center text-sm opacity-25">
       [Default Layout]
     </div>
   </main>

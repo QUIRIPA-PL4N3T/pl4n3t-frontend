@@ -40,10 +40,27 @@ import type {
 declare module 'vue-router/auto/routes' {
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
-    '/[...all]': RouteRecordInfo<'/[...all]', '/:all(.*)', { all: ParamValue<true> }, { all: ParamValue<false> }>,
-    '/about': RouteRecordInfo<'/about', '/about', Record<never, never>, Record<never, never>>,
-    '/hi/[name]': RouteRecordInfo<'/hi/[name]', '/hi/:name', { name: ParamValue<true> }, { name: ParamValue<false> }>,
-    '/README': RouteRecordInfo<'/README', '/README', Record<never, never>, Record<never, never>>,
+    'activities': RouteRecordInfo<'activities', '/activities', Record<never, never>, Record<never, never>>,
+    'register-activity': RouteRecordInfo<'register-activity', '/register-activity/:id', Record<never, never>, Record<never, never>>,
+    'liquidation': RouteRecordInfo<'liquidation', '/activities/liquidation', Record<never, never>, Record<never, never>>,
+    'register': RouteRecordInfo<'register', '/activities/register', Record<never, never>, Record<never, never>>,
+    'analytics': RouteRecordInfo<'analytics', '/analytics', Record<never, never>, Record<never, never>>,
+    '/auth/login': RouteRecordInfo<'/auth/login', '/auth/login', Record<never, never>, Record<never, never>>,
+    '/auth/register': RouteRecordInfo<'/auth/register', '/auth/register', Record<never, never>, Record<never, never>>,
+    '/auth/resetPassword': RouteRecordInfo<'/auth/resetPassword', '/auth/resetPassword', Record<never, never>, Record<never, never>>,
+    'company': RouteRecordInfo<'company', '/company', Record<never, never>, Record<never, never>>,
+    'brand-edit': RouteRecordInfo<'brand-edit', '/brand-edit/:id', Record<never, never>, Record<never, never>>,
+    'emission-source-edit': RouteRecordInfo<'emission-source-edit', '/emission-source-edit/:id', Record<never, never>, Record<never, never>>,
+    'location-edit': RouteRecordInfo<'location-edit', '/location-edit/:id', Record<never, never>, Record<never, never>>,
+    'company-edit': RouteRecordInfo<'company-edit', '/company/company-form', Record<never, never>, Record<never, never>>,
+    'equipments': RouteRecordInfo<'equipments', '/company/equipments', Record<never, never>, Record<never, never>>,
+    'locations': RouteRecordInfo<'locations', '/company/locations', Record<never, never>, Record<never, never>>,
+    'dashboard': RouteRecordInfo<'dashboard', '/dashboard', Record<never, never>, Record<never, never>>,
+    'goals': RouteRecordInfo<'goals', '/goals', Record<never, never>, Record<never, never>>,
+    'membership': RouteRecordInfo<'membership', '/membership', Record<never, never>, Record<never, never>>,
+    'profile': RouteRecordInfo<'profile', '/profile', Record<never, never>, Record<never, never>>,
+    'reports': RouteRecordInfo<'reports', '/reports', Record<never, never>, Record<never, never>>,
+    'settings': RouteRecordInfo<'settings', '/settings', Record<never, never>, Record<never, never>>,
   }
 }
 

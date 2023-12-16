@@ -1,0 +1,3528 @@
+openapi: 3.0.3
+info:
+  title: Pl4N3T API
+  version: 1.0.0
+  description: API Documentation
+paths:
+  /api/accounts/{id}/:
+    delete:
+      operationId: accountsDestroy
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Usuario.
+          required: true
+      tags:
+        - Accounts
+      security:
+        - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/accounts/avatar/:
+    post:
+      operationId: accountsAvatarCreate
+      description: Anexar una imagen a una emergencia
+      summary: Anexar documento a un modelo de datos
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                avatar:
+                  type: string
+                  format: binary
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserModel'
+          description: ''
+  /api/accounts/change-password/:
+    post:
+      operationId: accountsChangePasswordCreate
+      description: Cambiar contraseña
+      summary: Cambiar Contraseña
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPassword'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ResetPassword'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ResetPassword'
+        required: true
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResetPassword'
+          description: ''
+  /api/accounts/current/:
+    get:
+      operationId: accountsCurrentRetrieve
+      description: Obtiene el Usuario Actual utilizando el token en el HEADER
+      summary: Obtiene el Usuario Actual utilizando el token en el HEADER
+      tags:
+        - Accounts
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserModel'
+          description: ''
+        '401':
+          description: Usted no tiene permiso para ver este usuario
+  /api/accounts/login/:
+    post:
+      operationId: accountsLoginCreate
+      description: Iniciar Sesión
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomTokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CustomTokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CustomTokenObtainPair'
+        required: true
+      security:
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenOutput'
+          description: ''
+  /api/accounts/logout/:
+    post:
+      operationId: accountsLogoutCreate
+      description: Cerrar sesión
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Logout'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Logout'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Logout'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          description: Cierre de sesión exitoso
+        '401':
+          description: Usted no tiene permiso para ver este usuario
+  /api/accounts/recover-password/:
+    post:
+      operationId: accountsRecoverPasswordCreate
+      description: Solicitar el cambio de contraseña
+      summary: Recuperar Contraseña
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPasswordRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ResetPasswordRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ResetPasswordRequest'
+        required: true
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResetPasswordRequest'
+          description: ''
+  /api/accounts/refresh/:
+    post:
+      operationId: accountsRefreshCreate
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /api/accounts/register/:
+    post:
+      operationId: accountsRegisterCreate
+      description: Registrar un nuevo Usuario
+      summary: Registrar un nuevo Usuario
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Register'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Register'
+        required: true
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserModel'
+          description: ''
+  /api/accounts/user/{username}/:
+    get:
+      operationId: accountsUserRetrieve
+      description: Obtiene la información de un usuario mediante el nombre usuario
+      summary: Obtiene la información de un usuario mediante el nombre usuario
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+      tags:
+        - Accounts
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserModel'
+          description: ''
+        '404':
+          description: El Usuario no existe
+    post:
+      operationId: accountsUserCreate
+      description: Actualiza los datos del usuario, solo el usuario puede actualizar
+        sus datos
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserModel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserModel'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserModel'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserModel'
+          description: ''
+        '404':
+          description: El Usuario no existe
+        '400':
+          description: Datos inválidos
+        '401':
+          description: Usted no tiene permiso para actualizar este usuario
+    delete:
+      operationId: accountsUserDestroy
+      description: Elimina un usuario, solo el usuario se puede eliminar a si mismo
+      summary: Elimina un usuario, solo el usuario se puede eliminar a si mismo
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+      tags:
+        - Accounts
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          description: Eliminación exitosa del usuario
+        '404':
+          description: El Usuario no existe
+        '400':
+          description: Usted no tiene permiso para eliminar este usuario
+  /api/classifications/emission-source-groups/:
+    get:
+      operationId: classificationsEmissionSourceGroupsList
+      tags:
+        - EmissionSourceGroups
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmissionSourceGroup'
+          description: ''
+  /api/classifications/emission-source-groups/{id}/:
+    get:
+      operationId: classificationsEmissionSourceGroupsRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Grupo de fuente de emisión.
+          required: true
+      tags:
+        - EmissionSourceGroups
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmissionSourceGroup'
+          description: ''
+  /api/classifications/ghg-scopes/:
+    get:
+      operationId: classificationsGhgScopesList
+      tags:
+        - GHGScopes
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GHGScope'
+          description: ''
+  /api/classifications/ghg-scopes/{id}/:
+    get:
+      operationId: classificationsGhgScopesRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Alcance GHG.
+          required: true
+      tags:
+        - GHGScopes
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GHGScope'
+          description: ''
+  /api/classifications/iso-categories/:
+    get:
+      operationId: classificationsIsoCategoriesList
+      tags:
+        - ISOCategories
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ISOCategory'
+          description: ''
+  /api/classifications/iso-categories/{id}/:
+    get:
+      operationId: classificationsIsoCategoriesRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Categoría ISO.
+          required: true
+      tags:
+        - ISOCategories
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ISOCategory'
+          description: ''
+  /api/classifications/quantification-types/:
+    get:
+      operationId: classificationsQuantificationTypesList
+      tags:
+        - QuantificationTypes
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/QuantificationType'
+          description: ''
+  /api/classifications/quantification-types/{id}/:
+    get:
+      operationId: classificationsQuantificationTypesRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Tipo de Cuantificación.
+          required: true
+      tags:
+        - QuantificationTypes
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuantificationType'
+          description: ''
+  /api/companies/brands/:
+    get:
+      operationId: companiesBrandsList
+      tags:
+        - Brands
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Brand'
+          description: ''
+    post:
+      operationId: companiesBrandsCreate
+      tags:
+        - Brands
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                name:
+                  type: string
+                company:
+                  type: integer
+                logo:
+                  type: string
+                  format: binary
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Brand'
+          description: ''
+  /api/companies/brands/{id}/:
+    get:
+      operationId: companiesBrandsRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Marca.
+          required: true
+      tags:
+        - Brands
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Brand'
+          description: ''
+    put:
+      operationId: companiesBrandsUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Marca.
+          required: true
+      tags:
+        - Brands
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                name:
+                  type: string
+                company:
+                  type: integer
+                logo:
+                  type: string
+                  format: binary
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Brand'
+          description: ''
+    patch:
+      operationId: companiesBrandsPartialUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Marca.
+          required: true
+      tags:
+        - Brands
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                name:
+                  type: string
+                company:
+                  type: integer
+                logo:
+                  type: string
+                  format: binary
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Brand'
+          description: ''
+    delete:
+      operationId: companiesBrandsDestroy
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Marca.
+          required: true
+      tags:
+        - Brands
+      security:
+        - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/companies/companies/:
+    get:
+      operationId: companiesCompaniesList
+      tags:
+        - Companies
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Company'
+          description: ''
+    post:
+      operationId: companiesCompaniesCreate
+      tags:
+        - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Company'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Company'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+          description: ''
+  /api/companies/companies/{id}/:
+    get:
+      operationId: companiesCompaniesRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Compañía.
+          required: true
+      tags:
+        - Companies
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+          description: ''
+    put:
+      operationId: companiesCompaniesUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Compañía.
+          required: true
+      tags:
+        - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Company'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Company'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+          description: ''
+    patch:
+      operationId: companiesCompaniesPartialUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Compañía.
+          required: true
+      tags:
+        - Companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCompany'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCompany'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCompany'
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+          description: ''
+    delete:
+      operationId: companiesCompaniesDestroy
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Compañía.
+          required: true
+      tags:
+        - Companies
+      security:
+        - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/companies/company-logo/{id}/:
+    put:
+      operationId: companiesCompanyLogoUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Compañía.
+          required: true
+      tags:
+        - Companies
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                logo:
+                  type: string
+                  format: binary
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyLogo'
+          description: ''
+    patch:
+      operationId: companiesCompanyLogoPartialUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Compañía.
+          required: true
+      tags:
+        - Companies
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                logo:
+                  type: string
+                  format: binary
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyLogo'
+          description: ''
+  /api/companies/company-users/:
+    get:
+      operationId: companiesCompanyUsersList
+      tags:
+        - CompanyMembers
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Member'
+          description: ''
+    post:
+      operationId: companiesCompanyUsersCreate
+      tags:
+        - CompanyMembers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Member'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Member'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Member'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+          description: ''
+  /api/companies/company-users/{id}/:
+    get:
+      operationId: companiesCompanyUsersRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Usuario de Compañía.
+          required: true
+      tags:
+        - CompanyMembers
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+          description: ''
+    put:
+      operationId: companiesCompanyUsersUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Usuario de Compañía.
+          required: true
+      tags:
+        - CompanyMembers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Member'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Member'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Member'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+          description: ''
+    patch:
+      operationId: companiesCompanyUsersPartialUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Usuario de Compañía.
+          required: true
+      tags:
+        - CompanyMembers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedMember'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedMember'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedMember'
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+          description: ''
+    delete:
+      operationId: companiesCompanyUsersDestroy
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Usuario de Compañía.
+          required: true
+      tags:
+        - CompanyMembers
+      security:
+        - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/companies/emission-source-month-entries/:
+    get:
+      operationId: companiesEmissionSourceMonthEntriesList
+      tags:
+        - CompanyEmissionSourceEntries
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmissionsSourceMonthEntry'
+          description: ''
+    post:
+      operationId: companiesEmissionSourceMonthEntriesCreate
+      tags:
+        - CompanyEmissionSourceEntries
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmissionsSourceMonthEntry'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EmissionsSourceMonthEntry'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EmissionsSourceMonthEntry'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmissionsSourceMonthEntry'
+          description: ''
+  /api/companies/emission-source-month-entries/{id}/:
+    get:
+      operationId: companiesEmissionSourceMonthEntriesRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Registro Mensual de Emisión.
+          required: true
+      tags:
+        - CompanyEmissionSourceEntries
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmissionsSourceMonthEntry'
+          description: ''
+    put:
+      operationId: companiesEmissionSourceMonthEntriesUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Registro Mensual de Emisión.
+          required: true
+      tags:
+        - CompanyEmissionSourceEntries
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmissionsSourceMonthEntry'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EmissionsSourceMonthEntry'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EmissionsSourceMonthEntry'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmissionsSourceMonthEntry'
+          description: ''
+    patch:
+      operationId: companiesEmissionSourceMonthEntriesPartialUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Registro Mensual de Emisión.
+          required: true
+      tags:
+        - CompanyEmissionSourceEntries
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEmissionsSourceMonthEntry'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEmissionsSourceMonthEntry'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEmissionsSourceMonthEntry'
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmissionsSourceMonthEntry'
+          description: ''
+    delete:
+      operationId: companiesEmissionSourceMonthEntriesDestroy
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Registro Mensual de Emisión.
+          required: true
+      tags:
+        - CompanyEmissionSourceEntries
+      security:
+        - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/companies/emission-sources/:
+    get:
+      operationId: companiesEmissionSourcesList
+      tags:
+        - CompanyEmissionSources
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmissionsSource'
+          description: ''
+    post:
+      operationId: companiesEmissionSourcesCreate
+      tags:
+        - CompanyEmissionSources
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmissionsSource'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EmissionsSource'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EmissionsSource'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmissionsSource'
+          description: ''
+  /api/companies/emission-sources/{id}/:
+    get:
+      operationId: companiesEmissionSourcesRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Fuente de Emisión.
+          required: true
+      tags:
+        - CompanyEmissionSources
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmissionsSource'
+          description: ''
+    put:
+      operationId: companiesEmissionSourcesUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Fuente de Emisión.
+          required: true
+      tags:
+        - CompanyEmissionSources
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmissionsSource'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EmissionsSource'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EmissionsSource'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmissionsSource'
+          description: ''
+    patch:
+      operationId: companiesEmissionSourcesPartialUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Fuente de Emisión.
+          required: true
+      tags:
+        - CompanyEmissionSources
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEmissionsSource'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEmissionsSource'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEmissionsSource'
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmissionsSource'
+          description: ''
+    delete:
+      operationId: companiesEmissionSourcesDestroy
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Fuente de Emisión.
+          required: true
+      tags:
+        - CompanyEmissionSources
+      security:
+        - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/companies/locations/:
+    get:
+      operationId: companiesLocationsList
+      tags:
+        - Locations
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+          description: ''
+    post:
+      operationId: companiesLocationsCreate
+      tags:
+        - Locations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Location'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Location'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+          description: ''
+  /api/companies/locations/{id}/:
+    get:
+      operationId: companiesLocationsRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Sede.
+          required: true
+      tags:
+        - Locations
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+          description: ''
+    put:
+      operationId: companiesLocationsUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Sede.
+          required: true
+      tags:
+        - Locations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Location'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Location'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+          description: ''
+    patch:
+      operationId: companiesLocationsPartialUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Sede.
+          required: true
+      tags:
+        - Locations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedLocation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedLocation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedLocation'
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+          description: ''
+    delete:
+      operationId: companiesLocationsDestroy
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Sede.
+          required: true
+      tags:
+        - Locations
+      security:
+        - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/documents/{objectType}/{objectPk}/:
+    post:
+      operationId: documentsCreate
+      description: 'Anexa un documento a un modelo de datos: emission-source'
+      summary: Anexar documento a un modelo de datos
+      parameters:
+        - in: path
+          name: objectPk
+          schema:
+            type: integer
+          description: Id del objeto al que se va anexar el documento
+          required: true
+        - in: path
+          name: objectType
+          schema:
+            type: string
+          description: 'Tipo de objeto a que al que se va anexar el documento: emission-source'
+          required: true
+      tags:
+        - documents
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                title:
+                  type: string
+                tags:
+                  type: string
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+  /api/documents/{id}/:
+    put:
+      operationId: documentsUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this document.
+          required: true
+      tags:
+        - documents
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Document'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Document'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+    patch:
+      operationId: documentsPartialUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this document.
+          required: true
+      tags:
+        - documents
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDocument'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDocument'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDocument'
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+    delete:
+      operationId: documentsDestroy
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this document.
+          required: true
+      tags:
+        - documents
+      security:
+        - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/emissions/emission-factors/:
+    get:
+      operationId: emissionsEmissionFactorsList
+      tags:
+        - EmissionFactors
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmissionFactor'
+          description: ''
+  /api/emissions/emission-factors/{id}/:
+    get:
+      operationId: emissionsEmissionFactorsRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Factor de Emisión.
+          required: true
+      tags:
+        - EmissionFactors
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmissionFactor'
+          description: ''
+  /api/emissions/factor-types/:
+    get:
+      operationId: emissionsFactorTypesList
+      tags:
+        - FactorTypes
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FactorType'
+          description: ''
+  /api/emissions/factor-types/{id}/:
+    get:
+      operationId: emissionsFactorTypesRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Tipo de Factor de Emisión.
+          required: true
+      tags:
+        - FactorTypes
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FactorType'
+          description: ''
+  /api/emissions/greenhouse-gas-emissions/:
+    get:
+      operationId: emissionsGreenhouseGasEmissionsList
+      tags:
+        - GreenhouseGasEmissions
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GreenhouseGasEmission'
+          description: ''
+  /api/emissions/greenhouse-gas-emissions/{id}/:
+    get:
+      operationId: emissionsGreenhouseGasEmissionsRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Emisión de Gas de Efecto
+            Invernadero.
+          required: true
+      tags:
+        - GreenhouseGasEmissions
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GreenhouseGasEmission'
+          description: ''
+  /api/emissions/greenhouse-gases/:
+    get:
+      operationId: emissionsGreenhouseGasesList
+      tags:
+        - GreenhouseGases
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GreenhouseGas'
+          description: ''
+  /api/emissions/greenhouse-gases/{id}/:
+    get:
+      operationId: emissionsGreenhouseGasesRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Gas de Efecto Invernadero.
+          required: true
+      tags:
+        - GreenhouseGases
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GreenhouseGas'
+          description: ''
+  /api/emissions/source-types/:
+    get:
+      operationId: emissionsSourceTypesList
+      tags:
+        - SourceTypes
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SourceType'
+          description: ''
+  /api/emissions/source-types/{id}/:
+    get:
+      operationId: emissionsSourceTypesRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Tipo de Fuente de Emisión.
+          required: true
+      tags:
+        - SourceTypes
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceType'
+          description: ''
+  /api/main/city/:
+    get:
+      operationId: mainCityList
+      parameters:
+        - in: query
+          name: state
+          schema:
+            type: integer
+      tags:
+        - Main
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/City'
+          description: ''
+  /api/main/configurations/:
+    get:
+      operationId: mainConfigurationsList
+      tags:
+        - Main
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Configuration'
+          description: ''
+  /api/main/countries/:
+    get:
+      operationId: mainCountriesList
+      tags:
+        - Main
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Country'
+          description: ''
+  /api/main/document-type/:
+    get:
+      operationId: mainDocumentTypeList
+      tags:
+        - Main
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DocumentType'
+          description: ''
+  /api/main/economic-sector/:
+    get:
+      operationId: mainEconomicSectorList
+      tags:
+        - Main
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EconomicSector'
+          description: ''
+  /api/main/industry-type/:
+    get:
+      operationId: mainIndustryTypeList
+      tags:
+        - Main
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IndustryType'
+          description: ''
+  /api/main/location-type/:
+    get:
+      operationId: mainLocationTypeList
+      tags:
+        - Main
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LocationType'
+          description: ''
+  /api/main/state/:
+    get:
+      operationId: mainStateList
+      parameters:
+        - in: query
+          name: country
+          schema:
+            type: integer
+      tags:
+        - Main
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/State'
+          description: ''
+  /api/main/unit-of-measure/:
+    get:
+      operationId: mainUnitOfMeasureList
+      tags:
+        - Main
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UnitOfMeasure'
+          description: ''
+  /documentation/schema.yml:
+    get:
+      operationId: documentationSchema.ymlRetrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+        - in: query
+          name: format
+          schema:
+            type: string
+            enum:
+              - json
+              - yaml
+        - in: query
+          name: lang
+          schema:
+            type: string
+            enum:
+              - en
+              - es
+      tags:
+        - documentation
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+components:
+  schemas:
+    Brand:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        company:
+          type: integer
+        name:
+          type: string
+          title: Nombre de la Marca
+          maxLength: 255
+        description:
+          type: string
+          nullable: true
+          title: Descripción
+        logo:
+          type: string
+          format: uri
+          writeOnly: true
+          nullable: true
+        logo_absolute_url:
+          type: string
+          readOnly: true
+      required:
+        - company
+        - id
+        - logo_absolute_url
+        - name
+    City:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        state:
+          type: integer
+          title: Municipios
+        name:
+          type: string
+          title: Nombre del Municipio
+          maxLength: 255
+        dane_code:
+          type: string
+          title: Código DANE
+          maxLength: 3
+        slug:
+          type: string
+          readOnly: true
+          pattern: ^[-a-zA-Z0-9_]+$
+        coords_lat:
+          type: number
+          format: double
+          nullable: true
+        coords_long:
+          type: number
+          format: double
+          nullable: true
+        geo_location:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - Point
+            coordinates:
+              type: array
+              items:
+                type: number
+                format: float
+              example:
+                - 12.9721
+                - 77.5933
+              minItems: 2
+              maxItems: 3
+          nullable: true
+      required:
+        - dane_code
+        - id
+        - name
+        - slug
+        - state
+    Company:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+        description:
+          type: string
+          nullable: true
+          title: Descripción
+        industry:
+          type: string
+          nullable: true
+          title: Industria
+          maxLength: 255
+        size:
+          allOf:
+            - $ref: '#/components/schemas/SizeEnum'
+          title: Tamaño de la Empresa
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+          readOnly: true
+        website:
+          type: string
+          nullable: true
+          title: Página Web
+          maxLength: 255
+        geo_location:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - Point
+            coordinates:
+              type: array
+              items:
+                type: number
+                format: float
+              example:
+                - 12.9721
+                - 77.5933
+              minItems: 2
+              maxItems: 3
+          nullable: true
+          title: Posición geográfica
+        economic_sector:
+          type: integer
+          nullable: true
+          title: Sector Económico
+        industry_type:
+          type: integer
+          nullable: true
+          title: Tipo de Industria
+        members_roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+          readOnly: true
+        brands:
+          type: array
+          items:
+            $ref: '#/components/schemas/Brand'
+          readOnly: true
+        country:
+          type: integer
+          nullable: true
+          title: País de origen
+        address:
+          type: string
+          nullable: true
+          title: Dirección
+          maxLength: 255
+        postal_code:
+          type: string
+          nullable: true
+          title: Código Postal
+          maxLength: 15
+        phone:
+          type: string
+          nullable: true
+          title: Teléfono
+          maxLength: 20
+        state:
+          type: integer
+          nullable: true
+          title: Departamento/Estado/Provincia
+        city:
+          type: integer
+          nullable: true
+          title: Ciudad
+        logo_absolute_url:
+          type: string
+          readOnly: true
+        email:
+          type: string
+          format: email
+          nullable: true
+          title: Correo Electrónico
+          maxLength: 255
+        country_name:
+          type: string
+          readOnly: true
+        state_name:
+          type: string
+          readOnly: true
+        city_name:
+          type: string
+          readOnly: true
+        nit:
+          type: string
+          nullable: true
+          maxLength: 15
+        logo:
+          type: string
+          format: uri
+          nullable: true
+      required:
+        - brands
+        - city_name
+        - country_name
+        - id
+        - locations
+        - logo_absolute_url
+        - members_roles
+        - name
+        - state_name
+    CompanyLogo:
+      type: object
+      properties:
+        logo:
+          type: string
+          format: uri
+          nullable: true
+    Configuration:
+      type: object
+      properties:
+        key:
+          type: string
+          maxLength: 200
+        value:
+          type: string
+        company:
+          type: integer
+          nullable: true
+      required:
+        - key
+        - value
+    Country:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre de País
+          maxLength: 255
+        iso_code:
+          type: string
+          maxLength: 3
+        slug:
+          type: string
+          readOnly: true
+          pattern: ^[-a-zA-Z0-9_]+$
+      required:
+        - id
+        - iso_code
+        - name
+        - slug
+    CustomTokenObtainPair:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+          writeOnly: true
+      required:
+        - email
+        - password
+    Document:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        file:
+          type: string
+        file_type:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          nullable: true
+          maxLength: 200
+        user_created:
+          type: integer
+          readOnly: true
+          title: Subido por
+        updated:
+          type: string
+          format: date-time
+          readOnly: true
+          title: Last Updated
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+          title: Fecha de creación
+        tags:
+          type: string
+          nullable: true
+          description: Una Lista separada por comas
+          maxLength: 200
+        is_multimedia:
+          type: boolean
+          title: Es un Archivo Multimedia
+        file_url:
+          type: string
+          format: uri
+          readOnly: true
+        thumbnails_url:
+          type: string
+          format: uri
+          readOnly: true
+        size:
+          type: integer
+          readOnly: true
+          title: Tamaño
+      required:
+        - created
+        - file
+        - file_type
+        - file_url
+        - id
+        - size
+        - thumbnails_url
+        - updated
+        - user_created
+    DocumentType:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Tipo de Documento
+          maxLength: 64
+        code:
+          type: string
+          title: Código
+          maxLength: 8
+      required:
+        - code
+        - id
+        - name
+    EconomicSector:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre del Sector
+          maxLength: 255
+      required:
+        - id
+        - name
+    EmissionFactor:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+        description:
+          type: string
+          title: Descripción
+          maxLength: 255
+        factor_type:
+          type: integer
+          title: Tipo de Factor de Emisión
+        source_type:
+          type: integer
+          title: Tipo de Fuente de Emisión
+        unit:
+          type: integer
+          title: Unidad de Consumo
+      required:
+        - description
+        - factor_type
+        - id
+        - name
+        - source_type
+        - unit
+    EmissionSourceGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+        description:
+          type: string
+          nullable: true
+          title: Descripción
+        icon:
+          type: string
+          format: uri
+          nullable: true
+          title: Ícono
+        category:
+          type: integer
+          title: Categoría
+        category_name:
+          type: string
+          readOnly: true
+        emission_factor_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/FactorType'
+          readOnly: true
+        emission_factor_type_names:
+          type: array
+          items:
+            type: string
+        allow_inventory:
+          type: boolean
+          title: Permitir registro de inventario
+        enabled:
+          type: boolean
+          title: ¿Grupo de clasificación activo?
+        form_name:
+          type: string
+          nullable: true
+          title: Nombre del Formulario
+          maxLength: 255
+        classification:
+          type: string
+          readOnly: true
+      required:
+        - category
+        - category_name
+        - classification
+        - emission_factor_type_names
+        - emission_factor_types
+        - id
+        - name
+    EmissionsSource:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          nullable: true
+          title: Nombre
+          maxLength: 255
+        code:
+          type: string
+          nullable: true
+          title: Código
+          maxLength: 255
+        description:
+          type: string
+          nullable: true
+          title: Descripción
+        location:
+          type: integer
+        image:
+          type: string
+          format: uri
+          nullable: true
+          title: Imagen
+        group:
+          type: integer
+        source_type:
+          type: integer
+          title: Tipo de Fuente de Emisión
+        geo_location:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - Point
+            coordinates:
+              type: array
+              items:
+                type: number
+                format: float
+              example:
+                - 12.9721
+                - 77.5933
+              minItems: 2
+              maxItems: 3
+          nullable: true
+        factor_type:
+          type: integer
+          title: Factor de Emisión
+        emission_factor:
+          type: integer
+          title: Factor de Emisión
+        vehicle_type:
+          type: string
+          nullable: true
+          title: Tipo de Vehículo
+          maxLength: 128
+        vehicle_load:
+          type: string
+          nullable: true
+          title: Tipo de Carga
+          maxLength: 128
+        vehicle_fuel:
+          type: string
+          nullable: true
+          title: Tipo de Combustible
+          maxLength: 128
+        vehicle_capacity:
+          type: number
+          format: double
+          title: Capacidad
+        vehicle_efficiency:
+          type: number
+          format: double
+          title: Eficiencia del Vehículo
+        vehicle_efficiency_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida
+          maxLength: 128
+        electricity_supplier:
+          type: string
+          nullable: true
+          title: Proveedor de Electricidad
+          maxLength: 256
+        electricity_source:
+          type: string
+          nullable: true
+          title: Fuente de generación
+          maxLength: 256
+        electricity_efficiency:
+          type: number
+          format: double
+          nullable: true
+          title: Eficiencia Energética
+        electricity_efficiency_unit:
+          type: string
+          nullable: true
+          title: Unidad Eficiencia Energética
+          maxLength: 256
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+          readOnly: true
+          nullable: true
+        emission_source_name:
+          type: string
+          readOnly: true
+      required:
+        - documents
+        - emission_factor
+        - emission_source_name
+        - factor_type
+        - id
+        - location
+        - source_type
+    EmissionsSourceMonthEntry:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        register_date:
+          type: string
+          format: date
+        emission_agent:
+          type: integer
+        month:
+          $ref: '#/components/schemas/MonthEnum'
+        emission:
+          type: number
+          format: double
+        unit:
+          type: integer
+      required:
+        - emission_agent
+        - id
+        - month
+        - register_date
+        - unit
+    FactorType:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+        description:
+          type: string
+          title: Descripción
+          maxLength: 255
+      required:
+        - description
+        - id
+        - name
+    GHGScope:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+        quantification_type:
+          type: integer
+          nullable: true
+          title: Tipo de Cuantificación
+        code:
+          type: string
+          title: Código
+          maxLength: 5
+        description:
+          type: string
+          nullable: true
+          title: Descripción
+      required:
+        - code
+        - id
+        - name
+    GreenhouseGas:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+        acronym:
+          type: string
+          title: Sigla
+          maxLength: 255
+        kg_co2_equivalence:
+          type: number
+          format: double
+          title: Kg de CO₂ Equivalencia
+        pcg_min:
+          type: string
+          title: Porcentaje de calentamiento global min
+          maxLength: 255
+        pcg_max:
+          type: string
+          title: Porcentaje de calentamiento global min
+          maxLength: 255
+        lifespan_in_years:
+          type: string
+          title: Permanencia en años
+          maxLength: 255
+      required:
+        - acronym
+        - id
+        - lifespan_in_years
+        - name
+    GreenhouseGasEmission:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        greenhouse_gas:
+          type: integer
+          title: Gas de efecto invernadero
+        unit:
+          type: integer
+          title: Unidad Factor de Emisión
+        emission_factor:
+          type: integer
+        value:
+          type: number
+          format: double
+          title: Cantidad de Emisión
+        bibliographic_source:
+          type: string
+          nullable: true
+        percentage_uncertainty:
+          type: number
+          format: double
+          title: Porcentaje de Incertidumbre
+        maximum_allowed_amount:
+          type: number
+          format: double
+          title: Cantidad Máxima Permitida
+      required:
+        - emission_factor
+        - greenhouse_gas
+        - id
+        - unit
+    ISOCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+        code:
+          type: string
+          title: Código
+          maxLength: 5
+        scope:
+          type: integer
+          title: Alcance
+        scope_name:
+          type: string
+          readOnly: true
+        description:
+          type: string
+          nullable: true
+          title: Descripción
+      required:
+        - code
+        - id
+        - name
+        - scope
+        - scope_name
+    IndustryType:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Tipo de Industria
+          maxLength: 255
+      required:
+        - id
+        - name
+    Location:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+        address:
+          type: string
+          title: Dirección
+        phone:
+          type: string
+          nullable: true
+          title: Teléfono
+          maxLength: 20
+        email:
+          type: string
+          format: email
+          nullable: true
+          title: Correo Electrónico
+          maxLength: 255
+        country:
+          type: integer
+          nullable: true
+          title: País
+        state:
+          type: integer
+          nullable: true
+          title: Departamento/Estado/Provincia
+        city:
+          type: integer
+          nullable: true
+          title: Ciudad
+        zip_code:
+          type: string
+          title: Código Postal
+          maxLength: 255
+        company:
+          type: integer
+        geo_location:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - Point
+            coordinates:
+              type: array
+              items:
+                type: number
+                format: float
+              example:
+                - 12.9721
+                - 77.5933
+              minItems: 2
+              maxItems: 3
+          nullable: true
+          title: Posición Geográfica
+        brand:
+          type: integer
+          nullable: true
+          title: Marca
+        location_type:
+          type: integer
+          nullable: true
+          title: Tipo de Sede
+        employees:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Empleados
+        emission_source_locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmissionsSource'
+          readOnly: true
+      required:
+        - address
+        - company
+        - emission_source_locations
+        - id
+        - name
+        - zip_code
+    LocationType:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Tipo de sede
+          maxLength: 255
+      required:
+        - id
+        - name
+    Logout:
+      type: object
+      properties:
+        refresh_token:
+          type: string
+      required:
+        - refresh_token
+    MeasureTypeEnum:
+      enum:
+        - UNKNOWN
+        - QUANTITY
+        - AREA
+        - LENGTH
+        - ANGLE
+        - TIME
+        - VELOCITY
+        - VOLUMEN
+        - SCALE
+        - WEIGHT
+        - ENERGY
+        - MASS
+        - TEMPERATURE
+        - POWER
+        - FREQUENCY
+        - ENERGY_CONSUMPTION
+      type: string
+      description: |-
+        * `UNKNOWN` - Desconocido
+        * `QUANTITY` - Cantidad
+        * `AREA` - Area
+        * `LENGTH` - Longitud
+        * `ANGLE` - Ángulo
+        * `TIME` - Tiempo
+        * `VELOCITY` - Velocidad
+        * `VOLUMEN` - Volumen
+        * `SCALE` - Escala
+        * `WEIGHT` - Peso
+        * `ENERGY` - Energía
+        * `MASS` - Masa
+        * `TEMPERATURE` - Presión
+        * `POWER` - Potencia
+        * `FREQUENCY` - Frecuencia
+        * `ENERGY_CONSUMPTION` - Consumo de energía
+    Member:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        company:
+          type: integer
+        user_email:
+          type: string
+          readOnly: true
+        role:
+          allOf:
+            - $ref: '#/components/schemas/RoleEnum'
+          title: Rol
+        role_description:
+          type: string
+          readOnly: true
+      required:
+        - company
+        - id
+        - role_description
+        - user_email
+    MonthEnum:
+      enum:
+        - January
+        - February
+        - March
+        - April
+        - May
+        - June
+        - July
+        - August
+        - September
+        - October
+        - November
+        - December
+      type: string
+      description: |-
+        * `January` - Enero
+        * `February` - Febrero
+        * `March` - Marzo
+        * `April` - Abril
+        * `May` - Mayo
+        * `June` - Junio
+        * `July` - Julio
+        * `August` - Agosto
+        * `September` - Septiembre
+        * `October` - Octubre
+        * `November` - Noviembre
+        * `December` - Diciembre
+    PatchedCompany:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+        description:
+          type: string
+          nullable: true
+          title: Descripción
+        industry:
+          type: string
+          nullable: true
+          title: Industria
+          maxLength: 255
+        size:
+          allOf:
+            - $ref: '#/components/schemas/SizeEnum'
+          title: Tamaño de la Empresa
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+          readOnly: true
+        website:
+          type: string
+          nullable: true
+          title: Página Web
+          maxLength: 255
+        geo_location:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - Point
+            coordinates:
+              type: array
+              items:
+                type: number
+                format: float
+              example:
+                - 12.9721
+                - 77.5933
+              minItems: 2
+              maxItems: 3
+          nullable: true
+          title: Posición geográfica
+        economic_sector:
+          type: integer
+          nullable: true
+          title: Sector Económico
+        industry_type:
+          type: integer
+          nullable: true
+          title: Tipo de Industria
+        members_roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+          readOnly: true
+        brands:
+          type: array
+          items:
+            $ref: '#/components/schemas/Brand'
+          readOnly: true
+        country:
+          type: integer
+          nullable: true
+          title: País de origen
+        address:
+          type: string
+          nullable: true
+          title: Dirección
+          maxLength: 255
+        postal_code:
+          type: string
+          nullable: true
+          title: Código Postal
+          maxLength: 15
+        phone:
+          type: string
+          nullable: true
+          title: Teléfono
+          maxLength: 20
+        state:
+          type: integer
+          nullable: true
+          title: Departamento/Estado/Provincia
+        city:
+          type: integer
+          nullable: true
+          title: Ciudad
+        logo_absolute_url:
+          type: string
+          readOnly: true
+        email:
+          type: string
+          format: email
+          nullable: true
+          title: Correo Electrónico
+          maxLength: 255
+        country_name:
+          type: string
+          readOnly: true
+        state_name:
+          type: string
+          readOnly: true
+        city_name:
+          type: string
+          readOnly: true
+        nit:
+          type: string
+          nullable: true
+          maxLength: 15
+        logo:
+          type: string
+          format: uri
+          nullable: true
+    PatchedDocument:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        file:
+          type: string
+        file_type:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          nullable: true
+          maxLength: 200
+        user_created:
+          type: integer
+          readOnly: true
+          title: Subido por
+        updated:
+          type: string
+          format: date-time
+          readOnly: true
+          title: Last Updated
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+          title: Fecha de creación
+        tags:
+          type: string
+          nullable: true
+          description: Una Lista separada por comas
+          maxLength: 200
+        is_multimedia:
+          type: boolean
+          title: Es un Archivo Multimedia
+        file_url:
+          type: string
+          format: uri
+          readOnly: true
+        thumbnails_url:
+          type: string
+          format: uri
+          readOnly: true
+        size:
+          type: integer
+          readOnly: true
+          title: Tamaño
+    PatchedEmissionsSource:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          nullable: true
+          title: Nombre
+          maxLength: 255
+        code:
+          type: string
+          nullable: true
+          title: Código
+          maxLength: 255
+        description:
+          type: string
+          nullable: true
+          title: Descripción
+        location:
+          type: integer
+        image:
+          type: string
+          format: uri
+          nullable: true
+          title: Imagen
+        group:
+          type: integer
+        source_type:
+          type: integer
+          title: Tipo de Fuente de Emisión
+        geo_location:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - Point
+            coordinates:
+              type: array
+              items:
+                type: number
+                format: float
+              example:
+                - 12.9721
+                - 77.5933
+              minItems: 2
+              maxItems: 3
+          nullable: true
+        factor_type:
+          type: integer
+          title: Factor de Emisión
+        emission_factor:
+          type: integer
+          title: Factor de Emisión
+        vehicle_type:
+          type: string
+          nullable: true
+          title: Tipo de Vehículo
+          maxLength: 128
+        vehicle_load:
+          type: string
+          nullable: true
+          title: Tipo de Carga
+          maxLength: 128
+        vehicle_fuel:
+          type: string
+          nullable: true
+          title: Tipo de Combustible
+          maxLength: 128
+        vehicle_capacity:
+          type: number
+          format: double
+          title: Capacidad
+        vehicle_efficiency:
+          type: number
+          format: double
+          title: Eficiencia del Vehículo
+        vehicle_efficiency_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida
+          maxLength: 128
+        electricity_supplier:
+          type: string
+          nullable: true
+          title: Proveedor de Electricidad
+          maxLength: 256
+        electricity_source:
+          type: string
+          nullable: true
+          title: Fuente de generación
+          maxLength: 256
+        electricity_efficiency:
+          type: number
+          format: double
+          nullable: true
+          title: Eficiencia Energética
+        electricity_efficiency_unit:
+          type: string
+          nullable: true
+          title: Unidad Eficiencia Energética
+          maxLength: 256
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+          readOnly: true
+          nullable: true
+        emission_source_name:
+          type: string
+          readOnly: true
+    PatchedEmissionsSourceMonthEntry:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        register_date:
+          type: string
+          format: date
+        emission_agent:
+          type: integer
+        month:
+          $ref: '#/components/schemas/MonthEnum'
+        emission:
+          type: number
+          format: double
+        unit:
+          type: integer
+    PatchedLocation:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+        address:
+          type: string
+          title: Dirección
+        phone:
+          type: string
+          nullable: true
+          title: Teléfono
+          maxLength: 20
+        email:
+          type: string
+          format: email
+          nullable: true
+          title: Correo Electrónico
+          maxLength: 255
+        country:
+          type: integer
+          nullable: true
+          title: País
+        state:
+          type: integer
+          nullable: true
+          title: Departamento/Estado/Provincia
+        city:
+          type: integer
+          nullable: true
+          title: Ciudad
+        zip_code:
+          type: string
+          title: Código Postal
+          maxLength: 255
+        company:
+          type: integer
+        geo_location:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - Point
+            coordinates:
+              type: array
+              items:
+                type: number
+                format: float
+              example:
+                - 12.9721
+                - 77.5933
+              minItems: 2
+              maxItems: 3
+          nullable: true
+          title: Posición Geográfica
+        brand:
+          type: integer
+          nullable: true
+          title: Marca
+        location_type:
+          type: integer
+          nullable: true
+          title: Tipo de Sede
+        employees:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Empleados
+        emission_source_locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmissionsSource'
+          readOnly: true
+    PatchedMember:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        company:
+          type: integer
+        user_email:
+          type: string
+          readOnly: true
+        role:
+          allOf:
+            - $ref: '#/components/schemas/RoleEnum'
+          title: Rol
+        role_description:
+          type: string
+          readOnly: true
+    QuantificationType:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+        code:
+          type: string
+          title: Código
+          maxLength: 5
+        description:
+          type: string
+          nullable: true
+          title: Descripción
+      required:
+        - code
+        - id
+        - name
+    Register:
+      type: object
+      properties:
+        first_name:
+          type: string
+          title: Nombre
+          maxLength: 150
+        last_name:
+          type: string
+          title: Apellidos
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: Correo Electrónico
+          maxLength: 254
+        password:
+          type: string
+          title: Contraseña
+          maxLength: 128
+      required:
+        - email
+        - password
+    ResetPassword:
+      type: object
+      properties:
+        token:
+          type: string
+        password:
+          type: string
+      required:
+        - password
+        - token
+    ResetPasswordRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+        - email
+    RoleEnum:
+      enum:
+        - ADMIN
+        - MANAGER
+        - EMPLOYEE
+      type: string
+      description: |-
+        * `ADMIN` - Administrador de empresa
+        * `MANAGER` - Gerente de sede
+        * `EMPLOYEE` - Empleado
+    SizeEnum:
+      enum:
+        - SMALL
+        - MEDIUM
+        - LARGE
+      type: string
+      description: |-
+        * `SMALL` - Pequeña (1-50 empleados)
+        * `MEDIUM` - Mediana (51-200 empleados)
+        * `LARGE` - Grande (201+ empleados)
+    SourceType:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+        description:
+          type: string
+          title: Descripción
+          maxLength: 255
+      required:
+        - description
+        - id
+        - name
+    State:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre del Departamento
+          maxLength: 255
+        dane_code:
+          type: string
+          title: Código DANE
+          maxLength: 3
+        geonames_code:
+          type: string
+          nullable: true
+          title: Código GeoNames
+          maxLength: 10
+        slug:
+          type: string
+          readOnly: true
+          pattern: ^[-a-zA-Z0-9_]+$
+      required:
+        - dane_code
+        - id
+        - name
+        - slug
+    TokenOutput:
+      type: object
+      properties:
+        refresh:
+          type: string
+          title: Refresh token
+        access:
+          type: string
+          title: Access token
+      required:
+        - access
+        - refresh
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+      required:
+        - access
+        - refresh
+    UnitOfMeasure:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          description: El(los) nombre(s) de una unidad de medida (udm) particular.
+            Los ejemplos incluirían lo siguiente:1) para el área udm - metros cuadrados
+            <br />2) para udm Time - segundos <br />3) para el área udm - metros <br
+            />4) Ángulo udm - grados.
+          maxLength: 256
+        slug:
+          type: string
+          maxLength: 32
+        symbol:
+          type: string
+          title: Símbolo
+          description: El símbolo utilizado para esta unidad de medida, como "ft"
+            para pies o "m" para metro.
+          maxLength: 8
+        measure_type:
+          allOf:
+            - $ref: '#/components/schemas/MeasureTypeEnum'
+          title: Tipo de Medida
+          description: |-
+            Tipo de medida
+
+            * `UNKNOWN` - Desconocido
+            * `QUANTITY` - Cantidad
+            * `AREA` - Area
+            * `LENGTH` - Longitud
+            * `ANGLE` - Ángulo
+            * `TIME` - Tiempo
+            * `VELOCITY` - Velocidad
+            * `VOLUMEN` - Volumen
+            * `SCALE` - Escala
+            * `WEIGHT` - Peso
+            * `ENERGY` - Energía
+            * `MASS` - Masa
+            * `TEMPERATURE` - Presión
+            * `POWER` - Potencia
+            * `FREQUENCY` - Frecuencia
+            * `ENERGY_CONSUMPTION` - Consumo de energía
+        name_standard_unit:
+          type: string
+          title: Nombre de la unidad Estándar
+          description: Nombre de las unidades estándar a las que se puede convertir
+            directamente esta unidad de medidaSi esta variable es NULL, entonces la
+            unidad estándar para este tipo de medida dada por el localcopia de la
+            lista de códigos StandardsUnits.
+          maxLength: 64
+        scale_to_standard_unit:
+          type: number
+          format: double
+          nullable: true
+          title: Escala para la unidad Estándar
+          description: Si el sistema de implementación utilizado para este objeto
+            no es compatible con NULL, la escala se establece en 0 es equivalente
+            a NULL tanto para la escala como para el desplazamiento.<br />Si X es
+            la unidad actual y S es la estándar, la escala de dos variables (ToStandardUnit)y
+            offset(ToStandardUnit) se puede usar para hacer la conversión de X a S
+            por:<br />S = compensación + escala*X <br />y, por el contrario, <br />X
+            = (desplazamiento S)/escala
+        offset_to_standard_unit:
+          type: number
+          format: double
+          nullable: true
+          title: Compensación a la unidad estándar
+          description: Consulte scaleToStandardUnit para obtener una descripción.
+            Nuevamente, esta variable es NULL y no es una conversión lineal es posible.
+            Si las dos unidades son solo una escala en diferencia, entonces este número
+            es cero (0). Si el sistema de implementación utilizado para este objeto
+            no es compatible con NULL, entonces el conjunto de escalado a 0 es equivalente
+            a NULL tanto para la escala como para el desplazamiento
+        formula:
+          type: string
+          description: Una fórmula algebraica (probablemente en algún lenguaje de
+            programación) que convierte esta unidad de medida (representada en la
+            fórmula por su uomSymbol) a la norma ISO (representada por su símbolo.
+            Este atributo de miembro no es obligatorio, pero es una pieza valiosa
+            de documentación
+          maxLength: 32
+      required:
+        - id
+        - measure_type
+        - symbol
+    UserModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          title: Nombre de usuario
+          description: 'Requerido. 150 carácteres como máximo. Únicamente letras,
+            dígitos y @/./+/-/_ '
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        first_name:
+          type: string
+          title: Nombre
+          maxLength: 150
+        last_name:
+          type: string
+          title: Apellidos
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: Correo Electrónico
+          maxLength: 254
+        avatar:
+          type: string
+          readOnly: true
+      required:
+        - avatar
+        - email
+        - id
+        - username
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
