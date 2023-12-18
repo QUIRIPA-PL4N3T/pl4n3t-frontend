@@ -54,6 +54,7 @@
     { "rule": "*quotes", "severity": "off" },
     { "rule": "*semi", "severity": "off" }
   ],
+  "typescript.preferences.autoImportFileExcludePatterns": ["vue-router"],
 
   // The following is optional.
   // It's better to put under project setting `.vscode/settings.json`

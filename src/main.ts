@@ -1,11 +1,8 @@
 import { ViteSSG } from 'vite-ssg'
 import { setupLayouts } from 'virtual:generated-layouts'
-
-// import Previewer from 'virtual:vue-component-preview'
-import { routes } from 'vue-router/auto/routes'
 import App from './App.vue'
 import type { UserModule } from './types'
-
+import generatedRoutes from '~pages'
 import '@unocss/reset/tailwind.css'
 
 import '~/styles/css/tailwind.css'
@@ -17,13 +14,13 @@ import '~/styles/css/main.css'
 import 'uno.css'
 import { setup } from '~/core'
 
-// const routes = setupLayouts(generatedRoutes)
+const routes = setupLayouts(generatedRoutes)
 
 // https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(
   App,
   {
-    routes: setupLayouts(routes),
+    routes,
     base: import.meta.env.BASE_URL,
   },
   (ctx: any) => {

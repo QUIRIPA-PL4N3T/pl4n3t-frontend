@@ -1,6 +1,7 @@
 import path from 'node:path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
+import Pages from 'vite-plugin-pages'
 import generateSitemap from 'vite-ssg-sitemap'
 import Layouts from 'vite-plugin-vue-layouts'
 import Components from 'unplugin-vue-components/vite'
@@ -43,6 +44,12 @@ export default defineConfig({
     // https://github.com/posva/unplugin-vue-router
     VueRouter({
       extensions: ['.vue', '.md'],
+      dts: 'src/typed-router.d.ts',
+    }),
+
+    // https://github.com/hannoeru/vite-plugin-pages
+    Pages({
+      extensions: ['vue', 'md'],
     }),
 
     // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
