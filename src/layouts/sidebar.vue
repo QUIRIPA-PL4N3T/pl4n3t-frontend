@@ -23,7 +23,7 @@ function switchHeaderClass() {
 <template>
   <main class="text-gray-700 dark:text-gray-200">
     <TheHeader :class="width > 1280 ? switchHeaderClass() : ''" />
-    <SidebarPlanet v-if="width > 1280" />
+    <TheSidebar v-if="width > 1280" />
     <!-- main sidebar end -->
     <Transition name="mobilemenu">
       <MobileSidebar
@@ -44,12 +44,8 @@ function switchHeaderClass() {
           :class="width > 1280 ? switchHeaderClass() : ''"
         >
           <Breadcrumbs />
-          Hola Edwin
           <RouterView />
         </div>
-      </div>
-      <div mx-auto mt-5 text-center text-sm opacity-50>
-        [Sidebar Layout]
       </div>
     </main>
   </main>
