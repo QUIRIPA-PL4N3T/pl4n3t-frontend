@@ -1,0 +1,7 @@
+.input {
+  @apply bg-white focus:outline-none border border-gray-400 focus:bg-white focus:border focus:border-slate-700 h-10 rounded px-5 text-slate-800
+}
+
+.input-error {
+  @apply bg-white focus:outline-none border border-red-500 focus:border-2 focus:border-red-400 h-12 rounded pl-3 mt-4 mb-2 text-slate-800
+}
