@@ -48,5 +48,6 @@ function switchHeaderClass() {
         </div>
       </div>
     </main>
+    <TheFooter :class="width > 1280 ? switchHeaderClass() : ''" />
   </main>
 </template>
