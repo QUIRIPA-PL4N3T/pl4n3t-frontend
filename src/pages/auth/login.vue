@@ -59,6 +59,7 @@ async function login(value: any) {
               placeholder="jondoe@mail.com"
               validation="required|email"
               outer-class="my-6"
+              autocomplete="username"
             />
 
             <FormKit
@@ -69,6 +70,7 @@ async function login(value: any) {
               suffix-icon="eyeClosed"
               validation="required|length:8"
               outer-class="mb-4"
+              autocomplete="current-password"
               @suffix-icon-click="showPassword"
             />
 

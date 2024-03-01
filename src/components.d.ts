@@ -91,6 +91,7 @@ declare module 'vue' {
     Table: typeof import('./components/Skeleton/Table.vue')['default']
     Textarea: typeof import('./components/Textarea/index.vue')['default']
     Textinput: typeof import('./components/Textinput/index.vue')['default']
+    TheFooter: typeof import('./components/TheFooter/index.vue')['default']
     TheHeader: typeof import('./components/TheHeader/index.vue')['default']
     Theme: typeof import('./components/Settings/Tools/Theme.vue')['default']
     TheSidebar: typeof import('./components/TheSidebar/index.vue')['default']

@@ -59,31 +59,17 @@ function configureTheme(themeSettingsStore: any) {
   }
 }
 
-function configureUser() {
-  if (localStorage.users === undefined) {
-    const users = [
-      {
-        name: 'Pl4n3t',
-        email: 'pl4n3t@gmail.com',
-        password: 'pl4n3t',
-      },
-    ]
-    localStorage.setItem('users', JSON.stringify(users))
-  }
-}
-
 export async function setup() {
   if (typeof window === 'undefined')
     return
-
-  // Configure user data
-  const authStore = useAuthStore()
-  await authStore.refresh()
-
   // Configure theme settings
   const themeSettingsStore = useThemeSettingsStore()
   console.warn('Configure theme settings')
   configureTheme(themeSettingsStore)
+
+  // Configure user data
+  const authStore = useAuthStore()
+  await authStore.refresh()
 
   // load initial data
   console.warn('load initial data')
@@ -96,7 +82,4 @@ export async function setup() {
   companyStore.fetchCompany()
   classificationStore.fetchClassificationData()
   emissionFactorStore.fetchActivities([])
-
-  // TODO: remove call and method configureUser
-  configureUser()
 }

@@ -27,7 +27,6 @@ export const useThemeSettingsStore = defineStore('themeSettings', {
     setSidebarCollapse() {
       this.sidebarCollapse = !this.sidebarCollapse
     },
-
     toggleDark() {
       this.isDark = !this.isDark
       document.body.classList.remove(this.theme)
@@ -35,7 +34,6 @@ export const useThemeSettingsStore = defineStore('themeSettings', {
       document.body.classList.add(this.theme)
       localStorage.setItem('theme', this.theme)
     },
-
     toggleMonochrome() {
       const isMonochrome = (localStorage.getItem('monochrome') !== null)
       // this.monochrome = !this.monochrome;
@@ -47,7 +45,6 @@ export const useThemeSettingsStore = defineStore('themeSettings', {
       localStorage.setItem('monochrome', 'true')
       document.getElementsByTagName('html')[0].classList.add('grayscale')
     },
-
     toggleSettings() {
       this.isOpenSettings = !this.isOpenSettings
     },
