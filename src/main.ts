@@ -3,14 +3,11 @@ import { setupLayouts } from 'virtual:generated-layouts'
 import App from './App.vue'
 import type { UserModule } from './types'
 import generatedRoutes from '~pages'
-import '@unocss/reset/tailwind.css'
 import 'vue-good-table-next/dist/vue-good-table-next.css'
-
+import '~/styles/css/tailwind.css'
 import '~/styles/scss/tailwind.scss'
 import '~/styles/scss/index.scss'
 import '~/styles/css/main.css'
-
-import 'uno.css'
 import { setup } from '~/core'
 
 const routes = setupLayouts(generatedRoutes)
