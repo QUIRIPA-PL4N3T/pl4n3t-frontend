@@ -27,6 +27,7 @@
     "@vueform/multiselect": "^2.6.6",
     "@vueuse/core": "^10.7.0",
     "@vueuse/head": "^2.0.0",
+    "apexcharts": "^3.46.0",
     "date-fns": "^2.30.0",
     "element-plus": "^2.4.4",
     "formkit": "^1.5.9",
@@ -34,12 +35,15 @@
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
     "vue": "^3.3.12",
+    "vue-apexcharts": "^1.6.2",
     "vue-demi": "^0.14.6",
     "vue-good-table-next": "^0.2.1",
     "vue-i18n": "^9.8.0",
     "vue-router": "^4.2.5",
+    "vue-tailwind-datepicker": "^1.7.2",
     "vue-tippy": "^6.3.1",
-    "vue-toastification": "2.0.0-rc.5"
+    "vue-toastification": "2.0.0-rc.5",
+    "vue3-apexcharts": "^1.5.2"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^1.2.1",

@@ -1,93 +1,190 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
+// import { storeToRefs } from 'pinia'
 
-const emissionFactorStore = useEmissionFactorStore()
-const companyStore = useCompanyStore()
-const { statistics } = storeToRefs(emissionFactorStore)
-const { company } = storeToRefs(companyStore)
+// Import Images
+import shade1 from '~/assets/images/all-img/shade-1.png'
+import shade2 from '~/assets/images/all-img/shade-2.png'
+import shade3 from '~/assets/images/all-img/shade-3.png'
+import shade4 from '~/assets/images/all-img/shade-4.png'
+import {
+  pieChart,
+  pieChartDark,
+  stacked,
+  stackedDark,
+} from '~/constants/data'
 
-const show = $ref<boolean[]>([])
-function toggleGraphVisibility(index: number) {
-  show[index] = !show[index]
-}
+// const emissionFactorStore = useEmissionFactorStore()
+const themeSettingsStore = useThemeSettingsStore()
+// const companyStore = useCompanyStore()
+// const { statistics } = storeToRefs(emissionFactorStore)
+// const { company } = storeToRefs(companyStore)
+
+const statistics = [
+  {
+    title: 'CO₂ - Dióxido de Carbono',
+    count: '354',
+    bg: 'bg-warning-500',
+    text: 'text-primary-500',
+    percent: '25.67% ',
+    icon: 'heroicons:arrow-trending-up',
+    img: shade1,
+    percentClass: 'text-primary-500',
+  },
+  {
+    title: 'CH₄ - Metano ',
+    count: '86,9',
+
+    bg: 'bg-info-500',
+    text: 'text-primary-500',
+    percent: '8.67%',
+    icon: 'heroicons:arrow-trending-up',
+    img: shade2,
+    percentClass: 'text-primary-500',
+  },
+  {
+    title: 'N₂O - Óxido Nitroso',
+    count: '15%',
+    bg: 'bg-primary-500',
+    text: 'text-danger-500',
+    percent: '1.67%  ',
+    icon: 'heroicons:arrow-trending-down',
+    img: shade3,
+    percentClass: 'text-danger-500',
+  },
+  {
+    title: 'Perfluorocarbonos',
+    count: '654',
+    bg: 'bg-success-500',
+    text: 'text-primary-500',
+    percent: '11.67%  ',
+    icon: 'heroicons:arrow-trending-up',
+    img: shade4,
+    percentClass: 'text-primary-500',
+  },
+]
+
+const Campaigns = [
+  {
+    name: 'Tipo de Fuente',
+    value: 'Valor',
+  },
+  {
+    name: 'Combustible',
+    value: '40%',
+  },
+  {
+    name: 'Electricidad',
+    value: '28%',
+  },
+  {
+    name: 'Papel',
+    value: '34%',
+  },
+  {
+    name: 'Viajes',
+    value: '17%',
+  },
+]
+
+// const rangeDate = null
+
+// const show = $ref<boolean[]>([])
+// function toggleGraphVisibility(index: number) {
+//   show[index] = !show[index]
+// }
 </script>
 
 <template>
   <div>
-    <div class="bg- grid grid-cols-12 mb-5 gap-5">
-      <div class="col-span-12 bg-transparent">
-        <div class="grid col-span-1 gap-5">
-          <div v-for="(item, i) in statistics" :key="i" class="rounded-[6px] px-4 py-[10px] shadow" :class="item.bg">
-            <p class="m-2 font-bold uppercase">
-              {{ item.title }}
-            </p>
-            <div class="lg:flex">
-              <div class="flex-1">
-                <div class="h-36 flex items-center justify-between rounded-3xl bg-white p-4 shadow lg:p-8">
-                  <div class="h-full flex flex-col justify-between text-xl font-bold">
-                    <p>
-                      0
-                    </p>
-                    <p>Ton CO2e</p>
-                  </div>
+    <div class="card-auto space-y-5">
+      <div class="grid grid-cols-12 gap-5">
+        <div class="lg:col-span-8 col-span-12 space-y-5">
+          <Card>
+            <div class="grid xl:grid-cols-4 lg:grid-cols-2 col-span-1 gap-3">
+              <div
+                v-for="(item, i) in statistics"
+                :key="i"
+                :class="item.bg"
+                class="rounded-md p-4 bg-opacity-[0.15] dark:bg-opacity-25 relative z-[1]"
+              >
+                <div class="overlay absolute left-0 top-0 w-full h-full z-[-1]">
                   <img
-                    class="h-14"
-                    src="https://static.vecteezy.com/system/resources/previews/009/372/149/non_2x/cloud-illustration-design-elements-for-web-interface-weather-forecast-or-cloud-storage-applications-white-clouds-set-isolated-on-blue-background-vector-illustration-clouds-silhouettes-free-png.png"
+                    :src="item.img"
                     alt=""
+                    draggable="false"
+                    class="w-full h-full object-contain"
                   >
                 </div>
-              </div>
-              <div class="bg-black-400 m-auto mb-4 mt-4 h-px w-4/5 border-2 border-dotted lg:hidden" />
-              <div class="mb-5 mt-4 lg:ml-6 lg:mr-6">
-                <div class="mb-8 flex">
-                  <p class="mr-2 text-6xl font-bold lg:text-4xl">
-                    {{ company.locations.length }}
-                  </p>
-                  <p>Sedes registradas</p>
-                </div>
-                <div class="flex flex-row items-end">
-                  <p class="mr-2 text-6xl font-bold lg:text-4xl">
-                    0
-                  </p>
-                  <p>Fuentes de emisión en invierno</p>
-                </div>
-              </div>
-              <div class="bg-black-400 m-auto mb-4 mt-4 h-px w-4/5 border-2 border-dotted lg:hidden" />
-              <div class="flex-1">
-                <div class="flex-col items-center justify-between rounded-3xl bg-white p-4 shadow-xl lg:p-8">
-                  <div class="mb-1 flex flex-row justify-end">
-                    <p>Progreso</p>
+                <span
+                  class="block mb-6 text-sm text-slate-900 dark:text-white font-medium"
+                >{{ item.title }}</span>
+                <span
+                  class="block mb- text-2xl text-slate-900 dark:text-white font-medium mb-6"
+                >{{ item.count }}</span>
+                <div class="flex space-x-2 rtl:space-x-reverse">
+                  <div class="flex-none text-xl" :class="item.text">
+                    <Icon :icon="item.icon" />
                   </div>
-                  <div v-for="location in item.companies" :key="location.name">
-                    <div class="flex justify-between">
-                      <div class="flex items-start justify-start">
-                        <img class="mr-2 h-7" src="https://cdn-icons-png.flaticon.com/512/4844/4844589.png" alt="">
-                        <p> {{ location.name }}</p>
-                      </div>
-                      <div class="w-36 lg:w-32">
-                        <div class="bg-black-300 absolute h-4 w-36 rounded lg:w-32" />
-                        <div :class="`relative h-4 z-10 w-${location.progress} bg-red-600 rounded `" />
-                        <p
-                          class="text-black-500 relative bottom-[15px] left-[110px] z-10 text-xs font-bold lg:left-[92px]"
-                        >
-                          {{ location.progress }}%
-                        </p>
-                      </div>
-                    </div>
+                  <div class="flex-1 text-sm">
+                    <span class="block mb-[2px]" :class="item.percentClass">{{
+                      item.percent
+                    }}</span>
+                    <span class="block mb-1 text-slate-600 dark:text-slate-300">desde el último mes</span>
                   </div>
                 </div>
               </div>
             </div>
-            <p v-if="!show[i]" class="m-2" @click="toggleGraphVisibility(i)">
-              Ver gráficas
-            </p>
-            <p v-if="show[i]" class="m-2" @click="toggleGraphVisibility(i)">
-              Ocultar gráfica
-            </p>
-            <div v-if="show[i]" class="m-2 flex flex-col p-3">
-              <chart-bar :id="`chart${i}`" />
+          </Card>
+          <Card>
+            <header class="md:flex md:space-y-0 space-y-4">
+              <h6 class="flex-1 text-slate-900 dark:text-white capitalize">
+                Distribución por sede
+              </h6>
+            </header>
+
+            <div class="legend-ring">
+              <apexchart
+                type="bar"
+                height="410"
+                :options="
+                  themeSettingsStore.isDark
+                    ? stackedDark.chartOptions
+                    : stacked.chartOptions
+                "
+                :series="stacked.series"
+              />
             </div>
-          </div>
+          </Card>
+        </div>
+        <div class="lg:col-span-4 col-span-12 space-y-5">
+          <Card title="Fuentes de Emisión">
+            <ul class="divide-y divide-slate-100 dark:divide-slate-700">
+              <li
+                v-for="(item, i) in Campaigns"
+                :key="i"
+                class="first:text-xs text-sm first:text-slate-600 text-slate-600 dark:text-slate-300 py-2 first:uppercase"
+              >
+                <div class="flex justify-between">
+                  <span>{{ item.name }}</span>
+                  <span>{{ item.value }}</span>
+                </div>
+              </li>
+            </ul>
+          </Card>
+          <Card title="GEI Generados">
+            <div class="legend-ring3">
+              <apexchart
+                type="pie"
+                height="335"
+                :options="
+                  themeSettingsStore.isDark
+                    ? pieChartDark.chartOptions
+                    : pieChart.chartOptions
+                "
+                :series="pieChart.series"
+              />
+            </div>
+          </Card>
         </div>
       </div>
     </div>
