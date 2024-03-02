@@ -2,6 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { menuItems } from '../../constants/menuItems'
 
+const { t } = useI18n()
 const openClass = 'w-[248px]'
 const closeClass = 'w-[72px] close_sidebar'
 const shadowBase = ref(false)
@@ -69,13 +70,15 @@ const { sidebarCollapse, skin, semiDark, isMouseHovered, isDark } = storeToRefs(
         class="nav-shadow pointer-events-none absolute top-[80px] z-[1] h-[60px] w-full transition-all duration-200"
         :class="[shadowBase ? ' opacity-100' : ' opacity-0']"
       />
-      <div>
-        <MenuEnvironment />
-      </div>
-      <div class="pt-2">
-        <MenuLocationSearch />
-      </div>
       <div class="sidebar-menu h-[calc(100%-80px)] px-4">
+        <div class="flex gap-1 flex-col">
+          <h6 class="pl-2">
+            {{ t('general.manage') }}
+          </h6>
+          <MenuEnvironment />
+          <MenuLocationSearch />
+          <hr class="my-2">
+        </div>
         <NavigationMenu :items="menuItems" />
       </div>
     </div>

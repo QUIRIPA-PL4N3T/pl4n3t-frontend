@@ -2,7 +2,6 @@
 import { storeToRefs } from 'pinia'
 import { useClassificationStore } from '~/stores/classification'
 
-const { t } = useI18n()
 const selectedEnvironment = ref(null)
 const classificationStore = useClassificationStore()
 const { optionsQuantificationTypes, quantificationTypes } = storeToRefs(classificationStore)
@@ -15,11 +14,13 @@ watch(selectedEnvironment, (newVal) => {
 </script>
 
 <template>
-  <div class="rounded bg-white px-2">
+  <div class="rounded px-3 py-2 bg-white  dark:bg-slate-800">
     <FormKit
       v-model="selectedEnvironment"
       type="select"
-      :label="`${t('general.manage')}:`"
+      input-class="text-sm $remove:pr-8"
+      select-icon-class="$remove:mr-2"
+      wrapper-class="dark:bg-white"
       :options="optionsQuantificationTypes"
     />
   </div>
