@@ -1,6 +1,7 @@
 import { ViteSSG } from 'vite-ssg'
 import { setupLayouts } from 'virtual:generated-layouts'
 import App from './App.vue'
+import isAuthenticatedGuard from './guards/auth-guard'
 import type { UserModule } from './types'
 import generatedRoutes from '~pages'
 import 'vue-good-table-next/dist/vue-good-table-next.css'
@@ -10,6 +11,11 @@ import '~/styles/css/main.css'
 import { setup } from '~/core'
 
 const routes = setupLayouts(generatedRoutes)
+
+routes.forEach((route) => {
+  if (route.path.includes('/dashboard'))
+    route.beforeEnter = [isAuthenticatedGuard]
+})
 
 // https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(

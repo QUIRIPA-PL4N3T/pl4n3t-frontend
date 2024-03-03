@@ -1,7 +1,10 @@
-import VueApexCharts from 'vue3-apexcharts'
 import type { UserModule } from '~/types'
 
+const DynamicChart = defineAsyncComponent(() => import('vue3-apexcharts'))
+
 export const install: UserModule = ({ app }) => {
-  app.use(VueApexCharts)
-  app.component('Apexchart', VueApexCharts) // Nota el uso de 'apexchart' aquí
+  if (typeof window !== 'undefined') {
+    app.use(DynamicChart)
+    app.component('Apexchart', DynamicChart)
+  }
 }

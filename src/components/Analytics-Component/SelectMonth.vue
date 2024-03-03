@@ -6,7 +6,6 @@ import {
   ListboxOption,
   ListboxOptions,
 } from '@headlessui/vue'
-import Icon from '@/components/Icon'
 
 const months = [{ name: 'January' }, { name: 'February' }, { name: 'March' }]
 const selectedMonth = ref(months[0])

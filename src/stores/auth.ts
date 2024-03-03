@@ -76,18 +76,23 @@ export const useAuthStore = defineStore('auth', {
       }
     },
     async refresh() {
+      try {
       // Update access and refresh token from api Server
-      this.refreshTokenSynchronize()
-      if (this.refreshToken && !this.user) {
+        this.refreshTokenSynchronize()
+        if (this.refreshToken && !this.user) {
         // Request a new token
-        const { data } = await accountApi.accountsRefreshCreate({ tokenRefresh: { refresh: this.refreshToken, access: this.accessToken } })
-        this.accessToken = data.access
-        // Update and Persist refresh token
-        this.refreshTokenPersist(data.refresh)
-        setupInterceptors(this)
-        this.getUserProfile()
+          const { data } = await accountApi.accountsRefreshCreate({ tokenRefresh: { refresh: this.refreshToken, access: this.accessToken } })
+          this.accessToken = data.access
+          // Update and Persist refresh token
+          this.refreshTokenPersist(data.refresh)
+          setupInterceptors(this)
+          this.getUserProfile()
+        }
+        return this.isAuthenticated
       }
-      return this.isAuthenticated
+      catch (error) {
+        this.refreshTokenRemove()
+      }
     },
     refreshTokenSynchronize() {
       // Retrieve refresh from cookies and update

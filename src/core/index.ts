@@ -62,24 +62,27 @@ function configureTheme(themeSettingsStore: any) {
 export async function setup() {
   if (typeof window === 'undefined')
     return
-  // Configure theme settings
-  const themeSettingsStore = useThemeSettingsStore()
-  console.warn('Configure theme settings')
-  configureTheme(themeSettingsStore)
 
   // Configure user data
   const authStore = useAuthStore()
   await authStore.refresh()
 
-  // load initial data
-  console.warn('load initial data')
-  const emissionFactorStore = useEmissionFactorStore()
-  const basicStore = useBasicStore()
-  const companyStore = useCompanyStore()
-  const classificationStore = useClassificationStore()
+  if (authStore.isAuthenticated) {
+  // Configure theme settings
+    const themeSettingsStore = useThemeSettingsStore()
+    console.warn('Configure theme settings')
+    configureTheme(themeSettingsStore)
 
-  basicStore.fetchBasicData()
-  companyStore.fetchCompany()
-  classificationStore.fetchClassificationData()
-  emissionFactorStore.fetchActivities([])
+    // load initial data
+    console.warn('load initial data')
+    const emissionFactorStore = useEmissionFactorStore()
+    const basicStore = useBasicStore()
+    const companyStore = useCompanyStore()
+    const classificationStore = useClassificationStore()
+
+    basicStore.fetchBasicData()
+    companyStore.fetchCompany()
+    classificationStore.fetchClassificationData()
+    emissionFactorStore.fetchActivities([])
+  }
 }
