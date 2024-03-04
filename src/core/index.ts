@@ -6,16 +6,10 @@ import { useClassificationStore } from '~/stores/classification'
 
 function configureTheme(themeSettingsStore: any) {
   // check local Storage theme for dark light bordered
-  if (localStorage.theme === 'dark') {
-    document.body.classList.add('dark')
-    themeSettingsStore.theme = 'dark'
-    themeSettingsStore.isDark = true
-  }
-  else {
-    document.body.classList.add('light')
-    themeSettingsStore.theme = 'light'
-    themeSettingsStore.isDark = false
-  }
+  document.body.classList.add('light')
+  themeSettingsStore.theme = 'light'
+  themeSettingsStore.isDark = false
+
   if (localStorage.semiDark === 'true') {
     document.body.classList.add('semi-dark')
     themeSettingsStore.semiDark = true
