@@ -9,6 +9,8 @@ function configureTheme(themeSettingsStore: any) {
   document.body.classList.add('light')
   themeSettingsStore.theme = 'light'
   themeSettingsStore.isDark = false
+  document.documentElement.classList.toggle('dark', false)
+  document.documentElement.classList.toggle('light', true)
 
   if (localStorage.semiDark === 'true') {
     document.body.classList.add('semi-dark')
