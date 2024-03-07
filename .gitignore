@@ -8,6 +8,8 @@ node_modules
 .idea/
 *.log
 cypress/downloads
+.env
+.env.*
 
 # Generated API Client
 /src/api-client
