@@ -1,29 +1,37 @@
+activities:
+  activity: Activity
+  amount: Amount
+  hc4: HC4
+  ho2: HO2
+  location: Campus
+  month: Month
+  n20: N2O
 email: Email
-hintEmail: Email
-errorRequirementEmail: Email is required
 errorEmail: email must be a valid email
-password: Password
-hintPassword: Password
 errorPassword: password must be at least 8 characters
+errorRequirementEmail: Email is required
 forgotPassword: Forgot Password?
-signInSocial: Or continue with
-login:
-  text: Sign in
-  checkBox: Keep me signed in
-  buttonLogin: Sign in
-  footer: DON´T HAVE AN ACCOUNT? SIGN UP
-  link: SIGN UP
-register:
-  fullName: Full Name
-  hintFullName: Full Name
-  text: Sign up
-  checkBox: You accept our Terms and Conditions and Privacy Policy
-  buttonLogin: Create An Account
-  footer: ALREADY REGISTERED?
-  link: SIGN IP
 forgotPasswordScreen:
+  link: SIGN UP
   text: Forgot Your Password
   textButton: send Recovery Email
   textFooter1: FORGET IT,
   textFooter2: TO THE SIGN IN
+hintEmail: Email
+hintPassword: Password
+login:
+  buttonLogin: Sign in
+  checkBox: Keep me signed in
+  footer: DON´T HAVE AN ACCOUNT? SIGN UP
   link: SIGN UP
+  text: Sign in
+password: Password
+register:
+  buttonLogin: Create An Account
+  checkBox: You accept our Terms and Conditions and Privacy Policy
+  footer: ALREADY REGISTERED?
+  fullName: Full Name
+  hintFullName: Full Name
+  link: SIGN IP
+  text: Sign up
+signInSocial: Or continue with

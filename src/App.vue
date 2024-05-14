@@ -13,14 +13,14 @@ useHead({
     { name: 'description', content: 'Application to manage carbon footprint in companies' },
     {
       name: 'theme-color',
-      content: () => isDark.value ? '#00aba9' : '#ffffff',
+      content: () => '#ffffff',
     },
   ],
   link: [
     {
       rel: 'icon',
       type: 'image/svg+xml',
-      href: () => preferredDark.value ? '/logo-p.png' : '/logo-p.png',
+      href: () => '/logo-p.png',
     },
   ],
 })

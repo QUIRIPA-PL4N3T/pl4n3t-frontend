@@ -159,6 +159,9 @@ export default defineConfig({
   },
 
   build: {
+    modulePreload: {
+      polyfill: false,
+    },
     rollupOptions: {
       onwarn(warning, warn) {
         if (warning.message && warning.message.includes('@formkit/inputs'))
