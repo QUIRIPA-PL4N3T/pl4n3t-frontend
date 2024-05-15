@@ -2,10 +2,6 @@
   "type": "module",
   "private": true,
   "packageManager": "pnpm@8.10.2",
-  "engines": {
-    "npm": "8.13.2",
-    "node": "17.1.0"
-  },
   "scripts": {
     "build": "ENV=production vite-ssg build",
     "dev": "vite --port 3333 --open",
@@ -34,6 +30,7 @@
     "apexcharts": "^3.49.1",
     "date-fns": "^2.30.0",
     "element-plus": "^2.7.3",
+    "firebase": "^10.12.0",
     "formkit": "^1.6.2",
     "js-cookie": "^3.0.5",
     "nprogress": "^0.2.0",
@@ -53,6 +50,7 @@
     "@antfu/eslint-config": "^1.2.1",
     "@iconify-json/carbon": "^1.1.33",
     "@intlify/unplugin-vue-i18n": "^1.6.0",
+    "@types/js-cookie": "^3.0.6",
     "@types/markdown-it-link-attributes": "^3.0.5",
     "@types/nprogress": "^0.2.3",
     "@vitejs/plugin-vue": "^4.6.2",
@@ -102,5 +100,10 @@
   },
   "lint-staged": {
     "*": "eslint --fix"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@antfu"
+    ]
   }
 }

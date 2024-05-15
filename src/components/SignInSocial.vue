@@ -1,8 +1,36 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
+import { useToast } from 'vue-toastification'
 import { useI18n } from 'vue-i18n'
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import go from '~/assets/images/icons/gp.svg'
+import { auth } from '~/config/firebaseConfig'
+import { handleError } from '~/utilities/utils'
 
 const { t } = useI18n()
+const authStore = useAuthStore()
+const router = useRouter()
+const { isAuthenticated } = storeToRefs(authStore)
+const toast = useToast()
+let errorMessage = $ref('')
+
+async function signInWithGoogle() {
+  const provider = new GoogleAuthProvider()
+  try {
+    const result = await signInWithPopup(auth, provider)
+    const idToken = await result.user.getIdToken()
+
+    // Send the token to Firebase ID Token in backend
+    await authStore.googleLogin({ token: idToken })
+
+    if (isAuthenticated.value)
+      router.push('/dashboard')
+  }
+  catch (error: any) {
+    errorMessage = handleError(error)
+    toast.error(errorMessage)
+  }
+};
 </script>
 
 <template>
@@ -16,10 +44,11 @@ const { t } = useI18n()
       <div class=" justify-center items-center w-7/12">
         <ul class="flex justify-center">
           <RouterLink
-            class=" inline-flex w-10 h-10 bg-red-500 text-white text-2xl flex-col items-center justify-center rounded-full"
+            class="inline-flex w-10 h-10 bg-red-500 text-white text-2xl flex-col items-center justify-center rounded-full"
             to="#"
+            @click.prevent="signInWithGoogle"
           >
-            <img :src="go" alt="">
+            <img :src="go" alt="google">
           </RouterLink>
         </ul>
       </div>

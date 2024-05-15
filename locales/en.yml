@@ -23,6 +23,10 @@ login:
   buttonLogin: Sign in
   checkBox: Keep me signed in
   footer: DON´T HAVE AN ACCOUNT? SIGN UP
+  google:
+    created: >-
+      An email was sent to activate your account, please activate your account
+      and try again
   link: SIGN UP
   text: Sign in
 password: Password
