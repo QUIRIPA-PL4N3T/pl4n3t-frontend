@@ -1,10 +1,12 @@
-import { SizeEnum } from '~/api-client'
+import { MembershipTypeEnum, SizeEnum } from '~/api-client'
 import type {
   Brand,
   Company,
+  CompanyMembership,
   DocumentsApiDocumentsCreateRequest,
   EmissionsSource,
   Location,
+  Membership,
 }
   from '~/api-client'
 
@@ -72,4 +74,55 @@ export const DEFAULT_DOCUMENT: DocumentsApiDocumentsCreateRequest = {
   file: undefined,
   title: '',
   tags: '',
+}
+export const DEFAULT_MEMBERSHIPS: Membership = {
+  id: 1,
+  name: 'Gratuito',
+  membership_type: MembershipTypeEnum.Free,
+  price: '0.00',
+  duration: 365,
+  description: 'Membresía gratuita para pequeñas empresas.',
+  benefits: 'Navegación y visualización de contenido público, creación de un perfil.',
+  num_brands: 1,
+  num_locations: 1,
+  num_users: 1,
+  emission_sources: true,
+  footprint_types: 'Huella de Carbono',
+  liquidation_options: 'Anual',
+  analysis_tools: false,
+  basic_support: true,
+  storage_capacity: 'No sube soportes',
+  tutorials: true,
+  webinars: false,
+  general_support: true,
+  dedicated_support: false,
+  custom_api_access: false,
+}
+
+export const DEFAULT_COMPANY_MEMBERSHIP: CompanyMembership = {
+  id: 1,
+  company: 1,
+  membership: 1,
+  start_date: '2024-05-15T15:35:37.531Z',
+  end_date: '2024-05-15T15:35:37.531Z',
+}
+
+/**
+ *
+ * @export
+ * @interface Membership
+ */
+export interface AttrMembership {
+  /**
+   *
+   * @type {string}
+   * @memberof Membership
+   */
+  field: string
+  /**
+   *
+   * @type {string}
+   * @memberof Membership
+   */
+  attr: string
 }

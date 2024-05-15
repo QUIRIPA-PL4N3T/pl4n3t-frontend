@@ -15,6 +15,7 @@ import {
   ISOCategoriesApi,
   LocationsApi,
   MainApi,
+  MembershipsApi,
   QuantificationTypesApi,
   SourceTypesApi,
 } from '~/api-client'
@@ -41,3 +42,4 @@ export const locationApi = new LocationsApi(undefined, apiUrl, axiosInstance)
 export const quantificationTypeApi = new QuantificationTypesApi(undefined, apiUrl, axiosInstance)
 export const sourceTypeApi = new SourceTypesApi(undefined, apiUrl, axiosInstance)
 export const documentApi = new DocumentsApi(undefined, apiUrl, axiosInstance)
+export const membershipsApi = new MembershipsApi(undefined, apiUrl, axiosInstance)

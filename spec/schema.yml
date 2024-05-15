@@ -93,6 +93,34 @@ paths:
           description: ''
         '401':
           description: Usted no tiene permiso para ver este usuario
+  /api/accounts/google-account/:
+    post:
+      operationId: accountsGoogleAccountCreate
+      description: Iniciar sesión con una cuenta de google
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoogleAccount'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GoogleAccount'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GoogleAccount'
+        required: true
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenOutput'
+          description: ''
   /api/accounts/login/:
     post:
       operationId: accountsLoginCreate
@@ -1857,6 +1885,126 @@ paths:
                 items:
                   $ref: '#/components/schemas/UnitOfMeasure'
           description: ''
+  /api/memberships/company-memberships/:
+    get:
+      operationId: membershipsCompanyMembershipsList
+      tags:
+        - Memberships
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CompanyMembership'
+          description: ''
+  /api/memberships/company-memberships/{id}/:
+    get:
+      operationId: membershipsCompanyMembershipsRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this company membership.
+          required: true
+      tags:
+        - Memberships
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyMembership'
+          description: ''
+  /api/memberships/purchase/{membershipId}/:
+    post:
+      operationId: membershipsPurchaseCreate
+      description: Compra una membresía
+      parameters:
+        - in: path
+          name: membershipId
+          schema:
+            type: integer
+          required: true
+      tags:
+        - Memberships
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseMember'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PurchaseMember'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PurchaseMember'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          description: Compra de membresía exitosa
+        '401':
+          description: No tiene permiso para ver este usuario
+        '400':
+          description: Solicitud incorrecta
+  /api/memberships/success/:
+    get:
+      operationId: membershipsSuccessRetrieve
+      description: Verificación de pago de membresía exitosa
+      tags:
+        - Memberships
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          description: Membresía asignada exitosamente
+        '400':
+          description: Solicitud incorrecta
+  /api/memberships/types/:
+    get:
+      operationId: membershipsTypesList
+      tags:
+        - Memberships
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Membership'
+          description: ''
+  /api/memberships/types/{id}/:
+    get:
+      operationId: membershipsTypesRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this membership.
+          required: true
+      tags:
+        - Memberships
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership'
+          description: ''
   /documentation/schema.yml:
     get:
       operationId: documentationSchema.ymlRetrieve
@@ -2129,6 +2277,29 @@ components:
           type: string
           format: uri
           nullable: true
+    CompanyMembership:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        company:
+          type: integer
+          nullable: true
+        membership:
+          type: integer
+          nullable: true
+        start_date:
+          type: string
+          format: date-time
+          readOnly: true
+        end_date:
+          type: string
+          format: date-time
+      required:
+        - end_date
+        - id
+        - start_date
     Configuration:
       type: object
       properties:
@@ -2204,7 +2375,6 @@ components:
           type: string
           format: date-time
           readOnly: true
-          title: Fecha de creación
         tags:
           type: string
           nullable: true
@@ -2541,6 +2711,13 @@ components:
         - code
         - id
         - name
+    GoogleAccount:
+      type: object
+      properties:
+        token:
+          type: string
+      required:
+        - token
     GreenhouseGas:
       type: object
       properties:
@@ -2818,6 +2995,103 @@ components:
         - id
         - role_description
         - user_email
+    Membership:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+        membership_type:
+          allOf:
+            - $ref: '#/components/schemas/MembershipTypeEnum'
+          title: Tipo de Membresía
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        duration:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Duración en días
+        description:
+          type: string
+          nullable: true
+        benefits:
+          type: string
+          nullable: true
+        num_brands:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Número de Marcas
+        num_locations:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Número de Sedes
+        num_users:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Usuarios por organización
+        emission_sources:
+          type: boolean
+          title: Registro de todas las Fuentes de emisión
+        footprint_types:
+          type: string
+          title: Tipos de huella
+          maxLength: 255
+        liquidation_options:
+          type: string
+          title: 'Liquidación: Mensual, Trimestral, Anual'
+          maxLength: 255
+        analysis_tools:
+          type: boolean
+          title: Herramientas de análisis y generación de informes personalizados
+        basic_support:
+          type: boolean
+          title: Acceso al soporte básico a través de preguntas frecuentes o correo
+            electrónico
+        storage_capacity:
+          type: string
+          title: Mayor capacidad de almacenamiento para archivos y datos
+          maxLength: 255
+        tutorials:
+          type: boolean
+          title: Tutoriales
+        webinars:
+          type: boolean
+          title: Webinars, documentación especializada, etc.
+        general_support:
+          type: boolean
+          title: Soporte técnico General
+        dedicated_support:
+          type: boolean
+          title: Un representante de soporte asignado exclusivamente a la cuenta
+        custom_api_access:
+          type: boolean
+          title: Acceso a una API personalizada para desarrollar integraciones personalizadas
+      required:
+        - id
+        - name
+        - price
+    MembershipTypeEnum:
+      enum:
+        - FREE
+        - BASIC
+        - PREMIUM
+        - ELITE
+      type: string
+      description: |-
+        * `FREE` - Gratuito
+        * `BASIC` - Básica
+        * `PREMIUM` - Premium
+        * `ELITE` - Elite
     MonthEnum:
       enum:
         - January
@@ -2997,7 +3271,6 @@ components:
           type: string
           format: date-time
           readOnly: true
-          title: Fecha de creación
         tags:
           type: string
           nullable: true
@@ -3246,6 +3519,18 @@ components:
         role_description:
           type: string
           readOnly: true
+    PurchaseMember:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        payment_method:
+          type: string
+          maxLength: 50
+      required:
+        - email
+        - payment_method
     QuantificationType:
       type: object
       properties:
@@ -3273,11 +3558,9 @@ components:
       properties:
         first_name:
           type: string
-          title: Nombre
           maxLength: 150
         last_name:
           type: string
-          title: Apellidos
           maxLength: 150
         email:
           type: string
@@ -3286,7 +3569,6 @@ components:
           maxLength: 254
         password:
           type: string
-          title: Contraseña
           maxLength: 128
       required:
         - email
@@ -3495,18 +3777,15 @@ components:
           readOnly: true
         username:
           type: string
-          title: Nombre de usuario
-          description: 'Requerido. 150 carácteres como máximo. Únicamente letras,
-            dígitos y @/./+/-/_ '
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
           pattern: ^[\w.@+-]+$
           maxLength: 150
         first_name:
           type: string
-          title: Nombre
           maxLength: 150
         last_name:
           type: string
-          title: Apellidos
           maxLength: 150
         email:
           type: string

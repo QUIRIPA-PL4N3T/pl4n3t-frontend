@@ -250,3 +250,40 @@ equipment:
   efficiency_help: Dato numérico, puede incluir decimales.
   specific_factor_label: Factor de Emisión específico
   specific_factor_unit_label: Unidad de Factor de emisión
+my-membership:
+  title: Actualmente tiene la membresia
+  company: Estam membresia esta asociada a tu empresa
+  subtitle: Fechas importantes de tu mebresia
+  end_date: Tu membresia finaliza
+  start_date: Inicio de membresia
+  button: Cambiar de Plan
+memberships:
+  title: Membresias
+  subtitle: Escoje el mejor plan para ti
+  card-title: Planes
+  button: Comprar
+  days: Dias
+  subscriber: Estas sustrito
+pusharse-membership:
+  header: Estas comprando Membresia
+  subheader: Suministra la informacion de cada seccion para procesar el pago
+  footer: Gracias por confiar en nosotros
+  footer-total: Total
+  button: Pagar
+  fields:
+    names:
+      label: Nombre completo
+      placeholder: Joe doe
+    card:
+      label: Numero de tarjeta
+      placeholder: '0505545044'
+    expiration:
+      label: Fecha de expiracion
+      placeholder: MM YY
+    cvv:
+      label: CVV
+      placeholder: CVV
+      help: Revisa el cerca de la banda magnetica
+    address:
+      label: Direccion
+      placeholder: 'Calle #0 - 22'

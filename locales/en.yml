@@ -35,3 +35,40 @@ register:
   link: SIGN IP
   text: Sign up
 signInSocial: Or continue with
+my-membership:
+  title: Actually do you have
+  company: This membership has associate to company
+  subtitle: Dates importat of your membership
+  end_date: You memberaship finally
+  start_date: Init of membership
+  button: Change of plan
+memberships:
+  title: Memberships
+  subtitle: Choose the best plan
+  card-title: Plans
+  button: Buy
+  days: Days
+  subscriber: You are susbcriber to
+pusharse-membership:
+  header: You are buying
+  subheader: Give us the information of each section for process payment
+  footer: Thank for confidense on ours
+  footer-total: Total
+  button: Pay
+  fields:
+    names:
+      label: Full name
+      placeholder: Joe doe
+    card:
+      label: Card number
+      placeholder: '0505545044'
+    expiration:
+      label: Expirtation Date
+      placeholder: MM YY
+    cvv:
+      label: CVV
+      placeholder: CVV
+      help: Revisa el cerca de la banda magnetica
+    address:
+      label: Address
+      placeholder: 'Calle #0 - 22'

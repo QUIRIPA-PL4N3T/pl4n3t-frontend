@@ -3,6 +3,7 @@ import { useCompanyStore } from '~/stores/company'
 import { useBasicStore } from '~/stores/basic'
 import { useEmissionFactorStore } from '~/stores/emissionFactor'
 import { useClassificationStore } from '~/stores/classification'
+import { useMembershipsStore } from '~/stores/memberships'
 
 function configureTheme(themeSettingsStore: any) {
   // check local Storage theme for dark light bordered
@@ -75,9 +76,11 @@ export async function setup() {
     const basicStore = useBasicStore()
     const companyStore = useCompanyStore()
     const classificationStore = useClassificationStore()
+    const membershipsStore = useMembershipsStore()
 
     basicStore.fetchBasicData()
     companyStore.fetchCompany()
+    membershipsStore.fetchMemberships()
     classificationStore.fetchClassificationData()
     emissionFactorStore.fetchActivities([])
   }
