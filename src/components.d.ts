@@ -13,6 +13,7 @@ declare module 'vue' {
     Badge: typeof import('./components/Badge/index.vue')['default']
     BankTable: typeof import('./components/Analytics-Component/BankTable.vue')['default']
     Bar: typeof import('./components/ProgressBar/Bar.vue')['default']
+    Bill: typeof import('./components/Payment/Bill.vue')['default']
     Breadcrumbs: typeof import('./components/Breadcrumbs/index.vue')['default']
     Breadcrumbs2: typeof import('./components/Breadcrumbs/Breadcrumbs2.vue')['default']
     Button: typeof import('./components/Button/index.vue')['default']

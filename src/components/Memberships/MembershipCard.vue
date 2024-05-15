@@ -17,9 +17,9 @@ const router = useRouter()
 const membershipsStore = useMembershipsStore()
 const { attrMembership } = storeToRefs(membershipsStore)
 
-function pusharseMembership(id: number) {
+function purchaseMembership(id: number) {
   router.push({
-    name: 'pusharse-membership',
+    name: 'purchase-membership',
     params: { id },
   })
 }
@@ -81,7 +81,7 @@ function getIcon(value: string | number | boolean) {
     <Button
       v-if="buy"
       btn-class="btn-outline-dark dark:border-slate-400 w-full"
-      @click="pusharseMembership(membership.id)"
+      @click="purchaseMembership(membership.id)"
     >
       {{ t('memberships.button') }}
     </Button>

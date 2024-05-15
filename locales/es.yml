@@ -250,7 +250,9 @@ equipment:
   efficiency_help: Dato numérico, puede incluir decimales.
   specific_factor_label: Factor de Emisión específico
   specific_factor_unit_label: Unidad de Factor de emisión
-my-membership:
+my membership:
+  title: Mis membresias
+my_membership:
   title: Actualmente tiene la membresia
   company: Estam membresia esta asociada a tu empresa
   subtitle: Fechas importantes de tu mebresia
@@ -264,26 +266,47 @@ memberships:
   button: Comprar
   days: Dias
   subscriber: Estas sustrito
-pusharse-membership:
+purchase membership:
+  title: Comprar membresia
+purchase_membership:
   header: Estas comprando Membresia
   subheader: Suministra la informacion de cada seccion para procesar el pago
   footer: Gracias por confiar en nosotros
   footer-total: Total
   button: Pagar
   fields:
-    names:
+    name:
       label: Nombre completo
       placeholder: Joe doe
-    card:
-      label: Numero de tarjeta
-      placeholder: '0505545044'
-    expiration:
-      label: Fecha de expiracion
-      placeholder: MM YY
-    cvv:
-      label: CVV
-      placeholder: CVV
-      help: Revisa el cerca de la banda magnetica
-    address:
+    email:
+      label: Correo electronico
+      placeholder: correo
+    phone_zone:
+      label: Pais
+      placeholder: '+57'
+    phone:
+      label: Numero de telefono
+      placeholder: '316412155'
+    identification:
+      label: Identificacion
+      placeholder: '1321321212'
+    identification_type:
+      label: Tipo
+    street_name:
       label: Direccion
-      placeholder: 'Calle #0 - 22'
+      placeholder: Calle 20
+    street_number:
+      label: Numero
+      placeholder: '#12 - 24'
+    zip_code:
+      label: Codigo Postal
+      placeholder: '06233200'
+purchase status:
+  title: Estado de compra
+purchase_status:
+  title_table: Datos de compra
+  header_status: El pago de la membresia fue
+  icon_fail: emoji
+  icon_success: emoji
+  subheader_success: Ahora puedes distrutar de todos los beneficios de tu plan
+  subheader_fail: Tuvimos problemas procesando el pago intentalo nuevamente

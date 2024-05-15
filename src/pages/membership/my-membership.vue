@@ -12,6 +12,12 @@ membershipsStore.fetchCompanyMembership(Number(company.value.id)).then(() => {
   if (companyMembership.value.membership)
     membershipsStore.fetchMembership(companyMembership.value?.membership)
 })
+
+function viewPlans() {
+  router.push({
+    name: 'memberships',
+  })
+}
 </script>
 
 <template>
@@ -24,17 +30,17 @@ membershipsStore.fetchCompanyMembership(Number(company.value.id)).then(() => {
         <div class="max-w-lg w-full p-8 mx-auto px-4 sm:px-6 lg:px-8 bg-white rounded-xl overflow-hidden shadow-lg">
           <div class="text-left mb-4">
             <h2 class="text-2xl text-black font-normal">
-              {{ t('my-membership.title') }} <span class="font-bold">{{ currentMembership?.name
+              {{ t('my_membership.title') }} <span class="font-bold">{{ currentMembership?.name
               }}</span>
             </h2>
             <p class="text-gray-600">
-              {{ t('my-membership.subtitle') }}
+              {{ t('my_membership.subtitle') }}
             </p>
           </div>
           <div class="text-left grid grid-cols-2 gap-4">
             <div>
               <p class="text-xl text-black font-normal">
-                {{ t('my-membership.start_date') }}
+                {{ t('my_membership.start_date') }}
               </p>
               <span class="font-medium">
                 {{ new Date(companyMembership.start_date).toLocaleString('en-US', { timeZone: 'UTC' }) }}
@@ -42,7 +48,7 @@ membershipsStore.fetchCompanyMembership(Number(company.value.id)).then(() => {
             </div>
             <div>
               <p class="text-xl text-black font-normal">
-                {{ t('my-membership.end_date') }}
+                {{ t('my_membership.end_date') }}
               </p>
               <span class="font-medium">
                 {{ new Date(companyMembership.end_date).toLocaleString('en-US', { timeZone: 'UTC' }) }}
@@ -51,11 +57,9 @@ membershipsStore.fetchCompanyMembership(Number(company.value.id)).then(() => {
             <div class="col-span-2">
               <Button
                 btn-class="btn-dark dark:border-slate-400 w-full mt-4"
-                @click=" router.push({
-                  name: 'memberships',
-                })"
+                @click="viewPlans()"
               >
-                {{ t('my-membership.button') }}
+                {{ t('my_membership.button') }}
               </Button>
             </div>
           </div>
