@@ -1,3 +1,4 @@
+not_found: Lo sentimos informacion no disponible
 email: Correo
 hintEmail: Correo
 errorRequirementEmail: Correo requerido
@@ -253,6 +254,7 @@ equipment:
 my membership:
   title: Mis membresias
 my_membership:
+  title_memberships: Ultimas membresias adquiridas
   title: Actualmente tiene la membresia
   company: Estam membresia esta asociada a tu empresa
   subtitle: Fechas importantes de tu mebresia
@@ -274,6 +276,9 @@ purchase_membership:
   footer: Gracias por confiar en nosotros
   footer-total: Total
   button: Pagar
+  alerts:
+    success: El pago se ha solita exitosamenta, en un momento, cargadon detalles de compra...
+    error: El pago no se ha completado, intentalo en un momento
   fields:
     name:
       label: Nombre completo

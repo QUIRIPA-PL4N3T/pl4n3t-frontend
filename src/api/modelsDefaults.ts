@@ -1,12 +1,18 @@
 import { MembershipTypeEnum, SizeEnum } from '~/api-client'
 import type {
+  Address,
+  BackUrls,
   Brand,
   Company,
   CompanyMembership,
   DocumentsApiDocumentsCreateRequest,
   EmissionsSource,
+  Identification,
   Location,
   Membership,
+  Payer,
+  Phone,
+  Purchase,
 }
   from '~/api-client'
 
@@ -107,11 +113,42 @@ export const DEFAULT_COMPANY_MEMBERSHIP: CompanyMembership = {
   end_date: '2024-05-15T15:35:37.531Z',
 }
 
-/**
- *
- * @export
- * @interface Membership
- */
+export const DEFAULT_PURCHASE_PHONE: Phone = {
+  area_code: '',
+  number: '',
+}
+
+export const DEFAULT_PURCHASE_IDENTIFICATION: Identification = {
+  type: '1',
+  number: '',
+}
+
+export const DEFAULT_PURCHASE_ADDRESS: Address = {
+  street_name: '',
+  street_number: 0,
+  zip_code: '',
+}
+
+export const DEFAULT_PAYER: Payer = {
+  name: '',
+  surname: '',
+  email: '',
+  phone: DEFAULT_PURCHASE_PHONE,
+  identification: DEFAULT_PURCHASE_IDENTIFICATION,
+  address: DEFAULT_PURCHASE_ADDRESS,
+}
+
+export const DEFAULT_BACK_URL: BackUrls = {
+  success: window.location.origin,
+  failure: window.location.origin,
+  pending: window.location.origin,
+}
+
+export const DEFAULT_PURCHASE: Purchase = {
+  payer: DEFAULT_PAYER,
+  back_urls: DEFAULT_BACK_URL,
+}
+
 export interface AttrMembership {
   /**
    *

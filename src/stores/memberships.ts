@@ -1,20 +1,23 @@
 import { defineStore } from 'pinia'
 import { membershipsApi } from '~/api'
-import type { CompanyMembership, Membership, PurchaseMember } from '~/api-client'
+import type { BackUrls, CompanyMembership, Membership, MembershipsApiMembershipsPurchaseCreateRequest, PreferenceResponse, Purchase } from '~/api-client'
 import attrMembershipData from '~/stores/attr-membership.json'
 
 import type { AttrMembership } from '~/api/modelsDefaults'
 import {
   DEFAULT_COMPANY_MEMBERSHIP,
   DEFAULT_MEMBERSHIPS,
+  DEFAULT_PURCHASE,
 } from '~/api/modelsDefaults'
 
 export const useMembershipsStore = defineStore('membership', {
   state: () => ({
     membershipsTypes: <Membership[]>[],
+    companyMemberships: <CompanyMembership[]>[],
     companyMembership: <CompanyMembership>DEFAULT_COMPANY_MEMBERSHIP,
     currentMembership: <Membership>DEFAULT_MEMBERSHIPS,
     attrMembership: <AttrMembership[]>attrMembershipData,
+    purchase: <Purchase>DEFAULT_PURCHASE,
   }),
   getters: {
     memberships(): Membership[] {
@@ -31,6 +34,12 @@ export const useMembershipsStore = defineStore('membership', {
     },
   },
   actions: {
+    purchaseLoadBackUrl(backUrls: BackUrls) {
+      this.purchase.payer.surname = this.purchase.payer.name
+      this.purchase.back_urls.success += backUrls.success
+      this.purchase.back_urls.failure += backUrls.failure
+      this.purchase.back_urls.pending += backUrls.pending
+    },
     async fetchMemberships() {
       try {
         const { data: memberships } = await membershipsApi.membershipsTypesList()
@@ -42,8 +51,8 @@ export const useMembershipsStore = defineStore('membership', {
     },
     async fetchCompanyMembership(id: number) {
       try {
-        const { data: companyMembership } = await membershipsApi.membershipsCompanyMembershipsRetrieve({ id })
-        this.companyMembership = companyMembership
+        const { data: companyMemberships } = await membershipsApi.membershipsCompanyMembershipsRetrieve({ id })
+        this.companyMemberships = companyMemberships
       }
       catch (error) {
         this.fetchMembership(1)
@@ -65,12 +74,9 @@ export const useMembershipsStore = defineStore('membership', {
         this.currentMembership = DEFAULT_MEMBERSHIPS
       }
     },
-    async purchaseMembership(purchaseMember: PurchaseMember) {
+    async purchaseMembership(requestParameters: MembershipsApiMembershipsPurchaseCreateRequest) {
       try {
-        await membershipsApi.membershipsPurchaseCreate({
-          membershipId: this.currentMembership.id,
-          purchaseMember,
-        })
+        await membershipsApi.membershipsPurchaseCreate(requestParameters)
       }
       catch (error) {
         console.error(error)

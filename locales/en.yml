@@ -1,3 +1,4 @@
+not_found: Data not found
 activities:
   activity: Activity
   amount: Amount
@@ -36,6 +37,7 @@ register:
   text: Sign up
 signInSocial: Or continue with
 my_membership:
+  title_memberships: Last memberships buyed
   title: Actually do you have
   company: This membership has associate to company
   subtitle: Dates importat of your membership

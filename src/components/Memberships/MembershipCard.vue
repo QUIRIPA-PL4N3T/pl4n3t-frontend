@@ -38,8 +38,8 @@ function getIcon(value: string | number | boolean) {
 <template>
   <Card>
     <header class="mb-6">
-      <div class="flex justify-between">
-        <h4 class="text-xl mb-5">
+      <div class="flex justify-between gap-2">
+        <h4 class="text-xl">
           {{ membership.name }}
         </h4>
         <Badge
@@ -80,7 +80,7 @@ function getIcon(value: string | number | boolean) {
     </div>
     <Button
       v-if="buy"
-      btn-class="btn-outline-dark dark:border-slate-400 w-full"
+      btn-class="btn-outline-dark dark:border-slate-400 w-full mt-4"
       @click="purchaseMembership(membership.id)"
     >
       {{ t('memberships.button') }}

@@ -59,6 +59,7 @@ declare module 'vue' {
     Map: typeof import('./components/Analytics-Component/Map.vue')['default']
     Map2: typeof import('./components/Analytics-Component/Map2.vue')['default']
     MembershipCard: typeof import('./components/Memberships/MembershipCard.vue')['default']
+    MembershipMiniCard: typeof import('./components/Memberships/MembershipMiniCard.vue')['default']
     MenuEnvironment: typeof import('./components/menuEnvironment/index.vue')['default']
     MenuLayout: typeof import('./components/Settings/Tools/MenuLayout.vue')['default']
     MenuLocationSearch: typeof import('./components/menuLocationSearch/index.vue')['default']
