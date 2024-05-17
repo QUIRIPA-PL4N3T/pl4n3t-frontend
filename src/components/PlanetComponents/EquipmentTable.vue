@@ -107,13 +107,13 @@ async function deleteItem(id: number) {
       <template #pagination-bottom="props">
         <div class="py-4 px-3 flex justify-center">
           <Pagination
-            :total="50"
+            :total="locationEquipments.length"
             :current="current"
             :per-page="perpage"
             :page-range="pageRange"
             :page-changed="props.pageChanged"
             :per-page-changed="props.perPageChanged"
-            @pageChanged="current = $event"
+            @page-changed="current = $event"
           >
             >
           </Pagination>

@@ -25,6 +25,11 @@ edit: Edit
 email: Email
 equipment:
   add: Add
+  code: Code
+  description: Description
+  group: Cluster
+  name: Name / Brand / Model
+  source_type: Type of emission source (Fixed or Mobile)
 equipments:
   modal:
     title: Registered organization emission sources
