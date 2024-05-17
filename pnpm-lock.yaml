@@ -195,6 +195,9 @@ devDependencies:
   vite-bundle-visualizer:
     specifier: ^0.10.1
     version: 0.10.1(rollup@4.17.2)
+  vite-plugin-commonjs:
+    specifier: ^0.10.1
+    version: 0.10.1
   vite-plugin-inspect:
     specifier: ^0.7.42
     version: 0.7.42(rollup@4.17.2)(vite@5.2.11)
@@ -11388,6 +11391,15 @@ packages:
       - terser
     dev: true
 
+  /vite-plugin-commonjs@0.10.1:
+    resolution: {integrity: sha512-taP8R9kYGlCW5OzkVR0UIWRCnG6rSxeWWuA7tnU5b9t5MniibOnDY219NhisTeDhJAeGT8cEnrhVWZ9A5yD+vg==}
+    dependencies:
+      acorn: 8.11.3
+      fast-glob: 3.3.2
+      magic-string: 0.30.10
+      vite-plugin-dynamic-import: 1.5.0
+    dev: true
+
   /vite-plugin-css-injected-by-js@3.5.1(vite@5.2.11):
     resolution: {integrity: sha512-9ioqwDuEBxW55gNoWFEDhfLTrVKXEEZgl5adhWmmqa88EQGKfTmexy4v1Rh0pAS6RhKQs2bUYQArprB32JpUZQ==}
     peerDependencies:
@@ -11395,6 +11407,15 @@ packages:
     dependencies:
       vite: 5.2.11(@types/node@20.12.11)(sass@1.77.1)
     dev: false
+
+  /vite-plugin-dynamic-import@1.5.0:
+    resolution: {integrity: sha512-Qp85c+AVJmLa8MLni74U4BDiWpUeFNx7NJqbGZyR2XJOU7mgW0cb7nwlAMucFyM4arEd92Nfxp4j44xPi6Fu7g==}
+    dependencies:
+      acorn: 8.11.3
+      es-module-lexer: 1.5.2
+      fast-glob: 3.3.2
+      magic-string: 0.30.10
+    dev: true
 
   /vite-plugin-inspect@0.7.42(rollup@4.17.2)(vite@5.2.11):
     resolution: {integrity: sha512-JCyX86wr3siQc+p9Kd0t8VkFHAJag0RaQVIpdFGSv5FEaePEVB6+V/RGtz2dQkkGSXQzRWrPs4cU3dRKg32bXw==}

@@ -1,12 +1,8 @@
 import Cookies from 'js-cookie'
 import { defineStore } from 'pinia'
-import { useToast } from 'vue-toastification'
 import { accountApi } from '~/api'
 import type { UserModel } from '~/api-client'
 import setupInterceptors from '~/api/interceptors'
-import { i18n } from '~/modules/i18n'
-
-const toast = useToast()
 
 export const useAuthStore = defineStore('auth', {
   state: (): any => ({
@@ -79,7 +75,6 @@ export const useAuthStore = defineStore('auth', {
       if (status === 201) {
         // User created but needs to activate account
         this.hasActiveAccount = false
-        toast.success(i18n.t('login.google.created'), { timeout: false })
       }
       if (data.access) {
         this.accessToken = data.access
