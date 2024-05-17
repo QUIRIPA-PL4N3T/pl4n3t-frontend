@@ -42,29 +42,14 @@ const { sidebarCollapse, skin, semiDark, isMouseHovered, isDark } = storeToRefs(
 
         `"
       >
-        <router-link v-if="!sidebarCollapse || isMouseHovered" to="/auth/login">
+        <router-link v-if="!sidebarCollapse || isMouseHovered" to="/dashboard">
           <img v-if="!isDark && !semiDark" src="../../assets/images/logo.png" alt="">
           <img v-if="isDark || semiDark" src="../../assets/images/logo.png" alt="">
         </router-link>
-        <router-link v-if="sidebarCollapse && !isMouseHovered" to="/auth/login">
+        <router-link v-if="sidebarCollapse && !isMouseHovered" to="/dashboard">
           <img v-if=" !isDark && !semiDark" src="../../assets/images/logo.png" alt="">
           <img v-if="isDark || semiDark" src="../../assets/images/logo.png" alt="">
         </router-link>
-        <span
-          v-if="!sidebarCollapse || isMouseHovered" class="cursor-pointer text-2xl text-slate-900 dark:text-white"
-          @click="sidebarCollapse = !sidebarCollapse"
-        >
-          <!-- <Icon icon="heroicons-outline:menu-alt-3"
-        /> -->
-          <div
-            class="h-4 w-4 border-[1.5px] border-slate-900 rounded-full transition-all duration-150 dark:border-slate-700"
-            :class="
-              sidebarCollapse
-                ? ''
-                : 'ring-2 ring-inset ring-offset-4 ring-black-900 dark:ring-slate-400 bg-slate-900 dark:bg-slate-400 dark:ring-offset-slate-700'
-            "
-          />
-        </span>
       </div>
       <div
         class="nav-shadow pointer-events-none absolute top-[80px] z-[1] h-[60px] w-full transition-all duration-200"
