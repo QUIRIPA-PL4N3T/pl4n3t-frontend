@@ -4,7 +4,6 @@ import { useToast } from 'vue-toastification'
 import type { EmissionSourceGroup } from '~/api-client'
 
 const props = defineProps<{ id?: string }>()
-
 const selectedGroup = ref<EmissionSourceGroup | undefined>(undefined)
 const selectedGroupId = ref(0)
 const selectedFactorTypeId = ref(0)

@@ -6,7 +6,7 @@ import type { UserModule } from '~/types'
 // https://vitejs.dev/guide/features.html#glob-import
 //
 // Don't need this? Try vitesse-lite: https://github.com/antfu/vitesse-lite
-const i18n = createI18n({
+const instance = createI18n({
   legacy: false,
   locale: '',
   messages: {},
@@ -22,7 +22,7 @@ export const availableLocales = Object.keys(localesMap)
 const loadedLanguages: string[] = []
 
 function setI18nLanguage(lang: Locale) {
-  i18n.global.locale.value = lang as any
+  instance.global.locale.value = lang as any
   if (typeof document !== 'undefined')
     document.querySelector('html')?.setAttribute('lang', lang)
   return lang
@@ -30,7 +30,7 @@ function setI18nLanguage(lang: Locale) {
 
 export async function loadLanguageAsync(lang: string): Promise<Locale> {
   // If the same language
-  if (i18n.global.locale.value === lang)
+  if (instance.global.locale.value === lang)
     return setI18nLanguage(lang)
 
   // If the language was already loaded
@@ -39,12 +39,14 @@ export async function loadLanguageAsync(lang: string): Promise<Locale> {
 
   // If the language hasn't been loaded yet
   const messages = await localesMap[lang]()
-  i18n.global.setLocaleMessage(lang, messages.default)
+  instance.global.setLocaleMessage(lang, messages.default)
   loadedLanguages.push(lang)
   return setI18nLanguage(lang)
 }
 
 export const install: UserModule = ({ app }) => {
-  app.use(i18n)
+  app.use(instance)
   loadLanguageAsync('es')
 }
+
+export const i18n = instance.global

@@ -10,10 +10,14 @@ export const useAuthStore = defineStore('auth', {
     accessToken: null,
     refreshToken: Cookies.get('refreshToken') || null,
     interceptorConfigured: false,
+    hasActiveAccount: null,
   }),
   getters: {
     isAuthenticated(): boolean {
       return !!this.accessToken || !!this.refreshToken
+    },
+    isActiveAccount(): boolean {
+      return this.hasActiveAccount
     },
     username(): string {
       if (this.user) {
@@ -25,16 +29,19 @@ export const useAuthStore = defineStore('auth', {
       return ''
     },
     fullName(): string {
-      if (this.user) {
+      if (this.user && (this.user.first_name || this.user.last_name)) {
         const names = this.user!.first_name.split(' ')
         const lastNames = this.user!.last_name.split(' ')
         return `${names[0]} ${lastNames[0]}`
+      }
+      else if (this.user && this.user.email) {
+        return this.user.email
       }
       else { return '' }
     },
     uiAvatar(): string {
       if (this.user && this.user.avatar)
-        return this.user.avatar.file_url
+        return this.user.avatar
       return `https://ui-avatars.com/api/?name=${this.user ? this.fullName : 'Unknown'}`
     },
   },
@@ -61,6 +68,25 @@ export const useAuthStore = defineStore('auth', {
       // Set axios interceptors to inject the bearer token in all request headers
       setupInterceptors(this)
       this.getUserProfile()
+      return this.isAuthenticated
+    },
+    async googleLogin(token: any) {
+      const { data, status } = await accountApi.accountsGoogleAccountCreate({ googleAccount: token })
+      if (status === 201) {
+        // User created but needs to activate account
+        this.hasActiveAccount = false
+      }
+      if (data.access) {
+        this.accessToken = data.access
+        // Persist refresh token
+        this.refreshTokenPersist(data.refresh)
+        setupInterceptors(this)
+        this.getUserProfile()
+        this.hasActiveAccount = true
+      }
+      else {
+        this.hasActiveAccount = false
+      }
       return this.isAuthenticated
     },
     async logOut() {

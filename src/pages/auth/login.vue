@@ -46,52 +46,57 @@ async function login(value: any) {
           </div>
           <label class="mt-4 flex justify-center text-2xl text-slate-900">{{ t('login.text') }}</label>
           <ElAlert v-if="errorMessage" :title="errorMessage" type="error" show-icon />
-          <FormKit
-            type="form" :actions="false"
-            :incomplete-message="false"
-            @submit="login"
-          >
+          <div class="p-4">
             <FormKit
-              type="text"
-              name="email"
-              class="input"
-              :label="t('email')"
-              placeholder="jondoe@mail.com"
-              validation="required|email"
-              outer-class="my-6"
-              autocomplete="username"
-            />
-
-            <FormKit
-              :type="typeInput"
-              name="password"
-              :label="t('password')"
-              placeholder="********"
-              suffix-icon="eyeClosed"
-              validation="required|length:8"
-              outer-class="mb-4"
-              autocomplete="current-password"
-              @suffix-icon-click="showPassword"
-            />
-
-            <div class="mt-5 flex justify-between">
-              <CheckBoxAuth :label="t('login.checkBox')" :model-value="checkbox" :checked="false" :value="false" @on-selected="checkbox = !checkbox" />
-              <RouterLink to="/auth/resetPassword">
-                <label>{{ t('forgotPassword') }}</label>
-              </RouterLink>
-            </div>
-            <div class="mt-10 border-2 border-transparent rounded hover:border-slate-900">
+              type="form" :actions="false"
+              outer-class="p-4"
+              :incomplete-message="false"
+              @submit="login"
+            >
               <FormKit
-                type="submit"
-                :label="t('login.buttonLogin')"
-                :classes="{
-                  input: '$reset w-[99%] flex justify-center items-center justify-items-center h-11 bg-slate-900 text-white  rounded m-0.5',
-                  wrapper: '$reset',
-                  outer: '$reset',
-                }"
+                type="text"
+                name="email"
+                class="input"
+                :label="t('email')"
+                label-class="text-left"
+                placeholder="jondoe@mail.com"
+                validation="required|email"
+                outer-class="my-6"
+                autocomplete="username"
               />
-            </div>
-          </FormKit>
+
+              <FormKit
+                :type="typeInput"
+                name="password"
+                label-class="text-left pt-5"
+                :label="t('password')"
+                placeholder="********"
+                suffix-icon="eyeClosed"
+                validation="required|length:8"
+                outer-class="mb-4"
+                autocomplete="current-password"
+                @suffix-icon-click="showPassword"
+              />
+
+              <div class="mt-5 flex justify-between">
+                <CheckBoxAuth :label="t('login.checkBox')" :model-value="checkbox" :checked="false" :value="false" @on-selected="checkbox = !checkbox" />
+                <RouterLink to="/auth/resetPassword">
+                  <label class="text-sm">{{ t('forgotPassword') }}</label>
+                </RouterLink>
+              </div>
+              <div class="mt-10 border-2 border-transparent rounded hover:border-slate-900">
+                <FormKit
+                  type="submit"
+                  :label="t('login.buttonLogin')"
+                  :classes="{
+                    input: '$reset w-[99%] flex justify-center items-center justify-items-center h-11 bg-slate-900 text-white  rounded m-0.5',
+                    wrapper: '$reset',
+                    outer: '$reset',
+                  }"
+                />
+              </div>
+            </FormKit>
+          </div>
           <SignInSocial class="mb-10 mt-5" />
           <div class="mt-7 flex items-center justify-center">
             <label class="mr-2 text-sm text-gray-500">{{ t('login.footer') }}</label>
