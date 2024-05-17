@@ -46,9 +46,11 @@ function goEditBrand(id: number) {
             <p>{{ `${t('company.email')}: ${company.email}` }}</p>
           </div>
           <div class="flex flex-col w-full md:w-2/6 align-middle justify-center">
-            <a href="/" class="font-bold text-sky-400">{{ t('membership.title') }}</a>
-            <p>{{ `${t('membership.locationLimit')}: ` }} ♾️ </p>
-            <p>{{ `${t('membership.workersLimit')}: ` }} ♾️ </p>
+            <span class="font-bold text-sky-400">{{ t('membership.title') }} {{ company.membership.membership.name }}</span>
+            <p>{{ `${t('membership.locationLimit')}: ${company.membership.membership.num_locations}` }}</p>
+            <p>{{ `${t('membership.brandsLimit')}: ${company.membership.membership.num_brands}` }}</p>
+            <p>{{ `${t('membership.userLimit')}: ${company.membership.membership.num_users}` }} </p>
+            <a href="#" class="font-light text-sky-400">{{ t('membership.changePlan') }} </a>
           </div>
         </div>
       </Card>

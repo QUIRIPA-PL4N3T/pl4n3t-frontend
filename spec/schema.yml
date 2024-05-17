@@ -1885,25 +1885,9 @@ paths:
                 items:
                   $ref: '#/components/schemas/UnitOfMeasure'
           description: ''
-  /api/memberships/company-memberships/:
+  /api/memberships/company/{id}/:
     get:
-      operationId: membershipsCompanyMembershipsList
-      tags:
-        - Memberships
-      security:
-        - jwtAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CompanyMembership'
-          description: ''
-  /api/memberships/company-memberships/{id}/:
-    get:
-      operationId: membershipsCompanyMembershipsRetrieve
+      operationId: membershipsCompanyRetrieve
       parameters:
         - in: path
           name: id
@@ -1922,11 +1906,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/CompanyMembership'
           description: ''
-  /api/memberships/purchase/{membershipId}/:
+  /api/memberships/purchase/{companyId}/{membershipId}/:
     post:
       operationId: membershipsPurchaseCreate
       description: Compra una membresía
       parameters:
+        - in: path
+          name: companyId
+          schema:
+            type: integer
+          required: true
         - in: path
           name: membershipId
           schema:
@@ -1938,29 +1927,45 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PurchaseMember'
+              $ref: '#/components/schemas/Purchase'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PurchaseMember'
+              $ref: '#/components/schemas/Purchase'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PurchaseMember'
+              $ref: '#/components/schemas/Purchase'
         required: true
       security:
         - jwtAuth: []
       responses:
         '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreferenceResponse'
           description: Compra de membresía exitosa
         '401':
           description: No tiene permiso para ver este usuario
         '400':
           description: Solicitud incorrecta
   /api/memberships/success/:
-    get:
-      operationId: membershipsSuccessRetrieve
+    post:
+      operationId: membershipsSuccessCreate
       description: Verificación de pago de membresía exitosa
       tags:
         - Memberships
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentVerification'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PaymentVerification'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PaymentVerification'
+        required: true
       security:
         - jwtAuth: []
       responses:
@@ -1983,27 +1988,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Membership'
-          description: ''
-  /api/memberships/types/{id}/:
-    get:
-      operationId: membershipsTypesRetrieve
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          description: A unique integer value identifying this membership.
-          required: true
-      tags:
-        - Memberships
-      security:
-        - jwtAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Membership'
           description: ''
   /documentation/schema.yml:
     get:
@@ -2055,6 +2039,37 @@ paths:
           description: ''
 components:
   schemas:
+    Address:
+      type: object
+      properties:
+        street_name:
+          type: string
+          maxLength: 100
+        street_number:
+          type: integer
+        zip_code:
+          type: string
+          maxLength: 20
+      required:
+        - street_name
+        - street_number
+        - zip_code
+    BackUrls:
+      type: object
+      properties:
+        success:
+          type: string
+          format: uri
+        failure:
+          type: string
+          format: uri
+        pending:
+          type: string
+          format: uri
+      required:
+        - failure
+        - pending
+        - success
     Brand:
       type: object
       properties:
@@ -2260,6 +2275,10 @@ components:
           type: string
           format: uri
           nullable: true
+        membership:
+          allOf:
+            - $ref: '#/components/schemas/CompanyMembership'
+          readOnly: true
       required:
         - brands
         - city_name
@@ -2268,6 +2287,7 @@ components:
         - locations
         - logo_absolute_url
         - members_roles
+        - membership
         - name
         - state_name
     CompanyLogo:
@@ -2279,6 +2299,10 @@ components:
           nullable: true
     CompanyMembership:
       type: object
+      description: |-
+        This view returns the membership for the company associated with the currently authenticated user.
+        Since a company can only have one membership, this ensures that the user views or interacts with
+        only their company's membership.
       properties:
         id:
           type: integer
@@ -2287,8 +2311,11 @@ components:
           type: integer
           nullable: true
         membership:
-          type: integer
-          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Membership'
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/StatusEnum'
         start_date:
           type: string
           format: date-time
@@ -2299,6 +2326,7 @@ components:
       required:
         - end_date
         - id
+        - membership
         - start_date
     Configuration:
       type: object
@@ -2818,6 +2846,18 @@ components:
         - name
         - scope
         - scope_name
+    Identification:
+      type: object
+      properties:
+        type:
+          type: string
+          maxLength: 10
+        number:
+          type: string
+          maxLength: 20
+      required:
+        - number
+        - type
     IndustryType:
       type: object
       properties:
@@ -3089,7 +3129,7 @@ components:
         - ELITE
       type: string
       description: |-
-        * `FREE` - Gratuito
+        * `FREE` - Gratuita
         * `BASIC` - Básica
         * `PREMIUM` - Premium
         * `ELITE` - Elite
@@ -3244,6 +3284,10 @@ components:
           type: string
           format: uri
           nullable: true
+        membership:
+          allOf:
+            - $ref: '#/components/schemas/CompanyMembership'
+          readOnly: true
     PatchedDocument:
       type: object
       properties:
@@ -3521,18 +3565,199 @@ components:
         role_description:
           type: string
           readOnly: true
-    PurchaseMember:
+    Payer:
       type: object
       properties:
+        name:
+          type: string
+          maxLength: 100
+        surname:
+          type: string
+          maxLength: 100
         email:
           type: string
           format: email
-        payment_method:
-          type: string
-          maxLength: 50
+        phone:
+          $ref: '#/components/schemas/Phone'
+        identification:
+          $ref: '#/components/schemas/Identification'
+        address:
+          $ref: '#/components/schemas/Address'
       required:
+        - address
         - email
-        - payment_method
+        - identification
+        - name
+        - phone
+        - surname
+    PaymentMethods:
+      type: object
+      properties:
+        default_card_id:
+          type: string
+          nullable: true
+        default_payment_method_id:
+          type: string
+          nullable: true
+        excluded_payment_methods:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        excluded_payment_types:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        installments:
+          type: integer
+          nullable: true
+        default_installments:
+          type: integer
+          nullable: true
+      required:
+        - excluded_payment_methods
+        - excluded_payment_types
+    PaymentVerification:
+      type: object
+      properties:
+        preference_id:
+          type: string
+          description: ID de preferencia de MercadoPago para verificar el estado del
+            pago.
+        company_id:
+          type: string
+          description: ID de la Compañía
+      required:
+        - company_id
+        - preference_id
+    Phone:
+      type: object
+      properties:
+        area_code:
+          type: string
+          maxLength: 10
+        number:
+          type: string
+          maxLength: 20
+      required:
+        - area_code
+        - number
+    PreferenceResponse:
+      type: object
+      properties:
+        additional_info:
+          type: string
+        auto_return:
+          type: string
+        back_urls:
+          $ref: '#/components/schemas/BackUrls'
+        binary_mode:
+          type: boolean
+        client_id:
+          type: string
+        collector_id:
+          type: string
+        coupon_code:
+          type: string
+          nullable: true
+        coupon_labels:
+          type: string
+          nullable: true
+        date_created:
+          type: string
+          format: date-time
+        date_of_expiration:
+          type: string
+          format: date-time
+          nullable: true
+        expiration_date_from:
+          type: string
+          format: date-time
+          nullable: true
+        expiration_date_to:
+          type: string
+          format: date-time
+          nullable: true
+        expires:
+          type: boolean
+        external_reference:
+          type: string
+        id:
+          type: string
+        init_point:
+          type: string
+          format: uri
+        internal_metadata:
+          type: string
+          nullable: true
+        marketplace:
+          type: string
+        marketplace_fee:
+          type: integer
+        metadata:
+          type: object
+          additionalProperties: {}
+        notification_url:
+          type: string
+          nullable: true
+        operation_type:
+          type: string
+        payer:
+          $ref: '#/components/schemas/Payer'
+        payment_methods:
+          $ref: '#/components/schemas/PaymentMethods'
+        processing_modes:
+          type: string
+          nullable: true
+        product_id:
+          type: string
+          nullable: true
+        redirect_urls:
+          $ref: '#/components/schemas/BackUrls'
+        sandbox_init_point:
+          type: string
+          format: uri
+        site_id:
+          type: string
+        total_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          nullable: true
+        last_updated:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - auto_return
+        - back_urls
+        - binary_mode
+        - client_id
+        - collector_id
+        - date_created
+        - expires
+        - id
+        - init_point
+        - marketplace
+        - marketplace_fee
+        - metadata
+        - operation_type
+        - payer
+        - payment_methods
+        - redirect_urls
+        - sandbox_init_point
+        - site_id
+    Purchase:
+      type: object
+      properties:
+        payer:
+          $ref: '#/components/schemas/Payer'
+        back_urls:
+          $ref: '#/components/schemas/BackUrls'
+      required:
+        - back_urls
+        - payer
     QuantificationType:
       type: object
       properties:
@@ -3662,6 +3887,20 @@ components:
         - id
         - name
         - slug
+    StatusEnum:
+      enum:
+        - PENDING
+        - PAID
+        - CANCELED
+        - EXPIRED
+        - AWAITING_PAYMENT
+      type: string
+      description: |-
+        * `PENDING` - Pending
+        * `PAID` - Paid
+        * `CANCELED` - Canceled
+        * `EXPIRED` - Expired
+        * `AWAITING_PAYMENT` - Awaiting Payment
     TokenOutput:
       type: object
       properties:

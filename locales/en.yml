@@ -6,6 +6,18 @@ activities:
   location: Campus
   month: Month
   n20: N2O
+company:
+  contact: Contact
+  create:
+    success: The company was successfully created
+  email: Mail
+  phone: Phone
+  update:
+    success: The company was successfully upgraded
+copyright:
+  footer: |-
+    COPYRIGHT ©;
+    Dawn in El Palmar, all rights reserved
 email: Email
 errorEmail: email must be a valid email
 errorPassword: password must be at least 8 characters
@@ -29,6 +41,12 @@ login:
       and try again
   link: SIGN UP
   text: Sign in
+membership:
+  brandsLimit: Number of Brands
+  locationLimit: Venue limit
+  title: Membership
+  userLimit: Users Number
+  workersLimit: Employee Limit
 password: Password
 register:
   buttonLogin: Create An Account

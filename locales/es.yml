@@ -50,6 +50,10 @@ company:
   email: Correo
   status: Estado
   equipment: Agentes Emisor
+  create:
+    success: ¡La compañía fue creada con Éxito!
+  update:
+    success: ¡La compañía fue actualizada con Éxito!
   status-options:
     very-good: Muy bueno
     good: Bueno
@@ -131,9 +135,14 @@ reports:
 membership:
   title: Membresía
   update: Cambiar de Plan
+  duration: Duración
+  termOf: Vigencia de la membresía
   benefits: Para obtener mejores resultados
-  locationLimit: Límite de sedes
+  brandsLimit: Marcas Permitidas
+  locationLimit: Sedes Permitidas
   workersLimit: Límite de Empleados
+  userLimit: Usuarios Permitidas
+  changePlan: Cambiar Plan
 cancel: Cancelar
 save: Guardar
 button:

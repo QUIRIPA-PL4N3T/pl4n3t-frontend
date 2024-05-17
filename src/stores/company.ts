@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import * as pkg from 'vue-toastification'
 import { brandApi, companyApi, locationApi } from '~/api'
 import type {
   Brand,
@@ -11,6 +12,11 @@ import {
   DEFAULT_COMPANY,
   DEFAULT_LOCATION,
 } from '~/api/modelsDefaults'
+import { i18n } from '~/modules/i18n'
+import { handleError } from '~/utilities/utils'
+
+const { useToast } = pkg
+const toast = useToast()
 
 export const useCompanyStore = defineStore('company', {
   state: () => ({
@@ -154,14 +160,17 @@ export const useCompanyStore = defineStore('company', {
         if (this.company.id === 0) {
           const { data: company } = await companyApi.companiesCompaniesCreate({ company: this.company })
           this.company = company
+          toast.success(i18n.t('company.create.success'))
         }
         else {
           const { data: company } = await companyApi.companiesCompaniesUpdate({ id: this.company.id, company: this.company })
           this.company = company
+          toast.success(i18n.t('company.update.success'))
         }
       }
       catch (error) {
         console.error(error)
+        toast.success(handleError(error))
       }
     },
     getLocationName(id: number) {
