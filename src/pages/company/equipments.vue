@@ -34,7 +34,7 @@ const { t } = useI18n()
 <template>
   <div class="w-full h-full">
     <div class="lg:col-span-4 col-span-12 space-y-5">
-      <Card :title="t('equipments.modal.title')" noborder>
+      <Card :title="t('equipments.modal.title')">
         <div class="flex gap-3 items-baseline overflow-auto">
           <button
             v-for="(group, i) in inventoriableClassificationGroups"

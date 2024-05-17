@@ -15,7 +15,7 @@ function generateReport() {
     <h1 class="mb-5">
       {{ t('reports.title') }}
     </h1>
-    <Card class="flex flex-col gap-3 mt-5">
+    <Card>
       <form class="flex flex-col gap-5" @submit="generateReport">
         <div>
           <label for="period">{{ t('reports.period') }}:</label>

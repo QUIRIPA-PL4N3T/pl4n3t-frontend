@@ -4,6 +4,8 @@ activities:
   hc4: HC4
   ho2: HO2
   location: Campus
+  modal:
+    title: Register an Activity
   month: Month
   n20: N2O
 company:
@@ -18,7 +20,14 @@ copyright:
   footer: |-
     COPYRIGHT ©;
     Dawn in El Palmar, all rights reserved
+delete: Eliminate
+edit: Edit
 email: Email
+equipment:
+  add: Add
+equipments:
+  modal:
+    title: Registered organization emission sources
 errorEmail: email must be a valid email
 errorPassword: password must be at least 8 characters
 errorRequirementEmail: Email is required
@@ -31,6 +40,16 @@ forgotPasswordScreen:
   textFooter2: TO THE SIGN IN
 hintEmail: Email
 hintPassword: Password
+location:
+  add: Add Headquarters
+  address: Address
+  email: Mail
+  employees: Employees
+  name: Name
+  phone: Phone
+  status: State
+locations:
+  title: Headquarters
 login:
   buttonLogin: Sign in
   checkBox: Keep me signed in

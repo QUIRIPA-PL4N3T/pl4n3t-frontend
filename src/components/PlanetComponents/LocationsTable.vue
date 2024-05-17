@@ -7,9 +7,9 @@ const companyStore = useCompanyStore()
 const { company } = storeToRefs(companyStore)
 const router = useRouter()
 
-const current = ref(1)
-const perpage = ref(10)
-const pageRange = ref(5)
+const current = $ref(1)
+const perPage = $ref(10)
+const pageRange = $ref(5)
 
 const columns = ref([
   {
@@ -67,7 +67,7 @@ async function deleteItem(id: number) {
       :rows="company.locations"
       :pagination-options="{
         enabled: true,
-        perPage: perpage,
+        perpage: perPage,
       }"
       :sort-options="{
         enabled: false,
@@ -133,13 +133,13 @@ async function deleteItem(id: number) {
       <template #pagination-bottom="props">
         <div class="py-4 px-3 flex justify-center">
           <Pagination
-            :total="50"
+            :total="company.locations.length"
             :current="current"
-            :per-page="perpage"
+            :per-page="perPage"
             :page-range="pageRange"
             :page-changed="props.pageChanged"
             :per-page-changed="props.perPageChanged"
-            @pageChanged="current = $event"
+            @page-changed="current = $event"
           >
             >
           </Pagination>

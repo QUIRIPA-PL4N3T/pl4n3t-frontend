@@ -82,7 +82,7 @@ export default {
 
 <template>
   <div>
-    <Card noborder>
+    <Card>
       <div
         class="md:flex pb-6 md:space-y-0 space-y-3 justify-between items-center"
       >
