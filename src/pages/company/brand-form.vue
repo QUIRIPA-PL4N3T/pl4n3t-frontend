@@ -9,6 +9,9 @@ const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
 const companyStore = useCompanyStore()
 const { company, currentBrand } = storeToRefs(companyStore)
+const confirmModal = ref<any>(null)
+const router = useRouter()
+const companyId = company.value.id
 
 async function save(data: any) {
   const requestData: Brand = {
@@ -24,6 +27,7 @@ async function save(data: any) {
 
 async function deleteBrand(id: number) {
   await companyStore.deleteBrand(id)
+  companyStore.fetchBrand(currentBrand.value.id)
 }
 
 watch(() => user.value, () => {
@@ -31,23 +35,42 @@ watch(() => user.value, () => {
     companyStore.fetchBrand(Number(props.id))
 })
 
+watch(() => company.value, () => {
+  if (company.value)
+    router.push({ name: 'company', params: { id: companyId } })
+})
+
+function closeModal() {
+  if (confirmModal.value)
+    confirmModal.value.closeModal()
+}
+
 companyStore.fetchBrand(Number(props.id))
 </script>
 
 <template>
   <div class="xl:col-span-2">
-    <Card :title="currentBrand.name">
-      <div class="flex flex-row gap-4">
+    <Card :title="currentBrand.name || t('brands.newBrand')">
+      <div class="flex flex-col lg:flex-row gap-4 pt-10 px-8">
         <!-- Image Column -->
-        <div class="w-full md:w-1/2 flex justify-center">
+        <div class="w-full lg:w-1/2 flex justify-center">
           <Image
+            v-if="currentBrand.id !== 0 && currentBrand.logo_absolute_url"
             :src="currentBrand.logo_absolute_url"
             alt="{{ brand.name }}"
-            image-class="rounded-md border-1 border-slate-300 w-[300px] h-[300px] object-contain object-center"
+            height="h-full"
+            image-class="rounded-md border-1 border-slate-300 w-full md:w-[350px] lg:w-[400px]object-contain object-center"
+          />
+          <Image
+            v-else
+            src="https://placehold.co/600x400?text=logo"
+            alt="{{ brand.name }}"
+            height="h-full"
+            image-class="rounded-md border-1 border-slate-300 w-full md:p-4 md:w-[350px] md:w-[400px object-contain object-center"
           />
         </div>
         <!-- Form Column -->
-        <div class="w-full md:w-1/2">
+        <div class="w-full lg:w-1/2 justify-center items-center">
           <FormKit
             v-model="currentBrand"
             type="form"
@@ -78,8 +101,31 @@ companyStore.fetchBrand(Number(props.id))
                 placeholder="..."
               />
             </div>
-            <div class="flex justify-end gap-2 pr-9">
-              <Button :text="t('delete')" btn-class="btn-danger" @click="deleteBrand(currentBrand.id)" />
+            <div class="flex justify-end gap-2 pt-6">
+              <Modal
+                v-if="currentBrand.id !== 0"
+                ref="confirmModal"
+                :title="t('company.delete.Brand')"
+                :label="t('delete')"
+                label-class="btn-danger"
+                theme-class="bg-danger-500"
+              >
+                <div class="text-base text-slate-600 dark:text-slate-300">
+                  {{ t('company.brand.delete.message') }}
+                </div>
+                <template #footer>
+                  <Button
+                    :text="t('cancel')"
+                    btn-class="btn-dark"
+                    @click="closeModal"
+                  />
+                  <Button
+                    :text="t('Accept')"
+                    btn-class="btn-danger"
+                    @click="deleteBrand(currentBrand.id)"
+                  />
+                </template>
+              </Modal>
               <div class="space-y-5">
                 <Button :text="t('save')" btn-class="btn-dark" />
               </div>

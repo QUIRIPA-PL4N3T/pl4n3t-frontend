@@ -20,7 +20,7 @@ const toast = useToast()
 export const useCompanyStore = defineStore('company', {
   state: () => ({
     companies: <Company[]>[],
-    currentBrand: <Brand>DEFAULT_BRAND,
+    currentBrand: <Brand>JSON.parse(JSON.stringify(DEFAULT_BRAND)),
     currentLocation: <Location>DEFAULT_LOCATION,
     company: <Company>DEFAULT_COMPANY,
   }),
@@ -69,7 +69,7 @@ export const useCompanyStore = defineStore('company', {
     async fetchBrand(id: number) {
       // Fetch current brand by id
       if (id === 0) {
-        this.currentBrand = DEFAULT_BRAND
+        this.clearBrand()
         return
       }
 
@@ -78,8 +78,11 @@ export const useCompanyStore = defineStore('company', {
         this.currentBrand = brand
       }
       catch (error) {
-        this.currentBrand = DEFAULT_BRAND
+        this.clearBrand()
       }
+    },
+    clearBrand() {
+      this.currentBrand = <Brand>JSON.parse(JSON.stringify(DEFAULT_BRAND))
     },
     async fetchLocation(id: number) {
       // Fetch current location by id
@@ -102,17 +105,18 @@ export const useCompanyStore = defineStore('company', {
         delete data.logo
       try {
         if (this.currentBrand.id === 0) {
-          const { data: brand } = await brandApi.companiesBrandsCreate(data)
-          this.currentBrand = brand
+          await brandApi.companiesBrandsCreate(data)
+          toast.success(i18n.t('brand.created.success'))
         }
         else {
-          const { data: brand } = await brandApi.companiesBrandsUpdate(data)
-          this.currentBrand = brand
+          await brandApi.companiesBrandsUpdate(data)
+          toast.success(i18n.t('brand.updated.success'))
         }
         this.fetchCompany()
       }
       catch (error) {
         console.error(error)
+        toast.error(handleError(error))
       }
     },
     async saveLocation() {
@@ -122,36 +126,44 @@ export const useCompanyStore = defineStore('company', {
         if (this.currentLocation.id === 0) {
           const { data: location } = await locationApi.companiesLocationsCreate({ location: this.currentLocation })
           this.currentLocation = location
+          toast.success(i18n.t('location.created.success'))
         }
         else {
           const { data: location } = await locationApi.companiesLocationsUpdate({
             id: this.currentLocation.id,
             location: this.currentLocation,
           })
+          toast.success(i18n.t('location.updated.success'))
           this.currentLocation = location
         }
         this.fetchCompany()
       }
       catch (error) {
         console.error(error)
+        toast.error(handleError(error))
       }
     },
     async deleteBrand(id: number) {
       try {
         await brandApi.companiesBrandsDestroy({ id })
+        toast.success(i18n.t('location.deleted.brand'))
+        this.clearBrand()
         this.fetchCompany()
       }
       catch (error) {
         console.error(error)
+        toast.error(handleError(error))
       }
     },
     async deleteLocation(id: number) {
       try {
         await locationApi.companiesLocationsDestroy({ id })
         this.fetchCompany()
+        toast.success(i18n.t('location.deleted.success'))
       }
       catch (error) {
         console.error(error)
+        toast.error(handleError(error))
       }
     },
     async saveCompany() {

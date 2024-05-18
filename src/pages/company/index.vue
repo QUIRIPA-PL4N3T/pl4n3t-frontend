@@ -83,9 +83,9 @@ function goEditBrand(id: number) {
             </h5>
             <div class="flex flex-col text-sm">
               <p>
-                <spam class="font-bold">
+                <span class="font-bold">
                   {{ t('company.email') }}:
-                </spam><a class="text-sky-600 ps-2" :href="`mailto:${company!.email!}`">{{ company!.email! }}</a>
+                </span><a class="text-sky-600 ps-2" :href="`mailto:${company!.email!}`">{{ company!.email! }}</a>
               </p>
               <p><span class="font-bold">{{ t('company.phone') }}</span> {{ company.phone }}</p>
               <span>{{ t('company.address') }}</span>

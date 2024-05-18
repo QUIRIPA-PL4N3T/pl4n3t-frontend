@@ -12,7 +12,7 @@ export default {
     classes: generateClasses({
       // Global styles apply to _all_ inputs with matching section keys
       'global': {
-        fieldset: 'max-w-md border border-gray-400 rounded px-2 pb-1',
+        fieldset: 'border border-gray-400 rounded px-2 pb-1',
         help: 'text-xs text-gray-500',
         inner: 'formkit-disabled:bg-gray-200 formkit-disabled:cursor-not-allowed formkit-disabled:pointer-events-none',
         input: 'input mt-0 form-control text-sm',
@@ -43,7 +43,7 @@ export default {
       },
       'family:dropdown': {
         dropdownWrapper: 'my-2 w-full drop-shadow-lg rounded [&::-webkit-scrollbar]:hidden',
-        inner: 'max-w-md relative flex ring-1 ring-gray-400 rounded mb-1 formkit-disabled:focus-within:ring-gray-400 formkit-disabled:focus-within:ring-1 [&>span:first-child]:focus-within:text-blue-500',
+        inner: 'relative flex ring-1 ring-gray-400 rounded mb-1 formkit-disabled:focus-within:ring-gray-400 formkit-disabled:focus-within:ring-1 [&>span:first-child]:focus-within:text-blue-500',
         input: 'w-full px-3 py-2',
         listbox: 'bg-white drop-shadow-lg rounded overflow-hidden',
         listboxButton: 'flex w-12 self-stretch justify-center mx-auto',
@@ -62,7 +62,7 @@ export default {
         input: 'w-full px-3 py-2 border-none text-base text-gray-700 placeholder-gray-400',
       },
       'family:date': {
-        inner: 'flex items-center max-w-md ring-1 ring-gray-400 focus-within:ring-blue-500 focus-within:ring-2 [&>label:first-child]:focus-within:text-blue-500 rounded mb-1',
+        inner: 'flex items-center ring-1 ring-gray-400 focus-within:ring-blue-500 focus-within:ring-2 [&>label:first-child]:focus-within:text-blue-500 rounded mb-1',
         input: 'w-full px-3 py-2 border-none text-gray-700 placeholder-gray-400',
       },
 
@@ -79,7 +79,7 @@ export default {
         fileName: 'break-all grow text-ellipsis',
         fileRemove: 'relative z-[2] ml-auto text-[0px] hover:text-red-500 pl-2 peer-data-[has-multiple=true]:text-sm peer-data-[has-multiple=true]:text-blue-500 peer-data-[has-multiple=true]:ml-3 peer-data-[has-multiple=true]:mb-2 formkit-multiple:bottom-[0.15em] formkit-multiple:pl-0 formkit-multiple:ml-0 formkit-multiple:left-[1em] formkit-multiple:formkit-prefix-icon:left-[3.75em]',
         fileRemoveIcon: 'block text-base w-3 relative z-[2]',
-        inner: 'relative max-w-md cursor-pointer formkit-multiple:[&>button]:absolute',
+        inner: 'relative cursor-pointer formkit-multiple:[&>button]:absolute',
         input: 'cursor-pointer text-transparent absolute top-0 right-0 left-0 bottom-0 opacity-0 z-[2]',
         noFiles: 'flex w-full items-center px-3 py-2 text-gray-400',
         noFilesIcon: 'w-4 mr-2',
@@ -89,7 +89,7 @@ export default {
         decoratorIcon: 'w-5 p-[5px]',
       },
       'range': {
-        inner: '$reset flex items-center max-w-md',
+        inner: '$reset flex items-center',
         input: '$reset w-full mb-1 h-2 p-0 rounded-full',
         prefixIcon: '$reset w-4 mr-1 flex self-stretch grow-0 shrink-0 [&>svg]:max-w-[1em] [&>svg]:max-h-[1em] [&>svg]:m-auto',
         suffixIcon: '$reset w-4 ml-1 flex self-stretch grow-0 shrink-0 [&>svg]:max-w-[1em] [&>svg]:max-h-[1em] [&>svg]:m-auto',
@@ -171,7 +171,7 @@ export default {
         calendarIcon: 'flex w-8 grow-0 shrink-0 self-stretch select-none [&>svg]:w-full [&>svg]:m-auto [&>svg]:max-h-[1em] [&>svg]:max-w-[1em]',
       },
       'mask': {
-        inner: 'flex items-center max-w-md ring-1 ring-gray-400 focus-within:ring-2 [&>label:first-child]:focus-within:text-blue-500 rounded mb-1',
+        inner: 'flex items-center ring-1 ring-gray-400 focus-within:ring-2 [&>label:first-child]:focus-within:text-blue-500 rounded mb-1',
         input: 'w-full px-3 py-2 border-none text-base text-gray-700 placeholder-gray-400',
       },
       'rating': {

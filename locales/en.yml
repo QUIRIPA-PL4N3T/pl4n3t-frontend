@@ -1,3 +1,4 @@
+Accept: Accept
 activities:
   activity: Activity
   amount: Amount
@@ -9,13 +10,28 @@ activities:
   month: Month
   n20: N2O
 brand:
+  created:
+    success: A new one has been created successfully
+  description: Description
+  logo: Logo
+  name: Name
   title: Brands
+  updated:
+    success: The brand was successfully updated
+brands:
+  newBrand: New brand
+cancel: Cancel
 company:
   addMember: Add
   address: Address
+  brand:
+    delete:
+      message: Are you sure you want to remove this flag?
   contact: Contact
   create:
     success: The company was successfully created
+  delete:
+    Brand: Remove Brand
   edit: Edit
   email: Mail
   members: Members
@@ -29,7 +45,7 @@ copyright:
   footer: |-
     COPYRIGHT ©;
     Dawn in El Palmar, all rights reserved
-delete: Eliminate
+delete: Delete
 edit: Edit
 email: Email
 equipment:
@@ -68,11 +84,18 @@ hintPassword: Password
 location:
   add: Add Headquarters
   address: Address
+  created:
+    success: The new headquarters has been successfully created
+  deleted:
+    brand: The brand has been removed
+    success: Headquarters removed
   email: Mail
   employees: Employees
   name: Name
   phone: Phone
   status: State
+  updated:
+    success: The headquarters has been successfully updated
 locations:
   title: Headquarters
 login:

@@ -1,3 +1,4 @@
+Accept: Acceptar
 activities:
   activity: Actividad
   add: Agregar Actividad
@@ -19,21 +20,32 @@ analytics:
   title: Análisis
 brand:
   add: Nueva Marca
+  created:
+    success: Se ha creado una nueva marca
   description: Descripción
   logo: Logo
   name: Nombre
   title: Marcas
+  updated:
+    success: Se actualizado la marca
 brand edit:
   title: Editar Marca
+brands:
+  newBrand: Nueva Marca
 button:
   back: Atrás
 cancel: Cancelar
 company:
   addMember: Agregar
   address: Dirección
+  brand:
+    delete:
+      message: ¿Esta seguro que desea eliminar esta marca?
   contact: Contacto
   create:
     success: ¡La compañía fue creada con Éxito!
+  delete:
+    Brand: Elimina Marca
   edit: Editar
   email: Correo
   equipment: Agentes Emisor
@@ -207,6 +219,11 @@ liquidation:
 location:
   add: Agregar Sede
   address: Dirección
+  created:
+    success: Se ha creado la nueva sede
+  deleted:
+    brand: La marca ha sido eliminada
+    success: Se ha eliminado la sede
   email: Correo
   employees: Empleados
   modal:
@@ -214,6 +231,8 @@ location:
   name: Nombre
   phone: Teléfono
   status: Estado
+  updated:
+    success: Se ha actulizado la sede
 location edit:
   title: Editar Sede
 locations:
