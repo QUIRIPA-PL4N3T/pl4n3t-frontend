@@ -9,13 +9,16 @@ activities:
   month: Month
   n20: N2O
 company:
+  address: Address
   contact: Contact
   create:
     success: The company was successfully created
   email: Mail
+  name: Name
   phone: Phone
   update:
     success: The company was successfully upgraded
+  url: Web page
 copyright:
   footer: |-
     COPYRIGHT ©;
@@ -46,6 +49,13 @@ forgotPasswordScreen:
   textButton: send Recovery Email
   textFooter1: FORGET IT,
   textFooter2: TO THE SIGN IN
+general:
+  city: City
+  economic_sector: Economic Sector
+  industry_type: Industry Type
+  nit: NIT
+  origin_country: Country of origin
+  state: Department
 hintEmail: Email
 hintPassword: Password
 location:
@@ -83,4 +93,5 @@ register:
   hintFullName: Full Name
   link: SIGN IP
   text: Sign up
+save: Keep
 signInSocial: Or continue with

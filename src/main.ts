@@ -7,7 +7,6 @@ import generatedRoutes from '~pages'
 import 'vue-good-table-next/dist/vue-good-table-next.css'
 import '~/styles/scss/tailwind.scss'
 import '~/styles/scss/index.scss'
-import '~/styles/css/main.css'
 import { setup } from '~/core'
 
 const routes = setupLayouts(generatedRoutes)

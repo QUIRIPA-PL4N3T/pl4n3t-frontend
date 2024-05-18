@@ -15,8 +15,8 @@ export default {
         fieldset: 'max-w-md border border-gray-400 rounded px-2 pb-1',
         help: 'text-xs text-gray-500',
         inner: 'formkit-disabled:bg-gray-200 formkit-disabled:cursor-not-allowed formkit-disabled:pointer-events-none',
-        input: 'input mt-0',
-        label: 'block mb-3',
+        input: 'input mt-0 form-control text-sm',
+        label: 'text-slate-700 text-sm leading-6 block mb-3 capitalize form-label font-semibold cursor-pointer block w-full',
         legend: 'font-bold text-sm',
         loaderIcon: 'inline-flex items-center w-4 text-gray-600 animate-spin',
         message: 'text-red-500 mb-1 text-xs',
@@ -58,7 +58,7 @@ export default {
         selectIcon: 'flex box-content w-4 px-2 self-stretch grow-0 shrink-0',
       },
       'family:text': {
-        inner: 'flex items-center max-w-md ring-1 ring-gray-400 focus-within:ring-gray-700 focus-within:ring-1 [&>label:first-child]:focus-within:text-blue-500 rounded mb-1',
+        inner: 'flex items-center ring-1 ring-gray-400 focus-within:ring-gray-700 focus-within:ring-1 [&>label:first-child]:focus-within:text-blue-500 rounded mb-1',
         input: 'w-full px-3 py-2 border-none text-base text-gray-700 placeholder-gray-400',
       },
       'family:date': {

@@ -29,6 +29,9 @@
   "files.associations": {
     "*.css": "postcss"
   },
+  "scss.validate": false,
+  "css.validate": false,
+  "postcss.validate": true,
 
   // Enable the ESlint flat config support
   "eslint.experimental.useFlatConfig": true,
