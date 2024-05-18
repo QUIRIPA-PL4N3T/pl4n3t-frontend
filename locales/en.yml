@@ -8,12 +8,17 @@ activities:
     title: Register an Activity
   month: Month
   n20: N2O
+brand:
+  title: Brands
 company:
+  addMember: Add
   address: Address
   contact: Contact
   create:
     success: The company was successfully created
+  edit: Edit
   email: Mail
+  members: Members
   name: Name
   phone: Phone
   update:
@@ -80,6 +85,8 @@ login:
   text: Sign in
 membership:
   brandsLimit: Number of Brands
+  changePlan: Change Plan
+  currentTitle: Current Membership
   locationLimit: Venue limit
   title: Membership
   userLimit: Users Number

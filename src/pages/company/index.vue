@@ -28,29 +28,35 @@ function goEditBrand(id: number) {
             {{ t('company.edit') }}
           </button>
         </template>
-        <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex flex-col md:flex-row gap-4 justify-between">
           <div class="w-full flex md:w-1/6 align-middle justify-center">
             <a :href="company.website!" target="_blank">
               <img v-if="company.logo_absolute_url" :src="company.logo_absolute_url!" :alt="company.name" class="max-w-[300px]" style="width: 100%;">
               <img v-else :src="`https://ui-avatars.com/api/?background=a0a0a0&size=128&name=${company.name}`" alt="" class="rounded-full">
             </a>
           </div>
-          <div class="w-full md:w-3/6">
-            <h5>{{ t('company.contact') }}</h5>
-            <p>{{ company.address }}</p>
-            <p>{{ `${company.city_name}, ${company.state_name}` }}</p>
-            <p class="uppercase">
-              {{ `${company.country_name}` }}
-            </p>
-            <p>{{ `${t('company.phone')}: ${company.phone}` }}</p>
-            <p>{{ `${t('company.email')}: ${company.email}` }}</p>
+          <div class="md:w-3/6">
+            <h5 class="pb-3">
+              {{ company.name }}
+            </h5>
+            <div class="flex flex-col text-sm">
+              <p><span class="font-bold"> {{ t('general.nit') }}:</span> <span> {{ company.nit }}</span></p>
+            </div>
           </div>
-          <div class="flex flex-col w-full md:w-2/6 align-middle justify-center">
-            <span class="font-bold text-sky-400">{{ t('membership.title') }} {{ company.membership.membership.name }}</span>
-            <p>{{ `${t('membership.locationLimit')}: ${company.membership.membership.num_locations}` }}</p>
-            <p>{{ `${t('membership.brandsLimit')}: ${company.membership.membership.num_brands}` }}</p>
-            <p>{{ `${t('membership.userLimit')}: ${company.membership.membership.num_users}` }} </p>
-            <a href="#" class="font-light text-sky-400">{{ t('membership.changePlan') }} </a>
+
+          <div class="w-full md:w-2/6">
+            <h5 class="pb-3">
+              {{ t('company.contact') }}
+            </h5>
+            <p class="flex flex-col text-sm">
+              <span>{{ company.address }}</span>
+              <span>{{ `${company.city_name}, ${company.state_name}` }}</span>
+              <span class="uppercase">
+                {{ `${company.country_name}` }}
+              </span>
+              <span>{{ `${t('company.phone')}: ${company.phone}` }}</span>
+              <span>{{ t('company.email') }}:<a class="text-sky-600 ps-2" :href="`mailto:${company!.email!}`">{{ company!.email! }}</a></span>
+            </p>
           </div>
         </div>
       </Card>
@@ -109,6 +115,32 @@ function goEditBrand(id: number) {
                 <Icon icon="heroicons-outline:plus" class="absolute z-10 bg-white p-1 rounded-full text-4xl" />
               </button>
             </div>
+          </div>
+        </div>
+      </Card>
+
+      <!-- Company Membership -->
+      <Card v-if="company.id" :title="`${t('membership.currentTitle')}: ${company.membership.membership.name}`">
+        <div class="flex flex-col w-full md:w-2/6 align-middle justify-center">
+          <p class="flex flex-col text-sm">
+            <span>{{ `${t('membership.locationLimit')}: ${company.membership.membership.num_locations}` }}</span>
+            <span>{{ `${t('membership.brandsLimit')}: ${company.membership.membership.num_brands}` }}</span>
+            <span>{{ `${t('membership.userLimit')}: ${company.membership.membership.num_users}` }} </span>
+            <a href="#" class="font-light text-sky-400">{{ t('membership.changePlan') }} </a>
+          </p>
+        </div>
+      </Card>
+
+      <!-- Company Membership -->
+      <Card v-if="company.id" :title="t('company.members')">
+        <template #header>
+          <button type="button" class="btn btn-dark btn-sm">
+            {{ t('company.addMember') }}
+          </button>
+        </template>
+        <div v-for="member in company.members_roles" :key="member.user_email">
+          <div>
+            {{ member.user_email }}
           </div>
         </div>
       </Card>

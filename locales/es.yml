@@ -50,6 +50,8 @@ company:
   email: Correo
   status: Estado
   equipment: Agentes Emisor
+  members: Miembros
+  addMember: Agregar
   create:
     success: ¡La compañía fue creada con Éxito!
   update:
@@ -134,6 +136,7 @@ reports:
   generate: Generar Informe
 membership:
   title: Membresía
+  currentTitle: Membresía Actual
   update: Cambiar de Plan
   duration: Duración
   termOf: Vigencia de la membresía
