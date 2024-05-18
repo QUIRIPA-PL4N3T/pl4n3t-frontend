@@ -169,7 +169,7 @@ export const useCompanyStore = defineStore('company', {
       }
       catch (error) {
         console.error(error)
-        toast.success(handleError(error))
+        toast.error(handleError(error))
       }
     },
     getLocationName(id: number) {

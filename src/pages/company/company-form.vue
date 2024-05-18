@@ -12,6 +12,7 @@ const {
   optionCities,
   optionsIndustryTypeList,
   optionsEconomicSectorList,
+  optionsCompanySize,
 } = storeToRefs(basicStore)
 
 async function handleCountryChange() {
@@ -74,12 +75,6 @@ async function handleStateChange() {
             placeholder="..."
           />
           <FormKit
-            :label="t('company.url')"
-            name="website"
-            type="text"
-            placeholder="..."
-          />
-          <FormKit
             type="select"
             name="country"
             :label="t('general.origin_country')"
@@ -107,6 +102,21 @@ async function handleStateChange() {
             validation="required"
             :classes="{ outer: !company.city ? 'option-placeholder' : '' }"
             :options="optionCities"
+          />
+
+          <FormKit
+            :label="t('company.url')"
+            name="website"
+            wr
+            type="text"
+            placeholder="..."
+          />
+
+          <FormKit
+            type="select"
+            name="size"
+            :label="t('company.size')"
+            :options="optionsCompanySize"
           />
 
           <FormKit

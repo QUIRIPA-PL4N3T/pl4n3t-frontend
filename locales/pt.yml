@@ -1,29 +1,38 @@
+company:
+  contact: Contato
+  edit: Editar
 email: E-mail
-hintEmail: E-mail
-errorRequirementEmail: O e-mail é obrigatório
 errorEmail: e-mail deve ser um e-mail válido
-password: Senha
-hintPassword: Senha
 errorPassword: A senha deve conter pelo menos 8 caracteres
+errorRequirementEmail: O e-mail é obrigatório
 forgotPassword: Esqueceu sua senha?
-signInSocial: Ou continuar com
-login:
-  text: iniciar sessão
-  checkBox: Mantenha-me conectado
-  buttonLogin: Ingresar
-  footer: Você não tem uma conta?
-  link: Criar Uma Conta
-register:
-  fullName: Nome completo
-  hintFullName: Nome completo
-  text: Check-in
-  checkBox: Você aceita nossos Termos e Condições e Política de Privacidade
-  buttonLogin: Criar uma conta
-  footer: Você já tem uma conta?
-  link: Entrar
 forgotPasswordScreen:
+  link: Ir
   text: Restaurar senha
   textButton: Enviar e-mail de recuperação
   textFooter1: Esqueça,
   textFooter2: No início da sessão
-  link: Ir
+general:
+  new: ''
+  nit: NIT
+hintEmail: E-mail
+hintPassword: Senha
+login:
+  buttonLogin: Ingresar
+  checkBox: Mantenha-me conectado
+  footer: Você não tem uma conta?
+  link: Criar Uma Conta
+  text: iniciar sessão
+membership:
+  daysRemaining: ''
+  endDate: Data de término
+password: Senha
+register:
+  buttonLogin: Criar uma conta
+  checkBox: Você aceita nossos Termos e Condições e Política de Privacidade
+  footer: Você já tem uma conta?
+  fullName: Nome completo
+  hintFullName: Nome completo
+  link: Entrar
+  text: Check-in
+signInSocial: Ou continuar com

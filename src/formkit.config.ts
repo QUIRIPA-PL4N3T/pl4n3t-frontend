@@ -16,7 +16,7 @@ export default {
         help: 'text-xs text-gray-500',
         inner: 'formkit-disabled:bg-gray-200 formkit-disabled:cursor-not-allowed formkit-disabled:pointer-events-none',
         input: 'input mt-0 form-control text-sm',
-        label: 'text-slate-700 text-sm leading-6 block mb-3 capitalize form-label font-semibold cursor-pointer block w-full',
+        label: 'text-slate-700 text-sm leading-6 block mb-3 form-label font-semibold cursor-pointer block w-full',
         legend: 'font-bold text-sm',
         loaderIcon: 'inline-flex items-center w-4 text-gray-600 animate-spin',
         message: 'text-red-500 mb-1 text-xs',

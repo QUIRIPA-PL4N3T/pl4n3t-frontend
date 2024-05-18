@@ -21,6 +21,7 @@ company:
   members: Members
   name: Name
   phone: Phone
+  size: Company size
   update:
     success: The company was successfully upgraded
   url: Web page
@@ -58,6 +59,7 @@ general:
   city: City
   economic_sector: Economic Sector
   industry_type: Industry Type
+  new: New
   nit: NIT
   origin_country: Country of origin
   state: Department
@@ -87,6 +89,8 @@ membership:
   brandsLimit: Number of Brands
   changePlan: Change Plan
   currentTitle: Current Membership
+  daysRemaining: Remaining days
+  endDate: Finish date
   locationLimit: Venue limit
   title: Membership
   userLimit: Users Number

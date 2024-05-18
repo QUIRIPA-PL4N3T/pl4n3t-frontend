@@ -1,266 +1,290 @@
-email: Correo
-hintEmail: Correo
-errorRequirementEmail: Correo requerido
-errorEmail: Correo no valido
-password: Contraseña
-hintPassword: Contraseña
-errorPassword: Mínimo 8 caracteres
-forgotPassword: Restablecer Contraseña?
-signInSocial: O Continue con
-dashboard:
-  title: Dashboard
-login:
-  text: Iniciar Sesión
-  checkBox: Mantener conectado
-  buttonLogin: Ingresar
-  footer: No tienes una cuenta?
-  link: Crear Cuenta
-  google:
-    created: Se envió un correo para activar su cuenta, por favor active su cuenta e intente de nuevo
-register:
-  fullName: Nombre Completo
-  hintFullName: Nombre Completo
-  title: Registrarse
-  description: Cree una cuenta para comenzar a usar PL4N3T
-  first-name: Nombres
-  last-name: Apellidos
-  checkBox: Aceptas nuestros Términos y Condiciones y Política de Privacidad
-  buttonLogin: Crear Cuenta
-  footer: Ya tienes una Cuenta?
-  link: Ingresar
-  success: ¡Usuario registrado!
-  account-activation: Debe ingresar a su correo para continuar con la activación de su cuenta
-forgotPasswordScreen:
-  text: Restablecer Contraseña
-  textButton: Enviar correo de recuperación
-  textFooter1: Olvídalo,
-  textFooter2: Al inicio de sesión
-  link: Ir
-copyright:
-  footer: COPYRIGHT ©; Amanecer en el Palmar, todos los derechos reservados
-company:
-  title: Compañía
-  locations: Sedes
-  contact: Contacto
-  edit: Editar
-  name: Nombre
-  address: Dirección
-  url: Página Web
-  phone: Teléfono
-  email: Correo
-  status: Estado
-  equipment: Agentes Emisor
-  members: Miembros
-  addMember: Agregar
-  create:
-    success: ¡La compañía fue creada con Éxito!
-  update:
-    success: ¡La compañía fue actualizada con Éxito!
-  status-options:
-    very-good: Muy bueno
-    good: Bueno
-    fair: Regular
-    bad: Malo
-    very-bad: Muy malo
-    undefined: --
-company edit.title: Editar
-location:
-  modal:
-    title: Agregar un nueva sede
-  name: Nombre
-  address: Dirección
-  phone: Teléfono
-  email: Correo
-  employees: Empleados
-  status: Estado
-  add: Agregar Sede
-locations:
-  title: Sedes
-menu:
-  title: Menu
-  profile: Perfil
-  chat: Chat
-  email: correo
-  todo: Tareas
-  settings: Configuración
-  membership: Membresía
-  faq: FAQ
-  logout: Salir
-  dashboard: Dashboard
-  characterization: Caracterización
-  company: Compañía
-  activities: Actividades
-  goals: Metas y Objetivos
-  reports: Reportes
-  companyLocations: Sedes
-  equipment: Fuentes de Emisión
-  inventory: Inventario
-  register-data: Ingreso de Datos
 activities:
-  register: Registrar Actividades
-  add: Agregar Actividad
-  location: Sede
   activity: Actividad
+  add: Agregar Actividad
   amount: Cantidad
-  month: Mes
-  ho2: HO2
   hc4: HC4
-  n20: N2O
+  ho2: HO2
+  location: Sede
   modal:
-    title: Registrar una Actividad
-    location: Sede
     activity: Actividad
     amount: Cantidad
-    month: Mes
-  processActivities: Cuantificar Periodo
-equipments:
-  title: Fuentes de Emisión
-  add: Agregar
-  modal:
     location: Sede
-    equipment-type: Tipo de equipo
-    name: Nombre
-    description: Descripción
-    branch: Marca
-    identification: Placa | Serial | Número de Identificación
-    title: Fuentes de emisión de la organización registradas
-liquidation:
-  title: Cuantificar
-goals:
-  title: Metas
-reports:
-  title: Reportes
-  period: Período
-  methodology: Metodología
-  format: Formato del Informe
-  generate: Generar Informe
-membership:
-  title: Membresía
-  currentTitle: Membresía Actual
-  update: Cambiar de Plan
-  duration: Duración
-  termOf: Vigencia de la membresía
-  benefits: Para obtener mejores resultados
-  brandsLimit: Marcas Permitidas
-  locationLimit: Sedes Permitidas
-  workersLimit: Límite de Empleados
-  userLimit: Usuarios Permitidas
-  changePlan: Cambiar Plan
-cancel: Cancelar
-save: Guardar
-button:
-  back: Atrás
-errors:
-  register:
-    exist: Ya existe un usuario registrado con este correo
-    password: Su contraseña no puede ser una clave utilizada comúnmente.
-general:
-  origin_country: País de origen
-  country: País
-  state: Departamento
-  city: Ciudad
-  economic_sector: Sector Económico
-  industry_type: Tipo de Industria
-  nit: NIT
-  manage: Gestionar
-  location: Sede
-  new: Nuevo
-  brand: Marca
-brand edit:
-  title: Editar Marca
-location edit:
-  title: Editar Sede
-emission source-edit:
-  title: Registro de Inventario
-brand:
-  title: Marcas
-  add: Nueva Marca
-  name: Nombre
-  description: Descripción
-  logo: Logo
-delete: Eliminar
-edit: Editar
-view: Ver
-yes: Sí
-no: No
-no_apply: No Aplica
+    month: Mes
+    title: Registrar una Actividad
+  month: Mes
+  n20: N2O
+  processActivities: Cuantificar Periodo
+  register: Registrar Actividades
 analytics:
   title: Análisis
+brand:
+  add: Nueva Marca
+  description: Descripción
+  logo: Logo
+  name: Nombre
+  title: Marcas
+brand edit:
+  title: Editar Marca
+button:
+  back: Atrás
+cancel: Cancelar
+company:
+  addMember: Agregar
+  address: Dirección
+  contact: Contacto
+  create:
+    success: ¡La compañía fue creada con Éxito!
+  edit: Editar
+  email: Correo
+  equipment: Agentes Emisor
+  locations: Sedes
+  members: Miembros
+  name: Nombre
+  phone: Teléfono
+  size: Tamaño de la Compañía
+  sizes:
+    LARGE: Grande (201+ empleados)
+    MEDIUM: Mediana (51-200 empleados),
+    SMALL: Pequeña (1-50 empleados),
+  status: Estado
+  status-options:
+    bad: Malo
+    fair: Regular
+    good: Bueno
+    undefined: --
+    very-bad: Muy malo
+    very-good: Muy bueno
+  title: Compañía
+  update:
+    success: ¡La compañía fue actualizada con Éxito!
+  url: Página Web
+company edit.title: Editar
+copyright:
+  footer: COPYRIGHT ©; Amanecer en el Palmar, todos los derechos reservados
+dashboard:
+  title: Dashboard
+delete: Eliminar
+edit: Editar
+email: Correo
+emission source-edit:
+  title: Registro de Inventario
 equipment:
   add: Agregar
-  name: Nombre / Marcar / Modelo
+  asset_duration_label: unidad
+  asset_duration_value_label: Duración del contrato de arrendamiento
+  asset_leased_label: Bien Arrendado
+  attach:
+    help: >-
+      Por favor seleccione los documentos soporte como (hoja de vida,
+      certificados, mantenimientos u otros)
+    label: Adjuntar Soportes
   code: Código
   description: Descripción
-  group: Grupo
-  source_type: Tipo de fuente de emisión (Fija o Móvil)
-  source_type_help: Tipo de fuente de emisión
-  factor_type: Tipo de Factor de Emisión
-  emission_factor: Factor de Emisión
-  emission_factor_unit: Unidad de medida
-  vehicle_type: Clase de Vehículo
-  vehicle_fuel_type: Tipo de Combustible
-  vehicle_fuel: Combustible
-  vehicle_load_type: Tipo de Vehículo
-  vehicle_efficiency_unit: Unidad
-  vehicle_capacity: Capacidad
-  vehicle_efficiency: Eficiencia del Vehículo
-  save:
-    success: Fuente de emisión guardada correctamente
-    error: La Fuente de emisión no ha podido ser guardada
-  attach:
-    label: Adjuntar Soportes
-    help: Por favor seleccione los documentos soporte como (hoja de vida, certificados, mantenimientos u otros)
-  process_label: Seleccione el proceso o actividad
-  type: Seleccione el equipo
-  vapor_generation_question: ¿Existe un factor de emisión especifico asociado a la generación de vapor?
-  efficiency_label: Eficiencia energética del equipo o sistema que usa el combustible
-  efficiency_unit_label: Unidad de medida
-  description_help: |
-    Amplía la información sobre el proceso / actividad para la cual se usa el combustible, teniendo en cuenta aspectos como:
+  description_help: >
+    Amplía la información sobre el proceso / actividad para la cual se usa el
+    combustible, teniendo en cuenta aspectos como:
 
       * Para qué propósitos se utiliza el combustible.
       * Variación estacional en el consumo de combustible.
       * Implementación de medidas para reducir el consumo.
+  efficiency_help: Dato numérico, puede incluir decimales.
+  efficiency_label: Eficiencia energética del equipo o sistema que usa el combustible
+  efficiency_unit_label: Unidad de medida
+  electricity_generation_question: >-
+    ¿Existe un factor de emisión específico asociado a ala generación de
+    electricidad del proveedor?
+  electricity_source_label: Fuente de generación de electricidad
+  electricity_supplier_help: Nombre de su proveedor de energía eléctrica
+  electricity_supplier_label: Nombre del proveedor de electricidad
+  electricity_type: Tipo de Electricidad
+  emission_factor: Factor de Emisión
+  emission_factor_type: Emisión
+  emission_factor_unit: Unidad de medida
+  factor_type: Tipo de Factor de Emisión
   fuel_storage_label: Almacenamiento de Combustible
   fuel_storage_management_label: Gestión del Combustible
-  electricity_supplier_label: Nombre del proveedor de electricidad
-  electricity_supplier_help: Nombre de su proveedor de energía eléctrica
-  electricity_source_label: Fuente de generación de electricidad
-  electricity_generation_question: ¿Existe un factor de emisión específico asociado a ala generación de electricidad del proveedor?
-  electricity_type: Tipo de Electricidad
-  refrigerant_source_type_label: Equipo
-  refrigerant_type: Tipo de Refrigerante
-  refrigerant_leaks_label: ¿Existen Fugas del refrigerante en el equipo?
-  refrigerant_convert_label: ¿Se han realizado conversiones a refrigerantes con menor potencial de calentamiento global (PCG)?
-  refrigerant_capacity_label: Capacidad de refrigerante en el equipo
-  refrigerant_final_disposal: ¿De qué manera realiza la disposición final de refrigerantes?
-  maintenance_actions: ¿Cuál de las siguientes acciones realiza para el mantenimiento y reparaciones del equipo?
-  waste_operation_label: ¿Que tipo de desperdicios se generan en las operaciones de la organización?
-  waste_register_label: Seleccione el los desperdicios generados de los cuales se lleva seguimiento y registro
-  waste_type_label: ¿A cuál de las siguientes clase de residuo pertenece la fuente de emisión?
-  waste_organic_label: ¿Cuál es el tipo de residuo?
-  waste_inorganic_label: ¿Cuál es el tipo de residuo?
-  waste_danger_label: ¿Cuál es el tipo de residuo?
-  waste_management_organic_label: ¿Cómo se gestiona el residuo orgánico?
-  waste_management_inorganic_label: ¿Cómo se gestiona el residuo inorgánico?
-  waste_management_danger_label: ¿Cómo se gestiona el residuo peligroso?
   good_and_service_label: Adquisición de
   goods_and_service_monitoring_label: ¿Se registran y monitorean las emisiones de GEI?
-  service_label: Servicio Adquirido
-  goods_label: Bien Adquirido
-  supplier_name: Nombre del Proveedor
-  emission_factor_type: Emisión
   goods_and_service_origin_label: Origen
-  asset_leased_label: Bien Arrendado
-  asset_duration_label: unidad
-  asset_duration_value_label: Duración del contrato de arrendamiento
+  goods_label: Bien Adquirido
+  group: Grupo
+  investment_type_label: Tipo de Inversión
+  know_electricity_source: ¿Conoce el tipo de fuente de generación de electricidad?
+  know_electricity_source_help: >-
+    Selecciona 'Sí' si conoces la fuente de electricidad o 'No' si no la
+    conoces.
+  maintenance_actions: >-
+    ¿Cuál de las siguientes acciones realiza para el mantenimiento y
+    reparaciones del equipo?
+  name: Nombre / Marcar / Modelo
+  process_label: Seleccione el proceso o actividad
   product_name: Nombre del Producto
+  refrigerant_capacity_label: Capacidad de refrigerante en el equipo
+  refrigerant_convert_label: >-
+    ¿Se han realizado conversiones a refrigerantes con menor potencial de
+    calentamiento global (PCG)?
+  refrigerant_final_disposal: ¿De qué manera realiza la disposición final de refrigerantes?
+  refrigerant_leaks_label: ¿Existen Fugas del refrigerante en el equipo?
+  refrigerant_source_type_label: Equipo
+  refrigerant_type: Tipo de Refrigerante
+  refrigerant_type_help: >-
+    Revise la ficha técnica del equipo o la placa para identificar el tipo de
+    refrigerante
+  save:
+    error: La Fuente de emisión no ha podido ser guardada
+    success: Fuente de emisión guardada correctamente
+  service_label: Servicio Adquirido
   shelf_life_label: Estimación Vida útil del producto
   shelf_life_unit_label: Unidad
-  investment_type_label: Tipo de Inversión
-  refrigerant_type_help: Revise la ficha técnica del equipo o la placa para identificar el tipo de refrigerante
-  know_electricity_source: ¿Conoce el tipo de fuente de generación de electricidad?
-  know_electricity_source_help: Selecciona 'Sí' si conoces la fuente de electricidad o 'No' si no la conoces.
-  efficiency_help: Dato numérico, puede incluir decimales.
+  source_type: Tipo de fuente de emisión (Fija o Móvil)
+  source_type_help: Tipo de fuente de emisión
   specific_factor_label: Factor de Emisión específico
   specific_factor_unit_label: Unidad de Factor de emisión
+  supplier_name: Nombre del Proveedor
+  type: Seleccione el equipo
+  vapor_generation_question: ¿Existe un factor de emisión especifico asociado a la generación de vapor?
+  vehicle_capacity: Capacidad
+  vehicle_efficiency: Eficiencia del Vehículo
+  vehicle_efficiency_unit: Unidad
+  vehicle_fuel: Combustible
+  vehicle_fuel_type: Tipo de Combustible
+  vehicle_load_type: Tipo de Vehículo
+  vehicle_type: Clase de Vehículo
+  waste_danger_label: ¿Cuál es el tipo de residuo?
+  waste_inorganic_label: ¿Cuál es el tipo de residuo?
+  waste_management_danger_label: ¿Cómo se gestiona el residuo peligroso?
+  waste_management_inorganic_label: ¿Cómo se gestiona el residuo inorgánico?
+  waste_management_organic_label: ¿Cómo se gestiona el residuo orgánico?
+  waste_operation_label: ¿Que tipo de desperdicios se generan en las operaciones de la organización?
+  waste_organic_label: ¿Cuál es el tipo de residuo?
+  waste_register_label: >-
+    Seleccione el los desperdicios generados de los cuales se lleva seguimiento
+    y registro
+  waste_type_label: ¿A cuál de las siguientes clase de residuo pertenece la fuente de emisión?
+equipments:
+  add: Agregar
+  modal:
+    branch: Marca
+    description: Descripción
+    equipment-type: Tipo de equipo
+    identification: Placa | Serial | Número de Identificación
+    location: Sede
+    name: Nombre
+    title: Fuentes de emisión de la organización registradas
+  title: Fuentes de Emisión
+errorEmail: Correo no valido
+errorPassword: Mínimo 8 caracteres
+errorRequirementEmail: Correo requerido
+errors:
+  register:
+    exist: Ya existe un usuario registrado con este correo
+    password: Su contraseña no puede ser una clave utilizada comúnmente.
+forgotPassword: Restablecer Contraseña?
+forgotPasswordScreen:
+  link: Ir
+  text: Restablecer Contraseña
+  textButton: Enviar correo de recuperación
+  textFooter1: Olvídalo,
+  textFooter2: Al inicio de sesión
+general:
+  brand: Marca
+  city: Ciudad
+  country: País
+  economic_sector: Sector Económico
+  industry_type: Tipo de Industria
+  location: Sede
+  manage: Gestionar
+  new: Nuevo
+  nit: NIT
+  origin_country: País de origen
+  state: Departamento
+goals:
+  title: Metas
+hintEmail: Correo
+hintPassword: Contraseña
+liquidation:
+  title: Cuantificar
+location:
+  add: Agregar Sede
+  address: Dirección
+  email: Correo
+  employees: Empleados
+  modal:
+    title: Agregar un nueva sede
+  name: Nombre
+  phone: Teléfono
+  status: Estado
+location edit:
+  title: Editar Sede
+locations:
+  title: Sedes
+login:
+  buttonLogin: Ingresar
+  checkBox: Mantener conectado
+  footer: No tienes una cuenta?
+  google:
+    created: >-
+      Se envió un correo para activar su cuenta, por favor active su cuenta e
+      intente de nuevo
+  link: Crear Cuenta
+  text: Iniciar Sesión
+membership:
+  benefits: Para obtener mejores resultados
+  brandsLimit: Marcas Permitidas
+  changePlan: Cambiar Plan
+  currentTitle: Membresía Actual
+  daysRemaining: Días restantes
+  duration: Duración
+  endDate: Fecha de Finalización
+  locationLimit: Sedes Permitidas
+  termOf: Vigencia de la membresía
+  title: Membresía
+  update: Cambiar de Plan
+  userLimit: Usuarios Permitidas
+  workersLimit: Límite de Empleados
+menu:
+  activities: Actividades
+  characterization: Caracterización
+  chat: Chat
+  company: Compañía
+  companyLocations: Sedes
+  dashboard: Dashboard
+  email: correo
+  equipment: Fuentes de Emisión
+  faq: FAQ
+  goals: Metas y Objetivos
+  inventory: Inventario
+  logout: Salir
+  membership: Membresía
+  profile: Perfil
+  register-data: Ingreso de Datos
+  reports: Reportes
+  settings: Configuración
+  title: Menu
+  todo: Tareas
+no: No
+no_apply: No Aplica
+password: Contraseña
+register:
+  account-activation: Debe ingresar a su correo para continuar con la activación de su cuenta
+  buttonLogin: Crear Cuenta
+  checkBox: Aceptas nuestros Términos y Condiciones y Política de Privacidad
+  description: Cree una cuenta para comenzar a usar PL4N3T
+  first-name: Nombres
+  footer: Ya tienes una Cuenta?
+  fullName: Nombre Completo
+  hintFullName: Nombre Completo
+  last-name: Apellidos
+  link: Ingresar
+  success: ¡Usuario registrado!
+  title: Registrarse
+reports:
+  format: Formato del Informe
+  generate: Generar Informe
+  methodology: Metodología
+  period: Período
+  title: Reportes
+save: Guardar
+signInSocial: O Continue con
+view: Ver
+yes: Sí

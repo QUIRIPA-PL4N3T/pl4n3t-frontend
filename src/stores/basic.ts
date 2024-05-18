@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia'
 import { useLocalStorage } from '@vueuse/core'
 import { mainApi } from '~/api'
+import { SizeEnum } from '~/api-client'
 import type { City, Country, DocumentType, EconomicSector, IndustryType, LocationType, State, UnitOfMeasure } from '~/api-client'
+import { i18n } from '~/modules/i18n'
 
 export const useBasicStore = defineStore('basic', {
   state: () => ({
@@ -55,6 +57,12 @@ export const useBasicStore = defineStore('basic', {
       return this.unitOfMeasureList.map((unit: any) => ({
         value: unit.id,
         label: unit.name,
+      }))
+    },
+    optionsCompanySize(): any {
+      return Object.keys(SizeEnum).map(key => ({
+        label: i18n.t(`company.sizes.${key.toUpperCase()}`), // You can use a more user-friendly label here if needed
+        value: SizeEnum[key as keyof typeof SizeEnum],
       }))
     },
     optionsIndustryTypeList(): any {

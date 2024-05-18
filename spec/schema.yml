@@ -2275,6 +2275,15 @@ components:
           type: string
           format: uri
           nullable: true
+        economic_sector_name:
+          type: string
+          readOnly: true
+        size_name:
+          type: string
+          readOnly: true
+        industry_type_name:
+          type: string
+          readOnly: true
         membership:
           allOf:
             - $ref: '#/components/schemas/CompanyMembership'
@@ -2283,12 +2292,15 @@ components:
         - brands
         - city_name
         - country_name
+        - economic_sector_name
         - id
+        - industry_type_name
         - locations
         - logo_absolute_url
         - members_roles
         - membership
         - name
+        - size_name
         - state_name
     CompanyLogo:
       type: object
@@ -2323,8 +2335,13 @@ components:
         end_date:
           type: string
           format: date-time
+          nullable: true
+          description: Deje en blanco para membresías ilimitadas.
+        days_remaining:
+          type: string
+          readOnly: true
       required:
-        - end_date
+        - days_remaining
         - id
         - membership
         - start_date
@@ -3059,6 +3076,7 @@ components:
           maximum: 2147483647
           minimum: -2147483648
           title: Duración en días
+          description: Ingrese -1 para una membresía ilimitada.
         description:
           type: string
           nullable: true
@@ -3284,6 +3302,15 @@ components:
           type: string
           format: uri
           nullable: true
+        economic_sector_name:
+          type: string
+          readOnly: true
+        size_name:
+          type: string
+          readOnly: true
+        industry_type_name:
+          type: string
+          readOnly: true
         membership:
           allOf:
             - $ref: '#/components/schemas/CompanyMembership'

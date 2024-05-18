@@ -39,24 +39,62 @@ function goEditBrand(id: number) {
             <h5 class="pb-3">
               {{ company.name }}
             </h5>
-            <div class="flex flex-col text-sm">
-              <p><span class="font-bold"> {{ t('general.nit') }}:</span> <span> {{ company.nit }}</span></p>
-            </div>
+            <table class="text-sm w-full md:w-auto">
+              <tbody>
+                <tr>
+                  <td class="font-bold">
+                    {{ t('general.nit') }}:
+                  </td>
+                  <td class="px-4 text-right md:text-left">
+                    {{ company.nit }}
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-bold">
+                    {{ t('company.size') }}:
+                  </td>
+                  <td class="px-4 text-right md:text-left">
+                    {{ company.size_name }}
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-bold">
+                    {{ t('general.industry_type') }}:
+                  </td>
+                  <td class="px-4 text-right md:text-left">
+                    {{ company.industry_type_name }}
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-bold">
+                    {{ t('general.economic_sector') }}:
+                  </td>
+                  <td class="px-4 text-right md:text-left">
+                    {{ company.economic_sector_name }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
           <div class="w-full md:w-2/6">
             <h5 class="pb-3">
               {{ t('company.contact') }}
             </h5>
-            <p class="flex flex-col text-sm">
+            <div class="flex flex-col text-sm">
+              <p>
+                <spam class="font-bold">
+                  {{ t('company.email') }}:
+                </spam><a class="text-sky-600 ps-2" :href="`mailto:${company!.email!}`">{{ company!.email! }}</a>
+              </p>
+              <p><span class="font-bold">{{ t('company.phone') }}</span> {{ company.phone }}</p>
+              <span>{{ t('company.address') }}</span>
               <span>{{ company.address }}</span>
               <span>{{ `${company.city_name}, ${company.state_name}` }}</span>
               <span class="uppercase">
                 {{ `${company.country_name}` }}
               </span>
-              <span>{{ `${t('company.phone')}: ${company.phone}` }}</span>
-              <span>{{ t('company.email') }}:<a class="text-sky-600 ps-2" :href="`mailto:${company!.email!}`">{{ company!.email! }}</a></span>
-            </p>
+            </div>
           </div>
         </div>
       </Card>
@@ -121,11 +159,13 @@ function goEditBrand(id: number) {
 
       <!-- Company Membership -->
       <Card v-if="company.id" :title="`${t('membership.currentTitle')}: ${company.membership.membership.name}`">
-        <div class="flex flex-col w-full md:w-2/6 align-middle justify-center">
+        <div class="flex flex-col w-full align-middle justify-center">
           <p class="flex flex-col text-sm">
             <span>{{ `${t('membership.locationLimit')}: ${company.membership.membership.num_locations}` }}</span>
             <span>{{ `${t('membership.brandsLimit')}: ${company.membership.membership.num_brands}` }}</span>
             <span>{{ `${t('membership.userLimit')}: ${company.membership.membership.num_users}` }} </span>
+            <span>{{ `${t('membership.endDate')}: ${company.membership.end_date}` }} </span>
+            <span>{{ `${t('membership.daysRemaining')}: ${company.membership.days_remaining}` }} </span>
             <a href="#" class="font-light text-sky-400">{{ t('membership.changePlan') }} </a>
           </p>
         </div>
