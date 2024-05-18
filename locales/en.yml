@@ -29,6 +29,9 @@ equipment:
   description: Description
   group: Cluster
   name: Name / Brand / Model
+  save:
+    error: The broadcast source could not be saved
+    success: Broadcast source saved successfully
   source_type: Type of emission source (Fixed or Mobile)
 equipments:
   modal:
