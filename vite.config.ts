@@ -150,7 +150,7 @@ export default defineConfig({
 
   ssr: {
     // TODO: workaround until they support native ESM
-    noExternal: ['workbox-window', 'element-plus', /vue-i18n/],
+    noExternal: ['workbox-window', 'element-plus', 'vue-toastification', /vue-i18n/],
   },
 
   test: {

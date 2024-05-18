@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import * as pkg from 'vue-toastification'
+import { useToast } from 'vue-toastification'
 import { brandApi, companyApi, locationApi } from '~/api'
 import type {
   Brand,
@@ -15,7 +15,6 @@ import {
 import { i18n } from '~/modules/i18n'
 import { handleError } from '~/utilities/utils'
 
-const { useToast } = pkg
 const toast = useToast()
 
 export const useCompanyStore = defineStore('company', {

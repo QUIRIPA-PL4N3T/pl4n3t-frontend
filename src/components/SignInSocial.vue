@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import * as pkg from 'vue-toastification'
+import { useToast } from 'vue-toastification'
 import { useI18n } from 'vue-i18n'
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import go from '~/assets/images/icons/gp.svg'
 import { auth } from '~/config/firebaseConfig'
 import { handleError } from '~/utilities/utils'
 
-const { useToast } = pkg
 const { t } = useI18n()
 const authStore = useAuthStore()
 const router = useRouter()
