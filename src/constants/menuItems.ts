@@ -12,7 +12,7 @@ export const menuItems = [
   {
     title: 'menu.characterization',
     icon: 'heroicons-outline:document',
-    link: '/company',
+    link: '/characterization',
     requiredCompany: false,
     child: [
       {
