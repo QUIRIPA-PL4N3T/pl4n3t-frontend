@@ -53,16 +53,36 @@ edit: Edit
 email: Email
 emission:
   sources: Emission Sources
+emissionSource:
+  edit: Emission Source Editing
 equipment:
   add: Add
   code: Code
   description: Description
+  description_help: >-
+    Expands information on the process/activity for which the fuel is used,
+    taking into account aspects such as:
+
+    * For what purposes the fuel is used.
+
+    * Seasonal variation in fuel consumption.
+
+    * Implementation of measures to reduce consumption.
+  efficiency_label: Energy efficiency of the equipment or system that uses the fuel
+  efficiency_unit_label: Unit of measurement
+  fuel_storage_label: Fuel storage
+  fuel_storage_management_label: Fuel Management
   group: Cluster
   name: Name / Brand / Model
+  process_label: Select the process or activity
   save:
     error: The broadcast source could not be saved
     success: Broadcast source saved successfully
   source_type: Type of emission source (Fixed or Mobile)
+  type: Select the team
+  vapor_generation_question: Is there a specific emission factor associated with steam generation?
+  vehicle_fuel: Fuel
+  vehicle_fuel_type: Fuel type
 equipments:
   modal:
     title: Registered organization emission sources

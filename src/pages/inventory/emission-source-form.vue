@@ -93,37 +93,39 @@ setSelectGroupById(currentEmissionSource.value.group!)
 
 <template>
   <div class="xl:col-span-2">
-    <Card :title="currentEmissionSource.name">
-      <label class="ltr:inline-block rtl:block input-label" for="phon">{{ t('equipment.group') }}</label>
+    <Card :title="`${t('emissionSource.edit')} ${currentEmissionSource.name}`">
       <div class="flex gap-3 items-stretch overflow-auto pb-5">
-        <Tooltip
+        <div
           v-for="(group, i) in inventoriableClassificationGroups"
           :key="i"
-          placement="bottom"
-          btn-class="relative flex w-40 hover:bg-black-100"
+          class="relative flex w-40 hover:bg-black-100"
         >
-          <template #button>
-            <button
-              class="relative flex w-40 hover:bg-black-100 justify-center h-full"
-              :class="{ 'border-blue-500 bg-black-200 border-2': group.id === selectedGroupId }"
-              @click.prevent="setSelectGroup(group)"
-            >
-              <div class="flex flex-col h-full items-center p-2">
-                <Image
-                  :src="group.icon!"
-                  alt="{{ brand.name }}"
-                  image-class="rounded-md border-2 border-slate-100 max-w-full h-[80px] object-contain object-center p-3"
-                />
-                <span class="text-xs pt-2">
-                  {{ group.name }}
-                </span>
-              </div>
-            </button>
-          </template>
-          <div class="text-white text-sm" v-html="group.description" />
-        </Tooltip>
+          <button
+            class="relative flex w-40 hover:bg-black-100 justify-center h-full"
+            :class="{ 'border-indigo-600 rounded  bg-black-200 border-2': group.id === selectedGroupId }"
+            @click.prevent="setSelectGroup(group)"
+          >
+            <div class="flex flex-col h-full items-center p-2">
+              <Image
+                :src="group.icon!"
+                alt="{{ brand.name }}"
+                image-class="rounded-md border-2 border-slate-100 max-w-full h-[80px] object-contain object-center p-3"
+              />
+              <span class="text-xs pt-2">
+                {{ group.name }}
+              </span>
+            </div>
+          </button>
+        </div>
       </div>
-      <hr>
+      <Alert
+        v-if="selectedGroup"
+        dismissible
+        class-name="bg-primary-500 bg-opacity-[14%] text-indigo-500"
+        icon="heroicons-outline:information-circle"
+      >
+        <div class="text-indigo-600 text-sm" v-html="selectedGroup.description" />
+      </Alert>
       <div class="flex flex-row gap-4 pt-5">
         <!-- Form Column -->
         <div class="w-full">

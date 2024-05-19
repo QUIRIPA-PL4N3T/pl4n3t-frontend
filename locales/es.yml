@@ -87,6 +87,8 @@ emission:
   sources: Fuentes de Emisión
 emission source-edit:
   title: Registro de Inventario
+emissionSource:
+  edit: Edición de Fuente de Emisión
 equipment:
   add: Agregar
   asset_duration_label: unidad
@@ -221,6 +223,8 @@ goals:
   title: Metas
 hintEmail: Correo
 hintPassword: Contraseña
+inventory:
+  title: Fuentes de Emisión
 liquidation:
   title: Cuantificar
 location:
@@ -323,5 +327,3 @@ since:
   lastMonth: Desde el último mes
 view: Ver
 yes: Sí
-inventory:
-  title: Fuentes de Emisión
