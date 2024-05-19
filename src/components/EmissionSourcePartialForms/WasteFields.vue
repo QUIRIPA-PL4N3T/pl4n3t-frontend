@@ -85,7 +85,7 @@ watch(() => selectedFactorTypeId.value, () => {
       <div class="w-full pb-5">
         <FormKit
           v-model="wasteTypeId"
-          :label="t('equipment.waste_type_label')"
+          :label="t('emissionSource.waste_type_label')"
           type="select"
           placeholder="..."
           :options="optionWasteTypeList"
@@ -95,7 +95,7 @@ watch(() => selectedFactorTypeId.value, () => {
       <div class="flex flex-col md:flex-row gap-4">
         <FormKit
           v-model="sourceTypeId"
-          :label="t('equipment.waste_type_label')"
+          :label="t('emissionSource.waste_type_label')"
           type="select"
           placeholder="..."
           :options="wasteOptions"
@@ -104,7 +104,7 @@ watch(() => selectedFactorTypeId.value, () => {
 
         <FormKit
           type="checkbox"
-          :label="t('equipment.waste_register_label')"
+          :label="t('emissionSource.waste_register_label')"
           :options="wasteManagementOptions"
           outer-class="flex-1"
           fieldset-class="p-3"
@@ -115,11 +115,11 @@ watch(() => selectedFactorTypeId.value, () => {
     <div />
     <div class="mb-5">
       <FormKit
-        :label="t('equipment.description')"
+        :label="t('emissionSource.description')"
         type="textarea"
         placeholder="..."
         name="description"
-        :help="t('equipment.description_help')"
+        :help="t('emissionSource.description_help')"
       />
     </div>
   </div>

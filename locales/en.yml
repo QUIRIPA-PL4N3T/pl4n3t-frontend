@@ -59,7 +59,6 @@ emission:
   sources: Emission Sources
 emissionSource:
   edit: Emission Source Editing
-equipment:
   add: Add
   code: Code
   description: Description
@@ -72,7 +71,7 @@ equipment:
     * Seasonal variation in fuel consumption.
 
     * Implementation of measures to reduce consumption.
-  efficiency_label: Energy efficiency of the equipment or system that uses the fuel
+  efficiency_label: Energy efficiency of the emissionSource or system that uses the fuel
   efficiency_unit_label: Unit of measurement
   fuel_storage_label: Fuel storage
   fuel_storage_management_label: Fuel Management

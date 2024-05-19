@@ -19,7 +19,7 @@ function goEditEmissionSource(id: number) {
 }
 
 function filterByGroup(id: number) {
-  // TODO: add equipment filter by group
+  // TODO: add emissionSource filter by group
   console.warn(id)
 }
 
@@ -60,7 +60,7 @@ const { t } = useI18n()
 
         <div class="flex justify-end pb-4">
           <Button
-            :text="t('equipment.add')"
+            :text="t('emissionSource.add')"
             btn-class="btn btn-dark btn-sm"
             @click.prevent="goEditEmissionSource(0)"
           />

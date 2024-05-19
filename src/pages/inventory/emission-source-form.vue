@@ -24,13 +24,13 @@ const { currentEmissionSource } = storeToRefs(emissionSourceStore)
 async function save() {
   try {
     await emissionSourceStore.saveEmissionSource()
-    toast.success(t('equipment.save.success'), {
+    toast.success(t('emissionSource.save.success'), {
       timeout: 2000,
     })
   }
   catch (error) {
     console.error(error)
-    toast.error(t('equipment.save.error'))
+    toast.error(t('emissionSource.save.error'))
   }
 }
 
@@ -170,8 +170,8 @@ setSelectGroupById(currentEmissionSource.value.group!)
             <div>
               <FormKit
                 type="file"
-                :label="t('equipment.attach.label')"
-                :help="t('equipment.attach.help')"
+                :label="t('emissionSource.attach.label')"
+                :help="t('emissionSource.attach.help')"
                 :disabled="currentEmissionSource.id === 0"
                 name=""
                 accept=".jpg,.png,.pdf"

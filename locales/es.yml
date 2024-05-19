@@ -49,7 +49,7 @@ company:
     Brand: Elimina Marca
   edit: Editar
   email: Correo
-  equipment: Agentes Emisor
+  emissionSource: Agentes Emisor
   locations: Sedes
   members: Miembros
   name: Nombre
@@ -91,7 +91,6 @@ emission source-edit:
   title: Registro de Inventario
 emissionSource:
   edit: Edición de Fuente de Emisión
-equipment:
   add: Agregar
   asset_duration_label: unidad
   asset_duration_value_label: Duración del contrato de arrendamiento
@@ -189,7 +188,7 @@ equipments:
   modal:
     branch: Marca
     description: Descripción
-    equipment-type: Tipo de equipo
+    emissionSource-type: Tipo de equipo
     identification: Placa | Serial | Número de Identificación
     location: Sede
     name: Nombre
@@ -286,7 +285,7 @@ menu:
   companyLocations: Sedes
   dashboard: Dashboard
   email: correo
-  equipment: Fuentes de Emisión
+  emissionSource: Fuentes de Emisión
   faq: FAQ
   goals: Metas y Objetivos
   inventory: Inventario

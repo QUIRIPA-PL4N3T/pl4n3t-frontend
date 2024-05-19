@@ -9,7 +9,7 @@ const { currentGlobalLocation } = storeToRefs(emissionSourceStore)
 const { t } = useI18n()
 
 function filterByGroup(id: number) {
-  // TODO: add equipment filter by group
+  // TODO: add emissionSource filter by group
   console.warn(id)
 }
 
@@ -50,7 +50,7 @@ function goRegisterActivity(id: number) {
 
         <div class="flex justify-end pb-4">
           <Button
-            :text="t('equipment.add')"
+            :text="t('emissionSource.add')"
             btn-class="btn btn-dark btn-sm"
             @click.prevent="goRegisterActivity(0)"
           />

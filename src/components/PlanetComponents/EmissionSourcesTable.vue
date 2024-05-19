@@ -17,24 +17,24 @@ const columns = ref([
     field: 'id',
   },
   {
-    label: t('equipment.name'),
+    label: t('emissionSource.name'),
     field: 'name',
   },
   {
-    label: t('equipment.code'),
+    label: t('emissionSource.code'),
     field: 'code',
   },
   {
-    label: t('equipment.description'),
+    label: t('emissionSource.description'),
     field: 'description',
   },
 
   {
-    label: t('equipment.group'),
+    label: t('emissionSource.group'),
     field: 'group',
   },
   {
-    label: t('equipment.source_type'),
+    label: t('emissionSource.source_type'),
     field: 'source_type',
   },
   {

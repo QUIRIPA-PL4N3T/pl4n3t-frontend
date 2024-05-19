@@ -23,13 +23,13 @@ const { currentEmissionSource } = storeToRefs(emissionSourceStore)
 async function save() {
   try {
     await emissionSourceStore.saveEmissionSource()
-    toast.success(t('equipment.save.success'), {
+    toast.success(t('emissionSource.save.success'), {
       timeout: 2000,
     })
   }
   catch (error) {
     console.error(error)
-    toast.error(t('equipment.save.error'))
+    toast.error(t('emissionSource.save.error'))
   }
 }
 
@@ -79,7 +79,7 @@ setSelectGroupById(currentEmissionSource.value.group!)
 <template>
   <div class="xl:col-span-2">
     <Card :title="currentEmissionSource.name">
-      <label class="ltr:inline-block rtl:block input-label" for="phon">{{ t('equipment.group') }}</label>
+      <label class="ltr:inline-block rtl:block input-label" for="phon">{{ t('emissionSource.group') }}</label>
       <div class="flex gap-3 items-stretch overflow-auto pb-5">
         <Tooltip
           v-for="(group, i) in inventoriableClassificationGroups"

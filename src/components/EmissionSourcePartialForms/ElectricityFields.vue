@@ -50,25 +50,25 @@ load()
   <div>
     <div class="mb-5">
       <FormKit
-        :label="t('equipment.electricity_supplier_label')"
+        :label="t('emissionSource.electricity_supplier_label')"
         outer-class="w-full"
         inner-class="max-w-xl"
         type="text"
         placeholder="..."
         name="electricity_supplier"
         required
-        :help="t('equipment.electricity_supplier_help')"
+        :help="t('emissionSource.electricity_supplier_help')"
       />
     </div>
     <div class="pb-5">
       <FormKit
         v-model="sourceTypeId"
-        :label="t('equipment.source_type')"
+        :label="t('emissionSource.source_type')"
         type="select"
         placeholder="..."
         :options="optionSourceTypes"
         name="source_type"
-        :help="t('equipment.source_type_help')"
+        :help="t('emissionSource.source_type_help')"
       />
     </div>
     <div class="mb-5">
@@ -76,9 +76,9 @@ load()
       <FormKit
         v-model="knowElectricitySource"
         type="radio"
-        :label="t('equipment.know_electricity_source')"
+        :label="t('emissionSource.know_electricity_source')"
         :options="{ yes: t('yes'), no: t('no') }"
-        :help="t('equipment.know_electricity_source_help')"
+        :help="t('emissionSource.know_electricity_source_help')"
         fieldset-class="$remove:max-w-md pt-2"
         :classes="{
           fieldset: 'max-w-full',
@@ -90,7 +90,7 @@ load()
       <FormKit
         v-model="sourceTypeId"
         :disabled="knowElectricitySource !== 'yes'"
-        :label="t('equipment.electricity_source_label')"
+        :label="t('emissionSource.electricity_source_label')"
         type="select"
         placeholder="..."
         :options="knowElectricitySource === 'yes' ? optionsElectricitySourceList : []"
@@ -101,7 +101,7 @@ load()
     <div class="flex gap-4 pb-5">
       <FormKit
         v-model="selectedFactorTypeId"
-        :label="t('equipment.factor_type')"
+        :label="t('emissionSource.factor_type')"
         outer-class="w-full"
         type="select"
         placeholder="..."
@@ -110,7 +110,7 @@ load()
         @onchange="filterEmissionFactors"
       />
       <FormKit
-        :label="t('equipment.electricity_type')"
+        :label="t('emissionSource.electricity_type')"
         outer-class="w-full"
         type="select"
         placeholder="..."
@@ -124,7 +124,7 @@ load()
       <FormKit
         v-model="existElectricityGenerationFactor"
         type="radio"
-        :label="t('equipment.electricity_generation_question')"
+        :label="t('emissionSource.electricity_generation_question')"
         :options="{ yes: t('yes'), no: t('no') }"
         fieldset-class="$remove:max-w-md pt-2"
         :classes="{
@@ -138,8 +138,8 @@ load()
         :disabled="existElectricityGenerationFactor === 'no'"
         type="number"
         outer-class="w-full"
-        :label="t('equipment.specific_factor_label')"
-        :help="t('equipment.efficiency_help')"
+        :label="t('emissionSource.specific_factor_label')"
+        :help="t('emissionSource.efficiency_help')"
         value="0"
         name="electricity_efficiency"
       />
@@ -147,7 +147,7 @@ load()
       <FormKit
         :disabled="existElectricityGenerationFactor === 'no'"
         outer-class="w-full"
-        :label="t('equipment.specific_factor_unit_label')"
+        :label="t('emissionSource.specific_factor_unit_label')"
         type="text"
         placeholder="..."
         name="electricity_efficiency_unit"
@@ -155,10 +155,10 @@ load()
     </div>
     <div class="mb-5">
       <FormKit
-        :label="t('equipment.description')"
+        :label="t('emissionSource.description')"
         type="textarea"
         placeholder="..."
-        :help="t('equipment.description_help')"
+        :help="t('emissionSource.description_help')"
         name="description"
       />
     </div>
