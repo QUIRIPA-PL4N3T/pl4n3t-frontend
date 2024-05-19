@@ -127,6 +127,7 @@ membership:
   title: Membership
   userLimit: Users Number
   workersLimit: Employee Limit
+notResultFound: No results found
 password: Password
 register:
   buttonLogin: Create An Account
@@ -137,6 +138,7 @@ register:
   link: SIGN IP
   text: Sign up
 save: Save
+search: Search
 select:
   location: Select a Headquarters
 signInSocial: Or continue with

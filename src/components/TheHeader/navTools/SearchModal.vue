@@ -11,6 +11,8 @@ import {
   TransitionRoot,
 } from '@headlessui/vue'
 
+const { t } = useI18n()
+
 const isOpen = ref(false)
 const searchList = [
   {
@@ -46,7 +48,7 @@ const searchList = [
 const selected = ref(searchList[0])
 const query = ref('')
 
-const filteredsearchList = computed(() =>
+const filteredSearchList = computed(() =>
   query.value === ''
     ? searchList
     : searchList.filter(item =>
@@ -73,7 +75,7 @@ function openModal() {
     >
       <Icon icon="heroicons-outline:search" /><span
         class="xl:inline-block hidden"
-      >Search...</span>
+      >{{ t('search') }}</span>
     </button>
   </div>
   <TransitionRoot :show="isOpen" as="template">
@@ -134,18 +136,18 @@ function openModal() {
                   <ComboboxOptions
                     class="max-h-40 overflow-y-auto text-sm py-2"
                   >
-                    <div v-if="filteredsearchList.length === 0 && query !== ''">
+                    <div v-if="filteredSearchList.length === 0 && query !== ''">
                       <div className=" text-base py-2 px-4">
                         <p
                           className="text-slate-500-600 text-base dark:text-white"
                         >
-                          No result found
+                          {{ t('notResultFound') }}
                         </p>
                       </div>
                     </div>
 
                     <ComboboxOption
-                      v-for="item in filteredsearchList"
+                      v-for="item in filteredSearchList"
                       :key="item.id"
                       v-slot="{ active }"
                       as="template"

@@ -18,7 +18,7 @@ const name = computed(() => {
           ? 'lg:border-r lg:border-secondary-500'
           : ''
       "
-      class="font-medium lg:text-2xl text-xl capitalize text-slate-900 inline-block ltr:pr-4 rtl:pl-4"
+      class="font-medium lg:text-2xl lowercase text-xl text-slate-900 inline-block ltr:pr-4 rtl:pl-4"
     >
       <button btn text-sm m="3 t8" @click="router.back()">
         <Icon icon="material-symbols:arrow-back-ios" class="pt-2" />
@@ -35,14 +35,14 @@ const name = computed(() => {
         </span>
       </li>
       <li class="text-primary-500">
-        <button type="button" class="capitalize">
+        <button type="button">
           {{ $route.meta.groupParent }}
         </button>
         <span class="breadcrumbs-icon rtl:transform rtl:rotate-180">
           <Icon icon="heroicons:chevron-right" />
         </span>
       </li>
-      <li class="capitalize text-slate-500 dark:text-slate-400 lo">
+      <li class="text-slate-500 dark:text-slate-400 lo">
         {{ t(`${name}.title`) }}
       </li>
     </ul>

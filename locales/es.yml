@@ -293,6 +293,7 @@ menu:
   todo: Tareas
 no: No
 no_apply: No Aplica
+notResultFound: No se encontrarón Resultados
 password: Contraseña
 register:
   account-activation: Debe ingresar a su correo para continuar con la activación de su cuenta
@@ -314,6 +315,7 @@ reports:
   period: Período
   title: Reportes
 save: Guardar
+search: Buscar
 select:
   location: Seleccione una Sede
 signInSocial: O Continue con
