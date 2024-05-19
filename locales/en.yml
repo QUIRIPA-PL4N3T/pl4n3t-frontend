@@ -15,6 +15,7 @@ brand:
   description: Description
   logo: Logo
   name: Name
+  select: Select a Brand
   title: Brands
   updated:
     success: The brand was successfully updated
@@ -72,6 +73,7 @@ forgotPasswordScreen:
   textFooter1: FORGET IT,
   textFooter2: TO THE SIGN IN
 general:
+  brand: Brand
   city: City
   economic_sector: Economic Sector
   industry_type: Industry Type
@@ -91,9 +93,12 @@ location:
     success: Headquarters removed
   email: Mail
   employees: Employees
+  employeesNumber: Number of employees
   name: Name
+  new: New Headquarters
   phone: Phone
   status: State
+  type: Headquarters Type
   updated:
     success: The headquarters has been successfully updated
 locations:
@@ -127,5 +132,7 @@ register:
   hintFullName: Full Name
   link: SIGN IP
   text: Sign up
-save: Keep
+save: Save
+select:
+  location: Select a Headquarters
 signInSocial: Or continue with

@@ -53,10 +53,6 @@ function editItem(id: number) {
     params: { id },
   })
 }
-
-async function deleteItem(id: number) {
-  await companyStore.deleteLocation(id)
-}
 </script>
 
 <template>
@@ -118,14 +114,6 @@ async function deleteItem(id: number) {
                 </div>
               </template>
               <span> {{ t('edit') }}</span>
-            </Tooltip>
-            <Tooltip placement="top" arrow theme="danger-500">
-              <template #button>
-                <div class="action-btn" @click="deleteItem(props.row.id)">
-                  <Icon icon="heroicons:trash" />
-                </div>
-              </template>
-              <span>{{ t('delete') }}</span>
             </Tooltip>
           </div>
         </span>

@@ -29,14 +29,19 @@ export const useCompanyStore = defineStore('company', {
       return this.company.brands
     },
     optionBrands(): any {
-      return this.company.brands.map((brand: Brand) => ({
+      const emptyBrand = {
+        label: i18n.t('brand.select'),
+        value: null,
+      }
+      const brands = this.company.brands.map((brand: Brand) => ({
         label: brand.name,
         value: brand.id,
       }))
+      return [emptyBrand, ...brands]
     },
     optionsLocations(): any {
       const emptyLocation = {
-        label: 'Seleccione una Sede',
+        label: i18n.t('select.location'),
         value: null,
       }
 
@@ -84,10 +89,13 @@ export const useCompanyStore = defineStore('company', {
     clearBrand() {
       this.currentBrand = <Brand>JSON.parse(JSON.stringify(DEFAULT_BRAND))
     },
+    clearLocation() {
+      this.currentLocation = <Location>JSON.parse(JSON.stringify(DEFAULT_LOCATION))
+    },
     async fetchLocation(id: number) {
       // Fetch current location by id
       if (id === 0) {
-        this.currentLocation = DEFAULT_LOCATION
+        this.clearLocation()
         return
       }
 
@@ -104,7 +112,7 @@ export const useCompanyStore = defineStore('company', {
       if (data.logo === null)
         delete data.logo
       try {
-        if (this.currentBrand.id === 0) {
+        if (data.id === 0) {
           await brandApi.companiesBrandsCreate(data)
           toast.success(i18n.t('brand.created.success'))
         }
@@ -124,18 +132,17 @@ export const useCompanyStore = defineStore('company', {
       this.currentLocation.company = this.company.id
       try {
         if (this.currentLocation.id === 0) {
-          const { data: location } = await locationApi.companiesLocationsCreate({ location: this.currentLocation })
-          this.currentLocation = location
+          await locationApi.companiesLocationsCreate({ location: this.currentLocation })
           toast.success(i18n.t('location.created.success'))
         }
         else {
-          const { data: location } = await locationApi.companiesLocationsUpdate({
+          await locationApi.companiesLocationsUpdate({
             id: this.currentLocation.id,
             location: this.currentLocation,
           })
           toast.success(i18n.t('location.updated.success'))
-          this.currentLocation = location
         }
+        this.clearLocation()
         this.fetchCompany()
       }
       catch (error) {

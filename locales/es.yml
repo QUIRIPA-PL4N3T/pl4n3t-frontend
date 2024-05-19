@@ -25,6 +25,7 @@ brand:
   description: Descripción
   logo: Logo
   name: Nombre
+  select: Selecciones una Marca
   title: Marcas
   updated:
     success: Se actualizado la marca
@@ -226,11 +227,14 @@ location:
     success: Se ha eliminado la sede
   email: Correo
   employees: Empleados
+  employeesNumber: Número de empleados
   modal:
     title: Agregar un nueva sede
   name: Nombre
+  new: Nueva Sede
   phone: Teléfono
   status: Estado
+  type: Tipo de Sede
   updated:
     success: Se ha actulizado la sede
 location edit:
@@ -304,6 +308,8 @@ reports:
   period: Período
   title: Reportes
 save: Guardar
+select:
+  location: Seleccione una Sede
 signInSocial: O Continue con
 view: Ver
 yes: Sí

@@ -11,7 +11,6 @@ const companyStore = useCompanyStore()
 const { company, currentBrand } = storeToRefs(companyStore)
 const confirmModal = ref<any>(null)
 const router = useRouter()
-const companyId = company.value.id
 
 async function save(data: any) {
   const requestData: Brand = {
@@ -37,7 +36,7 @@ watch(() => user.value, () => {
 
 watch(() => company.value, () => {
   if (company.value)
-    router.push({ name: 'company', params: { id: companyId } })
+    router.push({ name: 'company' })
 })
 
 function closeModal() {
@@ -89,6 +88,7 @@ companyStore.fetchBrand(Number(props.id))
               <FormKit
                 type="text"
                 name="description"
+                validation="required"
                 :label="t('brand.description')"
                 placeholder="..."
               />

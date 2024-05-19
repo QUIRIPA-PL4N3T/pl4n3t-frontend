@@ -134,9 +134,17 @@ function goEditBrand(id: number) {
             @click.prevent="goEditBrand(brand.id)"
           >
             <Image
+              v-if="brand.logo_absolute_url"
               :src="brand.logo_absolute_url"
               alt="{{ brand.name }}"
-              image-class="rounded-md border-2 border-slate-300 w-[163px] h-[163px] object-contain object-center p-3"
+              image-class="rounded-md border-2 border-slate-300 w-[163px] object-contain object-center"
+            />
+            <Image
+              v-else
+              :src="`https://placehold.co/400x400?text=${brand.name}`"
+              :alt="brand.name"
+              height="h-full"
+              image-class="rounded-md border-2 border-slate-300 w-[163px] object-contain object-center"
             />
           </button>
           <div>
