@@ -1,8 +1,19 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
+
+const emissionSourceStore = useEmissionSourceStore()
+const { currentGlobalLocation } = storeToRefs(emissionSourceStore)
+const { t } = useI18n()
 </script>
 
 <template>
-  <Card>...</Card>
+  <Card
+    v-if="currentGlobalLocation"
+    :title="t('analytics.title')"
+  >
+    ...
+  </Card>
+  <NoLocationSelected v-else />
 </template>
 
 <route lang="yaml">

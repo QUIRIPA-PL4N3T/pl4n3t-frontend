@@ -74,6 +74,8 @@ company:
 company edit.title: Editar
 copyright:
   footer: COPYRIGHT ©; Amanecer en el Palmar, todos los derechos reservados
+currentLocation:
+  required: Debe seleccionar una Sede para pode Continuar
 dashboard:
   title: Dashboard
 delete: Eliminar
@@ -226,6 +228,7 @@ hintPassword: Contraseña
 inventory:
   title: Fuentes de Emisión
 liquidation:
+  form: Formularío de Liquidación
   title: Cuantificar
 location:
   add: Agregar Sede

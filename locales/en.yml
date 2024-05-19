@@ -9,6 +9,8 @@ activities:
     title: Register an Activity
   month: Month
   n20: N2O
+analytics:
+  title: Analysis
 brand:
   created:
     success: A new one has been created successfully
@@ -46,6 +48,8 @@ copyright:
   footer: |-
     COPYRIGHT ©;
     Dawn in El Palmar, all rights reserved
+currentLocation:
+  required: You must select a Location to be able to Continue
 delete: Delete
 distribution:
   bySede: Distribution by Headquarters
@@ -107,6 +111,8 @@ general:
   state: Department
 hintEmail: Email
 hintPassword: Password
+liquidation:
+  form: Settlement Form
 location:
   add: Add Headquarters
   address: Address

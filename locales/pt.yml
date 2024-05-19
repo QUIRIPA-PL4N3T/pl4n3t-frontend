@@ -1,7 +1,14 @@
+analytics:
+  title: Análise
 company:
   contact: Contato
   edit: Editar
+currentLocation:
+  required: Você deve selecionar um local para poder continuar
 email: E-mail
+equipments:
+  modal:
+    title: Fontes de emissão de organizações registradas
 errorEmail: e-mail deve ser um e-mail válido
 errorPassword: A senha deve conter pelo menos 8 caracteres
 errorRequirementEmail: O e-mail é obrigatório

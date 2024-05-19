@@ -4,7 +4,8 @@ import { storeToRefs } from 'pinia'
 const router = useRouter()
 const classificationStore = useClassificationStore()
 const { classificationGroups } = storeToRefs(classificationStore)
-
+const emissionSourceStore = useEmissionSourceStore()
+const { currentGlobalLocation } = storeToRefs(emissionSourceStore)
 const { t } = useI18n()
 
 function filterByGroup(id: number) {
@@ -23,7 +24,10 @@ function goRegisterActivity(id: number) {
 <template>
   <div class="w-full h-full">
     <div class="lg:col-span-4 col-span-12 space-y-5">
-      <Card :title="t('activities.modal.title')">
+      <Card
+        v-if="currentGlobalLocation"
+        :title="t('activities.modal.title')"
+      >
         <div class="flex gap-3 items-baseline overflow-auto">
           <button
             v-for="(group, i) in classificationGroups"
@@ -54,6 +58,7 @@ function goRegisterActivity(id: number) {
 
         <ActivitiesTable />
       </Card>
+      <NoLocationSelected v-else />
     </div>
   </div>
 </template>
