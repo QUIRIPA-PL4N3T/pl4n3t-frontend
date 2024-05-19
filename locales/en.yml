@@ -47,8 +47,12 @@ copyright:
     COPYRIGHT ©;
     Dawn in El Palmar, all rights reserved
 delete: Delete
+distribution:
+  bySede: Distribution by Headquarters
 edit: Edit
 email: Email
+emission:
+  sources: Emission Sources
 equipment:
   add: Add
   code: Code
@@ -136,3 +140,5 @@ save: Save
 select:
   location: Select a Headquarters
 signInSocial: Or continue with
+since:
+  lastMonth: since last month

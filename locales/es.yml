@@ -77,8 +77,14 @@ copyright:
 dashboard:
   title: Dashboard
 delete: Eliminar
+distibution:
+  bySede: Distribución por Sede
+distribution:
+  bySede: Distribución por Sede
 edit: Editar
 email: Correo
+emission:
+  sources: Fuentes de Emisión
 emission source-edit:
   title: Registro de Inventario
 equipment:
@@ -311,5 +317,7 @@ save: Guardar
 select:
   location: Seleccione una Sede
 signInSocial: O Continue con
+since:
+  lastMonth: Desde el último mes
 view: Ver
 yes: Sí
