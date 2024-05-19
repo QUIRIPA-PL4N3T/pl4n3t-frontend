@@ -62,14 +62,14 @@ const { t } = useI18n()
             @click.prevent="goEditEmissionSource(0)"
           />
         </div>
-        <EquipmentTable />
+        <EmissionSourcesTable />
       </Card>
     </div>
   </div>
 </template>
 
 <route lang="yaml">
-name: equipments
+name: inventory
 meta:
   layout: sidebar
   requiresAuth: true

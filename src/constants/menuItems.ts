@@ -28,7 +28,7 @@ export const menuItems = [
   {
     title: 'menu.inventory',
     icon: 'heroicons-outline:view-boards',
-    link: '/company/equipments',
+    link: '/inventory',
     requiredCompany: true,
   },
   {
