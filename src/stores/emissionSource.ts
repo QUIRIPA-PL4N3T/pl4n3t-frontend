@@ -5,7 +5,7 @@ import { DEFAULT_EMISSIONS_SOURCE } from '~/api/modelsDefaults'
 
 export const useEmissionSourceStore = defineStore('emissionSource', {
   state: () => ({
-    currentEquipment: <EmissionsSource>DEFAULT_EMISSIONS_SOURCE,
+    currentEmissionSource: <EmissionsSource>DEFAULT_EMISSIONS_SOURCE,
     locationEquipments: <EmissionsSource[]>[],
     environLocation: useLocalStorage<any | null>('environLocation', null),
   }),
@@ -16,16 +16,16 @@ export const useEmissionSourceStore = defineStore('emissionSource', {
     async fetchEmissionSource(id: number) {
       // Fetch current location by id
       if (id === 0) {
-        this.currentEquipment = DEFAULT_EMISSIONS_SOURCE
+        this.currentEmissionSource = DEFAULT_EMISSIONS_SOURCE
         return
       }
 
       try {
-        const { data: currentEquipment } = await companyEmissionSourceApi.companiesEmissionSourcesRetrieve({ id })
-        this.currentEquipment = currentEquipment
+        const { data: currentEmissionSource } = await companyEmissionSourceApi.companiesEmissionSourcesRetrieve({ id })
+        this.currentEmissionSource = currentEmissionSource
       }
       catch (error) {
-        this.currentEquipment = DEFAULT_EMISSIONS_SOURCE
+        this.currentEmissionSource = DEFAULT_EMISSIONS_SOURCE
       }
     },
     async fetchEmissionSourcesByLocation(id: number) {
@@ -44,20 +44,20 @@ export const useEmissionSourceStore = defineStore('emissionSource', {
       if (!this.environLocation)
         return
 
-      this.currentEquipment.location = this.environLocation
+      this.currentEmissionSource.location = this.environLocation
       try {
-        if (this.currentEquipment.id === 0) {
-          const { data: currentEquipment } = await companyEmissionSourceApi.companiesEmissionSourcesCreate(
-            { emissionsSource: this.currentEquipment },
+        if (this.currentEmissionSource.id === 0) {
+          const { data: currentEmissionSource } = await companyEmissionSourceApi.companiesEmissionSourcesCreate(
+            { emissionsSource: this.currentEmissionSource },
           )
-          this.currentEquipment = currentEquipment
+          this.currentEmissionSource = currentEmissionSource
         }
         else {
-          const { data: currentEquipment } = await companyEmissionSourceApi.companiesEmissionSourcesUpdate({
-            id: this.currentEquipment.id,
-            emissionsSource: this.currentEquipment,
+          const { data: currentEmissionSource } = await companyEmissionSourceApi.companiesEmissionSourcesUpdate({
+            id: this.currentEmissionSource.id,
+            emissionsSource: this.currentEmissionSource,
           })
-          this.currentEquipment = currentEquipment
+          this.currentEmissionSource = currentEmissionSource
         }
         this.fetchEmissionSourcesByLocation(this.environLocation)
       }

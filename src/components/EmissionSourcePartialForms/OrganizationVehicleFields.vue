@@ -11,7 +11,7 @@ const { t } = useI18n()
 
 const disabledSourceType = ref<boolean>(false)
 
-const { currentEquipment } = storeToRefs(emissionSourceStore)
+const { currentEmissionSource } = storeToRefs(emissionSourceStore)
 // Store to ref
 const {
   optionsVehicleTypeList,
@@ -91,7 +91,7 @@ function emissionFactorTypeLabel(): string {
     <div class="pb-5 col-span-2">
       <FormKit
         type="number"
-        :label="`${t('equipment.vehicle_capacity')} ${currentEquipment.vehicle_load || ''}`"
+        :label="`${t('equipment.vehicle_capacity')} ${currentEmissionSource.vehicle_load || ''}`"
         number
         name="vehicle_capacity"
       />

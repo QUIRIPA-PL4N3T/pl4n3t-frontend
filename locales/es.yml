@@ -189,7 +189,7 @@ equipments:
     identification: Placa | Serial | Número de Identificación
     location: Sede
     name: Nombre
-    title: Fuentes de emisión de la organización registradas
+    title: Fuentes de emisión de la Compañía
   title: Fuentes de Emisión
 errorEmail: Correo no valido
 errorPassword: Mínimo 8 caracteres
@@ -323,3 +323,5 @@ since:
   lastMonth: Desde el último mes
 view: Ver
 yes: Sí
+inventory:
+  title: Fuentes de Emisión
