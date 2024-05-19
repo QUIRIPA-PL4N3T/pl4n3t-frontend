@@ -20,7 +20,6 @@ const documentStore = useDocumentsStore()
 
 const { inventoriableClassificationGroups } = storeToRefs(classificationStore)
 const { currentEmissionSource } = storeToRefs(emissionSourceStore)
-const { documentItem } = storeToRefs(documentStore)
 
 async function save() {
   try {
@@ -43,10 +42,14 @@ async function uploadDocument(event: Event) {
   const inputElement = event.target as HTMLInputElement
   if (inputElement.files && inputElement.files.length > 0) {
     const file: File = inputElement.files[0]
-    documentItem.value.objectPk = currentEmissionSource.value.id
-    documentItem.value.objectType = 'emission-source'
-    documentItem.value.file = file
-    documentItem.value.title = file.name
+
+    documentStore.setDocumentProperties({
+      objectPk: currentEmissionSource.value.id,
+      objectType: 'emission-source',
+      file,
+      title: file.name,
+    })
+
     await documentStore.uploadDocument()
     emissionSourceStore.fetchEmissionSource(Number(props.id))
   }

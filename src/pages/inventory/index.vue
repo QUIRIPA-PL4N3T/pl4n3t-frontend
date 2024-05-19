@@ -9,7 +9,7 @@ const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
 const { inventoriableClassificationGroups } = storeToRefs(classificationStore)
 const emissionSourceStore = useEmissionSourceStore()
-const { environLocation } = storeToRefs(emissionSourceStore)
+const { currentGlobalLocation } = storeToRefs(emissionSourceStore)
 
 function goEditEmissionSource(id: number) {
   router.push({
@@ -24,8 +24,8 @@ function filterByGroup(id: number) {
 }
 
 watch(() => user.value, () => {
-  if (user.value && !Number.isNaN(environLocation.value))
-    emissionSourceStore.fetchEmissionSourcesByLocation(Number(environLocation.value))
+  if (user.value && !Number.isNaN(currentGlobalLocation.value))
+    emissionSourceStore.fetchEmissionSourcesByLocation(Number(currentGlobalLocation.value))
 })
 
 const { t } = useI18n()

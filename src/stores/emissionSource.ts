@@ -6,8 +6,8 @@ import { DEFAULT_EMISSIONS_SOURCE } from '~/api/modelsDefaults'
 export const useEmissionSourceStore = defineStore('emissionSource', {
   state: () => ({
     currentEmissionSource: <EmissionsSource>DEFAULT_EMISSIONS_SOURCE,
-    locationEquipments: <EmissionsSource[]>[],
-    environLocation: useLocalStorage<any | null>('environLocation', null),
+    locationEmissionSources: <EmissionsSource[]>[],
+    currentGlobalLocation: useLocalStorage<any | null>('currentGlobalLocation', null),
   }),
   getters: {
 
@@ -30,9 +30,9 @@ export const useEmissionSourceStore = defineStore('emissionSource', {
     },
     async fetchEmissionSourcesByLocation(id: number) {
       try {
-        if (this.environLocation) {
+        if (this.currentGlobalLocation) {
           const { data: location } = await locationApi.companiesLocationsRetrieve({ id })
-          this.locationEquipments = location.emission_source_locations
+          this.locationEmissionSources = location.emission_source_locations
         }
       }
       catch (error) {
@@ -41,10 +41,10 @@ export const useEmissionSourceStore = defineStore('emissionSource', {
     },
     async saveEmissionSource() {
       // Create or update a location
-      if (!this.environLocation)
+      if (!this.currentGlobalLocation)
         return
 
-      this.currentEmissionSource.location = this.environLocation
+      this.currentEmissionSource.location = this.currentGlobalLocation
       try {
         if (this.currentEmissionSource.id === 0) {
           const { data: currentEmissionSource } = await companyEmissionSourceApi.companiesEmissionSourcesCreate(
@@ -59,7 +59,7 @@ export const useEmissionSourceStore = defineStore('emissionSource', {
           })
           this.currentEmissionSource = currentEmissionSource
         }
-        this.fetchEmissionSourcesByLocation(this.environLocation)
+        this.fetchEmissionSourcesByLocation(this.currentGlobalLocation)
       }
       catch (error) {
         console.error(error)
@@ -68,7 +68,7 @@ export const useEmissionSourceStore = defineStore('emissionSource', {
     async deleteEmissionSource(id: number) {
       try {
         await companyEmissionSourceApi.companiesEmissionSourcesDestroy({ id })
-        this.fetchEmissionSourcesByLocation(this.environLocation)
+        this.fetchEmissionSourcesByLocation(this.currentGlobalLocation)
       }
       catch (error) {
         console.error(error)

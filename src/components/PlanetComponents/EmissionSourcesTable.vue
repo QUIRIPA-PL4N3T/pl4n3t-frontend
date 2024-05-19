@@ -5,7 +5,7 @@ import { VueGoodTable } from 'vue-good-table-next'
 const router = useRouter()
 const { t } = useI18n()
 const emissionSourceStore = useEmissionSourceStore()
-const { locationEquipments } = storeToRefs(emissionSourceStore)
+const { locationEmissionSources } = storeToRefs(emissionSourceStore)
 
 const current = ref(1)
 const perpage = ref(10)
@@ -55,11 +55,11 @@ async function deleteItem(id: number) {
 </script>
 
 <template>
-  <div v-if="locationEquipments">
+  <div v-if="locationEmissionSources">
     <VueGoodTable
       :columns="columns"
       style-class=" vgt-table  lesspadding2 centered "
-      :rows="locationEquipments"
+      :rows="locationEmissionSources"
       :pagination-options="{
         enabled: true,
         perPage: perpage,
@@ -107,7 +107,7 @@ async function deleteItem(id: number) {
       <template #pagination-bottom="props">
         <div class="py-4 px-3 flex justify-center">
           <Pagination
-            :total="locationEquipments.length"
+            :total="locationEmissionSources.length"
             :current="current"
             :per-page="perpage"
             :page-range="pageRange"
