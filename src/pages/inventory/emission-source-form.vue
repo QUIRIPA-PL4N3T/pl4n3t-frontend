@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useToast } from 'vue-toastification'
 import type { EmissionSourceGroup } from '~/api-client'
 
 const props = defineProps<{ id?: string }>()
@@ -11,7 +10,6 @@ const disabledSourceType = ref<boolean>(false)
 
 const { t } = useI18n()
 const authStore = useAuthStore()
-const toast = useToast()
 
 const { user } = storeToRefs(authStore)
 const emissionSourceStore = useEmissionSourceStore()
@@ -22,16 +20,7 @@ const { inventoriableClassificationGroups } = storeToRefs(classificationStore)
 const { currentEmissionSource } = storeToRefs(emissionSourceStore)
 
 async function save() {
-  try {
-    await emissionSourceStore.saveEmissionSource()
-    toast.success(t('emissionSource.save.success'), {
-      timeout: 2000,
-    })
-  }
-  catch (error) {
-    console.error(error)
-    toast.error(t('emissionSource.save.error'))
-  }
+  await emissionSourceStore.saveEmissionSource()
 }
 
 async function deleteEmissionFactor(id: number) {
@@ -182,6 +171,7 @@ setSelectGroupById(currentEmissionSource.value.group!)
             <div class="text-base text-slate-600 dark:text-slate-300 mb-5" />
             <div v-show="selectedGroupId !== 0" class="flex justify-end gap-2 pt-3">
               <Button
+                v-if="currentEmissionSource.id !== 0"
                 :text="t('delete')"
                 btn-class="btn-danger"
                 @click="deleteEmissionFactor(currentEmissionSource.id)"

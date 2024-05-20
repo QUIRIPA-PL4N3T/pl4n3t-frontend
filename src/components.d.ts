@@ -49,7 +49,6 @@ declare module 'vue' {
     HorizontalNav: typeof import('./components/TheHeader/horizontal-nav.vue')['default']
     Icon: typeof import('./components/Icon/index.vue')['default']
     Image: typeof import('./components/Image/index.vue')['default']
-    Indes: typeof import('./components/ActivitySearch/indes.vue')['default']
     InputGroup: typeof import('./components/InputGroup/index.vue')['default']
     InvestmentFields: typeof import('./components/EmissionSourcePartialForms/InvestmentFields.vue')['default']
     InvestmentRegisterFields: typeof import('./components/ActivityRegisterPartialForm/InvestmentRegisterFields.vue')['default']
