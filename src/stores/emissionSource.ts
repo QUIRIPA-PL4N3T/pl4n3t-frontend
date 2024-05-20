@@ -1,7 +1,11 @@
 import { defineStore } from 'pinia'
+import { useToast } from 'vue-toastification'
 import { companyEmissionSourceApi, locationApi } from '~/api'
 import type { EmissionsSource } from '~/api-client'
 import { DEFAULT_EMISSIONS_SOURCE } from '~/api/modelsDefaults'
+import { i18n } from '~/modules/i18n'
+
+const toast = useToast()
 
 export const useEmissionSourceStore = defineStore('emissionSource', {
   state: () => ({
@@ -51,6 +55,7 @@ export const useEmissionSourceStore = defineStore('emissionSource', {
             { emissionsSource: this.currentEmissionSource },
           )
           this.currentEmissionSource = currentEmissionSource
+          toast.success(i18n.t('emissionSource.save.success'))
         }
         else {
           const { data: currentEmissionSource } = await companyEmissionSourceApi.companiesEmissionSourcesUpdate({
@@ -58,10 +63,12 @@ export const useEmissionSourceStore = defineStore('emissionSource', {
             emissionsSource: this.currentEmissionSource,
           })
           this.currentEmissionSource = currentEmissionSource
+          toast.success(i18n.t('emissionSource.updated'))
         }
         this.fetchEmissionSourcesByLocation(this.currentGlobalLocation)
       }
       catch (error) {
+        toast.error(i18n.t('emissionSource.save.error'))
         console.error(error)
       }
     },

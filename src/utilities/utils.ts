@@ -1,5 +1,6 @@
 import * as cryptoNode from 'node:crypto'
 import { format, isValid, parseISO } from 'date-fns'
+import { i18n } from '~/modules/i18n'
 
 const DEBUG = import.meta.env.VITE_DEBUG_MODE || false
 
@@ -92,4 +93,28 @@ export function handleError(error: any): string {
     console.error(exception)
     return '🔥 Utils error 🔥!'
   }
+}
+
+export function formatOptions(list: any, labelKey = 'name', valueKey = 'id', emptyOption = true) {
+  const empty = {
+    label: i18n.t('selectAnOption'),
+    value: null,
+  }
+
+  const options = list.map((item: any) => {
+    if (typeof item === 'object') {
+      return {
+        label: item[labelKey],
+        value: item[valueKey],
+      }
+    }
+    else {
+      return {
+        label: item,
+        value: item,
+      }
+    }
+  })
+
+  return emptyOption ? [empty, ...options] : options
 }

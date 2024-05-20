@@ -91,9 +91,9 @@ emission source-edit:
   title: Registro de Inventario
 emissionSource:
   add: Agregar
-  asset_duration_label: unidad
+  asset_duration_label: Unidad
   asset_duration_value_label: Duración del contrato de arrendamiento
-  asset_leased_label: Bien Arrendado
+  asset_leased_label: Tipo de bien Arrendado
   attach:
     help: >-
       Por favor seleccione los documentos soporte como (hoja de vida,
@@ -154,7 +154,7 @@ emissionSource:
     refrigerante
   save:
     error: La Fuente de emisión no ha podido ser guardada
-    success: Fuente de emisión guardada correctamente
+    success: Fuente de emisión guardada
   service_label: Servicio Adquirido
   shelf_life_label: Estimación Vida útil del producto
   shelf_life_unit_label: Unidad
@@ -164,6 +164,7 @@ emissionSource:
   specific_factor_unit_label: Unidad de Factor de emisión
   supplier_name: Nombre del Proveedor
   type: Seleccione el equipo
+  updated: Fuente de Emisión Actualizada
   vapor_generation_question: ¿Existe un factor de emisión especifico asociado a la generación de vapor?
   vehicle_capacity: Capacidad
   vehicle_efficiency: Eficiencia del Vehículo
@@ -327,6 +328,9 @@ save: Guardar
 search: Buscar
 select:
   location: Seleccione una Sede
+selectAnOotion: Seleccione una Opción
+selectAnOpotion: Seleccione un opción
+selectAnOption: Seleccione una Opción
 signInSocial: O Continue con
 since:
   lastMonth: Desde el último mes

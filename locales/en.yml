@@ -59,6 +59,9 @@ emission:
   sources: Emission Sources
 emissionSource:
   add: Add
+  asset_duration_label: Unit
+  asset_duration_value_label: Lease duration (months)
+  asset_leased_label: Type of property Leased
   attach:
     help: >-
       Please select the supporting documents such as (resume, certificates,
@@ -88,6 +91,7 @@ emissionSource:
     success: Broadcast source saved successfully
   source_type: Type of emission source (Fixed or Mobile)
   type: Select the team
+  updated: Updated Emission Source
   vapor_generation_question: Is there a specific emission factor associated with steam generation?
   vehicle_fuel: Fuel
   vehicle_fuel_type: Fuel type
@@ -157,6 +161,7 @@ membership:
   title: Membership
   userLimit: Users Number
   workersLimit: Employee Limit
+no: No
 notResultFound: No results found
 optionCreated: Created Option
 optionCreationFailed: Creation of the Failed Option
@@ -173,6 +178,8 @@ save: Save
 search: Search
 select:
   location: Select a Headquarters
+selectAnOption: Select an Option
 signInSocial: Or continue with
 since:
   lastMonth: since last month
+yes: Yeah

@@ -33,140 +33,128 @@ watch(() => selectedFactorTypeId.value, () => {
 </script>
 
 <template>
-  <div>
-    <div class="mb-5">
-      <FormKit
-        :label="t('emissionSource.asset_leased_label')"
-        type="select"
-        :options="optionAssetLeasedList"
-        placeholder="..."
-        name="efficiency_unit"
-      />
-    </div>
-    <div class="mb-5 flex gap-4">
-      <FormKit
-        type="number"
-        :label="t('emissionSource.asset_duration_value_label')"
-        number
-        name="fuel_efficiency"
-      />
-      <FormKit
-        :label="t('emissionSource.asset_duration_label')"
-        type="select"
-        :options="optionDurationList"
-        placeholder="..."
-        name="efficiency_unit"
-      />
-    </div>
-    <div class="mb-5">
-      <FormKit
-        :label="t('emissionSource.code')"
-        outer-class="w-full"
-        inner-class="max-w-xl"
-        type="text"
-        placeholder="..."
-        name="code"
-      />
-    </div>
-    <div class="pb-5">
-      <FormKit
-        v-model="sourceTypeId"
-        :label="t('emissionSource.source_type')"
-        type="select"
-        placeholder="..."
-        :options="optionSourceTypes"
-        name="source_type"
-      />
-    </div>
-    <div class="mb-5">
-      <ActivitySearch
-        v-model="activityValue"
-        :label="t('emissionSource.process_label')"
-      />
-    </div>
-    <div class="mb-5">
-      <EquipmentSearch
-        v-model="equipmentValue"
-        :label="t('emissionSource.type')"
-      />
-    </div>
-    <!-- Emission factor select -->
-    <div class="flex gap-4 pb-5">
+  <div class="flex flex-col md:grid md:grid-cols-4 md:gap-4">
+    <FormKit
+      :label="t('emissionSource.asset_leased_label')"
+      type="select"
+      outer-class="md:col-span-2 lg:col-span-1"
+      :options="optionAssetLeasedList"
+      name="efficiency_unit"
+    />
+    <FormKit
+      :label="t('emissionSource.code')"
+      outer-class="w-full"
+      inner-class="max-w-xl"
+      type="text"
+      name="code"
+    />
+    <FormKit
+      :label="t('emissionSource.name')"
+      outer-class="w-full md:col-span-2"
+      type="text"
+      name="name"
+    />
+    <FormKit
+      type="number"
+      outer-class="md:col-start-1 md:col-span-2"
+      :label="t('emissionSource.asset_duration_value_label')"
+      number
+      name="fuel_efficiency"
+    />
+    <FormKit
+      :label="t('emissionSource.asset_duration_label')"
+      type="select"
+      :options="optionDurationList"
+      name="efficiency_unit"
+    />
+    <FormKit
+      v-model="sourceTypeId"
+      :label="t('emissionSource.source_type')"
+      outer-class="md:col-start-4"
+      type="select"
+      placeholder=""
+      :options="optionSourceTypes"
+      name="source_type"
+    />
+    <ActivitySearch
+      v-model="activityValue"
+      :label="t('emissionSource.process_label')"
+      classes="md:col-start-1 col-span-2"
+    />
+    <EquipmentSearch
+      v-model="equipmentValue"
+      classes="col-span-2"
+      :label="t('emissionSource.type')"
+    />
+    <div class="grid grid-cols-subgrid gap-4 col-span-4 bg-neutral-100 p-4 rounded mb-5">
       <FormKit
         v-model="selectedFactorTypeId"
         :label="t('emissionSource.factor_type')"
-        outer-class="w-full"
+        outer-class="md:col-span-2"
         type="select"
-        placeholder="..."
         name="factor_type"
         :options="optionFactorTypes"
         @onchange="filterEmissionFactors"
       />
       <FormKit
         :label="t('emissionSource.emission_factor')"
-        outer-class="w-full"
+        outer-class="md:col-span-2"
         type="select"
-        placeholder="..."
+
         name="emission_factor"
         :options="optionsFilteredEmissionFactors"
       />
     </div>
-    <div class="mb-5 flex w-full gap-5">
-      <FormKit
-        type="checkbox"
-        :label="t('emissionSource.fuel_storage_label')"
-        :options="optionsFuelStorageList"
-        name="fuel_storage"
-        outer-class="flex-1"
-        fieldset-class="p-3"
-      />
+    <FormKit
+      type="checkbox"
+      :label="t('emissionSource.fuel_storage_label')"
+      :options="optionsFuelStorageList"
+      outer-class="md:col-span-2"
+      name="fuel_storage"
+      fieldset-class="p-3"
+    />
 
-      <FormKit
-        type="checkbox"
-        :label="t('emissionSource.fuel_storage_management_label')"
-        :options="optionsFuelStorageManagementList"
-        outer-class="flex-1"
-        fieldset-class="p-3"
-        name="fuel_storage_management"
-      />
-    </div>
-    <div class="mb-5">
-      <FormKit
-        type="radio"
-        :label="t('emissionSource.vapor_generation_question')"
-        :options="{ yes: t('yes'), no: t('no') }"
-        fieldset-class="$remove:max-w-md"
-        :classes="{
-          fieldset: 'max-w-full',
-        }
-        "
-      />
-    </div>
-    <div class="mb-5">
-      <FormKit
-        type="number"
-        :label="t('emissionSource.efficiency_label')"
-        number
-        name="fuel_efficiency"
-      />
-    </div>
-    <div class="mb-5">
-      <FormKit
-        :label="t('emissionSource.efficiency_unit_label')"
-        type="text"
-        placeholder="..."
-        name="fuel_efficiency_unit"
-      />
-    </div>
-    <div class="mb-5">
-      <FormKit
-        :label="t('emissionSource.description')"
-        type="textarea"
-        placeholder="..."
-        name="description"
-        :help="t('emissionSource.description_help')"
-      />
-    </div>
-  <!-- End Emission Factor select -->
+    <FormKit
+      type="checkbox"
+      :label="t('emissionSource.fuel_storage_management_label')"
+      outer-class="md:col-span-2"
+      :options="optionsFuelStorageManagementList"
+      fieldset-class="p-3"
+      name="fuel_storage_management"
+    />
+    <FormKit
+      type="radio"
+      :label="t('emissionSource.vapor_generation_question')"
+      :options="{ yes: t('yes'), no: t('no') }"
+      outer-class="md:col-span-2"
+      fieldset-class="$remove:max-w-md"
+      :classes="{
+        fieldset: 'max-w-full',
+      }
+      "
+    />
+
+    <FormKit
+      type="number"
+      :label="t('emissionSource.efficiency_label')"
+      outer-class="md:col-start-1 md:col-span-2"
+      number
+      name="fuel_efficiency"
+    />
+
+    <FormKit
+      :label="t('emissionSource.efficiency_unit_label')"
+      type="text"
+      name="fuel_efficiency_unit"
+    />
+
+    <FormKit
+      :label="t('emissionSource.description')"
+      outer-class="md:col-start-1 md:col-span-4"
+      type="textarea"
+      name="description"
+      :help="t('emissionSource.description_help')"
+    />
   </div>
+  <div />
 </template>

@@ -32,6 +32,10 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  classes: {
+    type: String,
+    default: '',
+  },
   max: {
     type: Number,
     default: 1,
@@ -66,7 +70,7 @@ async function loadOptions(query = '') {
 </script>
 
 <template>
-  <div class="formkit-wrapper">
+  <div :class="`formkit-wrapper ${classes}`">
     <label :for="label" class="text-slate-700 text-sm leading-6 block mb-3 form-label font-semibold cursor-pointer w-full">{{ label }}</label>
     <Multiselect
       v-model="selectedOption"

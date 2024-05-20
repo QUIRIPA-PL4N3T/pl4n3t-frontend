@@ -4,6 +4,7 @@ import { mainApi } from '~/api'
 import { SizeEnum } from '~/api-client'
 import type { City, Country, DocumentType, EconomicSector, IndustryType, LocationType, State, UnitOfMeasure } from '~/api-client'
 import { i18n } from '~/modules/i18n'
+import { formatOptions, handleError } from '~/utilities/utils'
 
 export const useBasicStore = defineStore('basic', {
   state: () => ({
@@ -47,144 +48,77 @@ export const useBasicStore = defineStore('basic', {
   }),
   getters: {
     optionsEconomicSectorList(): any {
-      return this.economicSectorList.map((type: any) => ({
-        label: type.name,
-        value: type.id,
-      }),
-      )
+      return formatOptions(this.economicSectorList)
     },
     optionsUnitOfMeasure(): any {
-      return this.unitOfMeasureList.map((unit: any) => ({
-        value: unit.id,
-        label: unit.name,
-      }))
+      return formatOptions(this.economicSectorList)
     },
     optionsCompanySize(): any {
-      return Object.keys(SizeEnum).map(key => ({
-        label: i18n.t(`company.sizes.${key.toUpperCase()}`), // You can use a more user-friendly label here if needed
-        value: SizeEnum[key as keyof typeof SizeEnum],
+      const options = Object.keys(SizeEnum).map(key => ({
+        name: i18n.t(`company.sizes.${key.toUpperCase()}`),
+        id: SizeEnum[key as keyof typeof SizeEnum],
       }))
+      return formatOptions(options)
     },
     optionsIndustryTypeList(): any {
-      return this.industryTypeList.map(type => ({
-        value: type.id,
-        label: type.name,
-      }),
-      )
+      return formatOptions(this.economicSectorList)
     },
     optionsLocationTypeList(): any {
-      return this.locationTypeList.map(type => ({
-        value: type.id,
-        label: type.name,
-      }))
+      return formatOptions(this.locationTypeList)
     },
     optionsDocuments(): any {
-      return this.documentTypes.map(type => ({
-        value: type.id,
-        label: type.name,
-      }))
+      return formatOptions(this.documentTypes)
     },
     optionsCountries(): any {
-      return this.countryList.map(country => ({
-        value: country.id,
-        label: country.name,
-      }))
+      return formatOptions(this.countryList)
     },
     optionsStates(): any {
-      return this.stateList.map(state => ({
-        value: state.id,
-        label: state.name,
-      }))
+      return formatOptions(this.stateList)
     },
     optionCities(): any {
-      return this.cityList.map(city => ({
-        value: city.id,
-        label: city.name,
-      }))
+      return formatOptions(this.cityList)
     },
     optionsVehicleTypeList(): any {
-      return this.vehicleTypeList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.vehicleTypeList)
     },
     optionsVehicleFuelList(): any {
-      return this.vehicleFuelList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.vehicleFuelList)
     },
     optionsVehicleLoadList(): any {
-      return this.vehicleLoadList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.vehicleLoadList)
     },
     optionsVehicleEfficiencyUnitList(): any {
-      return this.vehicleEfficiencyUnitList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.vehicleEfficiencyUnitList)
     },
     optionsMethodologiesList(): any {
-      return this.methodologiesList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.methodologiesList)
     },
     optionsFuelStorageList(): any {
-      return this.fuelStorageList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.fuelStorageList, '', '', false)
     },
     optionsFuelStorageManagementList(): any {
-      return this.fuelStorageManagementList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.fuelStorageManagementList, '', '', false)
     },
     optionsElectricitySourceList(): any {
-      return this.electricitySourceList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.electricitySourceList)
     },
     optionsRefrigerantSourceList(): any {
-      return this.refrigerantSourceList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.refrigerantSourceList)
     },
     optionsRefrigerantDisposalList(): any {
-      return this.refrigerantDisposalList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.refrigerantDisposalList)
     },
     optionsRefrigerantMaintenanceAndRepairList(): any {
-      return this.refrigerantMaintenanceAndRepairList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.refrigerantMaintenanceAndRepairList)
     },
     optionsRefrigerantCapacityUnitList(): any {
-      return this.refrigerantCapacityUnitList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.refrigerantCapacityUnitList)
     },
     optionsWasteRegisterList(): any {
-      return this.wasteRegisterList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.wasteRegisterList)
     },
     optionsOperationWasteList(): any {
-      return this.operationWasteList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.operationWasteList)
     },
     optionsOperationWasteEmptyLabelList(): any {
       return this.operationWasteList.map(type => ({
@@ -193,97 +127,52 @@ export const useBasicStore = defineStore('basic', {
       }))
     },
     optionsGoodsAndServiceOriginList(): any {
-      return this.goodsAndServiceOriginList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.goodsAndServiceOriginList)
     },
     optionsServiceAcquiredList(): any {
-      return this.serviceAcquiredList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.serviceAcquiredList)
     },
     optionsGoodsAcquiredList(): any {
-      return this.goodsAcquiredList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.goodsAcquiredList)
     },
     optionsGoodsAndServiceList(): any {
-      return this.goodsAndServiceList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.goodsAndServiceList)
     },
     optionSupplierActionImplementationList(): any {
-      return this.supplierActionImplementationList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.supplierActionImplementationList)
     },
     optionAssetLeasedList(): any {
-      return this.assetLeasedList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.assetLeasedList)
     },
     optionDurationList(): any {
-      return this.durationList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.durationList)
     },
     optionInvestmentList(): any {
-      return this.investmentList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.investmentList)
     },
     optionWasteTypeList(): any {
-      return this.wasteTypeList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.wasteTypeList)
     },
     optionWasteOrganicList(): any {
-      return this.wasteOrganicList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.wasteOrganicList)
     },
     optionWasteInorganicList(): any {
-      return this.wasteInorganicList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.wasteInorganicList)
     },
     optionWasteDangerList(): any {
-      return this.wasteDangerList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.wasteDangerList)
     },
     optionsWasteManagementList(): any {
       return []
     },
     optionWasteManagementOrganicList(): any {
-      return this.wasteManagementOrganicList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.wasteManagementOrganicList)
     },
     optionWasteManagementInorganicList(): any {
-      return this.wasteManagementInorganicList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.wasteManagementInorganicList)
     },
     optionWasteManagementDangerList(): any {
-      return this.wasteManagementDangerList.map(type => ({
-        value: type,
-        label: type,
-      }))
+      return formatOptions(this.wasteManagementDangerList)
     },
   },
   actions: {
