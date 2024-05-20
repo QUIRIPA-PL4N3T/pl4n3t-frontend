@@ -6,7 +6,7 @@ const showTable = ref(false)
 const emissionFactorStore = useEmissionFactorStore()
 const { optionsMonths } = storeToRefs(emissionFactorStore)
 const emissionSourceStore = useEmissionSourceStore()
-const { currentGlobalLocation } = storeToRefs(emissionSourceStore)
+const { currentGlobalLocationId } = storeToRefs(emissionSourceStore)
 const { t } = useI18n()
 
 function submitForm() {
@@ -18,7 +18,7 @@ function submitForm() {
   <div class="w-full h-full">
     <div class="lg:col-span-4 col-span-12 space-y-5">
       <Card
-        v-if="currentGlobalLocation"
+        v-if="currentGlobalLocationId"
         :title="t('liquidation.form')"
       >
         <form @submit.prevent="submitForm">

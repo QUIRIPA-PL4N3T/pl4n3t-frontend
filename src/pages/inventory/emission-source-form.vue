@@ -15,6 +15,7 @@ const { user } = storeToRefs(authStore)
 const emissionSourceStore = useEmissionSourceStore()
 const classificationStore = useClassificationStore()
 const documentStore = useDocumentsStore()
+const { currentGlobalLocationId } = storeToRefs(emissionSourceStore)
 
 const { inventoriableClassificationGroups } = storeToRefs(classificationStore)
 const { currentEmissionSource } = storeToRefs(emissionSourceStore)
@@ -135,6 +136,11 @@ setSelectGroupById(currentEmissionSource.value.group!)
                   v-model="selectedGroupId"
                   type="hidden"
                   name="group"
+                />
+                <FormKit
+                  :value="currentGlobalLocationId.id"
+                  type="hidden"
+                  name="location"
                 />
               </div>
             </div>

@@ -5,7 +5,7 @@ const router = useRouter()
 const classificationStore = useClassificationStore()
 const { classificationGroups } = storeToRefs(classificationStore)
 const emissionSourceStore = useEmissionSourceStore()
-const { currentGlobalLocation } = storeToRefs(emissionSourceStore)
+const { currentGlobalLocationId } = storeToRefs(emissionSourceStore)
 const { t } = useI18n()
 
 function filterByGroup(id: number) {
@@ -25,7 +25,7 @@ function goRegisterActivity(id: number) {
   <div class="w-full h-full">
     <div class="lg:col-span-4 col-span-12 space-y-5">
       <Card
-        v-if="currentGlobalLocation"
+        v-if="currentGlobalLocationId"
         :title="t('activities.modal.title')"
       >
         <div class="flex gap-3 items-baseline overflow-auto">

@@ -9,7 +9,7 @@ const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
 const { inventoriableClassificationGroups } = storeToRefs(classificationStore)
 const emissionSourceStore = useEmissionSourceStore()
-const { currentGlobalLocation } = storeToRefs(emissionSourceStore)
+const { currentGlobalLocationId } = storeToRefs(emissionSourceStore)
 
 function goEditEmissionSource(id: number) {
   router.push({
@@ -24,18 +24,23 @@ function filterByGroup(id: number) {
 }
 
 watch(() => user.value, () => {
-  if (user.value && !Number.isNaN(currentGlobalLocation.value))
-    emissionSourceStore.fetchEmissionSourcesByLocation(Number(currentGlobalLocation.value))
+  if (user.value && currentGlobalLocationId.value && !Number.isNaN(currentGlobalLocationId.value))
+    emissionSourceStore.fetchEmissionSourcesByLocation(Number(currentGlobalLocationId.value))
 })
 
 const { t } = useI18n()
+
+watch(() => currentGlobalLocationId.value, () => {
+  if (currentGlobalLocationId.value)
+    emissionSourceStore.fetchEmissionSourcesByLocation(Number(currentGlobalLocationId.value))
+})
 </script>
 
 <template>
   <div class="w-full h-full">
     <div class="lg:col-span-4 col-span-12 space-y-5">
       <Card
-        v-if="currentGlobalLocation"
+        v-if="currentGlobalLocationId"
         :title="t('equipments.modal.title')"
       >
         <div class="flex gap-3 items-baseline overflow-auto">

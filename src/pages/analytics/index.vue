@@ -2,13 +2,13 @@
 import { storeToRefs } from 'pinia'
 
 const emissionSourceStore = useEmissionSourceStore()
-const { currentGlobalLocation } = storeToRefs(emissionSourceStore)
+const { currentGlobalLocationId } = storeToRefs(emissionSourceStore)
 const { t } = useI18n()
 </script>
 
 <template>
   <Card
-    v-if="currentGlobalLocation"
+    v-if="currentGlobalLocationId"
     :title="t('analytics.title')"
   >
     ...

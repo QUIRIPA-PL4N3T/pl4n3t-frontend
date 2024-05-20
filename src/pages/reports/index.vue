@@ -7,7 +7,7 @@ const period = ref('')
 const methodology = ref('ghgProtocol')
 const format = ref('pdf')
 const emissionSourceStore = useEmissionSourceStore()
-const { currentGlobalLocation } = storeToRefs(emissionSourceStore)
+const { currentGlobalLocationId } = storeToRefs(emissionSourceStore)
 
 function generateReport() {
   // Report generator
@@ -18,7 +18,7 @@ function generateReport() {
   <div class="w-full h-full">
     <div class="lg:col-span-4 col-span-12 space-y-5">
       <Card
-        v-if="currentGlobalLocation"
+        v-if="currentGlobalLocationId"
         :title="t('reports.title')"
       >
         <form class="flex flex-col gap-5" @submit="generateReport">
