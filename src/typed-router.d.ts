@@ -56,7 +56,7 @@ declare module 'vue-router/auto/routes' {
     'dashboard': RouteRecordInfo<'dashboard', '/dashboard', Record<never, never>, Record<never, never>>,
     'goals': RouteRecordInfo<'goals', '/goals', Record<never, never>, Record<never, never>>,
     'inventory': RouteRecordInfo<'inventory', '/inventory', Record<never, never>, Record<never, never>>,
-    'emission-source-edit': RouteRecordInfo<'emission-source-edit', '/emission-source-edit/:id', Record<never, never>, Record<never, never>>,
+    'emission-source-edit': RouteRecordInfo<'emission-source-edit', '/inventory/:id', Record<never, never>, Record<never, never>>,
     'membership': RouteRecordInfo<'membership', '/membership', Record<never, never>, Record<never, never>>,
     'profile': RouteRecordInfo<'profile', '/profile', Record<never, never>, Record<never, never>>,
     'reports': RouteRecordInfo<'reports', '/reports', Record<never, never>, Record<never, never>>,

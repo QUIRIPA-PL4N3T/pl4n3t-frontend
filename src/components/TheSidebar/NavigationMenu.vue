@@ -134,7 +134,7 @@ onMounted(() => {
       :class="`
       ${item.child ? 'item-has-children' : ''}
       ${activeSubmenu === i ? 'open' : ''}
-      ${$route.fullPath === item.link ? 'menu-item-active' : ''}`"
+      ${item.link && $route.fullPath.includes(item.link.toString()) ? 'menu-item-active' : ''}`"
       class="single-sidebar-menu"
     >
       <template v-if="shouldDisplayItem(item)">

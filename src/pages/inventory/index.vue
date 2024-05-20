@@ -23,9 +23,14 @@ function filterByGroup(id: number) {
   console.warn(id)
 }
 
-watch(() => user.value, () => {
-  if (user.value && currentGlobalLocationId.value && !Number.isNaN(currentGlobalLocationId.value))
+function fetchEmissionSources() {
+  if (!Number.isNaN(currentGlobalLocationId.value))
     emissionSourceStore.fetchEmissionSourcesByLocation(Number(currentGlobalLocationId.value))
+}
+
+watch(() => user.value, () => {
+  if (user.value && currentGlobalLocationId.value)
+    fetchEmissionSources()
 })
 
 const { t } = useI18n()
@@ -34,6 +39,8 @@ watch(() => currentGlobalLocationId.value, () => {
   if (currentGlobalLocationId.value)
     emissionSourceStore.fetchEmissionSourcesByLocation(Number(currentGlobalLocationId.value))
 })
+
+fetchEmissionSources()
 </script>
 
 <template>

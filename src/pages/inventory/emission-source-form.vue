@@ -207,7 +207,7 @@ setSelectGroupById(currentEmissionSource.value.group!)
 </template>
 
 <route lang="yaml">
-path: '/emission-source-edit/:id'
+path: '/inventory/:id'
 name: emission-source-edit
 meta:
   layout: sidebar
