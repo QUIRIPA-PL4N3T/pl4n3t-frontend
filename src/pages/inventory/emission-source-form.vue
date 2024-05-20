@@ -179,6 +179,7 @@ setSelectGroupById(currentEmissionSource.value.group!)
               <div class="space-y-5">
                 <Button
                   :text="t('save')"
+                  type="submit"
                   btn-class="btn-dark"
                 />
               </div>

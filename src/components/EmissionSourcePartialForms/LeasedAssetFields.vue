@@ -94,13 +94,14 @@ watch(() => selectedFactorTypeId.value, () => {
         type="select"
         name="factor_type"
         :options="optionFactorTypes"
+        validation="required"
         @onchange="filterEmissionFactors"
       />
       <FormKit
         :label="t('emissionSource.emission_factor')"
         outer-class="md:col-span-2"
         type="select"
-
+        validation="required"
         name="emission_factor"
         :options="optionsFilteredEmissionFactors"
       />
@@ -126,7 +127,8 @@ watch(() => selectedFactorTypeId.value, () => {
       type="radio"
       :label="t('emissionSource.vapor_generation_question')"
       :options="{ yes: t('yes'), no: t('no') }"
-      outer-class="md:col-span-2"
+      outer-class="md:col-span-4"
+      name="exist_steam_specific_factor"
       fieldset-class="$remove:max-w-md"
       :classes="{
         fieldset: 'max-w-full',

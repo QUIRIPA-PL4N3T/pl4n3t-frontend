@@ -4,7 +4,7 @@ import { mainApi } from '~/api'
 import { SizeEnum } from '~/api-client'
 import type { City, Country, DocumentType, EconomicSector, IndustryType, LocationType, State, UnitOfMeasure } from '~/api-client'
 import { i18n } from '~/modules/i18n'
-import { formatOptions, handleError } from '~/utilities/utils'
+import { formatOptions } from '~/utilities/utils'
 
 export const useBasicStore = defineStore('basic', {
   state: () => ({

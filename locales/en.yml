@@ -81,6 +81,8 @@ emissionSource:
   edit: Emission Source Editing
   efficiency_label: Energy efficiency of the emissionSource or system that uses the fuel
   efficiency_unit_label: Unit of measurement
+  emission_factor: Emission Factor
+  factor_type: Type of Emission Factor
   fuel_storage_label: Fuel storage
   fuel_storage_management_label: Fuel Management
   group: Cluster

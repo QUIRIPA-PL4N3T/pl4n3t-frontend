@@ -81,6 +81,7 @@ declare module 'vue' {
     ProductFields: typeof import('./components/EmissionSourcePartialForms/ProductFields.vue')['default']
     ProductRegisterFields: typeof import('./components/ActivityRegisterPartialForm/ProductRegisterFields.vue')['default']
     Products: typeof import('./components/Analytics-Component/Products.vue')['default']
+    ProductSearch: typeof import('./components/ProductSearch/index.vue')['default']
     Profile: typeof import('./components/TheHeader/navTools/profile.vue')['default']
     ProgressBar: typeof import('./components/ProgressBar/index.vue')['default']
     ProjectGrid: typeof import('./components/Skeleton/Project-grid.vue')['default']

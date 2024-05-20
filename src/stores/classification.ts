@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { useLocalStorage } from '@vueuse/core'
 import { emissionFactorApi, emissionSourceGroupApi, quantificationTypeApi, sourceTypeApi } from '~/api'
 import type { EmissionFactor, EmissionSourceGroup, FactorType, QuantificationType, SourceType } from '~/api-client'
+import { formatOptions } from '~/utilities/utils'
 
 export const useClassificationStore = defineStore('classification', {
   state: () => ({
@@ -18,39 +19,19 @@ export const useClassificationStore = defineStore('classification', {
       return this.classificationGroups.filter(group => group.allow_inventory)
     },
     optionsQuantificationTypes(): any {
-      return this.quantificationTypes.map((type: any) => ({
-        label: type.name,
-        value: type.id,
-      }),
-      )
+      return formatOptions(this.quantificationTypes)
     },
     optionGroups(): any {
-      return this.classificationGroups.map((type: any) => ({
-        label: type.name,
-        value: type.id,
-      }),
-      )
+      return formatOptions(this.classificationGroups)
     },
     optionFactorTypes(): any {
-      return this.factorTypes.map((type: any) => ({
-        label: type.name,
-        value: type.id,
-      }),
-      )
+      return formatOptions(this.factorTypes)
     },
     optionSourceTypes(): any {
-      return this.sourceTypes.map((type: any) => ({
-        label: type.name,
-        value: type.id,
-      }),
-      )
+      return formatOptions(this.sourceTypes)
     },
     optionsFilteredEmissionFactors(): any {
-      return this.filteredEmissionFactors.map((type: any) => ({
-        label: type.name,
-        value: type.id,
-      }),
-      )
+      return formatOptions(this.filteredEmissionFactors)
     },
   },
   actions: {
@@ -76,6 +57,15 @@ export const useClassificationStore = defineStore('classification', {
     async getCommonEquipments(search: string) {
       try {
         const { data } = await emissionSourceGroupApi.classificationsEquipmentsSearchRetrieve({ search })
+        return data
+      }
+      catch (error) {
+        console.error(error)
+      }
+    },
+    async getCommonProducts(search: string) {
+      try {
+        const { data } = await emissionSourceGroupApi.classificationsProductsSearchRetrieve({ search })
         return data
       }
       catch (error) {
