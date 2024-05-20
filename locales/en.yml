@@ -39,3 +39,38 @@ register:
   link: SIGN IP
   text: Sign up
 signInSocial: Or continue with
+profile:
+  title: Profile
+  titles:
+    basic_title: Datos basicos
+    basic_subtitle: Aqui podras actualizar tus datos basicos
+    password_title: Actulizar contrasena
+    password_subtitle: Actuliazar tu contrase, ten encuenta que se cerrara tu sesion
+  button_form: Update
+  alerts:
+    profile_success: Datos de perfil actualizado
+    password_success: Contrasena actualizada
+    avatar_success: Contrasena actualizada
+    error: Hubo un error al actualizar los datos
+  fields:
+    old_password:
+      label: Lasted password
+      placeholder: '****'
+    new_password:
+      label: New password
+      placeholder: '****'
+    confirm_password:
+      label: Confirm Password
+      placeholder: '****'
+    username:
+      label: User
+      placeholder: Joe15
+    first_name:
+      label: Name
+      placeholder: Joe moe
+    last_name:
+      label: Last name
+      placeholder: Doe
+    email:
+      label: E-mail
+      placeholder: 'email@:gmail.com'

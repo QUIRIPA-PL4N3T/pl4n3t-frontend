@@ -1,12 +1,14 @@
 import Cookies from 'js-cookie'
 import { defineStore } from 'pinia'
 import { accountApi } from '~/api'
-import type { UserModel } from '~/api-client'
+import type { UpdatePassword, UserModel } from '~/api-client'
 import setupInterceptors from '~/api/interceptors'
+import { DEFAULT_UPDATE_PASSWORD } from '~/api/modelsDefaults'
 
 export const useAuthStore = defineStore('auth', {
   state: (): any => ({
     user: <UserModel | null>(null),
+    password: <UpdatePassword>(DEFAULT_UPDATE_PASSWORD),
     accessToken: null,
     refreshToken: Cookies.get('refreshToken') || null,
     interceptorConfigured: false,
@@ -141,6 +143,12 @@ export const useAuthStore = defineStore('auth', {
     },
     async recoverPasswordChange(resetPassword: any) {
       await accountApi.accountsChangePasswordCreate({ resetPassword })
+    },
+    async updateUser() {
+      await accountApi.accountsUserCreate({ userModel: this.user, username: this.user.username })
+    },
+    async updatePassword() {
+      await accountApi.accountsUpdatePasswordCreate({ updatePassword: this.password })
     },
   },
 })
