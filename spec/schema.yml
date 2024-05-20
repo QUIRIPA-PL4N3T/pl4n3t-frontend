@@ -3329,7 +3329,7 @@ components:
           maximum: 2147483647
           minimum: -2147483648
           title: Empleados
-        emission_source_locations:
+        emission_sources:
           type: array
           items:
             $ref: '#/components/schemas/EmissionsSource'
@@ -3337,7 +3337,7 @@ components:
       required:
         - address
         - company
-        - emission_source_locations
+        - emission_sources
         - id
         - name
         - zip_code
@@ -4069,7 +4069,7 @@ components:
           maximum: 2147483647
           minimum: -2147483648
           title: Empleados
-        emission_source_locations:
+        emission_sources:
           type: array
           items:
             $ref: '#/components/schemas/EmissionsSource'
