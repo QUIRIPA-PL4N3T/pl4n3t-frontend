@@ -7,6 +7,7 @@ const selectedGroup = ref<EmissionSourceGroup | undefined>(undefined)
 const selectedGroupId = ref(0)
 const selectedFactorTypeId = ref(0)
 const disabledSourceType = ref<boolean>(false)
+const groupContainerRef = ref<HTMLDivElement | null>(null)
 
 const { t } = useI18n()
 const authStore = useAuthStore()
@@ -46,8 +47,10 @@ async function uploadDocument(event: Event) {
 }
 
 watch(() => user.value, () => {
-  if (user.value)
-    emissionSourceStore.fetchEmissionSource(Number(props.id))
+  if (!user.value)
+    return
+  emissionSourceStore.fetchEmissionSource(Number(props.id))
+  setSelectGroupById(currentEmissionSource.value.group!)
 })
 
 watch(() => selectedFactorTypeId.value, () => {
@@ -74,12 +77,17 @@ function setSelectGroup(group: EmissionSourceGroup) {
   }
 }
 
-function setSelectGroupById(id: number) {
-  if (id !== 0)
-    selectedGroup.value = inventoriableClassificationGroups.value.find(group => group.id === id)
+function setSelectedGroupFocus(id: number) {
+  const selectedElement = groupContainerRef.value?.querySelector(`button[data-group-id="${id}"]`)
+  selectedElement?.scrollIntoView({ behavior: 'smooth', inline: 'center' })
 }
 
-emissionSourceStore.fetchEmissionSource(Number(props.id))
+function setSelectGroupById(id: number) {
+  if (id !== 0) {
+    selectedGroup.value = inventoriableClassificationGroups.value.find(group => group.id === id)
+    setSelectedGroupFocus(id)
+  }
+}
 
 setSelectGroupById(currentEmissionSource.value.group!)
 </script>
@@ -87,7 +95,7 @@ setSelectGroupById(currentEmissionSource.value.group!)
 <template>
   <div class="xl:col-span-2">
     <Card :title="`${t('emissionSource.edit')} ${currentEmissionSource.name}`">
-      <div class="flex gap-3 items-stretch overflow-auto pb-5">
+      <div ref="groupContainerRef" class="flex gap-3 items-stretch overflow-auto pb-5">
         <div
           v-for="(group, i) in inventoriableClassificationGroups"
           :key="i"
@@ -95,6 +103,7 @@ setSelectGroupById(currentEmissionSource.value.group!)
         >
           <button
             class="relative flex w-40 hover:bg-black-100 justify-center h-full"
+            :data-group-id="group.id"
             :class="{ 'border-indigo-600 rounded  bg-black-200 border-2': group.id === selectedGroupId }"
             @click.prevent="setSelectGroup(group)"
           >
