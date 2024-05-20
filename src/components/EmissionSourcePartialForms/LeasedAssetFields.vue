@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import Multiselect from '@vueform/multiselect'
 
 const selectedFactorTypeId = ref(0)
 const sourceTypeId = ref(0)
@@ -31,18 +30,6 @@ function filterEmissionFactors() {
 watch(() => selectedFactorTypeId.value, () => {
   classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value, sourceTypeId.value)
 })
-
-const activities = [
-  'Actividad 1',
-  'Actividad 2',
-  'Actividad 3',
-]
-
-const equipments = [
-  'Equipo 1',
-  'Equipo 2',
-  'Equipo 3',
-]
 </script>
 
 <template>
@@ -92,27 +79,15 @@ const equipments = [
       />
     </div>
     <div class="mb-5">
-      <label for="multiselect" class="mb-5">{{ t('emissionSource.process_label') }}</label>
-      <Multiselect
+      <ActivitySearch
         v-model="activityValue"
-        mode="tags"
-        :close-on-select="true"
-        :searchable="true"
-        :create-option="true"
-        :options="activities"
-        :max="1"
+        :label="t('emissionSource.process_label')"
       />
     </div>
     <div class="mb-5">
-      <label for="multiselect" class="mb-5">{{ t('emissionSource.type') }}</label>
-      <Multiselect
+      <EquipmentSearch
         v-model="equipmentValue"
-        mode="tags"
-        :close-on-select="true"
-        :searchable="true"
-        :create-option="true"
-        :options="equipments"
-        :max="1"
+        :label="t('emissionSource.type')"
       />
     </div>
     <!-- Emission factor select -->

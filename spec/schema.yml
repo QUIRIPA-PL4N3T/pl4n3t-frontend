@@ -343,6 +343,71 @@ paths:
           description: El Usuario no existe
         '400':
           description: Usted no tiene permiso para eliminar este usuario
+  /api/classifications/activities/:
+    get:
+      operationId: classificationsActivitiesList
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      tags:
+        - EmissionSourceGroups
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommonActivity'
+          description: ''
+    post:
+      operationId: classificationsActivitiesCreate
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      tags:
+        - EmissionSourceGroups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommonActivity'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CommonActivity'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CommonActivity'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonActivity'
+          description: ''
+  /api/classifications/activities/search/:
+    get:
+      operationId: classificationsActivitiesSearchRetrieve
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      summary: Buscar por un texto
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: texto a buscar
+      tags:
+        - EmissionSourceGroups
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonActivity'
+          description: ''
   /api/classifications/emission-source-groups/:
     get:
       operationId: classificationsEmissionSourceGroupsList
@@ -381,6 +446,71 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EmissionSourceGroup'
+          description: ''
+  /api/classifications/equipments/:
+    get:
+      operationId: classificationsEquipmentsList
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      tags:
+        - EmissionSourceGroups
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommonEquipment'
+          description: ''
+    post:
+      operationId: classificationsEquipmentsCreate
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      tags:
+        - EmissionSourceGroups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommonEquipment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CommonEquipment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CommonEquipment'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonEquipment'
+          description: ''
+  /api/classifications/equipments/search/:
+    get:
+      operationId: classificationsEquipmentsSearchRetrieve
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      summary: Buscar por un texto
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: texto a buscar
+      tags:
+        - EmissionSourceGroups
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonEquipment'
           description: ''
   /api/classifications/ghg-scopes/:
     get:
@@ -2152,6 +2282,32 @@ components:
         - name
         - slug
         - state
+    CommonActivity:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre de la actividad
+          maxLength: 255
+      required:
+        - id
+        - name
+    CommonEquipment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre del equipo
+          maxLength: 255
+      required:
+        - id
+        - name
     Company:
       type: object
       properties:

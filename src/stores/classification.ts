@@ -64,6 +64,24 @@ export const useClassificationStore = defineStore('classification', {
       else
         this.factorTypes = []
     },
+    async getCommonActivities(search: string) {
+      try {
+        const { data } = await emissionSourceGroupApi.classificationsActivitiesSearchRetrieve({ search })
+        return data
+      }
+      catch (error) {
+        console.error(error)
+      }
+    },
+    async getCommonEquipments(search: string) {
+      try {
+        const { data } = await emissionSourceGroupApi.classificationsEquipmentsSearchRetrieve({ search })
+        return data
+      }
+      catch (error) {
+        console.error(error)
+      }
+    },
     filterEmissionFactorByType(id: number, source_type?: number) {
       if (source_type)
         this.filteredEmissionFactors = this.emissionFactors.filter(item => item.factor_type === id && item.source_type === source_type)

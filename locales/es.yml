@@ -90,7 +90,6 @@ emission:
 emission source-edit:
   title: Registro de Inventario
 emissionSource:
-  edit: Edición de Fuente de Emisión
   add: Agregar
   asset_duration_label: unidad
   asset_duration_value_label: Duración del contrato de arrendamiento
@@ -109,6 +108,7 @@ emissionSource:
       * Para qué propósitos se utiliza el combustible.
       * Variación estacional en el consumo de combustible.
       * Implementación de medidas para reducir el consumo.
+  edit: Edición de Fuente de Emisión
   efficiency_help: Dato numérico, puede incluir decimales.
   efficiency_label: Eficiencia energética del equipo o sistema que usa el combustible
   efficiency_unit_label: Unidad de medida
@@ -300,6 +300,9 @@ menu:
 no: No
 no_apply: No Aplica
 notResultFound: No se encontrarón Resultados
+optionCreated: Opción Creada
+optionCreationFailed: Creación de la Opción Fallida
+optionLoadingFailed: Carga de la opción fallida
 password: Contraseña
 register:
   account-activation: Debe ingresar a su correo para continuar con la activación de su cuenta

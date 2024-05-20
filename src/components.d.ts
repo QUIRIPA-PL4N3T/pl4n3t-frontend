@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     Accordion: typeof import('./components/Accordion/index.vue')['default']
     ActivitiesTable: typeof import('./components/PlanetComponents/ActivitiesTable.vue')['default']
+    ActivitySearch: typeof import('./components/ActivitySearch/index.vue')['default']
     Alert: typeof import('./components/Alert/index.vue')['default']
     Badge: typeof import('./components/Badge/index.vue')['default']
     BankTable: typeof import('./components/Analytics-Component/BankTable.vue')['default']
@@ -35,6 +36,7 @@ declare module 'vue' {
     ElectricityFields: typeof import('./components/EmissionSourcePartialForms/ElectricityFields.vue')['default']
     ElectricityRegisterFields: typeof import('./components/ActivityRegisterPartialForm/ElectricityRegisterFields.vue')['default']
     EmissionSourcesTable: typeof import('./components/PlanetComponents/EmissionSourcesTable.vue')['default']
+    EquipmentSearch: typeof import('./components/EquipmentSearch/index.vue')['default']
     Etable: typeof import('./components/Analytics-Component/Etable.vue')['default']
     Fileinput: typeof import('./components/Fileinput/index.vue')['default']
     FooterMenu: typeof import('./components/PlanetFooter/FooterMenu.vue')['default']
@@ -47,6 +49,7 @@ declare module 'vue' {
     HorizontalNav: typeof import('./components/TheHeader/horizontal-nav.vue')['default']
     Icon: typeof import('./components/Icon/index.vue')['default']
     Image: typeof import('./components/Image/index.vue')['default']
+    Indes: typeof import('./components/ActivitySearch/indes.vue')['default']
     InputGroup: typeof import('./components/InputGroup/index.vue')['default']
     InvestmentFields: typeof import('./components/EmissionSourcePartialForms/InvestmentFields.vue')['default']
     InvestmentRegisterFields: typeof import('./components/ActivityRegisterPartialForm/InvestmentRegisterFields.vue')['default']

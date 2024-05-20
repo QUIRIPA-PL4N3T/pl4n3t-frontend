@@ -58,8 +58,12 @@ email: Email
 emission:
   sources: Emission Sources
 emissionSource:
-  edit: Emission Source Editing
   add: Add
+  attach:
+    help: >-
+      Please select the supporting documents such as (resume, certificates,
+      maintenance or others)
+    label: Attach Supports
   code: Code
   description: Description
   description_help: >-
@@ -71,6 +75,7 @@ emissionSource:
     * Seasonal variation in fuel consumption.
 
     * Implementation of measures to reduce consumption.
+  edit: Emission Source Editing
   efficiency_label: Energy efficiency of the emissionSource or system that uses the fuel
   efficiency_unit_label: Unit of measurement
   fuel_storage_label: Fuel storage
@@ -153,6 +158,8 @@ membership:
   userLimit: Users Number
   workersLimit: Employee Limit
 notResultFound: No results found
+optionCreated: Created Option
+optionCreationFailed: Creation of the Failed Option
 password: Password
 register:
   buttonLogin: Create An Account
