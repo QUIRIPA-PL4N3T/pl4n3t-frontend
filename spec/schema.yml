@@ -1885,25 +1885,9 @@ paths:
                 items:
                   $ref: '#/components/schemas/UnitOfMeasure'
           description: ''
-  /api/memberships/company-memberships/:
+  /api/memberships/company/{id}/:
     get:
-      operationId: membershipsCompanyMembershipsList
-      tags:
-        - Memberships
-      security:
-        - jwtAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CompanyMembership'
-          description: ''
-  /api/memberships/company-memberships/{id}/:
-    get:
-      operationId: membershipsCompanyMembershipsRetrieve
+      operationId: membershipsCompanyRetrieve
       parameters:
         - in: path
           name: id
@@ -1965,11 +1949,23 @@ paths:
         '400':
           description: Solicitud incorrecta
   /api/memberships/success/:
-    get:
-      operationId: membershipsSuccessRetrieve
+    post:
+      operationId: membershipsSuccessCreate
       description: Verificación de pago de membresía exitosa
       tags:
         - Memberships
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentVerification'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PaymentVerification'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PaymentVerification'
+        required: true
       security:
         - jwtAuth: []
       responses:
@@ -1992,27 +1988,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Membership'
-          description: ''
-  /api/memberships/types/{id}/:
-    get:
-      operationId: membershipsTypesRetrieve
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          description: A unique integer value identifying this membership.
-          required: true
-      tags:
-        - Memberships
-      security:
-        - jwtAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Membership'
           description: ''
   /documentation/schema.yml:
     get:
@@ -2319,6 +2294,10 @@ components:
           nullable: true
     CompanyMembership:
       type: object
+      description: |-
+        This view returns the membership for the company associated with the currently authenticated user.
+        Since a company can only have one membership, this ensures that the user views or interacts with
+        only their company's membership.
       properties:
         id:
           type: integer
@@ -2327,8 +2306,11 @@ components:
           type: integer
           nullable: true
         membership:
-          type: integer
-          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Membership'
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/StatusEnum'
         start_date:
           type: string
           format: date-time
@@ -2339,6 +2321,7 @@ components:
       required:
         - end_date
         - id
+        - membership
         - start_date
     Configuration:
       type: object
@@ -3323,6 +3306,7 @@ components:
           type: string
           format: date-time
           readOnly: true
+          title: Fecha de creación
         tags:
           type: string
           nullable: true
@@ -3624,6 +3608,19 @@ components:
       required:
         - excluded_payment_methods
         - excluded_payment_types
+    PaymentVerification:
+      type: object
+      properties:
+        preference_id:
+          type: string
+          description: ID de preferencia de MercadoPago para verificar el estado del
+            pago.
+        company_id:
+          type: string
+          description: ID de la Compañía
+      required:
+        - company_id
+        - preference_id
     Phone:
       type: object
       properties:
@@ -3778,9 +3775,11 @@ components:
       properties:
         first_name:
           type: string
+          title: Nombre
           maxLength: 150
         last_name:
           type: string
+          title: Apellidos
           maxLength: 150
         email:
           type: string
@@ -3789,6 +3788,7 @@ components:
           maxLength: 254
         password:
           type: string
+          title: Contraseña
           maxLength: 128
       required:
         - email
@@ -3877,6 +3877,20 @@ components:
         - id
         - name
         - slug
+    StatusEnum:
+      enum:
+        - PENDING
+        - PAID
+        - CANCELED
+        - EXPIRED
+        - AWAITING_PAYMENT
+      type: string
+      description: |-
+        * `PENDING` - Pending
+        * `PAID` - Paid
+        * `CANCELED` - Canceled
+        * `EXPIRED` - Expired
+        * `AWAITING_PAYMENT` - Awaiting Payment
     TokenOutput:
       type: object
       properties:
@@ -3997,15 +4011,18 @@ components:
           readOnly: true
         username:
           type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
-            only.
+          title: Nombre de usuario
+          description: 'Requerido. 150 carácteres como máximo. Únicamente letras,
+            dígitos y @/./+/-/_ '
           pattern: ^[\w.@+-]+$
           maxLength: 150
         first_name:
           type: string
+          title: Nombre
           maxLength: 150
         last_name:
           type: string
+          title: Apellidos
           maxLength: 150
         email:
           type: string

@@ -40,7 +40,7 @@ my_membership:
   title_memberships: Last memberships buyed
   title: Actually do you have
   company: This membership has associate to company
-  subtitle: Dates importat of your membership
+  subtitle: Dates important of your membership
   end_date: You memberaship finally
   start_date: Init of membership
   button: Change of plan
@@ -57,6 +57,10 @@ purchase_membership:
   footer: Thank for confidense on ours
   footer-total: Total
   button: Pay
+  alerts:
+    pre_success: Ya puedes continuar con el pago
+    success: El pago se ha solicitado exitosamenta, cargando detalles de compra...,
+    error: El pago no se ha completado, intentalo en un momento
   fields:
     name:
       label: Full name

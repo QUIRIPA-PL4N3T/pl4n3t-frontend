@@ -7,12 +7,9 @@ const { t } = useI18n()
 const router = useRouter()
 
 const { company } = storeToRefs(companyStore)
-const { currentMembership, companyMembership, companyMemberships } = storeToRefs(membershipsStore)
+const { currentMembership, companyMembership } = storeToRefs(membershipsStore)
 
-membershipsStore.fetchCompanyMembership(Number(company.value.id)).then(() => {
-  if (companyMembership.value.membership)
-    membershipsStore.fetchMembership(companyMembership.value?.membership)
-})
+membershipsStore.fetchCompanyMembership(Number(company.value.id))
 
 function viewPlans() {
   router.push({
@@ -24,29 +21,11 @@ function viewPlans() {
 <template>
   <div class="flex justify-center items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
-      <div class="grid grid-rows-4 grid-flow-col gap-4">
-        <div class="row-span-4">
-          <Card class="max-w-lg w-full p-8 mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl text-black font-normal mb-4">
-              {{ t('my_membership.title_memberships') }}
-            </h2>
-            <hr>
-            <div
-              v-for="(compMembership, i) in companyMemberships" :key="i"
-              class="flex"
-            >
-              <MembershipMiniCard :company-membership="compMembership" />
-            </div>
-            <div
-              class="flex flex-col items-center justify-center m-4"
-            >
-              <h4 class="text-2xl text-slate-600 dark:text-slate-300 font-medium">
-                {{ t('not_found') }}
-              </h4>
-            </div>
-          </Card>
+      <div class="grid grid-rows-3 grid-flow-col gap-4">
+        <div class="row-span-3 text-left">
+          <MembershipCard :buy="false" :membership="currentMembership" />
         </div>
-        <div class="col-span-4">
+        <div class="col-span-1 row-span-">
           <Card class="max-w-lg w-full p-8 mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-left mb-4">
               <h2 class="text-2xl text-black font-normal">
@@ -84,9 +63,6 @@ function viewPlans() {
               </div>
             </div>
           </Card>
-        </div>
-        <div class="row-span-3 col-span-4 text-left">
-          <MembershipCard :buy="false" :membership="currentMembership" />
         </div>
       </div>
     </div>

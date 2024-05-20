@@ -6,31 +6,28 @@ import attrMembershipData from '~/stores/attr-membership.json'
 import type { AttrMembership } from '~/api/modelsDefaults'
 import {
   DEFAULT_COMPANY_MEMBERSHIP,
-  DEFAULT_MEMBERSHIPS,
+  DEFAULT_MEMBERSHIP,
   DEFAULT_PURCHASE,
 } from '~/api/modelsDefaults'
 
 export const useMembershipsStore = defineStore('membership', {
   state: () => ({
     membershipsTypes: <Membership[]>[],
-    companyMemberships: <CompanyMembership[]>[],
     companyMembership: <CompanyMembership>DEFAULT_COMPANY_MEMBERSHIP,
-    currentMembership: <Membership>DEFAULT_MEMBERSHIPS,
+    currentMembership: <Membership>DEFAULT_MEMBERSHIP,
     attrMembership: <AttrMembership[]>attrMembershipData,
     purchase: <Purchase>DEFAULT_PURCHASE,
+    preferenceResponse: <PreferenceResponse>{},
   }),
   getters: {
-    memberships(): Membership[] {
-      return this.memberships
-    },
-    getCurrentCompanyMembership(): CompanyMembership {
-      return this.companyMembership
-    },
-    getCurrentMembership(): Membership {
-      return this.currentMembership
-    },
     hasMemberships(): boolean {
-      return this.memberships.length > 0
+      return this.membershipsTypes.length > 0
+    },
+    getMembershipById(): any {
+      return (id: number) => {
+        const mem = this.membershipsTypes.find((membershipsType: Membership) => membershipsType.id === id)
+        return mem || DEFAULT_MEMBERSHIP
+      }
     },
   },
   actions: {
@@ -51,32 +48,17 @@ export const useMembershipsStore = defineStore('membership', {
     },
     async fetchCompanyMembership(id: number) {
       try {
-        const { data: companyMemberships } = await membershipsApi.membershipsCompanyMembershipsRetrieve({ id })
-        this.companyMemberships = companyMemberships
+        const { data } = await membershipsApi.membershipsCompanyRetrieve({ id })
+        this.companyMembership = data
       }
       catch (error) {
-        this.fetchMembership(1)
         this.companyMembership = DEFAULT_COMPANY_MEMBERSHIP
-      }
-    },
-    async fetchMembership(id: number) {
-      // Fetch Membership brand by id
-      if (id === 0) {
-        this.currentMembership = DEFAULT_MEMBERSHIPS
-        return
-      }
-
-      try {
-        const { data: currentMembership } = await membershipsApi.membershipsTypesRetrieve({ id })
-        this.currentMembership = currentMembership
-      }
-      catch (error) {
-        this.currentMembership = DEFAULT_MEMBERSHIPS
       }
     },
     async purchaseMembership(requestParameters: MembershipsApiMembershipsPurchaseCreateRequest) {
       try {
-        await membershipsApi.membershipsPurchaseCreate(requestParameters)
+        const { data } = await membershipsApi.membershipsPurchaseCreate(requestParameters)
+        this.preferenceResponse = data?.init_point
       }
       catch (error) {
         console.error(error)

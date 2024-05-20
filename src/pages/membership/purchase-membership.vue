@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useToast } from 'vue-toastification'
+import type { Membership } from '~/api-client'
 import PaymentFields from '~/components/Payment/PaymentFields.vue'
 import { handleError } from '~/utilities/utils'
 
@@ -11,28 +12,38 @@ const { t } = useI18n()
 const toast = useToast()
 let errorMessage = $ref<string>('')
 let processing = $ref<boolean>(false)
-let catchPayment = $ref<boolean>(false)
+const id = Number(router.currentRoute.value.params?.id)
+const mp = new MercadoPago(import.meta.env.VITE_MP_PUBLIC_KEY, {
+  locale: 'es',
+})
 
-const mp = new MercadoPago(import.meta.env.VITE_MP_PUBLIC_KEY)
-
-membershipsStore.fetchMembership(Number(router.currentRoute.value.params.id))
 const { company } = storeToRefs(companyStore)
-const { currentMembership, purchase } = storeToRefs(membershipsStore)
+const { purchase, getMembershipById, preferenceResponse } = storeToRefs(membershipsStore)
 
-function startMP(PREFERENCE_ID: string) {
+const membership = computed((): Membership => {
+  return getMembershipById.value(id)
+})
+
+const catchPayment = computed((): boolean => {
+  return !!preferenceResponse.value.id
+})
+
+function startMP(PREFERENCE_ID: string): void {
   mp.bricks().create('wallet', 'wallet_container', {
     initialization: {
       preferenceId: PREFERENCE_ID,
     },
     customization: {
-      texts: {
-        valueProp: currentMembership.value,
+      visual: {
+        style: {
+          theme: 'default',
+        },
       },
     },
   })
 }
 
-async function purchasePost() {
+async function purchaseMembership() {
   processing = true
   try {
     membershipsStore.purchaseLoadBackUrl({
@@ -43,14 +54,14 @@ async function purchasePost() {
     await membershipsStore.purchaseMembership({
       purchase: purchase.value,
       companyId: company.value.id,
-      membershipId: currentMembership.value.id,
+      membershipId: membership.value.id,
     }).then(() => {
       toast.success(t('purchase_membership.alerts.success'), {
         timeout: 2000,
       })
-      catchPayment = true
       processing = false
-      startMP('sadasdsa')
+      startMP(preferenceResponse.value.id)
+      // renderPaymentBrick(bricksBuilder)
     }).catch(() => {
       processing = false
       toast.error(t('purchase_membership.alerts.error'))
@@ -68,12 +79,12 @@ async function purchasePost() {
     <div class="text-center mb-12">
       <div class="w-full flex flex-wrap gap-2 justify-center">
         <div class="max-w-sm text-left">
-          <MembershipCard :buy="false" :membership="currentMembership" />
+          <MembershipCard :buy="false" :membership="membership" />
         </div>
         <div class="max-w-lg w-full p-8 mx-auto px-4 sm:px-6 lg:px-8 bg-white rounded-xl overflow-hidden shadow-lg">
           <div class="text-left mb-4">
             <h2 class="text-2xl text-black font-normal">
-              {{ t('purchase_membership.header') }} <span class="font-bold">{{ currentMembership?.name
+              {{ t('purchase_membership.header') }} <span class="font-bold">{{ membership?.name
               }}</span>
             </h2>
             <p class="text-gray-600">
@@ -86,7 +97,7 @@ async function purchasePost() {
               type="form"
               :actions="false"
               :incomplete-message="false"
-              @submit="purchasePost"
+              @submit="purchaseMembership"
             >
               <PaymentFields />
               <button
@@ -96,7 +107,11 @@ async function purchasePost() {
                 {{ t('purchase_membership.button') }}
               </button>
             </FormKit>
-            <div v-else id="wallet_container" class="w-full" />
+            <div v-else id="wallet_container" class="w-full my-4">
+              <h3 class="text-xl">
+                Mercado pago
+              </h3>
+            </div>
             <ElAlert v-if="errorMessage" class="mt-4" :title="errorMessage" type="error" show-icon />
           </div>
           <hr class="m-4">
@@ -104,7 +119,7 @@ async function purchasePost() {
             <h2 class="text-2xl text-black font-normal">
               {{ t('purchase_membership.footer-total') }}
               <span class="text-dark leading-10 font-medium">
-                ${{ currentMembership.price !== '0.00' ? currentMembership.price : 'FREE' }}
+                ${{ membership.price !== '0.00' ? membership.price : 'FREE' }}
               </span>
             </h2>
           </div>

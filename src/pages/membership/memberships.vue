@@ -10,6 +10,7 @@ const { company } = storeToRefs(companyStore)
 const { companyMembership, membershipsTypes } = storeToRefs(membershipsStore)
 
 membershipsStore.fetchCompanyMembership(company.value.id)
+membershipsStore.fetchMemberships()
 </script>
 
 <template>

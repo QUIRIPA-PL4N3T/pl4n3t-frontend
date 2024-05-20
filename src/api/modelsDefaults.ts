@@ -81,7 +81,7 @@ export const DEFAULT_DOCUMENT: DocumentsApiDocumentsCreateRequest = {
   title: '',
   tags: '',
 }
-export const DEFAULT_MEMBERSHIPS: Membership = {
+export const DEFAULT_MEMBERSHIP: Membership = {
   id: 1,
   name: 'Gratuito',
   membership_type: MembershipTypeEnum.Free,
@@ -108,31 +108,31 @@ export const DEFAULT_MEMBERSHIPS: Membership = {
 export const DEFAULT_COMPANY_MEMBERSHIP: CompanyMembership = {
   id: 1,
   company: 1,
-  membership: 1,
+  membership: DEFAULT_MEMBERSHIP,
   start_date: '2024-05-15T15:35:37.531Z',
   end_date: '2024-05-15T15:35:37.531Z',
 }
 
 export const DEFAULT_PURCHASE_PHONE: Phone = {
-  area_code: '',
-  number: '',
+  area_code: '57',
+  number: '3168314191',
 }
 
 export const DEFAULT_PURCHASE_IDENTIFICATION: Identification = {
   type: '1',
-  number: '',
+  number: '123456789',
 }
 
 export const DEFAULT_PURCHASE_ADDRESS: Address = {
-  street_name: '',
-  street_number: 0,
-  zip_code: '',
+  street_name: 'Calle 20',
+  street_number: 15,
+  zip_code: '50001',
 }
 
 export const DEFAULT_PAYER: Payer = {
-  name: '',
+  name: 'juan sebastian',
   surname: '',
-  email: '',
+  email: 'jstorres0211@gmail.com',
   phone: DEFAULT_PURCHASE_PHONE,
   identification: DEFAULT_PURCHASE_IDENTIFICATION,
   address: DEFAULT_PURCHASE_ADDRESS,
@@ -162,4 +162,48 @@ export interface AttrMembership {
    * @memberof Membership
    */
   attr: string
+}
+
+export interface InitPoint {
+  /**
+   *
+   * @type {string}
+   * @memberof InitPoint
+   */
+  expiration_date_from: string
+
+  /**
+   *
+   * @type {string}
+   * @memberof InitPoint
+   */
+  expiration_date_to: string
+
+  /**
+   *
+   * @type {string}
+   * @memberof InitPoint
+   */
+  expires: boolean
+
+  /**
+   *
+   * @type {string}
+   * @memberof InitPoint
+   */
+  external_reference: string
+
+  /**
+   *
+   * @type {string}
+   * @memberof InitPoint
+   */
+  id: string
+
+  /**
+   *
+   * @type {string}
+   * @memberof InitPoint
+   */
+  init_point: string
 }

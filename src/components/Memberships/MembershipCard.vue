@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import type { Membership } from '~/api-client'
-import { DEFAULT_MEMBERSHIPS } from '~/api/modelsDefaults'
+import { DEFAULT_MEMBERSHIP } from '~/api/modelsDefaults'
 
 const {
-  membership = DEFAULT_MEMBERSHIPS,
+  membership = DEFAULT_MEMBERSHIP,
   buy = true,
 } = defineProps<{
   membership: Membership
