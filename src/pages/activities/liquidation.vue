@@ -49,7 +49,7 @@ function submitForm() {
   </div>
 
   <div class="mt-4 bg-white rounded">
-    <EquipmentTable v-if="showTable" />
+    <EmissionSourcesTable v-if="showTable" />
   </div>
 </template>
 
