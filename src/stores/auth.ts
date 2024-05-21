@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
 import { defineStore } from 'pinia'
 import { accountApi } from '~/api'
-import type { UpdatePassword, UserModel } from '~/api-client'
+import type { AccountsApiAccountsAvatarCreateRequest, UpdatePassword, UserModel } from '~/api-client'
 import setupInterceptors from '~/api/interceptors'
 import { DEFAULT_UPDATE_PASSWORD } from '~/api/modelsDefaults'
 
@@ -148,7 +148,19 @@ export const useAuthStore = defineStore('auth', {
       await accountApi.accountsUserCreate({ userModel: this.user, username: this.user.username })
     },
     async updatePassword() {
-      await accountApi.accountsUpdatePasswordCreate({ updatePassword: this.password })
+      await accountApi.accountsUpdatePasswordCreate({ updatePassword: this.password }).then(() => {
+        this.password = DEFAULT_UPDATE_PASSWORD
+      })
+    },
+    async updateAvatar(file: AccountsApiAccountsAvatarCreateRequest) {
+      await accountApi.accountsAvatarCreate(file).then(() => {
+        this.password = DEFAULT_UPDATE_PASSWORD
+      })
+    },
+    async deleteAccount(id: number) {
+      await accountApi.accountsDestroy({ id }).then(() => {
+        this.password = DEFAULT_UPDATE_PASSWORD
+      })
     },
   },
 })

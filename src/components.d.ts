@@ -81,6 +81,7 @@ declare module 'vue' {
     ProductRegisterFields: typeof import('./components/ActivityRegisterPartialForm/ProductRegisterFields.vue')['default']
     Products: typeof import('./components/Analytics-Component/Products.vue')['default']
     Profile: typeof import('./components/TheHeader/navTools/profile.vue')['default']
+    ProfileDelete: typeof import('./components/Profile/ProfileDelete.vue')['default']
     ProfileFields: typeof import('./components/Profile/ProfileFields.vue')['default']
     ProfilePassword: typeof import('./components/Profile/ProfilePassword.vue')['default']
     ProgressBar: typeof import('./components/ProgressBar/index.vue')['default']

@@ -10,25 +10,13 @@ const { t } = useI18n()
 <template>
   <div class="text-left">
     <FormKit
-      v-model="user.username"
-      :label="t('profile.fields.username.label')"
-      aria-readonly="true"
-      disabled="true"
-      outer-class="w-full"
-      inner-class="max-w-xl"
-      type="text"
-      :placeholder="t('profile.fields.username.placeholder')"
-      name="name"
-      required
-    />
-    <FormKit
       v-model="user.first_name"
       :label="t('profile.fields.first_name.label')"
       outer-class="w-full"
       inner-class="max-w-xl"
       type="text"
       :placeholder="t('profile.fields.first_name.placeholder')"
-      name="card"
+      name="first_name"
       required
     />
     <FormKit
@@ -38,18 +26,7 @@ const { t } = useI18n()
       inner-class="max-w-xl"
       type="text"
       :placeholder="t('profile.fields.last_name.placeholder')"
-      name="expiration"
-    />
-    <FormKit
-      v-model="user.email"
-      :label="t('profile.fields.email.label')"
-      aria-readonly="true"
-      disabled="true"
-      outer-class="w-full"
-      inner-class="max-w-xl"
-      type="email"
-      :placeholder="t('profile.fields.email.placeholder')"
-      name="email"
+      name="last_name"
     />
   </div>
 </template>

@@ -259,7 +259,12 @@ profile:
     basic_subtitle: Aqui podras actualizar tus datos basicos
     password_title: Actulizar contrasena
     password_subtitle: Actuliazar tu contrase, ten encuenta que se cerrara tu sesion
+    delete_title: Eliminacion de cuenta
+    delete_subtitle: 'Actualmente eres dueno de la compania:'
+    delete_summary: Oat cake ice cream candy chocolate cake chocolate cake cotton candy dragée apple pi
   button_form: Actualizar
+  button_delete: Eliminar
+  button_cancel: Cancelar
   alerts:
     profile_success: Datos de perfil actualizado
     password_success: Contrasena actualizada
