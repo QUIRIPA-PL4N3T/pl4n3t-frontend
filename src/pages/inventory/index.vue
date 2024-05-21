@@ -5,7 +5,7 @@ const router = useRouter()
 
 const classificationStore = useClassificationStore()
 const authStore = useAuthStore()
-
+const { t } = useI18n()
 const { user } = storeToRefs(authStore)
 const { inventoriableClassificationGroups } = storeToRefs(classificationStore)
 const emissionSourceStore = useEmissionSourceStore()
@@ -23,24 +23,15 @@ function filterByGroup(id: number) {
   console.warn(id)
 }
 
-function fetchEmissionSources() {
-  if (!Number.isNaN(currentGlobalLocationId.value))
-    emissionSourceStore.fetchEmissionSourcesByLocation(Number(currentGlobalLocationId.value))
-}
-
 watch(() => user.value, () => {
   if (user.value && currentGlobalLocationId.value)
-    fetchEmissionSources()
+    emissionSourceStore.fetchEmissionSources()
 })
-
-const { t } = useI18n()
 
 watch(() => currentGlobalLocationId.value, () => {
   if (currentGlobalLocationId.value)
-    emissionSourceStore.fetchEmissionSourcesByLocation(Number(currentGlobalLocationId.value))
+    emissionSourceStore.fetchEmissionSources()
 })
-
-fetchEmissionSources()
 </script>
 
 <template>
