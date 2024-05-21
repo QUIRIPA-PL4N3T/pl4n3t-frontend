@@ -42,7 +42,7 @@ watch(() => selectedFactorTypeId.value, () => {
       type="select"
       outer-class="md:col-span-2 lg:col-span-1"
       :options="optionAssetLeasedList"
-      name="efficiency_unit"
+      name="leased_assets_type"
     />
     <FormKit
       :label="t('emissionSource.code')"
