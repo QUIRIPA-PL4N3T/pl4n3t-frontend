@@ -60,10 +60,14 @@ const ProfileMenu = [
   {
     label: t('menu.logout'),
     icon: 'heroicons-outline:login',
-    link: () => {
-      authStore.logOut()
-      router.push('/')
-      localStorage.removeItem('activeUser')
+    link: async () => {
+      try {
+        await authStore.logOut()
+        router.push('/auth/login')
+      }
+      catch (error) {
+        console.error(error)
+      }
     },
   },
 ]

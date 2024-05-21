@@ -7,7 +7,6 @@ import { handleError } from '~/utilities/utils'
 const authStore = useAuthStore()
 const router = useRouter()
 const checkbox = ref<boolean>(false)
-const typeInput = $ref<string>('password')
 const { isAuthenticated } = storeToRefs(authStore)
 const { t } = useI18n()
 
@@ -66,7 +65,7 @@ async function login(value: any) {
               />
 
               <FormKit
-                :type="typeInput"
+                type="password"
                 name="password"
                 label-class="text-left pt-5"
                 :label="t('password')"

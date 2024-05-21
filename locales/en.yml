@@ -163,6 +163,15 @@ membership:
   title: Membership
   userLimit: Users Number
   workersLimit: Employee Limit
+menu:
+  chat: Chat
+  email: mail
+  faq: FAQ
+  logout: Go out
+  membership: Membership
+  profile: Profile
+  settings: Setting
+  todo: Tasks
 no: No
 notResultFound: No results found
 optionCreated: Created Option

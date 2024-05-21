@@ -96,6 +96,7 @@ export const useAuthStore = defineStore('auth', {
         this.refreshTokenRemove()
         this.accessToken = null
         this.user = null
+        this.$reset()
       }
       catch (error) {
         this.refreshTokenRemove()
