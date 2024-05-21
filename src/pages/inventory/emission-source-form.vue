@@ -90,6 +90,9 @@ function setSelectGroupById(id: number) {
 }
 
 setSelectGroupById(currentEmissionSource.value.group!)
+
+if (user.value && !Number.isNaN(props.id))
+  emissionSourceStore.fetchEmissionSource(Number(props.id))
 </script>
 
 <template>

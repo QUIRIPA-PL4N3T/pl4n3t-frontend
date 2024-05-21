@@ -45,28 +45,46 @@ export const useClassificationStore = defineStore('classification', {
       else
         this.factorTypes = []
     },
-    async getCommonActivities(search: string) {
+    async getCommonActivities(search?: string) {
       try {
-        const { data } = await emissionSourceGroupApi.classificationsActivitiesSearchRetrieve({ search })
-        return data
+        if (search) {
+          const { data } = await emissionSourceGroupApi.classificationsActivitiesSearchRetrieve({ search })
+          return data
+        }
+        else {
+          const { data } = await emissionSourceGroupApi.classificationsActivitiesList()
+          return data
+        }
       }
       catch (error) {
         console.error(error)
       }
     },
-    async getCommonEquipments(search: string) {
+    async getCommonEquipments(search?: string) {
       try {
-        const { data } = await emissionSourceGroupApi.classificationsEquipmentsSearchRetrieve({ search })
-        return data
+        if (search) {
+          const { data } = await emissionSourceGroupApi.classificationsEquipmentsSearchRetrieve({ search })
+          return data
+        }
+        else {
+          const { data } = await emissionSourceGroupApi.classificationsEquipmentsList()
+          return data
+        }
       }
       catch (error) {
         console.error(error)
       }
     },
-    async getCommonProducts(search: string) {
+    async getCommonProducts(search?: string) {
       try {
-        const { data } = await emissionSourceGroupApi.classificationsProductsSearchRetrieve({ search })
-        return data
+        if (search) {
+          const { data } = await emissionSourceGroupApi.classificationsProductsSearchRetrieve({ search })
+          return data
+        }
+        else {
+          const { data } = await emissionSourceGroupApi.classificationsProductsList()
+          return data
+        }
       }
       catch (error) {
         console.error(error)

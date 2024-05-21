@@ -158,7 +158,7 @@ emissionSource:
   service_label: Servicio Adquirido
   shelf_life_label: Estimación Vida útil del producto
   shelf_life_unit_label: Unidad
-  source_type: Tipo de fuente de emisión (Fija o Móvil)
+  source_type: Tipo (Fija o Móvil)
   source_type_help: Tipo de fuente de emisión
   specific_factor_label: Factor de Emisión específico
   specific_factor_unit_label: Unidad de Factor de emisión

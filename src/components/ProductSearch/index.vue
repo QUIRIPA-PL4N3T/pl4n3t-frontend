@@ -13,11 +13,11 @@ const props = defineProps({
     required: true,
   },
   modelValue: {
-    type: [String, Number, Array],
+    type: [String, Number, Array] as PropType<string | null | undefined>,
     default: '',
   },
   mode: {
-    type: String as () => 'tags' | 'single' | 'multiple' | undefined,
+    type: String as PropType<'tags' | 'single' | 'multiple'>,
     default: 'tags',
   },
   closeOnSelect: {
@@ -43,37 +43,42 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:modelValue'])
 const classificationStore = useClassificationStore()
-const selectedOption = ref(props.modelValue)
 const options = ref<Option[]>([])
 
 onMounted(() => {
   loadOptions()
 })
 
-watch(selectedOption, (newValue) => {
-  emit('update:modelValue', newValue)
-})
-
 async function onSearchChange(query: string) {
+  if (query.length < 3)
+    return
   await loadOptions(query)
 }
 
-async function loadOptions(query = '') {
-  if (query.length < 3)
-    return
+async function loadOptions(query?: string) {
   const data: any = await classificationStore.getCommonProducts(query)
   options.value = data.map((item: any) => ({
     label: item.name,
     value: item.id,
   }))
 }
+const value = computed({
+  get() {
+    if (props.modelValue)
+      return JSON.parse(props.modelValue)
+    return []
+  },
+  set(value) {
+    emit('update:modelValue', JSON.stringify(value))
+  },
+})
 </script>
 
 <template>
   <div :class="`formkit-wrapper ${classes}`">
     <label :for="label" class="text-slate-700 text-sm leading-6 block mb-3 form-label font-semibold cursor-pointer w-full">{{ label }}</label>
     <Multiselect
-      v-model="selectedOption"
+      v-model="value"
       class="input mt-0 form-control text-sm"
       :options="options"
       :mode="mode"

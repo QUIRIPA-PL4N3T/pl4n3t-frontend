@@ -5,10 +5,7 @@ const selectedFactorTypeId = ref(0)
 const sourceTypeId = ref(0)
 const classificationStore = useClassificationStore()
 const basicStorage = useBasicStore()
-
-const { t } = useI18n()
-const activityValue = ref([])
-const equipmentValue = ref([])
+const emissionSourceStore = useEmissionSourceStore()
 
 const {
   optionsFuelStorageManagementList,
@@ -22,6 +19,10 @@ const {
   optionsFilteredEmissionFactors,
   optionSourceTypes,
 } = storeToRefs(classificationStore)
+
+const { currentEmissionSource } = storeToRefs(emissionSourceStore)
+
+const { t } = useI18n()
 
 function filterEmissionFactors() {
   classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value)
@@ -59,13 +60,13 @@ watch(() => selectedFactorTypeId.value, () => {
       outer-class="md:col-start-1 md:col-span-2"
       :label="t('emissionSource.asset_duration_value_label')"
       number
-      name="fuel_efficiency"
+      name="leased_assets_durations"
     />
     <FormKit
       :label="t('emissionSource.asset_duration_label')"
       type="select"
       :options="optionDurationList"
-      name="efficiency_unit"
+      name="leased_assets_duration_unit"
     />
     <FormKit
       v-model="sourceTypeId"
@@ -77,12 +78,14 @@ watch(() => selectedFactorTypeId.value, () => {
       name="source_type"
     />
     <ActivitySearch
-      v-model="activityValue"
+      v-model="currentEmissionSource.activity_name"
+      name="activity_name"
       :label="t('emissionSource.process_label')"
       classes="md:col-start-1 col-span-2"
     />
     <EquipmentSearch
-      v-model="equipmentValue"
+      v-model="currentEmissionSource.equipment_name"
+      name="equipment_name"
       classes="col-span-2"
       :label="t('emissionSource.type')"
     />

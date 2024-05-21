@@ -115,6 +115,7 @@ general:
   city: City
   economic_sector: Economic Sector
   industry_type: Industry Type
+  manage: Manage
   new: New
   nit: NIT
   origin_country: Country of origin
