@@ -3,6 +3,7 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { ElAlert } from 'element-plus'
 import { handleError } from '~/utilities/utils'
+import { setup } from '~/core'
 
 const authStore = useAuthStore()
 const router = useRouter()
@@ -22,6 +23,7 @@ async function login(value: any) {
     await authStore.logIn(value)
     if (isAuthenticated.value)
       router.push('/dashboard')
+    setup()
   }
   catch (error: any) {
     errorMessage = handleError(error)
