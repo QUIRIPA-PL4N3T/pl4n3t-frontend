@@ -14,6 +14,17 @@ const routes = setupLayouts(generatedRoutes)
 routes.forEach((route) => {
   if (route.path.includes('/dashboard'))
     route.beforeEnter = [isAuthenticatedGuard]
+
+  // Redirect from home to dashboard if authenticated
+  if (route.path === '/') {
+    route.beforeEnter = (to, from, next) => {
+      const authStore = useAuthStore()
+      if (authStore.isAuthenticated)
+        next('/dashboard')
+      else
+        next()
+    }
+  }
 })
 
 // https://github.com/antfu/vite-ssg

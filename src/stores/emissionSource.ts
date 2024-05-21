@@ -17,6 +17,14 @@ export const useEmissionSourceStore = defineStore('emissionSource', {
 
   },
   actions: {
+    async fetchEmissionSources() {
+      if (this.currentGlobalLocationId && !Number.isNaN(this.currentGlobalLocationId)) {
+        const { data: location } = await locationApi.companiesLocationsRetrieve({
+          id: Number(this.currentGlobalLocationId),
+        })
+        this.locationEmissionSources = location.emission_sources
+      }
+    },
     async fetchEmissionSource(id: number) {
       // Fetch current location by id
       if (id === 0) {
