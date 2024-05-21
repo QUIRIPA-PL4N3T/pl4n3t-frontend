@@ -69,6 +69,7 @@ emissionSource:
       maintenance or others)
     label: Attach Supports
   code: Code
+  default_name: Name
   description: Description
   description_help: >-
     Expands information on the process/activity for which the fuel is used,

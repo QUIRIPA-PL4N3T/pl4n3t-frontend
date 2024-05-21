@@ -102,6 +102,7 @@ emissionSource:
       certificados, mantenimientos u otros)
     label: Adjuntar Soportes
   code: Código
+  default_name: Nombre
   description: Descripción
   description_help: >
     Amplía la información sobre el proceso / actividad para la cual se usa el

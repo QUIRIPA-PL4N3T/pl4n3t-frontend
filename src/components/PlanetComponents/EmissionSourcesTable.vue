@@ -13,29 +13,16 @@ const pageRange = ref(5)
 
 const columns = ref([
   {
-    label: 'Id',
-    field: 'id',
-  },
-  {
-    label: t('emissionSource.name'),
-    field: 'name',
-  },
-  {
     label: t('emissionSource.code'),
     field: 'code',
   },
   {
-    label: t('emissionSource.description'),
-    field: 'description',
+    label: t('emissionSource.default_name'),
+    field: 'emission_source_name',
   },
-
   {
     label: t('emissionSource.group'),
-    field: 'group',
-  },
-  {
-    label: t('emissionSource.source_type'),
-    field: 'source_type',
+    field: 'group_name',
   },
   {
     label: 'Action',
