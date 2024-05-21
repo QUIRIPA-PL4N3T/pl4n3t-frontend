@@ -10,6 +10,7 @@ const { user } = storeToRefs(authStore)
 const { inventoriableClassificationGroups } = storeToRefs(classificationStore)
 const emissionSourceStore = useEmissionSourceStore()
 const { currentGlobalLocationId } = storeToRefs(emissionSourceStore)
+let selectedGroupId = $ref(0)
 
 function goEditEmissionSource(id: number) {
   router.push({
@@ -18,9 +19,14 @@ function goEditEmissionSource(id: number) {
   })
 }
 
-function filterByGroup(id: number) {
-  // TODO: add emissionSource filter by group
-  console.warn(id)
+async function filterByGroup(id: number) {
+  selectedGroupId = id
+  emissionSourceStore.filterEmissionSources(
+    {
+      group: selectedGroupId,
+      location: currentGlobalLocationId.value,
+    },
+  )
 }
 
 watch(() => user.value, () => {
@@ -52,7 +58,7 @@ watch(() => currentGlobalLocationId.value, () => {
               <Image
                 :src="group.icon!"
                 alt="{{ brand.name }}"
-                image-class="rounded-md border-2 border-slate-100 w-full h-[80px] object-contain object-center p-3"
+                :image-class="group.id === selectedGroupId ? 'rounded-md border-indigo-500 border-2 border-slate-100 w-full h-[80px] object-contain object-center p-3' : 'rounded-md border-2 border-slate-100 w-full h-[80px] object-contain object-center p-3' "
               />
               <span class="text-xs pt-2">
                 {{ group.name }}

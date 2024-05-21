@@ -1389,6 +1389,31 @@ paths:
   /api/companies/emission-sources/:
     get:
       operationId: companiesEmissionSourcesList
+      parameters:
+        - in: query
+          name: code
+          schema:
+            type: string
+        - in: query
+          name: factor_type
+          schema:
+            type: number
+        - in: query
+          name: group
+          schema:
+            type: number
+        - in: query
+          name: location
+          schema:
+            type: number
+        - in: query
+          name: name
+          schema:
+            type: string
+        - in: query
+          name: source_type
+          schema:
+            type: number
       tags:
         - CompanyEmissionSources
       security:
@@ -2895,6 +2920,7 @@ components:
           type: integer
         source_type:
           type: integer
+          nullable: true
           title: Tipo de Fuente de Emisión
         geo_location:
           type: object
@@ -3111,14 +3137,17 @@ components:
         emission_source_name:
           type: string
           readOnly: true
+        group_name:
+          type: string
+          readOnly: true
       required:
         - documents
         - emission_factor
         - emission_source_name
         - factor_type
+        - group_name
         - id
         - location
-        - source_type
     EmissionsSourceMonthEntry:
       type: object
       properties:
@@ -3828,6 +3857,7 @@ components:
           type: integer
         source_type:
           type: integer
+          nullable: true
           title: Tipo de Fuente de Emisión
         geo_location:
           type: object
@@ -4042,6 +4072,9 @@ components:
           readOnly: true
           nullable: true
         emission_source_name:
+          type: string
+          readOnly: true
+        group_name:
           type: string
           readOnly: true
     PatchedEmissionsSourceMonthEntry:

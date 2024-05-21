@@ -127,7 +127,8 @@ emissionSource:
   factor_type: Tipo de Factor de Emisión
   fuel_storage_label: Almacenamiento de Combustible
   fuel_storage_management_label: Gestión del Combustible
-  good_and_service_label: Adquisición de
+  goodAndServiceType: Tipo de Adquisición
+  good_and_service_label: Tipo de Adquisición
   goods_and_service_monitoring_label: ¿Se registran y monitorean las emisiones de GEI?
   goods_and_service_origin_label: Origen
   goods_label: Bien Adquirido

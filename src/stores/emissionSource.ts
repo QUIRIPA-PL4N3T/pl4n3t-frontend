@@ -17,6 +17,15 @@ export const useEmissionSourceStore = defineStore('emissionSource', {
 
   },
   actions: {
+    async filterEmissionSources(filter: any) {
+      try {
+        const { data } = await companyEmissionSourceApi.companiesEmissionSourcesList(filter)
+        this.locationEmissionSources = data
+      }
+      catch (error) {
+        console.error(error)
+      }
+    },
     async fetchEmissionSources() {
       if (this.currentGlobalLocationId && !Number.isNaN(this.currentGlobalLocationId)) {
         const { data: location } = await locationApi.companiesLocationsRetrieve({
