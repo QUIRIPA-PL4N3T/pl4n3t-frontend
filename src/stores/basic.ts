@@ -174,6 +174,18 @@ export const useBasicStore = defineStore('basic', {
     optionWasteManagementDangerList(): any {
       return formatOptions(this.wasteManagementDangerList)
     },
+    optionYesNo(): any {
+      return [
+        {
+          label: i18n.t('yes'),
+          value: true,
+        },
+        {
+          label: i18n.t('no'),
+          value: false,
+        },
+      ]
+    },
   },
   actions: {
     async fetchBasicData() {

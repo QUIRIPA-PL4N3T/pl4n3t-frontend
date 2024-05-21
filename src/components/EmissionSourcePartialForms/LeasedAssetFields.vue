@@ -12,6 +12,7 @@ const {
   optionsFuelStorageList,
   optionAssetLeasedList,
   optionDurationList,
+  optionYesNo,
 } = storeToRefs(basicStorage)
 
 const {
@@ -126,28 +127,27 @@ watch(() => selectedFactorTypeId.value, () => {
     <FormKit
       type="radio"
       :label="t('emissionSource.vapor_generation_question')"
-      :options="{ yes: t('yes'), no: t('no') }"
-      outer-class="md:col-span-4"
+      :options="optionYesNo"
       name="exist_steam_specific_factor"
+      outer-class="md:col-span-4"
       fieldset-class="$remove:max-w-md"
       :classes="{
-        fieldset: 'max-w-full',
+        fieldset: 'w-full',
       }
       "
     />
-
     <FormKit
       type="number"
       :label="t('emissionSource.efficiency_label')"
       outer-class="md:col-start-1 md:col-span-2"
-      number
-      name="fuel_efficiency"
+      number="float"
+      step="any"
+      name="vehicle_efficiency"
     />
-
     <FormKit
       :label="t('emissionSource.efficiency_unit_label')"
       type="text"
-      name="fuel_efficiency_unit"
+      name="vehicle_efficiency_unit"
     />
 
     <FormKit
