@@ -8,6 +8,7 @@ const selectedGroupId = ref(0)
 const selectedFactorTypeId = ref(0)
 const disabledSourceType = ref<boolean>(false)
 const groupContainerRef = ref<HTMLDivElement | null>(null)
+const confirmModal = ref<any>(null)
 
 const { t } = useI18n()
 const authStore = useAuthStore()
@@ -87,6 +88,11 @@ function setSelectGroupById(id: number) {
     selectedGroup.value = inventoriableClassificationGroups.value.find(group => group.id === id)
     setSelectedGroupFocus(id)
   }
+}
+
+function closeModal() {
+  if (confirmModal.value)
+    confirmModal.value.closeModal()
 }
 
 setSelectGroupById(currentEmissionSource.value.group!)
@@ -188,12 +194,30 @@ if (user.value && !Number.isNaN(props.id))
             <!-- End attachment Section -->
             <div class="text-base text-slate-600 dark:text-slate-300 mb-5" />
             <div v-show="selectedGroupId !== 0" class="flex justify-end gap-2 pt-3">
-              <Button
+              <Modal
                 v-if="currentEmissionSource.id !== 0"
-                :text="t('delete')"
-                btn-class="btn-danger"
-                @click="deleteEmissionFactor(currentEmissionSource.id)"
-              />
+                ref="confirmModal"
+                :title="t('company.delete.Brand')"
+                :label="t('delete')"
+                label-class="btn-danger"
+                theme-class="bg-danger-500"
+              >
+                <div class="text-base text-slate-600 dark:text-slate-300">
+                  {{ t('company.brand.delete.emissionFactor') }}
+                </div>
+                <template #footer>
+                  <Button
+                    :text="t('cancel')"
+                    btn-class="btn-dark"
+                    @click="closeModal"
+                  />
+                  <Button
+                    :text="t('Accept')"
+                    btn-class="btn-danger"
+                    @click="deleteEmissionFactor(currentEmissionSource.id)"
+                  />
+                </template>
+              </Modal>
               <div class="space-y-5">
                 <Button
                   :text="t('save')"

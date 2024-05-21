@@ -41,6 +41,8 @@ company:
   address: Dirección
   brand:
     delete:
+      emisionFactor: ¿Esta seguro que desea eliminar esta Fuente de Emisión?
+      emissionFactor: ¿Esta seguro que desea Eliminar esta Fuente de Emisión?
       message: ¿Esta seguro que desea eliminar esta marca?
   contact: Contacto
   create:
@@ -164,6 +166,7 @@ emissionSource:
   specific_factor_unit_label: Unidad de Factor de emisión
   supplier_name: Nombre del Proveedor
   type: Seleccione el equipo
+  unit: Unidad de Medida
   updated: Fuente de Emisión Actualizada
   vapor_generation_question: ¿Existe un factor de emisión especifico asociado a la generación de vapor?
   vehicle_capacity: Capacidad

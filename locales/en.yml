@@ -29,6 +29,7 @@ company:
   address: Address
   brand:
     delete:
+      emissionFactor: Are you sure you want to Delete this Emission Source?
       message: Are you sure you want to remove this flag?
   contact: Contact
   create:
@@ -93,6 +94,7 @@ emissionSource:
     success: Broadcast source saved successfully
   source_type: Type of emission source (Fixed or Mobile)
   type: Select the team
+  unit: Unit of measurement
   updated: Updated Emission Source
   vapor_generation_question: Is there a specific emission factor associated with steam generation?
   vehicle_fuel: Fuel

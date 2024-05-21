@@ -10,6 +10,7 @@ export const useBasicStore = defineStore('basic', {
   state: () => ({
     documentTypes: useLocalStorage<DocumentType[]>('documentTypes', []),
     unitOfMeasureList: useLocalStorage<UnitOfMeasure[]>('unitOfMeasureList', []),
+    geiUnitOfMeasureList: useLocalStorage<UnitOfMeasure[]>('geiUnitOfMeasureList', []),
     economicSectorList: useLocalStorage<EconomicSector[]>('economicSectorList', []),
     industryTypeList: useLocalStorage<IndustryType[]>('industryTypeList', []),
     locationTypeList: useLocalStorage<LocationType[]>('locationTypeList', []),
@@ -186,6 +187,69 @@ export const useBasicStore = defineStore('basic', {
         },
       ]
     },
+    optionUnitOfMeasure(): any {
+      const empty = {
+        label: i18n.t('selectAnOption'),
+        value: null,
+      }
+
+      const options = this.unitOfMeasureList.reduce((acc: any[], item: any) => {
+        const group = acc.find(g => g.group === item.group)
+
+        if (group) {
+          group.options.push({
+            label: item.name,
+            value: item.id,
+          })
+        }
+        else {
+          acc.push({
+            group: item.group,
+            options: [
+              {
+                label: item.name,
+                value: item.id,
+              },
+            ],
+          })
+        }
+        return acc
+      }, [])
+
+      return [empty, ...options]
+    },
+    geiOptionUnitOfMeasure(): any {
+      const empty = {
+        label: i18n.t('selectAnOption'),
+        value: null,
+      }
+
+      const options = this.geiUnitOfMeasureList.reduce((acc: any[], item: any) => {
+        const group = acc.find(g => g.group === item.group)
+
+        if (group) {
+          group.options.push({
+            label: item.name,
+            value: item.id,
+          })
+        }
+        else {
+          acc.push({
+            group: item.group,
+            options: [
+              {
+                label: item.name,
+                value: item.id,
+              },
+            ],
+          })
+        }
+
+        return acc
+      }, [])
+      return [empty, ...options]
+      return [empty, ...options]
+    },
   },
   actions: {
     async fetchBasicData() {
@@ -196,7 +260,8 @@ export const useBasicStore = defineStore('basic', {
 
         // Fetch unitsOfMeasure types
         const { data: unitsOfMeasure } = await mainApi.mainUnitOfMeasureList()
-        this.unitOfMeasureList = unitsOfMeasure
+        this.unitOfMeasureList = unitsOfMeasure.filter(item => item.is_gei_unit === false)
+        this.geiUnitOfMeasureList = unitsOfMeasure.filter(item => item.is_gei_unit === true)
 
         // Fetch Economic Sectors
         const { data: economicSectors } = await mainApi.mainEconomicSectorList()

@@ -13,6 +13,7 @@ const {
   optionAssetLeasedList,
   optionDurationList,
   optionYesNo,
+  optionUnitOfMeasure,
 } = storeToRefs(basicStorage)
 
 const {
@@ -94,7 +95,7 @@ watch(() => selectedFactorTypeId.value, () => {
       <FormKit
         v-model="selectedFactorTypeId"
         :label="t('emissionSource.factor_type')"
-        outer-class="md:col-span-2"
+        outer-class="md:col-span-1"
         type="select"
         name="factor_type"
         :options="optionFactorTypes"
@@ -108,6 +109,14 @@ watch(() => selectedFactorTypeId.value, () => {
         validation="required"
         name="emission_factor"
         :options="optionsFilteredEmissionFactors"
+      />
+      <FormKit
+        :label="t('emissionSource.unit')"
+        outer-class="md:col-span-1"
+        type="select"
+        validation="required"
+        name="emission_factor_unit"
+        :options="optionUnitOfMeasure"
       />
     </div>
     <CheckBoxMultiple

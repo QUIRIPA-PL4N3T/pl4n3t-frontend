@@ -24,8 +24,7 @@ paths:
   /api/accounts/avatar/:
     post:
       operationId: accountsAvatarCreate
-      description: Anexar una imagen a una emergencia
-      summary: Anexar documento a un modelo de datos
+      summary: Actualiza avatar del usuario
       tags:
         - Accounts
       requestBody:
@@ -50,7 +49,7 @@ paths:
     post:
       operationId: accountsChangePasswordCreate
       description: Cambiar contraseña
-      summary: Cambiar Contraseña
+      summary: Cambiar contraseña con un token de recuperación
       tags:
         - Accounts
       requestBody:
@@ -93,6 +92,39 @@ paths:
           description: ''
         '401':
           description: Usted no tiene permiso para ver este usuario
+    post:
+      operationId: accountsCurrentCreate
+      description: Actualiza los datos del usuario, solo el usuario puede actualizar
+        sus datos
+      summary: Actualiza el Usuario Actual utilizando el token en el HEADER
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserModel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserModel'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserModel'
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserModel'
+          description: ''
+        '404':
+          description: El Usuario no existe
+        '400':
+          description: Datos inválidos
+        '401':
+          description: Usted no tiene permiso para actualizar este usuario
   /api/accounts/google-account/:
     post:
       operationId: accountsGoogleAccountCreate
@@ -258,6 +290,34 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserModel'
           description: ''
+  /api/accounts/update-password/:
+    post:
+      operationId: accountsUpdatePasswordCreate
+      description: Actualizar contraseña del usuario
+      summary: Actualizar contraseña del usuario
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePassword'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdatePassword'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UpdatePassword'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePassword'
+          description: ''
   /api/accounts/user/{username}/:
     get:
       operationId: accountsUserRetrieve
@@ -306,7 +366,6 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/UserModel'
-        required: true
       security:
         - jwtAuth: []
       responses:
@@ -2861,6 +2920,10 @@ components:
         emission_factor:
           type: integer
           title: Factor de Emisión
+        emission_factor_unit:
+          type: integer
+          nullable: true
+          title: Unidad por defecto
         vehicle_type:
           type: string
           nullable: true
@@ -3790,6 +3853,10 @@ components:
         emission_factor:
           type: integer
           title: Factor de Emisión
+        emission_factor_unit:
+          type: integer
+          nullable: true
+          title: Unidad por defecto
         vehicle_type:
           type: string
           nullable: true
@@ -4465,6 +4532,9 @@ components:
             <br />2) para udm Time - segundos <br />3) para el área udm - metros <br
             />4) Ángulo udm - grados.
           maxLength: 256
+        group:
+          type: string
+          readOnly: true
         slug:
           type: string
           maxLength: 32
@@ -4473,7 +4543,7 @@ components:
           title: Símbolo
           description: El símbolo utilizado para esta unidad de medida, como "ft"
             para pies o "m" para metro.
-          maxLength: 8
+          maxLength: 32
         measure_type:
           allOf:
             - $ref: '#/components/schemas/MeasureTypeEnum'
@@ -4536,10 +4606,27 @@ components:
             Este atributo de miembro no es obligatorio, pero es una pieza valiosa
             de documentación
           maxLength: 32
+        is_gei_unit:
+          type: boolean
+          title: Es una unidad de medida GEI
       required:
+        - group
         - id
         - measure_type
         - symbol
+    UpdatePassword:
+      type: object
+      properties:
+        old_password:
+          type: string
+        new_password:
+          type: string
+        confirm_password:
+          type: string
+      required:
+        - confirm_password
+        - new_password
+        - old_password
     UserModel:
       type: object
       properties:
@@ -4548,11 +4635,10 @@ components:
           readOnly: true
         username:
           type: string
+          readOnly: true
           title: Nombre de usuario
           description: 'Requerido. 150 carácteres como máximo. Únicamente letras,
             dígitos y @/./+/-/_ '
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
         first_name:
           type: string
           title: Nombre
@@ -4564,8 +4650,8 @@ components:
         email:
           type: string
           format: email
+          readOnly: true
           title: Correo Electrónico
-          maxLength: 254
         avatar:
           type: string
           readOnly: true
