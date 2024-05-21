@@ -24,6 +24,7 @@ declare module 'vue' {
     ChartBar: typeof import('./components/chartBar/index.vue')['default']
     Checkbox: typeof import('./components/Checkbox/index.vue')['default']
     CheckBoxAuth: typeof import('./components/CheckBoxAuth.vue')['default']
+    CheckBoxMultiple: typeof import('./components/CheckBoxMultiple/index.vue')['default']
     CompanyTable: typeof import('./components/Analytics-Component/CompanyTable.vue')['default']
     CrmTable: typeof import('./components/Analytics-Component/CrmTable.vue')['default']
     Customer: typeof import('./components/Analytics-Component/Customer.vue')['default']

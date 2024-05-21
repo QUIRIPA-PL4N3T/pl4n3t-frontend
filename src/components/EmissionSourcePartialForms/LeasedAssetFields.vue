@@ -109,22 +109,19 @@ watch(() => selectedFactorTypeId.value, () => {
         :options="optionsFilteredEmissionFactors"
       />
     </div>
-    <FormKit
-      type="checkbox"
+    <CheckBoxMultiple
+      v-model=" currentEmissionSource.fuel_store"
       :label="t('emissionSource.fuel_storage_label')"
       :options="optionsFuelStorageList"
       outer-class="md:col-span-2"
-      name="fuel_storage"
-      fieldset-class="p-3"
+      name="fuel_store"
     />
-
-    <FormKit
-      type="checkbox"
+    <CheckBoxMultiple
+      v-model="currentEmissionSource.fuel_management"
       :label="t('emissionSource.fuel_storage_management_label')"
       outer-class="md:col-span-2"
       :options="optionsFuelStorageManagementList"
-      fieldset-class="p-3"
-      name="fuel_storage_management"
+      name="fuel_management"
     />
     <FormKit
       type="radio"
