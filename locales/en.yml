@@ -107,8 +107,18 @@ emissionSource:
   investment_type_label: Investment Type
   know_electricity_source: Do you know the type of electricity generation source?
   know_electricity_source_help: Select 'Yes' if you know the source of electricity or 'No' if you don't.
+  maintenance_actions: >-
+    Which of the following actions do you perform for maintenance and repairs of
+    the equipment?
   name: Name / Brand / Model
   process_label: Select the process or activity
+  refrigerant_capacity_label: Refrigerant capacity in the equipment
+  refrigerant_convert_label: >-
+    Have conversions been made to refrigerants with lower global warming
+    potential (GWP)?
+  refrigerant_final_disposal: How do you carry out the final disposal of refrigerants?
+  refrigerant_leaks_label: Are there refrigerant leaks in the equipment?
+  refrigerant_type: Refrigerant Type
   save:
     error: The broadcast source could not be saved
     success: Broadcast source saved successfully
@@ -322,4 +332,4 @@ since:
   lastMonth: since last month
 waste:
   companyGenerationQuestion: What type of waste is generated in operations?
-yes: Yeah
+yes: Yes
