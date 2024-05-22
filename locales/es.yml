@@ -170,6 +170,7 @@ emissionSource:
   specific_factor_unit_label: Unidad de Factor de emisión
   type: Tipo de Equipo
   unit: Unidades de Medida
+  vapor_generation_question: ¿Existe un factor de emisión específico asociado a al generación de Vapor?
 equipments:
   add: Agregar
   modal:
