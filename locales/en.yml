@@ -235,6 +235,46 @@ select:
   location: Select a Headquarters
 selectAnOption: Select an Option
 signInSocial: Or continue with
+profile:
+  title: Profile
+  titles:
+    basic_title: Datos basicos
+    basic_subtitle: Aqui podras actualizar tus datos basicos
+    password_title: Actulizar contrasena
+    password_subtitle: Actuliazar tu contrase, ten encuenta que se cerrara tu sesion
+    delete_title: Delete account
+    delete_subtitle: 'Your account is currently an owner in these organizations:'
+    delete_summary: Oat cake ice cream candy chocolate cake chocolate cake cotton candy dragée apple pi
+  button_form: Update
+  button_delete: Delete
+  button_cancel: Cancel
+  alerts:
+    profile_success: Datos de perfil actualizado
+    password_success: Contrasena actualizada
+    avatar_success: Contrasena actualizada
+    error: Hubo un error al actualizar los datos
+  fields:
+    old_password:
+      label: Lasted password
+      placeholder: '****'
+    new_password:
+      label: New password
+      placeholder: '****'
+    confirm_password:
+      label: Confirm Password
+      placeholder: '****'
+    username:
+      label: User
+      placeholder: Joe15
+    first_name:
+      label: Name
+      placeholder: Joe moe
+    last_name:
+      label: Last name
+      placeholder: Doe
+    email:
+      label: E-mail
+      placeholder: 'email@:gmail.com'
 since:
   lastMonth: since last month
 waste:

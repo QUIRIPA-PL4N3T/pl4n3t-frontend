@@ -5,6 +5,7 @@ import type {
   DocumentsApiDocumentsCreateRequest,
   EmissionsSource,
   Location,
+  UpdatePassword,
 }
   from '~/api-client'
 
@@ -71,4 +72,10 @@ export const DEFAULT_DOCUMENT: DocumentsApiDocumentsCreateRequest = {
   file: undefined,
   title: '',
   tags: '',
+}
+
+export const DEFAULT_UPDATE_PASSWORD: UpdatePassword = {
+  old_password: '',
+  new_password: '',
+  confirm_password: '',
 }
