@@ -21,7 +21,7 @@ function switchHeaderClass() {
 </script>
 
 <template>
-  <main class="text-gray-700 dark:text-gray-200">
+  <main class="flex flex-col min-h-screen text-gray-700 dark:text-gray-200 bg-gray-100">
     <TheHeader :class="width > 1280 ? switchHeaderClass() : ''" />
     <TheSidebar v-if="width > 1280" />
     <!-- main sidebar end -->

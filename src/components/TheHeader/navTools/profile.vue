@@ -60,10 +60,14 @@ const ProfileMenu = [
   {
     label: t('menu.logout'),
     icon: 'heroicons-outline:login',
-    link: () => {
-      authStore.logOut()
-      router.push('/')
-      localStorage.removeItem('activeUser')
+    link: async () => {
+      try {
+        await authStore.logOut()
+        router.push('/auth/login')
+      }
+      catch (error) {
+        console.error(error)
+      }
     },
   },
 ]
@@ -85,9 +89,9 @@ const ProfileMenu = [
         class="flex-none text-slate-600 dark:text-white text-sm font-normal items-center lg:flex hidden overflow-hidden text-ellipsis whitespace-nowrap"
       >
         <span
-          class="overflow-hidden text-ellipsis whitespace-nowrap w-[85px] block"
+          class="overflow-hidden text-ellipsis whitespace-nowrap mx-2 block"
         >{{ fullName }}</span>
-        <span class="text-base inline-block ltr:ml-[10px] rtl:mr-[10px]"><Icon icon="heroicons-outline:chevron-down" /></span>
+        <span class="text-base inline-block"><Icon icon="heroicons-outline:chevron-down" /></span>
       </div>
     </div>
     <template #menus>

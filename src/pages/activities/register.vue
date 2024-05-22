@@ -4,11 +4,12 @@ import { storeToRefs } from 'pinia'
 const router = useRouter()
 const classificationStore = useClassificationStore()
 const { classificationGroups } = storeToRefs(classificationStore)
-
+const emissionSourceStore = useEmissionSourceStore()
+const { currentGlobalLocationId } = storeToRefs(emissionSourceStore)
 const { t } = useI18n()
 
 function filterByGroup(id: number) {
-  // TODO: add equipment filter by group
+  // TODO: add emissionSource filter by group
   console.warn(id)
 }
 
@@ -23,7 +24,10 @@ function goRegisterActivity(id: number) {
 <template>
   <div class="w-full h-full">
     <div class="lg:col-span-4 col-span-12 space-y-5">
-      <Card :title="t('activities.modal.title')" noborder>
+      <Card
+        v-if="currentGlobalLocationId"
+        :title="t('activities.modal.title')"
+      >
         <div class="flex gap-3 items-baseline overflow-auto">
           <button
             v-for="(group, i) in classificationGroups"
@@ -46,7 +50,7 @@ function goRegisterActivity(id: number) {
 
         <div class="flex justify-end pb-4">
           <Button
-            :text="t('equipment.add')"
+            :text="t('emissionSource.add')"
             btn-class="btn btn-dark btn-sm"
             @click.prevent="goRegisterActivity(0)"
           />
@@ -54,6 +58,7 @@ function goRegisterActivity(id: number) {
 
         <ActivitiesTable />
       </Card>
+      <NoLocationSelected v-else />
     </div>
   </div>
 </template>

@@ -17,6 +17,14 @@ export default {
       type: String,
       default: '',
     },
+    width: {
+      type: String,
+      default: 'w-full',
+    },
+    height: {
+      type: String,
+      default: 'h-[200px]',
+    },
   },
 }
 </script>
@@ -32,7 +40,7 @@ export default {
     >
     <div
       v-if="!src"
-      class="bg-neutral-300 w-full h-[200px] flex flex-col items-center justify-center font-medium rounded-md text-xl text-slate-900 capitalize"
+      :class="`bg-neutral-300 ${width} ${height} flex flex-col items-center justify-center font-medium rounded-md text-xl text-slate-900 capitalize`"
     >
       Please Set Image
       <code class="text-sm text-primary-500 lowercase mt-3">

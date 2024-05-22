@@ -7,9 +7,9 @@ const companyStore = useCompanyStore()
 const { company } = storeToRefs(companyStore)
 const router = useRouter()
 
-const current = ref(1)
-const perpage = ref(10)
-const pageRange = ref(5)
+const current = $ref(1)
+const perPage = $ref(10)
+const pageRange = $ref(5)
 
 const columns = ref([
   {
@@ -53,10 +53,6 @@ function editItem(id: number) {
     params: { id },
   })
 }
-
-async function deleteItem(id: number) {
-  await companyStore.deleteLocation(id)
-}
 </script>
 
 <template>
@@ -67,7 +63,7 @@ async function deleteItem(id: number) {
       :rows="company.locations"
       :pagination-options="{
         enabled: true,
-        perPage: perpage,
+        perpage: perPage,
       }"
       :sort-options="{
         enabled: false,
@@ -119,27 +115,19 @@ async function deleteItem(id: number) {
               </template>
               <span> {{ t('edit') }}</span>
             </Tooltip>
-            <Tooltip placement="top" arrow theme="danger-500">
-              <template #button>
-                <div class="action-btn" @click="deleteItem(props.row.id)">
-                  <Icon icon="heroicons:trash" />
-                </div>
-              </template>
-              <span>{{ t('delete') }}</span>
-            </Tooltip>
           </div>
         </span>
       </template>
       <template #pagination-bottom="props">
         <div class="py-4 px-3 flex justify-center">
           <Pagination
-            :total="50"
+            :total="company.locations.length"
             :current="current"
-            :per-page="perpage"
+            :per-page="perPage"
             :page-range="pageRange"
             :page-changed="props.pageChanged"
             :per-page-changed="props.perPageChanged"
-            @pageChanged="current = $event"
+            @page-changed="current = $event"
           >
             >
           </Pagination>

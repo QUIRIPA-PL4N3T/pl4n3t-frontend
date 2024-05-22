@@ -4,7 +4,6 @@ import { useToast } from 'vue-toastification'
 import type { EmissionSourceGroup } from '~/api-client'
 
 const props = defineProps<{ id?: string }>()
-
 const selectedGroup = ref<EmissionSourceGroup | undefined>(undefined)
 const selectedGroupId = ref(0)
 const selectedFactorTypeId = ref(0)
@@ -19,18 +18,18 @@ const emissionSourceStore = useEmissionSourceStore()
 const classificationStore = useClassificationStore()
 
 const { inventoriableClassificationGroups } = storeToRefs(classificationStore)
-const { currentEquipment } = storeToRefs(emissionSourceStore)
+const { currentEmissionSource } = storeToRefs(emissionSourceStore)
 
 async function save() {
   try {
     await emissionSourceStore.saveEmissionSource()
-    toast.success(t('equipment.save.success'), {
+    toast.success(t('emissionSource.save.success'), {
       timeout: 2000,
     })
   }
   catch (error) {
     console.error(error)
-    toast.error(t('equipment.save.error'))
+    toast.error(t('emissionSource.save.error'))
   }
 }
 
@@ -44,11 +43,11 @@ watch(() => user.value, () => {
 })
 
 watch(() => selectedFactorTypeId.value, () => {
-  classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value, currentEquipment.value.source_type)
+  classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value, currentEmissionSource.value.source_type)
 })
 
-watch(() => currentEquipment.value.group, () => {
-  selectedGroupId.value = currentEquipment.value.group || 0
+watch(() => currentEmissionSource.value.group, () => {
+  selectedGroupId.value = currentEmissionSource.value.group || 0
   setSelectGroupById(selectedGroupId.value)
 })
 
@@ -59,7 +58,7 @@ function setSelectGroup(group: EmissionSourceGroup) {
 
   switch (selectedGroup.value?.form_name) {
     case 'ORGANIZATION_VEHICLES':
-      currentEquipment.value.source_type = 2
+      currentEmissionSource.value.source_type = 2
       disabledSourceType.value = true
       break
     default:
@@ -74,13 +73,13 @@ function setSelectGroupById(id: number) {
 
 emissionSourceStore.fetchEmissionSource(Number(props.id))
 
-setSelectGroupById(currentEquipment.value.group!)
+setSelectGroupById(currentEmissionSource.value.group!)
 </script>
 
 <template>
   <div class="xl:col-span-2">
-    <Card :title="currentEquipment.name">
-      <label class="ltr:inline-block rtl:block input-label" for="phon">{{ t('equipment.group') }}</label>
+    <Card :title="currentEmissionSource.name">
+      <label class="ltr:inline-block rtl:block input-label" for="phon">{{ t('emissionSource.group') }}</label>
       <div class="flex gap-3 items-stretch overflow-auto pb-5">
         <Tooltip
           v-for="(group, i) in inventoriableClassificationGroups"
@@ -114,7 +113,7 @@ setSelectGroupById(currentEquipment.value.group!)
         <!-- Form Column -->
         <div class="w-full">
           <FormKit
-            v-model="currentEquipment"
+            v-model="currentEmissionSource"
             type="form"
             :actions="false"
             :incomplete-message="false"
@@ -143,7 +142,7 @@ setSelectGroupById(currentEquipment.value.group!)
             <!-- Attachment Section -->
             <div class="mb-5">
               <ul>
-                <li v-for="document in currentEquipment.documents" :key="document.id" class="underline text-blue-500">
+                <li v-for="document in currentEmissionSource.documents" :key="document.id" class="underline text-blue-500">
                   <a :href="document.file_url" target="_blank">{{ document.title }}</a>
                 </li>
               </ul>
@@ -154,7 +153,7 @@ setSelectGroupById(currentEquipment.value.group!)
               <Button
                 :text="t('delete')"
                 btn-class="btn-danger"
-                @click="deleteEmissionFactor(currentEquipment.id)"
+                @click="deleteEmissionFactor(currentEmissionSource.id)"
               />
               <div class="space-y-5">
                 <Button

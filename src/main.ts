@@ -7,7 +7,6 @@ import generatedRoutes from '~pages'
 import 'vue-good-table-next/dist/vue-good-table-next.css'
 import '~/styles/scss/tailwind.scss'
 import '~/styles/scss/index.scss'
-import '~/styles/css/main.css'
 import { setup } from '~/core'
 
 const routes = setupLayouts(generatedRoutes)
@@ -15,6 +14,17 @@ const routes = setupLayouts(generatedRoutes)
 routes.forEach((route) => {
   if (route.path.includes('/dashboard'))
     route.beforeEnter = [isAuthenticatedGuard]
+
+  // Redirect from home to dashboard if authenticated
+  if (route.path === '/') {
+    route.beforeEnter = (to, from, next) => {
+      const authStore = useAuthStore()
+      if (authStore.isAuthenticated)
+        next('/dashboard')
+      else
+        next()
+    }
+  }
 })
 
 // https://github.com/antfu/vite-ssg

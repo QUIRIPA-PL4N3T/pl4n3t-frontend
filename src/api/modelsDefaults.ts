@@ -13,6 +13,7 @@ import type {
   Payer,
   Phone,
   Purchase,
+  UpdatePassword,
 }
   from '~/api-client'
 
@@ -67,7 +68,6 @@ export const DEFAULT_EMISSIONS_SOURCE: EmissionsSource = {
   location: 0,
   image: null,
   group: 0,
-  source_type: 0,
   factor_type: 0,
   emission_factor: 0,
   geo_location: null,
@@ -206,4 +206,9 @@ export interface InitPoint {
    * @memberof InitPoint
    */
   init_point: string
+}
+export const DEFAULT_UPDATE_PASSWORD: UpdatePassword = {
+  old_password: '',
+  new_password: '',
+  confirm_password: '',
 }

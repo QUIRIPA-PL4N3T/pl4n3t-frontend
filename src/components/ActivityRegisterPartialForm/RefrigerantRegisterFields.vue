@@ -40,7 +40,7 @@ watch(() => optionFactorTypes.value, () => {
   <div>
     <div class="mb-5">
       <FormKit
-        :label="t('equipment.code')"
+        :label="t('emissionSource.code')"
         outer-class="w-full"
         inner-class="max-w-xl"
         type="text"
@@ -51,7 +51,7 @@ watch(() => optionFactorTypes.value, () => {
     <div class="pb-5">
       <FormKit
         v-model="sourceTypeId"
-        :label="t('equipment.source_type')"
+        :label="t('emissionSource.source_type')"
         type="select"
         placeholder="..."
         :options="optionSourceTypes"
@@ -59,7 +59,7 @@ watch(() => optionFactorTypes.value, () => {
       />
     </div>
     <div class="mb-5">
-      <label for="multiselect" class="mb-5">{{ t('equipment.type') }}</label>
+      <label for="multiselect" class="mb-5">{{ t('emissionSource.type') }}</label>
       <Multiselect
         mode="tags"
         :close-on-select="true"
@@ -73,7 +73,7 @@ watch(() => optionFactorTypes.value, () => {
     <div class="flex gap-4 pb-5">
       <FormKit
         v-model="selectedFactorTypeId"
-        :label="t('equipment.factor_type')"
+        :label="t('emissionSource.factor_type')"
         outer-class="w-full"
         type="select"
         placeholder="..."
@@ -82,12 +82,12 @@ watch(() => optionFactorTypes.value, () => {
         @onchange="filterEmissionFactors"
       />
       <FormKit
-        :label="t('equipment.refrigerant_type')"
+        :label="t('emissionSource.refrigerant_type')"
         outer-class="w-full"
         type="select"
         placeholder="..."
         name="emission_factor"
-        :help="t('equipment.refrigerant_type_help')"
+        :help="t('emissionSource.refrigerant_type_help')"
         :options="optionsFilteredEmissionFactors"
       />
     </div>
@@ -95,13 +95,13 @@ watch(() => optionFactorTypes.value, () => {
     <div class="mb-5 flex gap-4">
       <FormKit
         type="number"
-        :label="t('equipment.refrigerant_capacity_label')"
+        :label="t('emissionSource.refrigerant_capacity_label')"
         number
         name="efficiency"
       />
 
       <FormKit
-        :label="t('equipment.efficiency_unit_label')"
+        :label="t('emissionSource.efficiency_unit_label')"
         type="select"
         :options="optionsRefrigerantCapacityUnitList"
         placeholder="..."
@@ -111,7 +111,7 @@ watch(() => optionFactorTypes.value, () => {
     <div class="mb-5">
       <FormKit
         type="radio"
-        :label="t('equipment.refrigerant_leaks_label')"
+        :label="t('emissionSource.refrigerant_leaks_label')"
         :options="{ yes: t('yes'), no: t('no') }"
         fieldset-class="$remove:max-w-md"
         name="refrigerant_leaks"
@@ -124,7 +124,7 @@ watch(() => optionFactorTypes.value, () => {
     <div class="mb-5">
       <FormKit
         type="radio"
-        :label="t('equipment.refrigerant_convert_label')"
+        :label="t('emissionSource.refrigerant_convert_label')"
         :options="{ yes: t('yes'), no: t('no') }"
         fieldset-class="$remove:max-w-md"
         name="refrigerant_convert"
@@ -137,7 +137,7 @@ watch(() => optionFactorTypes.value, () => {
     <div class="mb-5 flex w-full gap-5">
       <FormKit
         type="checkbox"
-        :label="t('equipment.refrigerant_final_disposal')"
+        :label="t('emissionSource.refrigerant_final_disposal')"
         :options="optionsRefrigerantDisposalList"
         name="fuel_storage"
         outer-class="flex-1"
@@ -146,7 +146,7 @@ watch(() => optionFactorTypes.value, () => {
 
       <FormKit
         type="checkbox"
-        :label="t('equipment.maintenance_actions')"
+        :label="t('emissionSource.maintenance_actions')"
         :options="optionsRefrigerantMaintenanceAndRepairList"
         outer-class="flex-1"
         fieldset-class="p-3"
@@ -155,11 +155,11 @@ watch(() => optionFactorTypes.value, () => {
     </div>
     <div class="mb-5">
       <FormKit
-        :label="t('equipment.description')"
+        :label="t('emissionSource.description')"
         type="textarea"
         placeholder="..."
         name="description"
-        :help="t('equipment.description_help')"
+        :help="t('emissionSource.description_help')"
       />
     </div>
   </div>

@@ -47,7 +47,7 @@ const companyStore = useCompanyStore()
 const { hasCompany } = storeToRefs(companyStore)
 
 const { mobileSidebar } = storeToRefs(themeSettingsStore)
-let activeSubmenu = $ref(null)
+let activeSubmenu = $ref<number | null>(null)
 const router = useRouter()
 
 watch(() => router.currentRoute.value, () => {
@@ -55,7 +55,7 @@ watch(() => router.currentRoute.value, () => {
     mobileSidebar.value = false
 
   props.items.forEach((item: any) => {
-    if (item.link === router.currentRoute.value.name)
+    if (item.link === router.currentRoute.value.fullPath)
       activeSubmenu = null
   })
 })
@@ -106,6 +106,24 @@ function toggleSubmenu(index: any) {
   else
     activeSubmenu = index
 }
+
+// Method to check if an item should be displayed based on required company created
+function shouldDisplayItem(item: MenuItem): boolean {
+  return item.requiredCompany === false || (item.requiredCompany === true && hasCompany.value)
+}
+
+function load() {
+  props.items.forEach((item, i) => {
+    item.child?.forEach((child) => {
+      if (child.childLink === router.currentRoute.value.fullPath)
+        activeSubmenu = i
+    })
+  })
+}
+
+onMounted(() => {
+  load()
+})
 </script>
 
 <template>
@@ -113,15 +131,18 @@ function toggleSubmenu(index: any) {
     <li
       v-for="(item, i) in items"
       :key="i"
-      :class="`${item.child ? 'item-has-children' : ''} ${activeSubmenu === i ? 'open' : ''} ${$route.name === item.link ? 'menu-item-active' : ''}`"
+      :class="`
+      ${item.child ? 'item-has-children' : ''}
+      ${activeSubmenu === i ? 'open' : ''}
+      ${item.link && $route.fullPath.includes(item.link.toString()) ? 'menu-item-active' : ''}`"
       class="single-sidebar-menu"
     >
-      <template v-if="item.requiredCompany === false || (item.requiredCompany === true && hasCompany)">
-        <!-- ?? single menu with no children !!  -->
+      <template v-if="shouldDisplayItem(item)">
+        <!-- single menu with no children -->
         <router-link
           v-if="!item.child && !item.isHeader"
           :to="`${item.link}`"
-          class="menu-link"
+          class="menu-link animate__animated animate__bounce"
         >
           <span v-if="item.icon" class="menu-icon">
             <Icon :icon="item.icon" /></span>
@@ -130,11 +151,11 @@ function toggleSubmenu(index: any) {
           </div>
         </router-link>
 
-        <!-- ?? only for menu label ??  -->
+        <!-- only for menu label  -->
         <div v-else-if="item.isHeader && !item.child" class="menu-label">
           {{ t(item.title!) }}
         </div>
-        <!-- !!sub menu parent li !! -->
+        <!-- sub menu parent li -->
         <div
           v-else
           class="menu-link"
@@ -173,7 +194,7 @@ function toggleSubmenu(index: any) {
           @leave="leave"
           @after-leave="afterLeave"
         >
-          <!-- !! SubMenu !! -->
+          <!-- SubMenu -->
           <ul v-if="i === activeSubmenu" class="sub-menu ">
             <li
               v-for="(children, index) in item.child"
@@ -231,7 +252,7 @@ function toggleSubmenu(index: any) {
     @apply text-slate-800 dark:text-slate-300 text-xs font-semibold uppercase mb-4 mt-4;
   }
   > .menu-link {
-    @apply flex text-slate-600 font-medium dark:text-slate-300 text-sm capitalize px-[10px] py-3 rounded-[4px] cursor-pointer;
+    @apply flex text-slate-600 font-medium dark:text-slate-300 text-sm px-[10px] py-3 rounded-[4px] cursor-pointer;
   }
   .menu-icon {
     @apply icon-box inline-flex items-center text-slate-600 dark:text-slate-300 text-lg ltr:mr-3 rtl:ml-3;

@@ -24,8 +24,7 @@ paths:
   /api/accounts/avatar/:
     post:
       operationId: accountsAvatarCreate
-      description: Anexar una imagen a una emergencia
-      summary: Anexar documento a un modelo de datos
+      summary: Actualiza avatar del usuario
       tags:
         - Accounts
       requestBody:
@@ -50,7 +49,7 @@ paths:
     post:
       operationId: accountsChangePasswordCreate
       description: Cambiar contraseña
-      summary: Cambiar Contraseña
+      summary: Cambiar contraseña con un token de recuperación
       tags:
         - Accounts
       requestBody:
@@ -93,6 +92,39 @@ paths:
           description: ''
         '401':
           description: Usted no tiene permiso para ver este usuario
+    post:
+      operationId: accountsCurrentCreate
+      description: Actualiza los datos del usuario, solo el usuario puede actualizar
+        sus datos
+      summary: Actualiza el Usuario Actual utilizando el token en el HEADER
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserModel'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserModel'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserModel'
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserModel'
+          description: ''
+        '404':
+          description: El Usuario no existe
+        '400':
+          description: Datos inválidos
+        '401':
+          description: Usted no tiene permiso para actualizar este usuario
   /api/accounts/google-account/:
     post:
       operationId: accountsGoogleAccountCreate
@@ -258,6 +290,34 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserModel'
           description: ''
+  /api/accounts/update-password/:
+    post:
+      operationId: accountsUpdatePasswordCreate
+      description: Actualizar contraseña del usuario
+      summary: Actualizar contraseña del usuario
+      tags:
+        - Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePassword'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdatePassword'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UpdatePassword'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePassword'
+          description: ''
   /api/accounts/user/{username}/:
     get:
       operationId: accountsUserRetrieve
@@ -306,7 +366,6 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/UserModel'
-        required: true
       security:
         - jwtAuth: []
       responses:
@@ -343,6 +402,71 @@ paths:
           description: El Usuario no existe
         '400':
           description: Usted no tiene permiso para eliminar este usuario
+  /api/classifications/activities/:
+    get:
+      operationId: classificationsActivitiesList
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      tags:
+        - EmissionSourceGroups
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommonActivity'
+          description: ''
+    post:
+      operationId: classificationsActivitiesCreate
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      tags:
+        - EmissionSourceGroups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommonActivity'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CommonActivity'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CommonActivity'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonActivity'
+          description: ''
+  /api/classifications/activities/search/:
+    get:
+      operationId: classificationsActivitiesSearchRetrieve
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      summary: Buscar por un texto
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: texto a buscar
+      tags:
+        - EmissionSourceGroups
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonActivity'
+          description: ''
   /api/classifications/emission-source-groups/:
     get:
       operationId: classificationsEmissionSourceGroupsList
@@ -381,6 +505,71 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EmissionSourceGroup'
+          description: ''
+  /api/classifications/equipments/:
+    get:
+      operationId: classificationsEquipmentsList
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      tags:
+        - EmissionSourceGroups
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommonEquipment'
+          description: ''
+    post:
+      operationId: classificationsEquipmentsCreate
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      tags:
+        - EmissionSourceGroups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommonEquipment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CommonEquipment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CommonEquipment'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonEquipment'
+          description: ''
+  /api/classifications/equipments/search/:
+    get:
+      operationId: classificationsEquipmentsSearchRetrieve
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      summary: Buscar por un texto
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: texto a buscar
+      tags:
+        - EmissionSourceGroups
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonEquipment'
           description: ''
   /api/classifications/ghg-scopes/:
     get:
@@ -421,6 +610,71 @@ paths:
               schema:
                 $ref: '#/components/schemas/GHGScope'
           description: ''
+  /api/classifications/investment/:
+    get:
+      operationId: classificationsInvestmentList
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      tags:
+        - EmissionSourceGroups
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Investment'
+          description: ''
+    post:
+      operationId: classificationsInvestmentCreate
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      tags:
+        - EmissionSourceGroups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Investment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Investment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Investment'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Investment'
+          description: ''
+  /api/classifications/investment/search/:
+    get:
+      operationId: classificationsInvestmentSearchRetrieve
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      summary: Buscar por un texto
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: texto a buscar
+      tags:
+        - EmissionSourceGroups
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Investment'
+          description: ''
   /api/classifications/iso-categories/:
     get:
       operationId: classificationsIsoCategoriesList
@@ -459,6 +713,71 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ISOCategory'
+          description: ''
+  /api/classifications/products/:
+    get:
+      operationId: classificationsProductsList
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      tags:
+        - EmissionSourceGroups
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommonProduct'
+          description: ''
+    post:
+      operationId: classificationsProductsCreate
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      tags:
+        - EmissionSourceGroups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommonProduct'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CommonProduct'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CommonProduct'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonProduct'
+          description: ''
+  /api/classifications/products/search/:
+    get:
+      operationId: classificationsProductsSearchRetrieve
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      summary: Buscar por un texto
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: texto a buscar
+      tags:
+        - EmissionSourceGroups
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonProduct'
           description: ''
   /api/classifications/quantification-types/:
     get:
@@ -1135,6 +1454,31 @@ paths:
   /api/companies/emission-sources/:
     get:
       operationId: companiesEmissionSourcesList
+      parameters:
+        - in: query
+          name: code
+          schema:
+            type: string
+        - in: query
+          name: factor_type
+          schema:
+            type: number
+        - in: query
+          name: group
+          schema:
+            type: number
+        - in: query
+          name: location
+          schema:
+            type: number
+        - in: query
+          name: name
+          schema:
+            type: string
+        - in: query
+          name: source_type
+          schema:
+            type: number
       tags:
         - CompanyEmissionSources
       security:
@@ -2070,6 +2414,43 @@ components:
         - failure
         - pending
         - success
+    BlankEnum:
+      enum:
+        - ''
+    Brand:
+      type: object
+      properties:
+        street_name:
+          type: string
+          maxLength: 100
+        street_number:
+          type: integer
+        zip_code:
+          type: string
+          maxLength: 20
+      required:
+        - street_name
+        - street_number
+        - zip_code
+    BackUrls:
+      type: object
+      properties:
+        success:
+          type: string
+          format: uri
+        failure:
+          type: string
+          format: uri
+        pending:
+          type: string
+          format: uri
+      required:
+        - failure
+        - pending
+        - success
+    BlankEnum:
+      enum:
+        - ''
     Brand:
       type: object
       properties:
@@ -2152,6 +2533,45 @@ components:
         - name
         - slug
         - state
+    CommonActivity:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+      required:
+        - id
+        - name
+    CommonEquipment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+      required:
+        - id
+        - name
+    CommonProduct:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+      required:
+        - id
+        - name
     Company:
       type: object
       properties:
@@ -2275,15 +2695,32 @@ components:
           type: string
           format: uri
           nullable: true
+        economic_sector_name:
+          type: string
+          readOnly: true
+        size_name:
+          type: string
+          readOnly: true
+        industry_type_name:
+          type: string
+          readOnly: true
+        membership:
+          allOf:
+            - $ref: '#/components/schemas/CompanyMembership'
+          readOnly: true
       required:
         - brands
         - city_name
         - country_name
+        - economic_sector_name
         - id
+        - industry_type_name
         - locations
         - logo_absolute_url
         - members_roles
+        - membership
         - name
+        - size_name
         - state_name
     CompanyLogo:
       type: object
@@ -2320,6 +2757,13 @@ components:
           format: date-time
       required:
         - end_date
+          nullable: true
+          description: Deje en blanco para membresías ilimitadas.
+        days_remaining:
+          type: string
+          readOnly: true
+      required:
+        - days_remaining
         - id
         - membership
         - start_date
@@ -2576,6 +3020,7 @@ components:
           type: integer
         source_type:
           type: integer
+          nullable: true
           title: Tipo de Fuente de Emisión
         geo_location:
           type: object
@@ -2601,6 +3046,10 @@ components:
         emission_factor:
           type: integer
           title: Factor de Emisión
+        emission_factor_unit:
+          type: integer
+          nullable: true
+          title: Unidad por defecto
         vehicle_type:
           type: string
           nullable: true
@@ -2649,6 +3098,270 @@ components:
           nullable: true
           title: Unidad Eficiencia Energética
           maxLength: 256
+        know_type_electricity_generation_source:
+          type: boolean
+          title: Conoce el tipo de fuente de generación de electricidad
+        waste_management:
+          type: string
+          nullable: true
+          title: Manejo de desperdicio
+        leased_assets_type:
+          type: string
+          nullable: true
+          title: Tipo de bien arrendado
+          maxLength: 128
+        leased_assets_durations:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Duración del contrato de Arrendamiento
+        leased_assets_duration_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida de la duración
+          maxLength: 128
+        fuel_store:
+          type: string
+          nullable: true
+          title: Almacenamiento del Combustible
+          maxLength: 256
+        fuel_management:
+          type: string
+          nullable: true
+          title: Gestión del Combustible
+          maxLength: 256
+        exist_steam_specific_factor:
+          type: boolean
+        activity_name:
+          type: string
+          nullable: true
+          title: Nombre de la Actividad
+          maxLength: 255
+        equipment_name:
+          type: string
+          nullable: true
+          title: Nombre del Equipo
+          maxLength: 255
+        origin:
+          type: string
+          nullable: true
+          title: Origen
+          maxLength: 255
+        energy_efficiency_value:
+          type: number
+          format: double
+          title: Eficiencia energética del equipo o sistema que usa combustible
+        energy_efficiency_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida
+          maxLength: 128
+        service_life:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Vida Útil
+        service_life_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida Vida útil
+          maxLength: 128
+        good_and_service_acquired_type:
+          type: string
+          nullable: true
+          title: Tipo de Bien o Servicio Adquirido
+          maxLength: 128
+        acquired_service:
+          type: string
+          nullable: true
+          title: Servicio Adquirido
+          maxLength: 128
+        supplier_name:
+          type: string
+          nullable: true
+          title: Nombre del Proveedor
+          maxLength: 255
+        ghg_emission_are_recorded:
+          type: boolean
+          title: Se registran y monitorean las emisiones GEI
+        waste_type:
+          nullable: true
+          title: Tipo de desperdicio
+          oneOf:
+            - $ref: '#/components/schemas/WasteTypeEnum'
+            - $ref: '#/components/schemas/BlankEnum'
+            - $ref: '#/components/schemas/NullEnum'
+        waste_classification:
+          type: string
+          nullable: true
+          title: Clase de desperdicio
+          maxLength: 128
+        investment_type:
+          type: string
+          nullable: true
+          title: Tipo de Inversión
+          maxLength: 128
+        refrigerant_capacity:
+          type: number
+          format: double
+          title: Capacidad
+        refrigerant_capacity_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida
+          maxLength: 128
+        has_refrigerant_leaks:
+          type: boolean
+          title: ¿Existen Fugas del refrigerante en el equipo?
+        has_refrigerant_conversions:
+          type: boolean
+          title: ¿Se han realizado conversiones a refrigerantes con menor potencial
+            de calentamiento global (PCG)?
+        final_disposal_of_refrigerants:
+          type: string
+          nullable: true
+          title: Disposición final de refrigerantes
+          maxLength: 128
+        support_actions_refrigerant_equipment:
+          type: string
+          nullable: true
+          title: Acciones realiza para el mantenimiento y reparaciones del equipo
+          maxLength: 128
+        product_name:
+          type: string
+          nullable: true
+          title: Unidad Eficiencia Energética
+          maxLength: 256
+        know_type_electricity_generation_source:
+          type: boolean
+          title: Conoce el tipo de fuente de generación de electricidad
+        leased_assets_type:
+          type: string
+          nullable: true
+          title: Tipo de bien arrendado
+          maxLength: 128
+        leased_assets_durations:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Duración del contrato de Arrendamiento
+        leased_assets_duration_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida de la duración
+          maxLength: 128
+        fuel_store:
+          type: string
+          nullable: true
+          title: Almacenamiento del Combustible
+          maxLength: 256
+        fuel_management:
+          type: string
+          nullable: true
+          title: Gestión del Combustible
+          maxLength: 256
+        exist_steam_specific_factor:
+          type: boolean
+        activity_name:
+          type: string
+          nullable: true
+          title: Nombre de la Actividad
+          maxLength: 255
+        equipment_name:
+          type: string
+          nullable: true
+          title: Nombre del Equipo
+          maxLength: 255
+        origin:
+          type: string
+          nullable: true
+          title: Origen
+          maxLength: 255
+        energy_efficiency_value:
+          type: number
+          format: double
+          title: Eficiencia energética del equipo o sistema que usa combustible
+        energy_efficiency_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida
+          maxLength: 128
+        service_life:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Vida Útil
+        service_life_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida Vida útil
+          maxLength: 128
+        good_and_service_acquired_type:
+          type: string
+          nullable: true
+          title: Tipo de Bien o Servicio Adquirido
+          maxLength: 128
+        acquired_service:
+          type: string
+          nullable: true
+          title: Servicio Adquirido
+          maxLength: 128
+        supplier_name:
+          type: string
+          nullable: true
+          title: Nombre del Proveedor
+          maxLength: 255
+        ghg_emission_are_recorded:
+          type: boolean
+          title: Se registran y monitorean las emisiones GEI
+        waste_type:
+          nullable: true
+          title: Tipo de desperdicio
+          oneOf:
+            - $ref: '#/components/schemas/WasteTypeEnum'
+            - $ref: '#/components/schemas/BlankEnum'
+            - $ref: '#/components/schemas/NullEnum'
+        waste_classification:
+          type: string
+          nullable: true
+          title: Clase de desperdicio
+          maxLength: 128
+        investment_type:
+          type: string
+          nullable: true
+          title: Tipo de Inversión
+          maxLength: 128
+        refrigerant_capacity:
+          type: number
+          format: double
+          title: Capacidad
+        refrigerant_capacity_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida
+          maxLength: 128
+        has_refrigerant_leaks:
+          type: boolean
+          title: ¿Existen Fugas del refrigerante en el equipo?
+        has_refrigerant_conversions:
+          type: boolean
+          title: ¿Se han realizado conversiones a refrigerantes con menor potencial
+            de calentamiento global (PCG)?
+        final_disposal_of_refrigerants:
+          type: string
+          nullable: true
+          title: Disposición final de refrigerantes
+          maxLength: 128
+        support_actions_refrigerant_equipment:
+          type: string
+          nullable: true
+          title: Acciones realiza para el mantenimiento y reparaciones del equipo
+          maxLength: 128
+        product_name:
+          type: string
+          nullable: true
+          title: Nombre del Producto
+          maxLength: 255
         documents:
           type: array
           items:
@@ -2658,14 +3371,22 @@ components:
         emission_source_name:
           type: string
           readOnly: true
+        group_name:
+          type: string
+          readOnly: true
+        waste_management_data:
+          type: object
+          additionalProperties: {}
+          readOnly: true
       required:
         - documents
         - emission_factor
         - emission_source_name
         - factor_type
+        - group_name
         - id
         - location
-        - source_type
+        - waste_management_data
     EmissionsSourceMonthEntry:
       type: object
       properties:
@@ -2865,6 +3586,19 @@ components:
       required:
         - id
         - name
+    Investment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+      required:
+        - id
+        - name
     Location:
       type: object
       properties:
@@ -2939,7 +3673,7 @@ components:
           maximum: 2147483647
           minimum: -2147483648
           title: Empleados
-        emission_source_locations:
+        emission_sources:
           type: array
           items:
             $ref: '#/components/schemas/EmissionsSource'
@@ -2947,7 +3681,7 @@ components:
       required:
         - address
         - company
-        - emission_source_locations
+        - emission_sources
         - id
         - name
         - zip_code
@@ -3053,6 +3787,7 @@ components:
           maximum: 2147483647
           minimum: -2147483648
           title: Duración en días
+          description: Ingrese -1 para una membresía ilimitada.
         description:
           type: string
           nullable: true
@@ -3155,6 +3890,9 @@ components:
         * `October` - Octubre
         * `November` - Noviembre
         * `December` - Diciembre
+    NullEnum:
+      enum:
+        - null
     PatchedCompany:
       type: object
       properties:
@@ -3278,6 +4016,19 @@ components:
           type: string
           format: uri
           nullable: true
+        economic_sector_name:
+          type: string
+          readOnly: true
+        size_name:
+          type: string
+          readOnly: true
+        industry_type_name:
+          type: string
+          readOnly: true
+        membership:
+          allOf:
+            - $ref: '#/components/schemas/CompanyMembership'
+          readOnly: true
     PatchedDocument:
       type: object
       properties:
@@ -3358,6 +4109,7 @@ components:
           type: integer
         source_type:
           type: integer
+          nullable: true
           title: Tipo de Fuente de Emisión
         geo_location:
           type: object
@@ -3383,6 +4135,10 @@ components:
         emission_factor:
           type: integer
           title: Factor de Emisión
+        emission_factor_unit:
+          type: integer
+          nullable: true
+          title: Unidad por defecto
         vehicle_type:
           type: string
           nullable: true
@@ -3431,6 +4187,140 @@ components:
           nullable: true
           title: Unidad Eficiencia Energética
           maxLength: 256
+        know_type_electricity_generation_source:
+          type: boolean
+          title: Conoce el tipo de fuente de generación de electricidad
+        waste_management:
+          type: string
+          nullable: true
+          title: Manejo de desperdicio
+        leased_assets_type:
+          type: string
+          nullable: true
+          title: Tipo de bien arrendado
+          maxLength: 128
+        leased_assets_durations:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Duración del contrato de Arrendamiento
+        leased_assets_duration_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida de la duración
+          maxLength: 128
+        fuel_store:
+          type: string
+          nullable: true
+          title: Almacenamiento del Combustible
+          maxLength: 256
+        fuel_management:
+          type: string
+          nullable: true
+          title: Gestión del Combustible
+          maxLength: 256
+        exist_steam_specific_factor:
+          type: boolean
+        activity_name:
+          type: string
+          nullable: true
+          title: Nombre de la Actividad
+          maxLength: 255
+        equipment_name:
+          type: string
+          nullable: true
+          title: Nombre del Equipo
+          maxLength: 255
+        origin:
+          type: string
+          nullable: true
+          title: Origen
+          maxLength: 255
+        energy_efficiency_value:
+          type: number
+          format: double
+          title: Eficiencia energética del equipo o sistema que usa combustible
+        energy_efficiency_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida
+          maxLength: 128
+        service_life:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Vida Útil
+        service_life_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida Vida útil
+          maxLength: 128
+        good_and_service_acquired_type:
+          type: string
+          nullable: true
+          title: Tipo de Bien o Servicio Adquirido
+          maxLength: 128
+        acquired_service:
+          type: string
+          nullable: true
+          title: Servicio Adquirido
+          maxLength: 128
+        supplier_name:
+          type: string
+          nullable: true
+          title: Nombre del Proveedor
+          maxLength: 255
+        ghg_emission_are_recorded:
+          type: boolean
+          title: Se registran y monitorean las emisiones GEI
+        waste_type:
+          nullable: true
+          title: Tipo de desperdicio
+          oneOf:
+            - $ref: '#/components/schemas/WasteTypeEnum'
+            - $ref: '#/components/schemas/BlankEnum'
+            - $ref: '#/components/schemas/NullEnum'
+        waste_classification:
+          type: string
+          nullable: true
+          title: Clase de desperdicio
+          maxLength: 128
+        investment_type:
+          type: string
+          nullable: true
+          title: Tipo de Inversión
+          maxLength: 128
+        refrigerant_capacity:
+          type: number
+          format: double
+          title: Capacidad
+        refrigerant_capacity_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida
+          maxLength: 128
+        has_refrigerant_leaks:
+          type: boolean
+          title: ¿Existen Fugas del refrigerante en el equipo?
+        has_refrigerant_conversions:
+          type: boolean
+          title: ¿Se han realizado conversiones a refrigerantes con menor potencial
+            de calentamiento global (PCG)?
+        final_disposal_of_refrigerants:
+          type: string
+          nullable: true
+          title: Disposición final de refrigerantes
+          maxLength: 128
+        support_actions_refrigerant_equipment:
+          type: string
+          nullable: true
+          title: Acciones realiza para el mantenimiento y reparaciones del equipo
+          maxLength: 128
+        product_name:
+          type: string
+          nullable: true
+          title: Nombre del Producto
+          maxLength: 255
         documents:
           type: array
           items:
@@ -3439,6 +4329,13 @@ components:
           nullable: true
         emission_source_name:
           type: string
+          readOnly: true
+        group_name:
+          type: string
+          readOnly: true
+        waste_management_data:
+          type: object
+          additionalProperties: {}
           readOnly: true
     PatchedEmissionsSourceMonthEntry:
       type: object
@@ -3532,7 +4429,7 @@ components:
           maximum: 2147483647
           minimum: -2147483648
           title: Empleados
-        emission_source_locations:
+        emission_sources:
           type: array
           items:
             $ref: '#/components/schemas/EmissionsSource'
@@ -3928,6 +4825,9 @@ components:
             <br />2) para udm Time - segundos <br />3) para el área udm - metros <br
             />4) Ángulo udm - grados.
           maxLength: 256
+        group:
+          type: string
+          readOnly: true
         slug:
           type: string
           maxLength: 32
@@ -3936,7 +4836,7 @@ components:
           title: Símbolo
           description: El símbolo utilizado para esta unidad de medida, como "ft"
             para pies o "m" para metro.
-          maxLength: 8
+          maxLength: 32
         measure_type:
           allOf:
             - $ref: '#/components/schemas/MeasureTypeEnum'
@@ -3999,10 +4899,27 @@ components:
             Este atributo de miembro no es obligatorio, pero es una pieza valiosa
             de documentación
           maxLength: 32
+        is_gei_unit:
+          type: boolean
+          title: Es una unidad de medida GEI
       required:
+        - group
         - id
         - measure_type
         - symbol
+    UpdatePassword:
+      type: object
+      properties:
+        old_password:
+          type: string
+        new_password:
+          type: string
+        confirm_password:
+          type: string
+      required:
+        - confirm_password
+        - new_password
+        - old_password
     UserModel:
       type: object
       properties:
@@ -4011,11 +4928,10 @@ components:
           readOnly: true
         username:
           type: string
+          readOnly: true
           title: Nombre de usuario
           description: 'Requerido. 150 carácteres como máximo. Únicamente letras,
             dígitos y @/./+/-/_ '
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
         first_name:
           type: string
           title: Nombre
@@ -4027,8 +4943,8 @@ components:
         email:
           type: string
           format: email
+          readOnly: true
           title: Correo Electrónico
-          maxLength: 254
         avatar:
           type: string
           readOnly: true
@@ -4037,6 +4953,20 @@ components:
         - email
         - id
         - username
+    WasteTypeEnum:
+      enum:
+        - food
+        - gardening
+        - kitchen
+        - animals
+        - other
+      type: string
+      description: |-
+        * `food` - Residuos de alimentos
+        * `gardening` - Residuos de jardinería
+        * `kitchen` - Residuos de cocina
+        * `animals` - Residuos de animales
+        * `other` - Otro
   securitySchemes:
     jwtAuth:
       type: http

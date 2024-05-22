@@ -1,5 +1,6 @@
-import * as cryptoNode from 'node:crypto'
 import { format, isValid, parseISO } from 'date-fns'
+import { v4 as uuidv4 } from 'uuid'
+import { i18n } from '~/modules/i18n'
 
 const DEBUG = import.meta.env.VITE_DEBUG_MODE || false
 
@@ -22,7 +23,7 @@ export function splitMultipleChoiceOptions(value: string): string[][] {
   return questionParser
 }
 
-export function qtxLogger(error: any): void {
+export function planetLogger(error: any): void {
   if (!DEBUG)
     return
   console.warn(error.name, error)
@@ -35,22 +36,8 @@ export function qtxLogger(error: any): void {
   }
 }
 
-export function uuidv4() {
-  function getRandomValue() {
-    let randomValues
-
-    if (typeof window !== 'undefined' && window.crypto && window.crypto.getRandomValues) {
-      // Web Browser
-      randomValues = window.crypto.getRandomValues(new Uint8Array(1))[0]
-    }
-    else {
-      // Node.js
-      randomValues = cryptoNode.randomBytes(1).readUInt8(0)
-    }
-    return randomValues
-  }
-  return ((1e7).toString() + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c: any) =>
-    (c ^ getRandomValue() & 15 >> c / 4).toString(16))
+export function generateUuid() {
+  return uuidv4()
 }
 
 export function handleError(error: any): string {
@@ -92,4 +79,28 @@ export function handleError(error: any): string {
     console.error(exception)
     return '🔥 Utils error 🔥!'
   }
+}
+
+export function formatOptions(list: any, labelKey = 'name', valueKey = 'id', emptyOption = true) {
+  const empty = {
+    label: i18n.t('selectAnOption'),
+    value: null,
+  }
+
+  const options = list.map((item: any) => {
+    if (typeof item === 'object') {
+      return {
+        label: item[labelKey],
+        value: item[valueKey],
+      }
+    }
+    else {
+      return {
+        label: item,
+        value: item,
+      }
+    }
+  })
+
+  return emptyOption ? [empty, ...options] : options
 }

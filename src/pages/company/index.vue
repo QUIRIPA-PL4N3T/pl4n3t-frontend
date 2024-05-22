@@ -28,27 +28,73 @@ function goEditBrand(id: number) {
             {{ t('company.edit') }}
           </button>
         </template>
-        <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex flex-col md:flex-row gap-4 justify-between">
           <div class="w-full flex md:w-1/6 align-middle justify-center">
             <a :href="company.website!" target="_blank">
               <img v-if="company.logo_absolute_url" :src="company.logo_absolute_url!" :alt="company.name" class="max-w-[300px]" style="width: 100%;">
               <img v-else :src="`https://ui-avatars.com/api/?background=a0a0a0&size=128&name=${company.name}`" alt="" class="rounded-full">
             </a>
           </div>
-          <div class="w-full md:w-3/6">
-            <h5>{{ t('company.contact') }}</h5>
-            <p>{{ company.address }}</p>
-            <p>{{ `${company.city_name}, ${company.state_name}` }}</p>
-            <p class="uppercase">
-              {{ `${company.country_name}` }}
-            </p>
-            <p>{{ `${t('company.phone')}: ${company.phone}` }}</p>
-            <p>{{ `${t('company.email')}: ${company.email}` }}</p>
+          <div class="md:w-3/6">
+            <h5 class="pb-3">
+              {{ company.name }}
+            </h5>
+            <table class="text-sm w-full md:w-auto">
+              <tbody>
+                <tr>
+                  <td class="font-bold">
+                    {{ t('general.nit') }}:
+                  </td>
+                  <td class="px-4 text-right md:text-left">
+                    {{ company.nit }}
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-bold">
+                    {{ t('company.size') }}:
+                  </td>
+                  <td class="px-4 text-right md:text-left">
+                    {{ company.size_name }}
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-bold">
+                    {{ t('general.industry_type') }}:
+                  </td>
+                  <td class="px-4 text-right md:text-left">
+                    {{ company.industry_type_name }}
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-bold">
+                    {{ t('general.economic_sector') }}:
+                  </td>
+                  <td class="px-4 text-right md:text-left">
+                    {{ company.economic_sector_name }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div class="flex flex-col w-full md:w-2/6 align-middle justify-center">
-            <a href="/" class="font-bold text-sky-400">{{ t('membership.title') }}</a>
-            <p>{{ `${t('membership.locationLimit')}: ` }} ♾️ </p>
-            <p>{{ `${t('membership.workersLimit')}: ` }} ♾️ </p>
+
+          <div class="w-full md:w-2/6">
+            <h5 class="pb-3">
+              {{ t('company.contact') }}
+            </h5>
+            <div class="flex flex-col text-sm">
+              <p>
+                <span class="font-bold">
+                  {{ t('company.email') }}:
+                </span><a class="text-sky-600 ps-2" :href="`mailto:${company!.email!}`">{{ company!.email! }}</a>
+              </p>
+              <p><span class="font-bold">{{ t('company.phone') }}</span> {{ company.phone }}</p>
+              <span>{{ t('company.address') }}</span>
+              <span>{{ company.address }}</span>
+              <span>{{ `${company.city_name}, ${company.state_name}` }}</span>
+              <span class="uppercase">
+                {{ `${company.country_name}` }}
+              </span>
+            </div>
           </div>
         </div>
       </Card>
@@ -88,9 +134,17 @@ function goEditBrand(id: number) {
             @click.prevent="goEditBrand(brand.id)"
           >
             <Image
+              v-if="brand.logo_absolute_url"
               :src="brand.logo_absolute_url"
               alt="{{ brand.name }}"
-              image-class="rounded-md border-2 border-slate-300 w-[163px] h-[163px] object-contain object-center p-3"
+              image-class="rounded-md border-2 border-slate-300 w-[163px] object-contain object-center"
+            />
+            <Image
+              v-else
+              :src="`https://placehold.co/400x400?text=${brand.name}`"
+              :alt="brand.name"
+              height="h-full"
+              image-class="rounded-md border-2 border-slate-300 w-[163px] object-contain object-center"
             />
           </button>
           <div>
@@ -107,6 +161,34 @@ function goEditBrand(id: number) {
                 <Icon icon="heroicons-outline:plus" class="absolute z-10 bg-white p-1 rounded-full text-4xl" />
               </button>
             </div>
+          </div>
+        </div>
+      </Card>
+
+      <!-- Company Membership -->
+      <Card v-if="company.id" :title="`${t('membership.currentTitle')}: ${company.membership.membership.name}`">
+        <div class="flex flex-col w-full align-middle justify-center">
+          <p class="flex flex-col text-sm">
+            <span>{{ `${t('membership.locationLimit')}: ${company.membership.membership.num_locations}` }}</span>
+            <span>{{ `${t('membership.brandsLimit')}: ${company.membership.membership.num_brands}` }}</span>
+            <span>{{ `${t('membership.userLimit')}: ${company.membership.membership.num_users}` }} </span>
+            <span>{{ `${t('membership.endDate')}: ${company.membership.end_date}` }} </span>
+            <span>{{ `${t('membership.daysRemaining')}: ${company.membership.days_remaining}` }} </span>
+            <a href="#" class="font-light text-sky-400">{{ t('membership.changePlan') }} </a>
+          </p>
+        </div>
+      </Card>
+
+      <!-- Company Membership -->
+      <Card v-if="company.id" :title="t('company.members')">
+        <template #header>
+          <button type="button" class="btn btn-dark btn-sm">
+            {{ t('company.addMember') }}
+          </button>
+        </template>
+        <div v-for="member in company.members_roles" :key="member.user_email">
+          <div>
+            {{ member.user_email }}
           </div>
         </div>
       </Card>

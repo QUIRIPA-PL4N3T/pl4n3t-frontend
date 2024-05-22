@@ -59,7 +59,7 @@ const themeSettingsStore = useThemeSettingsStore()
 <template>
   <div
     v-if="!overlay"
-    :class="`card rounded-md bg-white dark:bg-slate-800 lg:h-full  ${
+    :class="`card rounded-md bg-white dark:bg-slate-800  ${
       themeSettingsStore.skin === 'bordered'
         ? ' border border-gray-5002 dark:border-slate-700'
         : 'shadow-base'
@@ -158,7 +158,7 @@ const themeSettingsStore = useThemeSettingsStore()
 
 <style lang="scss" scoped>
 .card-title {
-  @apply font-medium  capitalize md:text-xl md:leading-[28px] text-lg leading-[24px];
+  @apply font-medium md:text-xl md:leading-[28px] text-lg leading-[24px];
 }
 .card-subtitle {
   @apply text-sm leading-5 font-medium text-slate-600 dark:text-slate-300 mt-1;

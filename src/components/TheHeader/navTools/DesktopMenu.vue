@@ -106,7 +106,6 @@ export default {
                 :class="isActive ? ' bg-slate-900 dark:bg-white' : ''"
               />
               <span
-                class="capitalize"
                 :class="
                   isActive
                     ? ' text-slate-900 dark:text-white font-medium'

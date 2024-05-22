@@ -1,9 +1,19 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
+
+const emissionSourceStore = useEmissionSourceStore()
+const { currentGlobalLocationId } = storeToRefs(emissionSourceStore)
 const { t } = useI18n()
 </script>
 
 <template>
-  <h1>{{ t('goals.title') }}</h1>
+  <Card
+    v-if="currentGlobalLocationId"
+    :title="t('goals.title')"
+  >
+    ...
+  </Card>
+  <NoLocationSelected v-else />
 </template>
 
 <route lang="yaml">

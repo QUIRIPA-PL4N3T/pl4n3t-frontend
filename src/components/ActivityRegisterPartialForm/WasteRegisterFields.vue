@@ -40,7 +40,7 @@ watch(() => optionFactorTypes.value, () => {
     <div class="mb-5 flex w-full gap-5">
       <FormKit
         type="checkbox"
-        :label="t('equipment.waste_operation_label')"
+        :label="t('emissionSource.waste_operation_label')"
         :options="optionsWasteRegisterList"
         name="fuel_storage"
         outer-class="flex-1"
@@ -49,7 +49,7 @@ watch(() => optionFactorTypes.value, () => {
 
       <FormKit
         type="checkbox"
-        :label="t('equipment.waste_register_label')"
+        :label="t('emissionSource.waste_register_label')"
         :options="optionsOperationWasteList"
         outer-class="flex-1"
         fieldset-class="p-3"
@@ -85,11 +85,11 @@ watch(() => optionFactorTypes.value, () => {
     </div>
     <div class="mb-5">
       <FormKit
-        :label="t('equipment.description')"
+        :label="t('emissionSource.description')"
         type="textarea"
         placeholder="..."
         name="description"
-        :help="t('equipment.description_help')"
+        :help="t('emissionSource.description_help')"
       />
     </div>
   </div>

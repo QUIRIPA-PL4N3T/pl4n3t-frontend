@@ -3,15 +3,16 @@ import { storeToRefs } from 'pinia'
 
 const selectedFactorTypeId = ref(0)
 const sourceTypeId = ref(0)
-const knowElectricitySource = ref('yes')
-const existElectricityGenerationFactor = ref('no')
 const classificationStore = useClassificationStore()
 const basicStorage = useBasicStore()
+const emissionSourceStore = useEmissionSourceStore()
 
 const { t } = useI18n()
 
 const {
   optionsElectricitySourceList,
+  optionUnitOfMeasure,
+  optionYesNo,
 } = storeToRefs(basicStorage)
 
 const {
@@ -19,6 +20,8 @@ const {
   optionsFilteredEmissionFactors,
   optionSourceTypes,
 } = storeToRefs(classificationStore)
+
+const { currentEmissionSource } = storeToRefs(emissionSourceStore)
 
 function load() {
   if (optionFactorTypes.value.length === 1) {
@@ -47,120 +50,111 @@ load()
 </script>
 
 <template>
-  <div>
-    <div class="mb-5">
-      <FormKit
-        :label="t('equipment.electricity_supplier_label')"
-        outer-class="w-full"
-        inner-class="max-w-xl"
-        type="text"
-        placeholder="..."
-        name="electricity_supplier"
-        required
-        :help="t('equipment.electricity_supplier_help')"
-      />
-    </div>
-    <div class="pb-5">
-      <FormKit
-        v-model="sourceTypeId"
-        :label="t('equipment.source_type')"
-        type="select"
-        placeholder="..."
-        :options="optionSourceTypes"
-        name="source_type"
-        :help="t('equipment.source_type_help')"
-      />
-    </div>
-    <div class="mb-5">
-      <!-- Enable or disable electricity_source field -->
-      <FormKit
-        v-model="knowElectricitySource"
-        type="radio"
-        :label="t('equipment.know_electricity_source')"
-        :options="{ yes: t('yes'), no: t('no') }"
-        :help="t('equipment.know_electricity_source_help')"
-        fieldset-class="$remove:max-w-md pt-2"
-        :classes="{
-          fieldset: 'max-w-full',
-        }
-        "
-      />
-    </div>
-    <div class="pb-5">
-      <FormKit
-        v-model="sourceTypeId"
-        :disabled="knowElectricitySource !== 'yes'"
-        :label="t('equipment.electricity_source_label')"
-        type="select"
-        placeholder="..."
-        :options="knowElectricitySource === 'yes' ? optionsElectricitySourceList : []"
-        name="electricity_source"
-      />
-    </div>
-    <!-- Emission factor select -->
-    <div class="flex gap-4 pb-5">
+  <div class="flex flex-row md:grid md:grid-cols-4 md:gap-4">
+    <FormKit
+      :label="t('emissionSource.electricity_supplier_label')"
+      outer-class="md:col-span-2"
+      inner-class="max-w-xl"
+      type="text"
+      name="electricity_supplier"
+      required
+      :help="t('emissionSource.electricity_supplier_help')"
+    />
+    <FormKit
+      v-model="sourceTypeId"
+      :label="t('emissionSource.source_type')"
+      outer-class="md:col-span-2"
+      type="select"
+      :options="optionSourceTypes"
+      name="source_type"
+      :help="t('emissionSource.source_type_help')"
+    />
+    <!-- Enable or disable electricity_source field -->
+    <FormKit
+      type="radio"
+      outer-class="md:col-start-1 md:col-span-2"
+      :label="t('emissionSource.know_electricity_source')"
+      :options="optionYesNo"
+      :help="t('emissionSource.know_electricity_source_help')"
+      fieldset-class="$remove:max-w-md pt-2"
+      name="know_type_electricity_generation_source"
+      :classes="{
+        fieldset: 'max-w-full',
+      }
+      "
+    />
+    <FormKit
+      :disabled="!currentEmissionSource.know_type_electricity_generation_source"
+      outer-class="md:col-span-2"
+      :label="t('emissionSource.electricity_source_label')"
+      type="select"
+      :options="optionsElectricitySourceList"
+      name="electricity_source"
+    />
+    <div class="grid grid-cols-subgrid gap-4 col-span-4 bg-neutral-100 p-4 rounded mb-5">
       <FormKit
         v-model="selectedFactorTypeId"
-        :label="t('equipment.factor_type')"
-        outer-class="w-full"
+        :label="t('emissionSource.factor_type')"
+        outer-class="md:col-span-1"
         type="select"
-        placeholder="..."
         name="factor_type"
         :options="optionFactorTypes"
+        validation="required"
         @onchange="filterEmissionFactors"
       />
       <FormKit
-        :label="t('equipment.electricity_type')"
-        outer-class="w-full"
+        :label="t('emissionSource.electricity_type')"
+        outer-class="md:col-span-2"
         type="select"
-        placeholder="..."
+        validation="required"
         name="emission_factor"
         :options="optionsFilteredEmissionFactors"
       />
-    </div>
-    <!-- End Emission Factor select -->
-    <div class="mb-5">
-      <!-- Enable or disable electricity_efficiency and units field -->
       <FormKit
-        v-model="existElectricityGenerationFactor"
-        type="radio"
-        :label="t('equipment.electricity_generation_question')"
-        :options="{ yes: t('yes'), no: t('no') }"
-        fieldset-class="$remove:max-w-md pt-2"
-        :classes="{
-          fieldset: 'max-w-full',
-        }
-        "
+        :label="t('emissionSource.unit')"
+        outer-class="md:col-span-1"
+        type="select"
+        validation="required"
+        name="emission_factor_unit"
+        :options="optionUnitOfMeasure"
       />
     </div>
-    <div class="flex gap-4 mb-5">
-      <FormKit
-        :disabled="existElectricityGenerationFactor === 'no'"
-        type="number"
-        outer-class="w-full"
-        :label="t('equipment.specific_factor_label')"
-        :help="t('equipment.efficiency_help')"
-        value="0"
-        name="electricity_efficiency"
-      />
-
-      <FormKit
-        :disabled="existElectricityGenerationFactor === 'no'"
-        outer-class="w-full"
-        :label="t('equipment.specific_factor_unit_label')"
-        type="text"
-        placeholder="..."
-        name="electricity_efficiency_unit"
-      />
-    </div>
-    <div class="mb-5">
-      <FormKit
-        :label="t('equipment.description')"
-        type="textarea"
-        placeholder="..."
-        :help="t('equipment.description_help')"
-        name="description"
-      />
-    </div>
+    <!-- Enable or disable electricity_efficiency and units field -->
+    <FormKit
+      type="radio"
+      :label="t('emissionSource.electricity_generation_question')"
+      outer-class="md:col-span-4"
+      name="exist_steam_specific_factor"
+      :options="optionYesNo"
+      fieldset-class="$remove:max-w-md pt-2"
+      :classes="{
+        fieldset: 'max-w-full',
+      }
+      "
+    />
+    <FormKit
+      :disabled="!currentEmissionSource.exist_steam_specific_factor"
+      type="number"
+      outer-class="w-full"
+      :label="t('emissionSource.specific_factor_label')"
+      :help="t('emissionSource.efficiency_help')"
+      value="0"
+      step="any"
+      name="electricity_efficiency"
+    />
+    <FormKit
+      :disabled="!currentEmissionSource.exist_steam_specific_factor"
+      outer-class="w-full"
+      :label="t('emissionSource.specific_factor_unit_label')"
+      type="text"
+      name="electricity_efficiency_unit"
+    />
+    <FormKit
+      :label="t('emissionSource.description')"
+      type="textarea"
+      outer-class="md:col-span-4"
+      :help="t('emissionSource.description_help')"
+      name="description"
+    />
   </div>
 </template>

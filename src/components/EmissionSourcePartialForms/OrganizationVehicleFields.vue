@@ -11,7 +11,7 @@ const { t } = useI18n()
 
 const disabledSourceType = ref<boolean>(false)
 
-const { currentEquipment } = storeToRefs(emissionSourceStore)
+const { currentEmissionSource } = storeToRefs(emissionSourceStore)
 // Store to ref
 const {
   optionsVehicleTypeList,
@@ -30,18 +30,18 @@ function filterEmissionFactors() {
 }
 
 function emissionFactorLabel(): string {
-  return t('equipment.vehicle_fuel')
+  return t('emissionSource.vehicle_fuel')
 }
 
 function emissionFactorTypeLabel(): string {
-  return t('equipment.vehicle_fuel_type')
+  return t('emissionSource.vehicle_fuel_type')
 }
 </script>
 
 <template>
   <div>
     <FormKit
-      :label="t('equipment.code')"
+      :label="t('emissionSource.code')"
       outer-class="w-full"
       inner-class="max-w-xl"
       type="text"
@@ -49,7 +49,7 @@ function emissionFactorTypeLabel(): string {
       name="code"
     />
     <FormKit
-      :label="t('equipment.name')"
+      :label="t('emissionSource.name')"
       outer-class="w-full"
       inner-class="max-w-xl"
       type="text"
@@ -60,7 +60,7 @@ function emissionFactorTypeLabel(): string {
   <div class="pb-5">
     <FormKit
       :disabled="disabledSourceType"
-      :label="t('equipment.source_type')"
+      :label="t('emissionSource.source_type')"
       type="select"
       placeholder="..."
       :options="optionSourceTypes"
@@ -72,7 +72,7 @@ function emissionFactorTypeLabel(): string {
   >
     <div class="pb-5">
       <FormKit
-        :label="t('equipment.vehicle_type')"
+        :label="t('emissionSource.vehicle_type')"
         type="select"
         placeholder="..."
         :options="optionsVehicleTypeList"
@@ -81,7 +81,7 @@ function emissionFactorTypeLabel(): string {
     </div>
     <div class="pb-5">
       <FormKit
-        :label="t('equipment.vehicle_load_type')"
+        :label="t('emissionSource.vehicle_load_type')"
         type="select"
         placeholder="..."
         :options="optionsVehicleLoadList"
@@ -91,7 +91,7 @@ function emissionFactorTypeLabel(): string {
     <div class="pb-5 col-span-2">
       <FormKit
         type="number"
-        :label="`${t('equipment.vehicle_capacity')} ${currentEquipment.vehicle_load || ''}`"
+        :label="`${t('emissionSource.vehicle_capacity')} ${currentEmissionSource.vehicle_load || ''}`"
         number
         name="vehicle_capacity"
       />
@@ -99,14 +99,14 @@ function emissionFactorTypeLabel(): string {
     <div class="pb-5">
       <FormKit
         type="number"
-        :label="t('equipment.vehicle_efficiency')"
+        :label="t('emissionSource.vehicle_efficiency')"
         number
         name="vehicle_efficiency"
       />
     </div>
     <div class="pb-5">
       <FormKit
-        :label="t('equipment.vehicle_efficiency_unit')"
+        :label="t('emissionSource.vehicle_efficiency_unit')"
         type="select"
         placeholder="..."
         :options="optionsVehicleEfficiencyUnitList"
@@ -138,7 +138,7 @@ function emissionFactorTypeLabel(): string {
   <!-- End Emission Factor select -->
   <div class="mb-5">
     <FormKit
-      :label="t('equipment.description')"
+      :label="t('emissionSource.description')"
       type="textarea"
       placeholder="..."
       name="description"

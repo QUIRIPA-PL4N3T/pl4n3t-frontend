@@ -36,7 +36,7 @@ watch(() => optionFactorTypes.value, () => {
   <div>
     <div class="mb-5">
       <FormKit
-        :label="t('equipment.electricity_supplier_label')"
+        :label="t('emissionSource.electricity_supplier_label')"
         outer-class="w-full"
         inner-class="max-w-xl"
         type="text"
@@ -47,7 +47,7 @@ watch(() => optionFactorTypes.value, () => {
     <div class="pb-5">
       <FormKit
         v-model="sourceTypeId"
-        :label="t('equipment.source_type')"
+        :label="t('emissionSource.source_type')"
         type="select"
         placeholder="..."
         :options="optionSourceTypes"
@@ -57,7 +57,7 @@ watch(() => optionFactorTypes.value, () => {
     <div class="pb-5">
       <FormKit
         v-model="sourceTypeId"
-        :label="t('equipment.electricity_source_label')"
+        :label="t('emissionSource.electricity_source_label')"
         type="select"
         placeholder="..."
         :options="optionsElectricitySourceList"
@@ -68,7 +68,7 @@ watch(() => optionFactorTypes.value, () => {
     <div class="flex gap-4 pb-5">
       <FormKit
         v-model="selectedFactorTypeId"
-        :label="t('equipment.factor_type')"
+        :label="t('emissionSource.factor_type')"
         outer-class="w-full"
         type="select"
         placeholder="..."
@@ -77,7 +77,7 @@ watch(() => optionFactorTypes.value, () => {
         @onchange="filterEmissionFactors"
       />
       <FormKit
-        :label="t('equipment.electricity_type')"
+        :label="t('emissionSource.electricity_type')"
         outer-class="w-full"
         type="select"
         placeholder="..."
@@ -89,7 +89,7 @@ watch(() => optionFactorTypes.value, () => {
     <div class="mb-5">
       <FormKit
         type="radio"
-        :label="t('equipment.electricity_generation_question')"
+        :label="t('emissionSource.electricity_generation_question')"
         :options="{ yes: t('yes'), no: t('no') }"
         fieldset-class="$remove:max-w-md"
         :classes="{
@@ -101,14 +101,14 @@ watch(() => optionFactorTypes.value, () => {
     <div class="mb-5">
       <FormKit
         type="number"
-        :label="t('equipment.efficiency_label')"
+        :label="t('emissionSource.efficiency_label')"
         number
         name="efficiency"
       />
     </div>
     <div class="mb-5">
       <FormKit
-        :label="t('equipment.efficiency_unit_label')"
+        :label="t('emissionSource.efficiency_unit_label')"
         type="text"
         placeholder="..."
         name="efficiency_unit"
@@ -116,11 +116,11 @@ watch(() => optionFactorTypes.value, () => {
     </div>
     <div class="mb-5">
       <FormKit
-        :label="t('equipment.description')"
+        :label="t('emissionSource.description')"
         type="textarea"
         placeholder="..."
         name="description"
-        :help="t('equipment.description_help')"
+        :help="t('emissionSource.description_help')"
       />
     </div>
   </div>

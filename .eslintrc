@@ -1,0 +1,6 @@
+{
+  "extends": "@antfu",
+  "rules": {
+      "prefer-arrow-callback": [ "error", { "allowNamedFunctions": true } ]
+    }
+}

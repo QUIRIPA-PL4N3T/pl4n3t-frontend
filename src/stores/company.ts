@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useToast } from 'vue-toastification'
 import { brandApi, companyApi, locationApi } from '~/api'
 import type {
   Brand,
@@ -11,11 +12,15 @@ import {
   DEFAULT_COMPANY,
   DEFAULT_LOCATION,
 } from '~/api/modelsDefaults'
+import { i18n } from '~/modules/i18n'
+import { handleError } from '~/utilities/utils'
+
+const toast = useToast()
 
 export const useCompanyStore = defineStore('company', {
   state: () => ({
     companies: <Company[]>[],
-    currentBrand: <Brand>DEFAULT_BRAND,
+    currentBrand: <Brand>JSON.parse(JSON.stringify(DEFAULT_BRAND)),
     currentLocation: <Location>DEFAULT_LOCATION,
     company: <Company>DEFAULT_COMPANY,
   }),
@@ -24,14 +29,19 @@ export const useCompanyStore = defineStore('company', {
       return this.company.brands
     },
     optionBrands(): any {
-      return this.company.brands.map((brand: Brand) => ({
+      const emptyBrand = {
+        label: i18n.t('brand.select'),
+        value: null,
+      }
+      const brands = this.company.brands.map((brand: Brand) => ({
         label: brand.name,
         value: brand.id,
       }))
+      return [emptyBrand, ...brands]
     },
     optionsLocations(): any {
       const emptyLocation = {
-        label: 'Seleccione una Sede',
+        label: i18n.t('select.location'),
         value: null,
       }
 
@@ -64,7 +74,7 @@ export const useCompanyStore = defineStore('company', {
     async fetchBrand(id: number) {
       // Fetch current brand by id
       if (id === 0) {
-        this.currentBrand = DEFAULT_BRAND
+        this.clearBrand()
         return
       }
 
@@ -73,13 +83,19 @@ export const useCompanyStore = defineStore('company', {
         this.currentBrand = brand
       }
       catch (error) {
-        this.currentBrand = DEFAULT_BRAND
+        this.clearBrand()
       }
+    },
+    clearBrand() {
+      this.currentBrand = <Brand>JSON.parse(JSON.stringify(DEFAULT_BRAND))
+    },
+    clearLocation() {
+      this.currentLocation = <Location>JSON.parse(JSON.stringify(DEFAULT_LOCATION))
     },
     async fetchLocation(id: number) {
       // Fetch current location by id
       if (id === 0) {
-        this.currentLocation = DEFAULT_LOCATION
+        this.clearLocation()
         return
       }
 
@@ -96,18 +112,19 @@ export const useCompanyStore = defineStore('company', {
       if (data.logo === null)
         delete data.logo
       try {
-        if (this.currentBrand.id === 0) {
-          const { data: brand } = await brandApi.companiesBrandsCreate(data)
-          this.currentBrand = brand
+        if (data.id === 0) {
+          await brandApi.companiesBrandsCreate(data)
+          toast.success(i18n.t('brand.created.success'))
         }
         else {
-          const { data: brand } = await brandApi.companiesBrandsUpdate(data)
-          this.currentBrand = brand
+          await brandApi.companiesBrandsUpdate(data)
+          toast.success(i18n.t('brand.updated.success'))
         }
         this.fetchCompany()
       }
       catch (error) {
         console.error(error)
+        toast.error(handleError(error))
       }
     },
     async saveLocation() {
@@ -115,38 +132,45 @@ export const useCompanyStore = defineStore('company', {
       this.currentLocation.company = this.company.id
       try {
         if (this.currentLocation.id === 0) {
-          const { data: location } = await locationApi.companiesLocationsCreate({ location: this.currentLocation })
-          this.currentLocation = location
+          await locationApi.companiesLocationsCreate({ location: this.currentLocation })
+          toast.success(i18n.t('location.created.success'))
         }
         else {
-          const { data: location } = await locationApi.companiesLocationsUpdate({
+          await locationApi.companiesLocationsUpdate({
             id: this.currentLocation.id,
             location: this.currentLocation,
           })
-          this.currentLocation = location
+          toast.success(i18n.t('location.updated.success'))
         }
+        this.clearLocation()
         this.fetchCompany()
       }
       catch (error) {
         console.error(error)
+        toast.error(handleError(error))
       }
     },
     async deleteBrand(id: number) {
       try {
         await brandApi.companiesBrandsDestroy({ id })
+        toast.success(i18n.t('location.deleted.brand'))
+        this.clearBrand()
         this.fetchCompany()
       }
       catch (error) {
         console.error(error)
+        toast.error(handleError(error))
       }
     },
     async deleteLocation(id: number) {
       try {
         await locationApi.companiesLocationsDestroy({ id })
         this.fetchCompany()
+        toast.success(i18n.t('location.deleted.success'))
       }
       catch (error) {
         console.error(error)
+        toast.error(handleError(error))
       }
     },
     async saveCompany() {
@@ -154,14 +178,17 @@ export const useCompanyStore = defineStore('company', {
         if (this.company.id === 0) {
           const { data: company } = await companyApi.companiesCompaniesCreate({ company: this.company })
           this.company = company
+          toast.success(i18n.t('company.create.success'))
         }
         else {
           const { data: company } = await companyApi.companiesCompaniesUpdate({ id: this.company.id, company: this.company })
           this.company = company
+          toast.success(i18n.t('company.update.success'))
         }
       }
       catch (error) {
         console.error(error)
+        toast.error(handleError(error))
       }
     },
     getLocationName(id: number) {
