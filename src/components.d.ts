@@ -54,6 +54,7 @@ declare module 'vue' {
     InputGroup: typeof import('./components/InputGroup/index.vue')['default']
     InvestmentFields: typeof import('./components/EmissionSourcePartialForms/InvestmentFields.vue')['default']
     InvestmentRegisterFields: typeof import('./components/ActivityRegisterPartialForm/InvestmentRegisterFields.vue')['default']
+    InvestmentSearch: typeof import('./components/InvestmentSearch/index.vue')['default']
     Language: typeof import('./components/TheHeader/navTools/language.vue')['default']
     LeasedAssetFields: typeof import('./components/EmissionSourcePartialForms/LeasedAssetFields.vue')['default']
     LeasedAssetRegisterFields: typeof import('./components/ActivityRegisterPartialForm/LeasedAssetRegisterFields.vue')['default']

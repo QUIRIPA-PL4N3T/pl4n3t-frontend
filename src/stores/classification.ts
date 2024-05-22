@@ -60,6 +60,21 @@ export const useClassificationStore = defineStore('classification', {
         console.error(error)
       }
     },
+    async getInvestments(search?: string) {
+      try {
+        if (search) {
+          const { data } = await emissionSourceGroupApi.classificationsInvestmentSearchRetrieve({ search })
+          return data
+        }
+        else {
+          const { data } = await emissionSourceGroupApi.classificationsInvestmentList()
+          return data
+        }
+      }
+      catch (error) {
+        console.error(error)
+      }
+    },
     async getCommonEquipments(search?: string) {
       try {
         if (search) {

@@ -610,6 +610,71 @@ paths:
               schema:
                 $ref: '#/components/schemas/GHGScope'
           description: ''
+  /api/classifications/investment/:
+    get:
+      operationId: classificationsInvestmentList
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      tags:
+        - EmissionSourceGroups
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Investment'
+          description: ''
+    post:
+      operationId: classificationsInvestmentCreate
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      tags:
+        - EmissionSourceGroups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Investment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Investment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Investment'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Investment'
+          description: ''
+  /api/classifications/investment/search/:
+    get:
+      operationId: classificationsInvestmentSearchRetrieve
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      summary: Buscar por un texto
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: texto a buscar
+      tags:
+        - EmissionSourceGroups
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Investment'
+          description: ''
   /api/classifications/iso-categories/:
     get:
       operationId: classificationsIsoCategoriesList
@@ -3352,6 +3417,19 @@ components:
         name:
           type: string
           title: Tipo de Industria
+          maxLength: 255
+      required:
+        - id
+        - name
+    Investment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
           maxLength: 255
       required:
         - id

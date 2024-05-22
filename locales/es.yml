@@ -134,6 +134,8 @@ emissionSource:
   goods_and_service_origin_label: Origen
   goods_label: Bien Adquirido
   group: Grupo
+  investment:
+    name: Nombre de la Invesión
   investment_type_label: Tipo de Inversión
   know_electricity_source: ¿Conoce el tipo de fuente de generación de electricidad?
   know_electricity_source_help: >-
