@@ -19,7 +19,7 @@ export const useClassificationStore = defineStore('classification', {
       return this.classificationGroups.filter(group => group.allow_inventory)
     },
     optionsQuantificationTypes(): any {
-      return formatOptions(this.quantificationTypes)
+      return formatOptions(this.quantificationTypes, 'name', 'id', false)
     },
     optionGroups(): any {
       return formatOptions(this.classificationGroups)
