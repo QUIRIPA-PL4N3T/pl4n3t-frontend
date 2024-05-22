@@ -81,8 +81,16 @@ emissionSource:
 
     * Implementation of measures to reduce consumption.
   edit: Emission Source Editing
+  efficiency_help: Numerical data, may include decimals.
   efficiency_label: Energy efficiency of the emissionSource or system that uses the fuel
   efficiency_unit_label: Unit of measurement
+  electricity_generation_question: >-
+    Is there a specific emission factor associated with the supplier's
+    electricity generation?
+  electricity_source_label: Source of electricity generation
+  electricity_supplier_help: Name of your electricity supplier
+  electricity_supplier_label: Name of electricity supplier
+  electricity_type: Type of Electricity
   emission_factor: Emission Factor
   factor_type: Type of Emission Factor
   fuel_storage_label: Fuel storage
@@ -93,6 +101,8 @@ emissionSource:
   goods_and_service_origin_label: Origin
   goods_label: Good Acquired
   group: Cluster
+  know_electricity_source: Do you know the type of electricity generation source?
+  know_electricity_source_help: Select 'Yes' if you know the source of electricity or 'No' if you don't.
   name: Name / Brand / Model
   process_label: Select the process or activity
   save:
@@ -100,6 +110,9 @@ emissionSource:
     success: Broadcast source saved successfully
   service_label: Purchased Service
   source_type: Type of emission source (Fixed or Mobile)
+  source_type_help: Emission source type
+  specific_factor_label: Specific Emission Factor
+  specific_factor_unit_label: Emission Factor Unit
   supplier_name: Provider's name
   type: Select the team
   unit: Unit of measurement
