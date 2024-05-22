@@ -21,7 +21,6 @@ let loading = $ref<boolean>(false)
 
 let processingBasic = $ref<boolean>(false)
 let processingPassword = $ref<boolean>(false)
-const processingDelete = $ref<boolean>(false)
 
 authStore.getUserProfile()
 
@@ -93,6 +92,25 @@ async function updateAvatar(e: Event) {
   catch (error: any) {
     errorMessage = handleError(error)
     toast.error(t('profile.alerts.error'))
+  }
+}
+
+async function deleteAccount(confirm: boolean) {
+  if (confirm) {
+    try {
+      await authStore.deleteAccount(user.value.id).then(() => {
+        toast.success(t('profile.alerts.avatar_success'), {
+          timeout: 2000,
+        })
+        router.push('/auth/login')
+      }).catch(() => {
+        toast.error(t('profile.alerts.error'))
+      })
+    }
+    catch (error: any) {
+      errorMessage = handleError(error)
+      toast.error(t('profile.alerts.error'))
+    }
   }
 }
 </script>
@@ -207,14 +225,7 @@ async function updateAvatar(e: Event) {
           <h4 class="text-gray-500 text-sm">
             {{ t('profile.titles.delete_subtitle') }} <span class="font-bold">{{ company.name }}</span>
           </h4>
-          <ProfileDelete />
-          <Button
-            type="submit" btn-class="btn-outline-danger" class="w-full mt-4"
-          >
-            <Icon v-if="processingDelete" icon="eos-icons:trash" class="p-0 m-0" />
-            <Icon v-if="processingDelete" icon="eos-icons:loading" class="p-0 m-0" />
-            {{ t('profile.button_delete') }}
-          </Button>
+          <ProfileDelete @confirm="confirm => deleteAccount(confirm)" />
         </Card>
       </div>
     </div>

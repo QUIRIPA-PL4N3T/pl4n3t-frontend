@@ -1,18 +1,28 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import { defineEmits } from 'vue'
+
+const emit = defineEmits<{
+  (e: 'confirm', confirm: boolean): void
+}>()
 
 const { t } = useI18n()
-
 const companyStore = useCompanyStore()
 const { company } = storeToRefs(companyStore)
+const deleteAccount = $ref<any>(null)
+
+function confirm(value: boolean = false) {
+  emit('confirm', value)
+  deleteAccount.closeModal()
+}
 </script>
 
 <template>
   <Modal
     ref="deleteAccount"
-    title="Vertically center"
-    label="Vertically center"
-    label-class="btn-outline-danger"
+    :title="t('profile.button_delete')"
+    :label="t('profile.button_delete')"
+    label-class="btn-outline-danger btn-sm mt-2"
     centered
   >
     <h3 class="text-red-500 text-xl my-2">
@@ -26,15 +36,18 @@ const { company } = storeToRefs(companyStore)
     </div>
     <template #footer>
       <Button
-        :text="t('profile.button_cancel')"
+        :text="t"
         btn-class="btn-dark "
-        @click="$refs.deleteAccount.closeModal()"
-      />
+        @click="confirm()"
+      >
+        {{ t('profile.button_cancel') }}
+      </Button>
       <Button
-        :text="t('profile.titles.delete_title')"
         btn-class="btn-danger "
-        @click="$refs.deleteAccount.closeModal()"
-      />
+        @click="confirm(true)"
+      >
+        {{ t('profile.titles.delete_title') }}
+      </Button>
     </template>
   </Modal>
 </template>
