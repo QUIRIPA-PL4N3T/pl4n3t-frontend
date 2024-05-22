@@ -75,16 +75,10 @@ export const useClassificationStore = defineStore('classification', {
         console.error(error)
       }
     },
-    async getCommonEquipments(search?: string) {
+    async getCommonEquipments(params: any) {
       try {
-        if (search) {
-          const { data } = await emissionSourceGroupApi.classificationsEquipmentsSearchRetrieve({ search })
-          return data
-        }
-        else {
-          const { data } = await emissionSourceGroupApi.classificationsEquipmentsList()
-          return data
-        }
+        const { data } = await emissionSourceGroupApi.classificationsEquipmentsList(params)
+        return data
       }
       catch (error) {
         console.error(error)

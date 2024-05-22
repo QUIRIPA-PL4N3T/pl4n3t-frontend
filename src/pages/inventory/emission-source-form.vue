@@ -9,6 +9,7 @@ const selectedFactorTypeId = ref(0)
 const disabledSourceType = ref<boolean>(false)
 const groupContainerRef = ref<HTMLDivElement | null>(null)
 const confirmModal = ref<any>(null)
+provide('selectedGroupId', selectedGroupId)
 
 const { t } = useI18n()
 const authStore = useAuthStore()
@@ -67,7 +68,6 @@ function setSelectGroup(group: EmissionSourceGroup) {
   selectedGroupId.value = group.id
   classificationStore.setEmissionTypesByGroup(group.id)
   selectedGroup.value = group
-
   switch (selectedGroup.value?.form_name) {
     case 'ORGANIZATION_VEHICLES':
       currentEmissionSource.value.source_type = 2
