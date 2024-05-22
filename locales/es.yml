@@ -1,94 +1,14 @@
 not_found: Lo sentimos informacion no disponible
 email: Correo
-hintEmail: Correo
-errorRequirementEmail: Correo requerido
 errorEmail: Correo no valido
 password: Contraseña
 hintPassword: Contraseña
 errorPassword: Mínimo 8 caracteres
 forgotPassword: Restablecer Contraseña?
-signInSocial: O Continue con
 dashboard:
   title: Dashboard
-login:
-  text: Iniciar Sesión
-  checkBox: Mantener conectado
-  buttonLogin: Ingresar
-  footer: No tienes una cuenta?
-  link: Crear Cuenta
-register:
-  fullName: Nombre Completo
-  hintFullName: Nombre Completo
-  title: Registrarse
-  description: Cree una cuenta para comenzar a usar PL4N3T
-  first-name: Nombres
-  last-name: Apellidos
-  checkBox: Aceptas nuestros Términos y Condiciones y Política de Privacidad
-  buttonLogin: Crear Cuenta
-  footer: Ya tienes una Cuenta?
-  link: Ingresar
-  success: ¡Usuario registrado!
-  account-activation: Debe ingresar a su correo para continuar con la activación de su cuenta
-forgotPasswordScreen:
-  text: Restablecer Contraseña
-  textButton: Enviar correo de recuperación
-  textFooter1: Olvídalo,
-  textFooter2: Al inicio de sesión
-  link: Ir
-copyright:
-  footer: COPYRIGHT ©; Amanecer en el Palmar, todos los derechos reservados
-company:
-  title: Compañía
-  locations: Sedes
-  contact: Contacto
-  edit: Editar
-  name: Nombre
-  address: Dirección
-  url: Página Web
-  phone: Teléfono
-  email: Correo
-  status: Estado
-  equipment: Agentes Emisor
-  status-options:
-    very-good: Muy bueno
-    good: Bueno
-    fair: Regular
-    bad: Malo
-    very-bad: Muy malo
-    undefined: --
-company edit.title: Editar
-location:
-  modal:
-    title: Agregar un nueva sede
-  name: Nombre
-  address: Dirección
-  phone: Teléfono
-  email: Correo
-  employees: Empleados
-  status: Estado
-  add: Agregar Sede
 locations:
   title: Sedes
-menu:
-  title: Menu
-  profile: Perfil
-  chat: Chat
-  email: correo
-  todo: Tareas
-  settings: Configuración
-  membership: Membresía
-  faq: FAQ
-  logout: Salir
-  dashboard: Dashboard
-  characterization: Caracterización
-  company: Compañía
-  activities: Actividades
-  goals: Metas y Objetivos
-  reports: Reportes
-  companyLocations: Sedes
-  equipment: Fuentes de Emisión
-  inventory: Inventario
-  register-data: Ingreso de Datos
 Accept: Acceptar
 activities:
   activity: Actividad
@@ -164,20 +84,17 @@ company:
   update:
     success: ¡La compañía fue actualizada con Éxito!
   url: Página Web
-company edit.title: Editar
+  equipment: Agentes Emisor
 copyright:
   footer: COPYRIGHT ©; Amanecer en el Palmar, todos los derechos reservados
 currentLocation:
   required: Debe seleccionar una Sede para pode Continuar
-dashboard:
-  title: Dashboard
 delete: Eliminar
 distibution:
   bySede: Distribución por Sede
 distribution:
   bySede: Distribución por Sede
 edit: Editar
-email: Correo
 emission:
   sources: Fuentes de Emisión
 emission source-edit:
@@ -403,20 +320,10 @@ equipments:
     name: Nombre
     title: Fuentes de emisión de la Compañía
   title: Fuentes de Emisión
-errorEmail: Correo no valido
-errorPassword: Mínimo 8 caracteres
-errorRequirementEmail: Correo requerido
 errors:
   register:
     exist: Ya existe un usuario registrado con este correo
     password: Su contraseña no puede ser una clave utilizada comúnmente.
-forgotPassword: Restablecer Contraseña?
-forgotPasswordScreen:
-  link: Ir
-  text: Restablecer Contraseña
-  textButton: Enviar correo de recuperación
-  textFooter1: Olvídalo,
-  textFooter2: Al inicio de sesión
 general:
   brand: Marca
   city: Ciudad
@@ -431,47 +338,42 @@ general:
   state: Departamento
 goals:
   title: Metas
-hintEmail: Correo
-hintPassword: Contraseña
 inventory:
   title: Fuentes de Emisión
 liquidation:
   form: Formularío de Liquidación
   title: Cuantificar
 location:
-  add: Agregar Sede
+  modal:
+    title: Agregar un nueva sede
+  name: Nombre
   address: Dirección
+  phone: Teléfono
+  email: Correo
+  employees: Empleados
+  status: Estado
+  add: Agregar Sede
   created:
     success: Se ha creado la nueva sede
   deleted:
     brand: La marca ha sido eliminada
     success: Se ha eliminado la sede
-  email: Correo
-  employees: Empleados
   employeesNumber: Número de empleados
-  modal:
-    title: Agregar un nueva sede
-  name: Nombre
   new: Nueva Sede
-  phone: Teléfono
-  status: Estado
   type: Tipo de Sede
   updated:
     success: Se ha actulizado la sede
-location edit:
   title: Editar Sede
-locations:
-  title: Sedes
 login:
-  buttonLogin: Ingresar
+  text: Iniciar Sesión
   checkBox: Mantener conectado
+  buttonLogin: Ingresar
   footer: No tienes una cuenta?
+  link: Crear Cuenta
   google:
     created: >-
       Se envió un correo para activar su cuenta, por favor active su cuenta e
       intente de nuevo
-  link: Crear Cuenta
-  text: Iniciar Sesión
 membership:
   benefits: Para obtener mejores resultados
   brandsLimit: Marcas Permitidas
@@ -487,32 +389,31 @@ membership:
   userLimit: Usuarios Permitidas
   workersLimit: Límite de Empleados
 menu:
-  activities: Actividades
-  characterization: Caracterización
-  chat: Chat
-  company: Compañía
-  companyLocations: Sedes
-  dashboard: Dashboard
-  email: correo
-  emissionSource: Fuentes de Emisión
-  faq: FAQ
-  goals: Metas y Objetivos
-  inventory: Inventario
-  logout: Salir
-  membership: Membresía
-  profile: Perfil
-  register-data: Ingreso de Datos
-  reports: Reportes
-  settings: Configuración
   title: Menu
+  profile: Perfil
+  chat: Chat
+  email: correo
   todo: Tareas
+  settings: Configuración
+  membership: Membresía
+  faq: FAQ
+  logout: Salir
+  dashboard: Dashboard
+  characterization: Caracterización
+  company: Compañía
+  activities: Actividades
+  goals: Metas y Objetivos
+  reports: Reportes
+  companyLocations: Sedes
+  equipment: Fuentes de Emisión
+  inventory: Inventario
+  register-data: Ingreso de Datos
 no: No
 no_apply: No Aplica
 notResultFound: No se encontrarón Resultados
 optionCreated: Opción Creada
 optionCreationFailed: Creación de la Opción Fallida
 optionLoadingFailed: Carga de la opción fallida
-password: Contraseña
 register:
   account-activation: Debe ingresar a su correo para continuar con la activación de su cuenta
   buttonLogin: Crear Cuenta

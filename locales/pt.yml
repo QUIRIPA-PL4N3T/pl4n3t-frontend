@@ -6,6 +6,8 @@ company:
 currentLocation:
   required: Você deve selecionar um local para poder continuar
 email: E-mail
+emissionSource:
+  goodAndServiceType: Dica de aquisição
 equipments:
   modal:
     title: Fontes de emissão de organizações registradas

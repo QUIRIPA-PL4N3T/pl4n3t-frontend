@@ -46,7 +46,7 @@ export const menuItems = [
   {
     title: 'analytics.title',
     icon: 'heroicons-outline:calculator',
-    link: '/analytics/',
+    link: '/analytics',
     requiredCompany: true,
   },
   {
@@ -58,11 +58,11 @@ export const menuItems = [
     child: [
       {
         childTitle: 'reports.generate',
-        childLink: '/reports/',
+        childLink: '/reports',
       },
       {
         childTitle: 'menu.goals',
-        childLink: '/goals/',
+        childLink: '/goals',
       },
     ],
   },

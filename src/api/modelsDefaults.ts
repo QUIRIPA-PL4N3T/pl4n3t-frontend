@@ -139,9 +139,9 @@ export const DEFAULT_PAYER: Payer = {
 }
 
 export const DEFAULT_BACK_URL: BackUrls = {
-  success: window.location.origin,
-  failure: window.location.origin,
-  pending: window.location.origin,
+  success: 'window.location.origin',
+  failure: 'window.location.origin',
+  pending: 'window.location.origin',
 }
 
 export const DEFAULT_PURCHASE: Purchase = {
