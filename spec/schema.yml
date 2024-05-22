@@ -2420,6 +2420,40 @@ components:
     Brand:
       type: object
       properties:
+        street_name:
+          type: string
+          maxLength: 100
+        street_number:
+          type: integer
+        zip_code:
+          type: string
+          maxLength: 20
+      required:
+        - street_name
+        - street_number
+        - zip_code
+    BackUrls:
+      type: object
+      properties:
+        success:
+          type: string
+          format: uri
+        failure:
+          type: string
+          format: uri
+        pending:
+          type: string
+          format: uri
+      required:
+        - failure
+        - pending
+        - success
+    BlankEnum:
+      enum:
+        - ''
+    Brand:
+      type: object
+      properties:
         id:
           type: integer
           readOnly: true
@@ -3070,6 +3104,136 @@ components:
           type: string
           nullable: true
           title: Manejo de desperdicio
+        leased_assets_type:
+          type: string
+          nullable: true
+          title: Tipo de bien arrendado
+          maxLength: 128
+        leased_assets_durations:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Duración del contrato de Arrendamiento
+        leased_assets_duration_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida de la duración
+          maxLength: 128
+        fuel_store:
+          type: string
+          nullable: true
+          title: Almacenamiento del Combustible
+          maxLength: 256
+        fuel_management:
+          type: string
+          nullable: true
+          title: Gestión del Combustible
+          maxLength: 256
+        exist_steam_specific_factor:
+          type: boolean
+        activity_name:
+          type: string
+          nullable: true
+          title: Nombre de la Actividad
+          maxLength: 255
+        equipment_name:
+          type: string
+          nullable: true
+          title: Nombre del Equipo
+          maxLength: 255
+        origin:
+          type: string
+          nullable: true
+          title: Origen
+          maxLength: 255
+        energy_efficiency_value:
+          type: number
+          format: double
+          title: Eficiencia energética del equipo o sistema que usa combustible
+        energy_efficiency_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida
+          maxLength: 128
+        service_life:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Vida Útil
+        service_life_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida Vida útil
+          maxLength: 128
+        good_and_service_acquired_type:
+          type: string
+          nullable: true
+          title: Tipo de Bien o Servicio Adquirido
+          maxLength: 128
+        acquired_service:
+          type: string
+          nullable: true
+          title: Servicio Adquirido
+          maxLength: 128
+        supplier_name:
+          type: string
+          nullable: true
+          title: Nombre del Proveedor
+          maxLength: 255
+        ghg_emission_are_recorded:
+          type: boolean
+          title: Se registran y monitorean las emisiones GEI
+        waste_type:
+          nullable: true
+          title: Tipo de desperdicio
+          oneOf:
+            - $ref: '#/components/schemas/WasteTypeEnum'
+            - $ref: '#/components/schemas/BlankEnum'
+            - $ref: '#/components/schemas/NullEnum'
+        waste_classification:
+          type: string
+          nullable: true
+          title: Clase de desperdicio
+          maxLength: 128
+        investment_type:
+          type: string
+          nullable: true
+          title: Tipo de Inversión
+          maxLength: 128
+        refrigerant_capacity:
+          type: number
+          format: double
+          title: Capacidad
+        refrigerant_capacity_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida
+          maxLength: 128
+        has_refrigerant_leaks:
+          type: boolean
+          title: ¿Existen Fugas del refrigerante en el equipo?
+        has_refrigerant_conversions:
+          type: boolean
+          title: ¿Se han realizado conversiones a refrigerantes con menor potencial
+            de calentamiento global (PCG)?
+        final_disposal_of_refrigerants:
+          type: string
+          nullable: true
+          title: Disposición final de refrigerantes
+          maxLength: 128
+        support_actions_refrigerant_equipment:
+          type: string
+          nullable: true
+          title: Acciones realiza para el mantenimiento y reparaciones del equipo
+          maxLength: 128
+        product_name:
+          type: string
+          nullable: true
+          title: Unidad Eficiencia Energética
+          maxLength: 256
+        know_type_electricity_generation_source:
+          type: boolean
+          title: Conoce el tipo de fuente de generación de electricidad
         leased_assets_type:
           type: string
           nullable: true
