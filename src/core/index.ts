@@ -76,8 +76,9 @@ export async function setup() {
     const basicStore = useBasicStore()
     const companyStore = useCompanyStore()
     const classificationStore = useClassificationStore()
+    const membershipsStore = useMembershipsStore()
     const emissionSources = useEmissionSourceStore()
-
+    membershipsStore.fetchMemberships()
     basicStore.fetchBasicData()
     companyStore.fetchCompany()
     classificationStore.fetchClassificationData()

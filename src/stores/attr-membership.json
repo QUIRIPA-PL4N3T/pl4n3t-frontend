@@ -1,0 +1,62 @@
+[
+  {
+    "field": "benefits",
+    "attr": "Creación de un perfil"
+  },
+  {
+    "field": "num_brands",
+    "attr": "Número de Marcas"
+  },
+  {
+    "field": "num_locations",
+    "attr": "Número de Sedes"
+  },
+  {
+    "field": "num_users",
+    "attr": "Usuarios por organización"
+  },
+  {
+    "field": "emission_sources",
+    "attr": "Registro de todos las Fuentes de emisión"
+  },
+  {
+    "field": "footprint_types",
+    "attr": "Tipos de huella"
+  },
+  {
+    "field": "liquidation_options",
+    "attr": "Liquidación: Mensual, Trimestral, Anual"
+  },
+  {
+    "field": "analysis_tools",
+    "attr": "Herramientas de análisis y generación de informes personalizados"
+  },
+  {
+    "field": "basic_support",
+    "attr": "Acceso al soporte básico a través de preguntas frecuentes o correo electrónico"
+  },
+  {
+    "field": "storage_capacity",
+    "attr": "Mayor capacidad de almacenamiento para archivos y datos"
+  },
+  {
+    "field": "tutorials",
+    "attr": "Tutoriales"
+  },
+  {
+    "field": "webinars",
+    "attr": "webinars, documentación especializada, etc"
+  },
+  {
+    "field": "general_support",
+    "attr": "Soporte técnico General"
+  },
+  {
+    "field": "dedicated_support",
+    "attr": "Un representante de soporte asignado exclusivamente a la cuenta"
+  },
+  {
+    "field": "custom_api_access",
+    "attr": "Acceso a una API personalizada para desarrollar integraciones personalizadas"
+  }
+]

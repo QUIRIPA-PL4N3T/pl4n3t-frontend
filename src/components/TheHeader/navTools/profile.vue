@@ -47,7 +47,7 @@ const ProfileMenu = [
     label: t('menu.membership'),
     icon: 'heroicons-outline:credit-card',
     link: () => {
-      router.push('membership')
+      router.push('my-membership')
     },
   },
   // {

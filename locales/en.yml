@@ -1,3 +1,4 @@
+not_found: Data not found
 Accept: Accept
 activities:
   activity: Activity
@@ -235,6 +236,58 @@ select:
   location: Select a Headquarters
 selectAnOption: Select an Option
 signInSocial: Or continue with
+my_membership:
+  title_memberships: Last memberships buyed
+  title: Actually do you have
+  company: This membership has associate to company
+  subtitle: Dates important of your membership
+  end_date: You memberaship finally
+  start_date: Init of membership
+  button: Change of plan
+memberships:
+  title: Memberships
+  subtitle: Choose the best plan
+  card-title: Plans
+  button: Buy
+  days: Days
+  subscriber: You are susbcriber to
+purchase_membership:
+  header: You are buying
+  subheader: Give us the information of each section for process payment
+  footer: Thank for confidense on ours
+  footer-total: Total
+  button: Pay
+  alerts:
+    pre_success: Ya puedes continuar con el pago
+    success: El pago se ha solicitado exitosamenta, cargando detalles de compra...,
+    error: El pago no se ha completado, intentalo en un momento
+  fields:
+    name:
+      label: Full name
+      placeholder: Joe doe
+    phone_zone:
+      label: Country
+      placeholder: '+57'
+    phone:
+      label: Phone number
+      placeholder: '316412155'
+    email:
+      label: Email
+      placeholder: email
+    identification:
+      label: Identification
+      placeholder: '1321321212'
+    identification_type:
+      label: Type
+    street_name:
+      label: Street
+      placeholder: Street 40
+    street_number:
+      label: Street Number
+      placeholder: '#12 - 24'
+    zip_code:
+      label: Postal code
+      placeholder: '06233200'
 profile:
   title: Profile
   titles:

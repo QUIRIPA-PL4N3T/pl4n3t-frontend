@@ -1,7 +1,6 @@
 <script>
 export default {
   components: {
-    Icon,
   },
   props: {
     label: {
@@ -21,11 +20,8 @@ export default {
 </script>
 
 <template>
-  <span class="badge" :class="badgeClass">
-    <span v-if="!$slots.default" class="inline-flex items-center">
-      <span v-if="icon" class="inline-block ltr:mr-1 rtl:ml-1"><Icon :icon="icon" /> </span>{{ label }}</span>
-    <span v-if="$slots.default" class="inline-flex items-center"><slot /></span>
-  </span>
+  <span class="badge" :class="badgeClass">{{ label }}</span>
+  <span v-if="$slots.default" class="inline-flex items-center"><slot /></span>
 </template>
 
 <style lang="scss" scoped>

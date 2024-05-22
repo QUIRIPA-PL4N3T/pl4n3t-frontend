@@ -2755,6 +2755,8 @@ components:
         end_date:
           type: string
           format: date-time
+      required:
+        - end_date
           nullable: true
           description: Deje en blanco para membresías ilimitadas.
         days_remaining:
@@ -2840,7 +2842,6 @@ components:
           type: string
           format: date-time
           readOnly: true
-          title: Fecha de creación
         tags:
           type: string
           nullable: true
@@ -3857,7 +3858,7 @@ components:
         - ELITE
       type: string
       description: |-
-        * `FREE` - Gratuita
+        * `FREE` - Gratuito
         * `BASIC` - Básica
         * `PREMIUM` - Premium
         * `ELITE` - Elite
