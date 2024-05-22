@@ -60,7 +60,6 @@ export const DEFAULT_EMISSIONS_SOURCE: EmissionsSource = {
   location: 0,
   image: null,
   group: 0,
-  source_type: 0,
   factor_type: 0,
   emission_factor: 0,
   geo_location: null,

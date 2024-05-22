@@ -15,6 +15,7 @@ import {
 
 // const emissionFactorStore = useEmissionFactorStore()
 const themeSettingsStore = useThemeSettingsStore()
+const { t } = useI18n()
 // const companyStore = useCompanyStore()
 // const { statistics } = storeToRefs(emissionFactorStore)
 // const { company } = storeToRefs(companyStore)
@@ -129,7 +130,7 @@ const Campaigns = [
                     <span class="block mb-[2px]" :class="item.percentClass">{{
                       item.percent
                     }}</span>
-                    <span class="block mb-1 text-slate-600 dark:text-slate-300">desde el último mes</span>
+                    <span class="block mb-1 text-slate-600 dark:text-slate-300">{{ t('since.lastMonth') }}</span>
                   </div>
                 </div>
               </div>
@@ -137,8 +138,8 @@ const Campaigns = [
           </Card>
           <Card>
             <header class="md:flex md:space-y-0 space-y-4">
-              <h6 class="flex-1 text-slate-900 dark:text-white capitalize">
-                Distribución por sede
+              <h6 class="flex-1 text-slate-900 dark:text-white">
+                {{ t('distribution.bySede') }}
               </h6>
             </header>
 
@@ -157,7 +158,7 @@ const Campaigns = [
           </Card>
         </div>
         <div class="lg:col-span-4 col-span-12 space-y-5">
-          <Card title="Fuentes de Emisión">
+          <Card :title="t('emission.sources')">
             <ul class="divide-y divide-slate-100 dark:divide-slate-700">
               <li
                 v-for="(item, i) in Campaigns"

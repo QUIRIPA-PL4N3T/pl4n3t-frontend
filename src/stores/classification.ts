@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { useLocalStorage } from '@vueuse/core'
 import { emissionFactorApi, emissionSourceGroupApi, quantificationTypeApi, sourceTypeApi } from '~/api'
 import type { EmissionFactor, EmissionSourceGroup, FactorType, QuantificationType, SourceType } from '~/api-client'
+import { formatOptions } from '~/utilities/utils'
 
 export const useClassificationStore = defineStore('classification', {
   state: () => ({
@@ -18,39 +19,19 @@ export const useClassificationStore = defineStore('classification', {
       return this.classificationGroups.filter(group => group.allow_inventory)
     },
     optionsQuantificationTypes(): any {
-      return this.quantificationTypes.map((type: any) => ({
-        label: type.name,
-        value: type.id,
-      }),
-      )
+      return formatOptions(this.quantificationTypes)
     },
     optionGroups(): any {
-      return this.classificationGroups.map((type: any) => ({
-        label: type.name,
-        value: type.id,
-      }),
-      )
+      return formatOptions(this.classificationGroups)
     },
     optionFactorTypes(): any {
-      return this.factorTypes.map((type: any) => ({
-        label: type.name,
-        value: type.id,
-      }),
-      )
+      return formatOptions(this.factorTypes)
     },
     optionSourceTypes(): any {
-      return this.sourceTypes.map((type: any) => ({
-        label: type.name,
-        value: type.id,
-      }),
-      )
+      return formatOptions(this.sourceTypes)
     },
     optionsFilteredEmissionFactors(): any {
-      return this.filteredEmissionFactors.map((type: any) => ({
-        label: type.name,
-        value: type.id,
-      }),
-      )
+      return formatOptions(this.filteredEmissionFactors)
     },
   },
   actions: {
@@ -63,6 +44,66 @@ export const useClassificationStore = defineStore('classification', {
         this.factorTypes = group.emission_factor_types
       else
         this.factorTypes = []
+    },
+    async getCommonActivities(search?: string) {
+      try {
+        if (search) {
+          const { data } = await emissionSourceGroupApi.classificationsActivitiesSearchRetrieve({ search })
+          return data
+        }
+        else {
+          const { data } = await emissionSourceGroupApi.classificationsActivitiesList()
+          return data
+        }
+      }
+      catch (error) {
+        console.error(error)
+      }
+    },
+    async getInvestments(search?: string) {
+      try {
+        if (search) {
+          const { data } = await emissionSourceGroupApi.classificationsInvestmentSearchRetrieve({ search })
+          return data
+        }
+        else {
+          const { data } = await emissionSourceGroupApi.classificationsInvestmentList()
+          return data
+        }
+      }
+      catch (error) {
+        console.error(error)
+      }
+    },
+    async getCommonEquipments(search?: string) {
+      try {
+        if (search) {
+          const { data } = await emissionSourceGroupApi.classificationsEquipmentsSearchRetrieve({ search })
+          return data
+        }
+        else {
+          const { data } = await emissionSourceGroupApi.classificationsEquipmentsList()
+          return data
+        }
+      }
+      catch (error) {
+        console.error(error)
+      }
+    },
+    async getCommonProducts(search?: string) {
+      try {
+        if (search) {
+          const { data } = await emissionSourceGroupApi.classificationsProductsSearchRetrieve({ search })
+          return data
+        }
+        else {
+          const { data } = await emissionSourceGroupApi.classificationsProductsList()
+          return data
+        }
+      }
+      catch (error) {
+        console.error(error)
+      }
     },
     filterEmissionFactorByType(id: number, source_type?: number) {
       if (source_type)

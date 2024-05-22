@@ -41,7 +41,7 @@ watch(() => optionFactorTypes.value, () => {
     <div class="mb-5">
       <FormKit
         v-model="goodAndServiceSelected"
-        :label="t('equipment.good_and_service_label')"
+        :label="t('emissionSource.good_and_service_label')"
         type="select"
         :options="optionsGoodsAndServiceList"
         placeholder="..."
@@ -51,7 +51,7 @@ watch(() => optionFactorTypes.value, () => {
     <div class="mb-5">
       <FormKit
         v-if="goodAndServiceSelected === 'Bienes'"
-        :label="t('equipment.service_label')"
+        :label="t('emissionSource.service_label')"
         type="select"
         :options="optionsServiceAcquiredList"
         placeholder="..."
@@ -59,7 +59,7 @@ watch(() => optionFactorTypes.value, () => {
       />
       <FormKit
         v-else-if="goodAndServiceSelected === 'Servicios'"
-        :label="t('equipment.goods_label')"
+        :label="t('emissionSource.goods_label')"
         type="select"
         :options="optionsGoodsAcquiredList"
         placeholder="..."
@@ -68,7 +68,7 @@ watch(() => optionFactorTypes.value, () => {
     </div>
     <div class="mb-5">
       <FormKit
-        :label="t('equipment.supplier_name')"
+        :label="t('emissionSource.supplier_name')"
         outer-class="w-full"
         inner-class="max-w-xl"
         type="text"
@@ -80,7 +80,7 @@ watch(() => optionFactorTypes.value, () => {
     <div class="flex gap-4 pb-5">
       <FormKit
         v-model="selectedFactorTypeId"
-        :label="t('equipment.factor_type')"
+        :label="t('emissionSource.factor_type')"
         outer-class="w-full"
         type="select"
         placeholder="..."
@@ -89,7 +89,7 @@ watch(() => optionFactorTypes.value, () => {
         @onchange="filterEmissionFactors"
       />
       <FormKit
-        :label="t('equipment.emission_factor_type')"
+        :label="t('emissionSource.emission_factor_type')"
         outer-class="w-full"
         type="select"
         placeholder="..."
@@ -102,7 +102,7 @@ watch(() => optionFactorTypes.value, () => {
   <div class="mb-5">
     <FormKit
       type="radio"
-      :label="t('equipment.goods_and_service_monitoring_label')"
+      :label="t('emissionSource.goods_and_service_monitoring_label')"
       :options="{ yes: t('yes'), no: t('no') }"
       fieldset-class="$remove:max-w-md"
       name="refrigerant_leaks"
@@ -115,7 +115,7 @@ watch(() => optionFactorTypes.value, () => {
   <div class="mb-5">
     <FormKit
       v-model="goodAndServiceSelected"
-      :label="t('equipment.goods_and_service_origin_label')"
+      :label="t('emissionSource.goods_and_service_origin_label')"
       type="select"
       :options="optionsGoodsAndServiceOriginList"
       placeholder="..."
@@ -125,7 +125,7 @@ watch(() => optionFactorTypes.value, () => {
   <div class="mb-5">
     <FormKit
       type="checkbox"
-      :label="t('equipment.fuel_storage_label')"
+      :label="t('emissionSource.fuel_storage_label')"
       :options="optionSupplierActionImplementationList"
       name="fuel_storage"
       outer-class="flex-1"
@@ -134,11 +134,11 @@ watch(() => optionFactorTypes.value, () => {
   </div>
   <div class="mb-5">
     <FormKit
-      :label="t('equipment.description')"
+      :label="t('emissionSource.description')"
       type="textarea"
       placeholder="..."
       name="description"
-      :help="t('equipment.description_help')"
+      :help="t('emissionSource.description_help')"
     />
   </div>
 </template>

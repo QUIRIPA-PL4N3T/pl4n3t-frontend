@@ -610,6 +610,71 @@ paths:
               schema:
                 $ref: '#/components/schemas/GHGScope'
           description: ''
+  /api/classifications/investment/:
+    get:
+      operationId: classificationsInvestmentList
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      tags:
+        - EmissionSourceGroups
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Investment'
+          description: ''
+    post:
+      operationId: classificationsInvestmentCreate
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      tags:
+        - EmissionSourceGroups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Investment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Investment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Investment'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Investment'
+          description: ''
+  /api/classifications/investment/search/:
+    get:
+      operationId: classificationsInvestmentSearchRetrieve
+      description: Clase base para ViewSets con funcionalidad de búsqueda.
+      summary: Buscar por un texto
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: texto a buscar
+      tags:
+        - EmissionSourceGroups
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Investment'
+          description: ''
   /api/classifications/iso-categories/:
     get:
       operationId: classificationsIsoCategoriesList
@@ -1389,6 +1454,31 @@ paths:
   /api/companies/emission-sources/:
     get:
       operationId: companiesEmissionSourcesList
+      parameters:
+        - in: query
+          name: code
+          schema:
+            type: string
+        - in: query
+          name: factor_type
+          schema:
+            type: number
+        - in: query
+          name: group
+          schema:
+            type: number
+        - in: query
+          name: location
+          schema:
+            type: number
+        - in: query
+          name: name
+          schema:
+            type: string
+        - in: query
+          name: source_type
+          schema:
+            type: number
       tags:
         - CompanyEmissionSources
       security:
@@ -2330,6 +2420,40 @@ components:
     Brand:
       type: object
       properties:
+        street_name:
+          type: string
+          maxLength: 100
+        street_number:
+          type: integer
+        zip_code:
+          type: string
+          maxLength: 20
+      required:
+        - street_name
+        - street_number
+        - zip_code
+    BackUrls:
+      type: object
+      properties:
+        success:
+          type: string
+          format: uri
+        failure:
+          type: string
+          format: uri
+        pending:
+          type: string
+          format: uri
+      required:
+        - failure
+        - pending
+        - success
+    BlankEnum:
+      enum:
+        - ''
+    Brand:
+      type: object
+      properties:
         id:
           type: integer
           readOnly: true
@@ -2895,6 +3019,7 @@ components:
           type: integer
         source_type:
           type: integer
+          nullable: true
           title: Tipo de Fuente de Emisión
         geo_location:
           type: object
@@ -2920,6 +3045,10 @@ components:
         emission_factor:
           type: integer
           title: Factor de Emisión
+        emission_factor_unit:
+          type: integer
+          nullable: true
+          title: Unidad por defecto
         vehicle_type:
           type: string
           nullable: true
@@ -2964,6 +3093,140 @@ components:
           nullable: true
           title: Eficiencia Energética
         electricity_efficiency_unit:
+          type: string
+          nullable: true
+          title: Unidad Eficiencia Energética
+          maxLength: 256
+        know_type_electricity_generation_source:
+          type: boolean
+          title: Conoce el tipo de fuente de generación de electricidad
+        waste_management:
+          type: string
+          nullable: true
+          title: Manejo de desperdicio
+        leased_assets_type:
+          type: string
+          nullable: true
+          title: Tipo de bien arrendado
+          maxLength: 128
+        leased_assets_durations:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Duración del contrato de Arrendamiento
+        leased_assets_duration_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida de la duración
+          maxLength: 128
+        fuel_store:
+          type: string
+          nullable: true
+          title: Almacenamiento del Combustible
+          maxLength: 256
+        fuel_management:
+          type: string
+          nullable: true
+          title: Gestión del Combustible
+          maxLength: 256
+        exist_steam_specific_factor:
+          type: boolean
+        activity_name:
+          type: string
+          nullable: true
+          title: Nombre de la Actividad
+          maxLength: 255
+        equipment_name:
+          type: string
+          nullable: true
+          title: Nombre del Equipo
+          maxLength: 255
+        origin:
+          type: string
+          nullable: true
+          title: Origen
+          maxLength: 255
+        energy_efficiency_value:
+          type: number
+          format: double
+          title: Eficiencia energética del equipo o sistema que usa combustible
+        energy_efficiency_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida
+          maxLength: 128
+        service_life:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Vida Útil
+        service_life_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida Vida útil
+          maxLength: 128
+        good_and_service_acquired_type:
+          type: string
+          nullable: true
+          title: Tipo de Bien o Servicio Adquirido
+          maxLength: 128
+        acquired_service:
+          type: string
+          nullable: true
+          title: Servicio Adquirido
+          maxLength: 128
+        supplier_name:
+          type: string
+          nullable: true
+          title: Nombre del Proveedor
+          maxLength: 255
+        ghg_emission_are_recorded:
+          type: boolean
+          title: Se registran y monitorean las emisiones GEI
+        waste_type:
+          nullable: true
+          title: Tipo de desperdicio
+          oneOf:
+            - $ref: '#/components/schemas/WasteTypeEnum'
+            - $ref: '#/components/schemas/BlankEnum'
+            - $ref: '#/components/schemas/NullEnum'
+        waste_classification:
+          type: string
+          nullable: true
+          title: Clase de desperdicio
+          maxLength: 128
+        investment_type:
+          type: string
+          nullable: true
+          title: Tipo de Inversión
+          maxLength: 128
+        refrigerant_capacity:
+          type: number
+          format: double
+          title: Capacidad
+        refrigerant_capacity_unit:
+          type: string
+          nullable: true
+          title: Unidad de Medida
+          maxLength: 128
+        has_refrigerant_leaks:
+          type: boolean
+          title: ¿Existen Fugas del refrigerante en el equipo?
+        has_refrigerant_conversions:
+          type: boolean
+          title: ¿Se han realizado conversiones a refrigerantes con menor potencial
+            de calentamiento global (PCG)?
+        final_disposal_of_refrigerants:
+          type: string
+          nullable: true
+          title: Disposición final de refrigerantes
+          maxLength: 128
+        support_actions_refrigerant_equipment:
+          type: string
+          nullable: true
+          title: Acciones realiza para el mantenimiento y reparaciones del equipo
+          maxLength: 128
+        product_name:
           type: string
           nullable: true
           title: Unidad Eficiencia Energética
@@ -3107,14 +3370,22 @@ components:
         emission_source_name:
           type: string
           readOnly: true
+        group_name:
+          type: string
+          readOnly: true
+        waste_management_data:
+          type: object
+          additionalProperties: {}
+          readOnly: true
       required:
         - documents
         - emission_factor
         - emission_source_name
         - factor_type
+        - group_name
         - id
         - location
-        - source_type
+        - waste_management_data
     EmissionsSourceMonthEntry:
       type: object
       properties:
@@ -3310,6 +3581,19 @@ components:
         name:
           type: string
           title: Tipo de Industria
+          maxLength: 255
+      required:
+        - id
+        - name
+    Investment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
           maxLength: 255
       required:
         - id
@@ -3824,6 +4108,7 @@ components:
           type: integer
         source_type:
           type: integer
+          nullable: true
           title: Tipo de Fuente de Emisión
         geo_location:
           type: object
@@ -3849,6 +4134,10 @@ components:
         emission_factor:
           type: integer
           title: Factor de Emisión
+        emission_factor_unit:
+          type: integer
+          nullable: true
+          title: Unidad por defecto
         vehicle_type:
           type: string
           nullable: true
@@ -3900,6 +4189,10 @@ components:
         know_type_electricity_generation_source:
           type: boolean
           title: Conoce el tipo de fuente de generación de electricidad
+        waste_management:
+          type: string
+          nullable: true
+          title: Manejo de desperdicio
         leased_assets_type:
           type: string
           nullable: true
@@ -4035,6 +4328,13 @@ components:
           nullable: true
         emission_source_name:
           type: string
+          readOnly: true
+        group_name:
+          type: string
+          readOnly: true
+        waste_management_data:
+          type: object
+          additionalProperties: {}
           readOnly: true
     PatchedEmissionsSourceMonthEntry:
       type: object
@@ -4524,6 +4824,9 @@ components:
             <br />2) para udm Time - segundos <br />3) para el área udm - metros <br
             />4) Ángulo udm - grados.
           maxLength: 256
+        group:
+          type: string
+          readOnly: true
         slug:
           type: string
           maxLength: 32
@@ -4532,7 +4835,7 @@ components:
           title: Símbolo
           description: El símbolo utilizado para esta unidad de medida, como "ft"
             para pies o "m" para metro.
-          maxLength: 8
+          maxLength: 32
         measure_type:
           allOf:
             - $ref: '#/components/schemas/MeasureTypeEnum'
@@ -4595,7 +4898,11 @@ components:
             Este atributo de miembro no es obligatorio, pero es una pieza valiosa
             de documentación
           maxLength: 32
+        is_gei_unit:
+          type: boolean
+          title: Es una unidad de medida GEI
       required:
+        - group
         - id
         - measure_type
         - symbol

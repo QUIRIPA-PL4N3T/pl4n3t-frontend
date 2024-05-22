@@ -1,12 +1,137 @@
+Accept: Accept
 activities:
   activity: Activity
   amount: Amount
   hc4: HC4
   ho2: HO2
   location: Campus
+  modal:
+    title: Register an Activity
   month: Month
   n20: N2O
+analytics:
+  title: Analysis
+brand:
+  created:
+    success: A new one has been created successfully
+  description: Description
+  logo: Logo
+  name: Name
+  select: Select a Brand
+  title: Brands
+  updated:
+    success: The brand was successfully updated
+brands:
+  newBrand: New brand
+cancel: Cancel
+company:
+  addMember: Add
+  address: Address
+  brand:
+    delete:
+      emissionFactor: Are you sure you want to Delete this Emission Source?
+      message: Are you sure you want to remove this flag?
+  contact: Contact
+  create:
+    success: The company was successfully created
+  delete:
+    Brand: Remove Brand
+  edit: Edit
+  email: Mail
+  members: Members
+  name: Name
+  phone: Phone
+  size: Company size
+  update:
+    success: The company was successfully upgraded
+  url: Web page
+copyright:
+  footer: |-
+    COPYRIGHT ©;
+    Dawn in El Palmar, all rights reserved
+currentLocation:
+  required: You must select a Location to be able to Continue
+delete: Delete
+distribution:
+  bySede: Distribution by Headquarters
+edit: Edit
 email: Email
+emission:
+  sources: Emission Sources
+emissionSource:
+  add: Add
+  asset_duration_label: Unit
+  asset_duration_value_label: Lease duration (months)
+  asset_leased_label: Type of property Leased
+  attach:
+    help: >-
+      Please select the supporting documents such as (resume, certificates,
+      maintenance or others)
+    label: Attach Supports
+  code: Code
+  default_name: Name
+  description: Description
+  description_help: >-
+    Expands information on the process/activity for which the fuel is used,
+    taking into account aspects such as:
+
+    * For what purposes the fuel is used.
+
+    * Seasonal variation in fuel consumption.
+
+    * Implementation of measures to reduce consumption.
+  edit: Emission Source Editing
+  efficiency_help: Numerical data, may include decimals.
+  efficiency_label: Energy efficiency of the emissionSource or system that uses the fuel
+  efficiency_unit_label: Unit of measurement
+  electricity_generation_question: >-
+    Is there a specific emission factor associated with the supplier's
+    electricity generation?
+  electricity_source_label: Source of electricity generation
+  electricity_supplier_help: Name of your electricity supplier
+  electricity_supplier_label: Name of electricity supplier
+  electricity_type: Type of Electricity
+  emission_factor: Emission Factor
+  factor_type: Type of Emission Factor
+  fuel_storage_label: Fuel storage
+  fuel_storage_management_label: Fuel Management
+  goodAndServiceType: Acquisition Tip
+  good_and_service_label: Acquisition Type
+  goods_and_service_monitoring_label: Are GHG emissions recorded and monitored?
+  goods_and_service_origin_label: Origin
+  goods_label: Good Acquired
+  group: Cluster
+  investment:
+    name: Investment Name
+  investment_type_label: Investment Type
+  know_electricity_source: Do you know the type of electricity generation source?
+  know_electricity_source_help: Select 'Yes' if you know the source of electricity or 'No' if you don't.
+  name: Name / Brand / Model
+  process_label: Select the process or activity
+  save:
+    error: The broadcast source could not be saved
+    success: Broadcast source saved successfully
+  service_label: Purchased Service
+  shelf_life_label: Estimated useful life of the product
+  shelf_life_unit_label: Unit
+  source_type: Type of emission source (Fixed or Mobile)
+  source_type_help: Emission source type
+  specific_factor_label: Specific Emission Factor
+  specific_factor_unit_label: Emission Factor Unit
+  supplier_name: Provider's name
+  type: Select the team
+  unit: Unit of measurement
+  updated: Updated Emission Source
+  vapor_generation_question: Is there a specific emission factor associated with steam generation?
+  vehicle_fuel: Fuel
+  vehicle_fuel_type: Fuel type
+  wasteManagement: How waste is managed
+  wasteName: Waste Name
+  wasteRegister: Select the waste generated that is tracked and recorded
+  wasteType: To which of the following waste classes does the emission source belong?
+equipments:
+  modal:
+    title: Registered organization emission sources
 errorEmail: email must be a valid email
 errorPassword: password must be at least 8 characters
 errorRequirementEmail: Email is required
@@ -17,8 +142,40 @@ forgotPasswordScreen:
   textButton: send Recovery Email
   textFooter1: FORGET IT,
   textFooter2: TO THE SIGN IN
+general:
+  brand: Brand
+  city: City
+  economic_sector: Economic Sector
+  industry_type: Industry Type
+  manage: Manage
+  new: New
+  nit: NIT
+  origin_country: Country of origin
+  state: Department
 hintEmail: Email
 hintPassword: Password
+liquidation:
+  form: Settlement Form
+location:
+  add: Add Headquarters
+  address: Address
+  created:
+    success: The new headquarters has been successfully created
+  deleted:
+    brand: The brand has been removed
+    success: Headquarters removed
+  email: Mail
+  employees: Employees
+  employeesNumber: Number of employees
+  name: Name
+  new: New Headquarters
+  phone: Phone
+  status: State
+  type: Headquarters Type
+  updated:
+    success: The headquarters has been successfully updated
+locations:
+  title: Headquarters
 login:
   buttonLogin: Sign in
   checkBox: Keep me signed in
@@ -29,6 +186,30 @@ login:
       and try again
   link: SIGN UP
   text: Sign in
+membership:
+  brandsLimit: Number of Brands
+  changePlan: Change Plan
+  currentTitle: Current Membership
+  daysRemaining: Remaining days
+  endDate: Finish date
+  locationLimit: Venue limit
+  title: Membership
+  userLimit: Users Number
+  workersLimit: Employee Limit
+menu:
+  chat: Chat
+  email: mail
+  faq: FAQ
+  logout: Go out
+  membership: Membership
+  profile: Profile
+  settings: Setting
+  todo: Tasks
+no: No
+no_apply: Does not apply
+notResultFound: No results found
+optionCreated: Created Option
+optionCreationFailed: Creation of the Failed Option
 password: Password
 register:
   buttonLogin: Create An Account
@@ -38,6 +219,11 @@ register:
   hintFullName: Full Name
   link: SIGN IP
   text: Sign up
+save: Save
+search: Search
+select:
+  location: Select a Headquarters
+selectAnOption: Select an Option
 signInSocial: Or continue with
 profile:
   title: Profile
@@ -79,3 +265,8 @@ profile:
     email:
       label: E-mail
       placeholder: 'email@:gmail.com'
+since:
+  lastMonth: since last month
+waste:
+  companyGenerationQuestion: What type of waste is generated in operations?
+yes: Yeah

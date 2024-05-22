@@ -12,7 +12,7 @@ export const menuItems = [
   {
     title: 'menu.characterization',
     icon: 'heroicons-outline:document',
-    link: '/company',
+    link: '/characterization',
     requiredCompany: false,
     child: [
       {
@@ -28,7 +28,7 @@ export const menuItems = [
   {
     title: 'menu.inventory',
     icon: 'heroicons-outline:view-boards',
-    link: '/company/equipments',
+    link: '/inventory',
     requiredCompany: true,
   },
   {

@@ -5,7 +5,7 @@ import { VueGoodTable } from 'vue-good-table-next'
 const router = useRouter()
 const { t } = useI18n()
 const emissionSourceStore = useEmissionSourceStore()
-const { locationEquipments } = storeToRefs(emissionSourceStore)
+const { locationEmissionSources } = storeToRefs(emissionSourceStore)
 
 const current = ref(1)
 const perpage = ref(10)
@@ -13,29 +13,16 @@ const pageRange = ref(5)
 
 const columns = ref([
   {
-    label: 'Id',
-    field: 'id',
-  },
-  {
-    label: t('equipment.name'),
-    field: 'name',
-  },
-  {
-    label: t('equipment.code'),
+    label: t('emissionSource.code'),
     field: 'code',
   },
   {
-    label: t('equipment.description'),
-    field: 'description',
-  },
-
-  {
-    label: t('equipment.group'),
-    field: 'group',
+    label: t('emissionSource.default_name'),
+    field: 'emission_source_name',
   },
   {
-    label: t('equipment.source_type'),
-    field: 'source_type',
+    label: t('emissionSource.group'),
+    field: 'group_name',
   },
   {
     label: 'Action',
@@ -55,11 +42,11 @@ async function deleteItem(id: number) {
 </script>
 
 <template>
-  <div v-if="locationEquipments">
+  <div v-if="locationEmissionSources">
     <VueGoodTable
       :columns="columns"
       style-class=" vgt-table  lesspadding2 centered "
-      :rows="locationEquipments"
+      :rows="locationEmissionSources"
       :pagination-options="{
         enabled: true,
         perPage: perpage,
@@ -107,13 +94,13 @@ async function deleteItem(id: number) {
       <template #pagination-bottom="props">
         <div class="py-4 px-3 flex justify-center">
           <Pagination
-            :total="50"
+            :total="locationEmissionSources.length"
             :current="current"
             :per-page="perpage"
             :page-range="pageRange"
             :page-changed="props.pageChanged"
             :per-page-changed="props.perPageChanged"
-            @pageChanged="current = $event"
+            @page-changed="current = $event"
           >
             >
           </Pagination>

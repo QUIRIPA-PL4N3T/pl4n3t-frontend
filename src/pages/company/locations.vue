@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
-
 const router = useRouter()
-
-const companyStore = useCompanyStore()
-const { company } = storeToRefs(companyStore)
 const { t } = useI18n()
 
 function goEditLocation(id: number) {
@@ -18,7 +13,7 @@ function goEditLocation(id: number) {
 <template>
   <div class="w-full h-full">
     <div class="lg:col-span-4 col-span-12 space-y-5">
-      <Card :title="t('locations.title')" noborder>
+      <Card :title="t('locations.title')">
         <div class="flex justify-end pb-4">
           <Button
             :text="t('location.add')"
@@ -27,10 +22,6 @@ function goEditLocation(id: number) {
           />
         </div>
         <LocationsTable />
-        <VueGoodTable
-          style-class="vgt-table lesspadding2 centered "
-          :rows="company.locations"
-        />
       </Card>
     </div>
   </div>

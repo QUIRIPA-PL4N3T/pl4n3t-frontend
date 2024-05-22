@@ -42,7 +42,7 @@ const activities = [
   <div>
     <div class="mb-5">
       <FormKit
-        :label="t('equipment.code')"
+        :label="t('emissionSource.code')"
         outer-class="w-full"
         inner-class="max-w-xl"
         type="text"
@@ -51,7 +51,7 @@ const activities = [
       />
     </div>
     <div class="mb-5">
-      <label for="multiselect" class="mb-5">{{ t('equipment.product_name') }}</label>
+      <label for="multiselect" class="mb-5">{{ t('emissionSource.product_name') }}</label>
       <Multiselect
         v-model="activityValue"
         mode="tags"
@@ -65,12 +65,12 @@ const activities = [
     <div class="mb-5 flex gap-4">
       <FormKit
         type="number"
-        :label="t('equipment.shelf_life_label')"
+        :label="t('emissionSource.shelf_life_label')"
         number
         name="shelf_life"
       />
       <FormKit
-        :label="t('equipment.shelf_life_unit_label')"
+        :label="t('emissionSource.shelf_life_unit_label')"
         type="select"
         :options="optionDurationList"
         placeholder="..."
@@ -80,7 +80,7 @@ const activities = [
     <div class="pb-5">
       <FormKit
         v-model="sourceTypeId"
-        :label="t('equipment.source_type')"
+        :label="t('emissionSource.source_type')"
         type="select"
         placeholder="..."
         :options="optionSourceTypes"
@@ -91,7 +91,7 @@ const activities = [
     <div class="flex gap-4 pb-5">
       <FormKit
         v-model="selectedFactorTypeId"
-        :label="t('equipment.factor_type')"
+        :label="t('emissionSource.factor_type')"
         outer-class="w-full"
         type="select"
         placeholder="..."
@@ -100,7 +100,7 @@ const activities = [
         @onchange="filterEmissionFactors"
       />
       <FormKit
-        :label="t('equipment.emission_factor')"
+        :label="t('emissionSource.emission_factor')"
         outer-class="w-full"
         type="select"
         placeholder="..."
@@ -112,7 +112,7 @@ const activities = [
       <FormKit
         v-if="[1, 2, 3].includes(selectedFactorTypeId)"
         type="checkbox"
-        :label="t('equipment.fuel_storage_label')"
+        :label="t('emissionSource.fuel_storage_label')"
         :options="optionsFuelStorageList"
         name="fuel_storage"
         outer-class="flex-1"
@@ -122,7 +122,7 @@ const activities = [
       <FormKit
         v-if="[1, 2, 3].includes(selectedFactorTypeId)"
         type="checkbox"
-        :label="t('equipment.fuel_storage_management_label')"
+        :label="t('emissionSource.fuel_storage_management_label')"
         :options="optionsFuelStorageManagementList"
         outer-class="flex-1"
         fieldset-class="p-3"
@@ -132,7 +132,7 @@ const activities = [
     <div class="mb-5">
       <FormKit
         type="radio"
-        :label="t('equipment.vapor_generation_question')"
+        :label="t('emissionSource.vapor_generation_question')"
         :options="{ yes: t('yes'), no: t('no') }"
         fieldset-class="$remove:max-w-md"
         :classes="{
@@ -144,14 +144,14 @@ const activities = [
     <div class="mb-5">
       <FormKit
         type="number"
-        :label="t('equipment.efficiency_label')"
+        :label="t('emissionSource.efficiency_label')"
         number
         name="fuel_efficiency"
       />
     </div>
     <div class="mb-5">
       <FormKit
-        :label="t('equipment.efficiency_unit_label')"
+        :label="t('emissionSource.efficiency_unit_label')"
         type="text"
         placeholder="..."
         name="fuel_efficiency_unit"
@@ -159,11 +159,11 @@ const activities = [
     </div>
     <div class="mb-5">
       <FormKit
-        :label="t('equipment.description')"
+        :label="t('emissionSource.description')"
         type="textarea"
         placeholder="..."
         name="description"
-        :help="t('equipment.description_help')"
+        :help="t('emissionSource.description_help')"
       />
     </div>
   <!-- End Emission Factor select -->

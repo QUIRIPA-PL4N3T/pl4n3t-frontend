@@ -158,7 +158,7 @@ const themeSettingsStore = useThemeSettingsStore()
 
 <style lang="scss" scoped>
 .card-title {
-  @apply font-medium  capitalize md:text-xl md:leading-[28px] text-lg leading-[24px];
+  @apply font-medium md:text-xl md:leading-[28px] text-lg leading-[24px];
 }
 .card-subtitle {
   @apply text-sm leading-5 font-medium text-slate-600 dark:text-slate-300 mt-1;

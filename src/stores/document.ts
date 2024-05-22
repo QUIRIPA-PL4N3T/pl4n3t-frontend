@@ -5,15 +5,26 @@ import {
   DEFAULT_DOCUMENT,
 } from '~/api/modelsDefaults'
 
+interface EditableDocumentsApiDocumentsCreateRequest {
+  objectPk: number
+  objectType: string
+  file?: File
+  title?: string
+  tags?: string
+}
+
 export const useDocumentsStore = defineStore('document', {
   state: () => ({
-    documentItem: <DocumentsApiDocumentsCreateRequest>DEFAULT_DOCUMENT,
+    documentItem: <EditableDocumentsApiDocumentsCreateRequest>DEFAULT_DOCUMENT,
   }),
   getters: {
   },
   actions: {
+    setDocumentProperties(properties: Partial<EditableDocumentsApiDocumentsCreateRequest>) {
+      Object.assign(this.documentItem, properties)
+    },
     async uploadDocument() {
-      await documentApi.documentsCreate(this.documentItem)
+      await documentApi.documentsCreate(this.documentItem as DocumentsApiDocumentsCreateRequest)
     },
   },
 })

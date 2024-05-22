@@ -3,11 +3,11 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { ElAlert } from 'element-plus'
 import { handleError } from '~/utilities/utils'
+import { setup } from '~/core'
 
 const authStore = useAuthStore()
 const router = useRouter()
 const checkbox = ref<boolean>(false)
-const typeInput = $ref<string>('password')
 const { isAuthenticated } = storeToRefs(authStore)
 const { t } = useI18n()
 
@@ -23,6 +23,7 @@ async function login(value: any) {
     await authStore.logIn(value)
     if (isAuthenticated.value)
       router.push('/dashboard')
+    setup()
   }
   catch (error: any) {
     errorMessage = handleError(error)
@@ -66,7 +67,7 @@ async function login(value: any) {
               />
 
               <FormKit
-                :type="typeInput"
+                type="password"
                 name="password"
                 label-class="text-left pt-5"
                 :label="t('password')"

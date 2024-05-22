@@ -5,11 +5,12 @@ const router = useRouter()
 
 const classificationStore = useClassificationStore()
 const authStore = useAuthStore()
-
+const { t } = useI18n()
 const { user } = storeToRefs(authStore)
 const { inventoriableClassificationGroups } = storeToRefs(classificationStore)
 const emissionSourceStore = useEmissionSourceStore()
-const { environLocation } = storeToRefs(emissionSourceStore)
+const { currentGlobalLocationId } = storeToRefs(emissionSourceStore)
+let selectedGroupId = $ref(0)
 
 function goEditEmissionSource(id: number) {
   router.push({
@@ -18,23 +19,34 @@ function goEditEmissionSource(id: number) {
   })
 }
 
-function filterByGroup(id: number) {
-  // TODO: add equipment filter by group
-  console.warn(id)
+async function filterByGroup(id: number) {
+  selectedGroupId = id
+  emissionSourceStore.filterEmissionSources(
+    {
+      group: selectedGroupId,
+      location: currentGlobalLocationId.value,
+    },
+  )
 }
 
 watch(() => user.value, () => {
-  if (user.value && !Number.isNaN(environLocation.value))
-    emissionSourceStore.fetchEmissionSourcesByLocation(Number(environLocation.value))
+  if (user.value && currentGlobalLocationId.value)
+    emissionSourceStore.fetchEmissionSources()
 })
 
-const { t } = useI18n()
+watch(() => currentGlobalLocationId.value, () => {
+  if (currentGlobalLocationId.value)
+    emissionSourceStore.fetchEmissionSources()
+})
 </script>
 
 <template>
   <div class="w-full h-full">
     <div class="lg:col-span-4 col-span-12 space-y-5">
-      <Card :title="t('equipments.modal.title')" noborder>
+      <Card
+        v-if="currentGlobalLocationId"
+        :title="t('equipments.modal.title')"
+      >
         <div class="flex gap-3 items-baseline overflow-auto">
           <button
             v-for="(group, i) in inventoriableClassificationGroups"
@@ -46,7 +58,7 @@ const { t } = useI18n()
               <Image
                 :src="group.icon!"
                 alt="{{ brand.name }}"
-                image-class="rounded-md border-2 border-slate-100 w-full h-[80px] object-contain object-center p-3"
+                :image-class="group.id === selectedGroupId ? 'rounded-md border-indigo-500 border-2 border-slate-100 w-full h-[80px] object-contain object-center p-3' : 'rounded-md border-2 border-slate-100 w-full h-[80px] object-contain object-center p-3' "
               />
               <span class="text-xs pt-2">
                 {{ group.name }}
@@ -57,19 +69,20 @@ const { t } = useI18n()
 
         <div class="flex justify-end pb-4">
           <Button
-            :text="t('equipment.add')"
+            :text="t('emissionSource.add')"
             btn-class="btn btn-dark btn-sm"
             @click.prevent="goEditEmissionSource(0)"
           />
         </div>
-        <EquipmentTable />
+        <EmissionSourcesTable />
       </Card>
+      <NoLocationSelected v-else />
     </div>
   </div>
 </template>
 
 <route lang="yaml">
-name: equipments
+name: inventory
 meta:
   layout: sidebar
   requiresAuth: true

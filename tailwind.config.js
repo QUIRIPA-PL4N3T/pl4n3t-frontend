@@ -6,6 +6,7 @@ module.exports = {
   content: [
     './public/**/*.html',
     './src/**/*.{html,vue,js,ts,jsx,tsx}',
+    './src/pages/**/*.{html,vue,js,ts,jsx,tsx}',
     './node_modules/@formkit/themes/dist/tailwindcss/genesis/index.cjs',
     './node_modules/vue-tailwind-datepicker/**/*.js',
   ],

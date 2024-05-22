@@ -4,17 +4,13 @@ import { storeToRefs } from 'pinia'
 const companyStore = useCompanyStore()
 const emissionSourceStore = useEmissionSourceStore()
 const { optionsLocations } = storeToRefs(companyStore)
-const { environLocation } = storeToRefs(emissionSourceStore)
-
-watch(() => environLocation.value, () => {
-  emissionSourceStore.fetchEmissionSourcesByLocation(environLocation.value)
-})
+const { currentGlobalLocationId } = storeToRefs(emissionSourceStore)
 </script>
 
 <template>
   <div class="bg-white dark:bg-slate-800 px-3 rounded">
     <FormKit
-      v-model="environLocation"
+      v-model="currentGlobalLocationId"
       type="select"
       input-class="text-sm $remove:pr-8"
       select-icon-class="$remove:mr-2"
