@@ -4,22 +4,25 @@ import { storeToRefs } from 'pinia'
 const { t } = useI18n()
 
 const selectedFactorTypeId = ref(0)
-const sourceTypeId = ref(0)
+const sourceTypeId = ref<number>(0)
 const wasteTypeId = ref('')
 const wasteOptions = ref<string[]>([t('no_apply')])
 const wasteManagementOptions = ref<string[]>([t('no_apply')])
 const classificationStore = useClassificationStore()
 const basicStorage = useBasicStore()
+const wasteData = ref<string>('')
 
 const {
   optionWasteTypeList,
   optionWasteOrganicList,
   optionWasteInorganicList,
   optionWasteDangerList,
-  optionWasteManagementOrganicList,
   optionWasteManagementInorganicList,
   optionWasteManagementDangerList,
+  getWasteCategoriesList,
+  getWasteManagementOrganicList,
 } = storeToRefs(basicStorage)
+const initialData = ref('')
 
 // const {
 //   optionFactorTypes,
@@ -50,7 +53,7 @@ function setWasteOptions(): any {
 function setWasteManagementOptions(): any {
   switch (wasteTypeId.value) {
     case 'Residuos orgánicos':
-      wasteManagementOptions.value = optionWasteManagementOrganicList.value
+
       break
     case 'Residuos inorgánicos':
       wasteManagementOptions.value = optionWasteManagementInorganicList.value
@@ -73,6 +76,18 @@ watch(() => selectedFactorTypeId.value, () => {
   classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value, sourceTypeId.value)
 })
 
+async function saveData(data: string) {
+  initialData.value = data
+  // Aquí puedes realizar una petición para guardar `data` en la base de datos
+  await fetch('/api/save-waste-management', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ data }),
+  })
+}
+
 // watch(() => optionFactorTypes.value, () => {
 //   if (optionFactorTypes.value.length === 1)
 //     selectedFactorTypeId.value = optionFactorTypes.value[0]
@@ -81,43 +96,53 @@ watch(() => selectedFactorTypeId.value, () => {
 
 <template>
   <div>
-    <div class="mb-5 flex-col w-full gap-5">
-      <div class="w-full pb-5">
-        <FormKit
-          v-model="wasteTypeId"
-          :label="t('emissionSource.waste_type_label')"
-          type="select"
-          placeholder="..."
-          :options="optionWasteTypeList"
-          name="electricity_source"
-        />
-      </div>
-      <div class="flex flex-col md:flex-row gap-4">
-        <FormKit
-          v-model="sourceTypeId"
-          :label="t('emissionSource.waste_type_label')"
-          type="select"
-          placeholder="..."
-          :options="wasteOptions"
-          name="electricity_source"
-        />
+    <div class="flex flex-col md:grid md:grid-cols-4 gap-4">
+      <FormKit
+        :label="t('emissionSource.wasteName')"
+        outer-class="w-full md:col-span-2"
+        type="text"
+        name="name"
+      />
 
-        <FormKit
-          type="checkbox"
-          :label="t('emissionSource.waste_register_label')"
-          :options="wasteManagementOptions"
-          outer-class="flex-1"
-          fieldset-class="p-3"
-          name="fuel_storage_management"
+      <FormKit
+        v-model="wasteTypeId"
+        :label="t('emissionSource.wasteType')"
+        outer-class="w-full md:col-span-2"
+        type="select"
+        :options="optionWasteTypeList"
+        name="waste_type"
+      />
+
+      <FormKit
+        v-model="sourceTypeId"
+        :label="t('emissionSource.wasteManagement')"
+        type="select"
+        outer-class="md:col-span-"
+        :options="wasteOptions"
+        name="waste_classification"
+      />
+
+      <FormKit
+        type="checkbox"
+        :label="t('emissionSource.wasteRegister')"
+        :options="wasteManagementOptions"
+        outer-class="md:col-span-2"
+        fieldset-class="p-3"
+        name="fuel_storage_management"
+      />
+      <div class="overflow-auto md:col-span-4">
+        <CheckboxTable
+          v-model="wasteData"
+          :label="t('emissionSource.wasteManagement')"
+          :rows="getWasteCategoriesList"
+          :columns="getWasteManagementOrganicList"
+          @update:data="saveData"
         />
       </div>
-    </div>
-    <div />
-    <div class="mb-5">
       <FormKit
         :label="t('emissionSource.description')"
         type="textarea"
-        placeholder="..."
+        outer-class="md:col-span-4"
         name="description"
         :help="t('emissionSource.description_help')"
       />

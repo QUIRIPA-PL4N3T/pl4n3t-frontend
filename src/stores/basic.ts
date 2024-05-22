@@ -116,10 +116,10 @@ export const useBasicStore = defineStore('basic', {
       return formatOptions(this.refrigerantCapacityUnitList)
     },
     optionsWasteRegisterList(): any {
-      return formatOptions(this.wasteRegisterList)
+      return this.wasteRegisterList
     },
-    optionsOperationWasteList(): any {
-      return formatOptions(this.operationWasteList)
+    getWasteCategoriesList(): any {
+      return this.operationWasteList
     },
     optionsOperationWasteEmptyLabelList(): any {
       return this.operationWasteList.map(type => ({
@@ -166,8 +166,8 @@ export const useBasicStore = defineStore('basic', {
     optionsWasteManagementList(): any {
       return []
     },
-    optionWasteManagementOrganicList(): any {
-      return formatOptions(this.wasteManagementOrganicList)
+    getWasteManagementOrganicList(): any {
+      return this.wasteManagementOrganicList
     },
     optionWasteManagementInorganicList(): any {
       return formatOptions(this.wasteManagementInorganicList)

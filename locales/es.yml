@@ -178,6 +178,12 @@ emissionSource:
   vehicle_fuel_type: Tipo de Combustible
   vehicle_load_type: Tipo de Vehículo
   vehicle_type: Clase de Vehículo
+  wasteManagement: ¿Como se manejan los desperdicios de las operaciones?
+  wasteName: Nombre del Desperdicio
+  wasteRegister: >-
+    Seleccione el los desperdicios generados de los cuales se lleva seguimiento
+    y registro
+  wasteType: ¿A cuál de las siguientes clase de residuo pertenece la fuente de emisión?
   waste_danger_label: ¿Cuál es el tipo de residuo?
   waste_inorganic_label: ¿Cuál es el tipo de residuo?
   waste_management_danger_label: ¿Cómo se gestiona el residuo peligroso?
@@ -340,4 +346,6 @@ signInSocial: O Continue con
 since:
   lastMonth: Desde el último mes
 view: Ver
+waste:
+  companyGenerationQuestion: ¿Que tipo de desperdición se generan en las operaciones?
 yes: Sí

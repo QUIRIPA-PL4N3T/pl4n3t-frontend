@@ -3001,6 +3001,10 @@ components:
         know_type_electricity_generation_source:
           type: boolean
           title: Conoce el tipo de fuente de generación de electricidad
+        waste_management:
+          type: string
+          nullable: true
+          title: Manejo de desperdicio
         leased_assets_type:
           type: string
           nullable: true
@@ -3140,6 +3144,10 @@ components:
         group_name:
           type: string
           readOnly: true
+        waste_management_data:
+          type: object
+          additionalProperties: {}
+          readOnly: true
       required:
         - documents
         - emission_factor
@@ -3148,6 +3156,7 @@ components:
         - group_name
         - id
         - location
+        - waste_management_data
     EmissionsSourceMonthEntry:
       type: object
       properties:
@@ -3938,6 +3947,10 @@ components:
         know_type_electricity_generation_source:
           type: boolean
           title: Conoce el tipo de fuente de generación de electricidad
+        waste_management:
+          type: string
+          nullable: true
+          title: Manejo de desperdicio
         leased_assets_type:
           type: string
           nullable: true
@@ -4076,6 +4089,10 @@ components:
           readOnly: true
         group_name:
           type: string
+          readOnly: true
+        waste_management_data:
+          type: object
+          additionalProperties: {}
           readOnly: true
     PatchedEmissionsSourceMonthEntry:
       type: object

@@ -120,6 +120,10 @@ emissionSource:
   vapor_generation_question: Is there a specific emission factor associated with steam generation?
   vehicle_fuel: Fuel
   vehicle_fuel_type: Fuel type
+  wasteManagement: How waste is managed
+  wasteName: Waste Name
+  wasteRegister: Select the waste generated that is tracked and recorded
+  wasteType: To which of the following waste classes does the emission source belong?
 equipments:
   modal:
     title: Registered organization emission sources
@@ -197,6 +201,7 @@ menu:
   settings: Setting
   todo: Tasks
 no: No
+no_apply: Does not apply
 notResultFound: No results found
 optionCreated: Created Option
 optionCreationFailed: Creation of the Failed Option
@@ -217,4 +222,6 @@ selectAnOption: Select an Option
 signInSocial: Or continue with
 since:
   lastMonth: since last month
+waste:
+  companyGenerationQuestion: What type of waste is generated in operations?
 yes: Yeah
