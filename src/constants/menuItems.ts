@@ -57,6 +57,10 @@ export const menuItems = [
     requiredData: true,
     child: [
       {
+        childTitle: 'reports.template',
+        childLink: '/reports/templates',
+      },
+      {
         childTitle: 'reports.generate',
         childLink: '/reports',
       },

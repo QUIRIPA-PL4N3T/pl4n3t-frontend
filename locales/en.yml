@@ -333,3 +333,42 @@ since:
 waste:
   companyGenerationQuestion: What type of waste is generated in operations?
 yes: Yes
+open: Open
+preview: Preview
+duplicate: Duplicate
+reports:
+  format: Formato del Informe
+  generate: Generar Informe
+  methodology: Metodología
+  period: Período
+  title: Reportes
+  template: Templates
+  enable_templates: Enable Templates
+  company_templates: Company templates
+
+  template_form:
+    name: name
+    version: Version,
+    tags: Tags
+    introduction: Introduction
+    definitions: Definitions
+    company_description: Company description
+    organizational_description: Organizational description
+    baseline_year_diagnostic: Baseline year diagnostic
+    report_frequency: Report frequency
+    intended_use: Intended use
+    diagnostic_scope: Diagnostic scope
+    diagnostic_objectives: Diagnostic objectives
+    quantification_methodology: Quantification methodology
+    emissions_inventory_exclusions: Emissions inventory exclusions
+    carbon_footprint_determination: Carbon footprint determination
+    gei_inventory_boundaries: GEI inventory boundaries
+    report_results: Report results
+    emissions_inventory: Remissions inventory
+    emissions_consolidation: Emissions consolidation
+    emissions_consolidation_year: Emissions consolidation year
+    carbon_footprint_quantification: Carbon footprint quantification
+    emissions_reduction_recommendations: Emissions_reduction recommendations
+    conclusions: Conclusions
+    annexes: Annexes
+    save: Save

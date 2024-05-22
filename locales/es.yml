@@ -433,6 +433,35 @@ reports:
   methodology: Metodología
   period: Período
   title: Reportes
+  template: Plantillas
+  enable_templates: Plantillas disponibles
+  company_templates: Plantillas registradas
+  template_form:
+    name: name
+    version: v
+    tags: Tags
+    introduction: Introducción
+    definitions: Definiciones
+    company_description: Descripción de la compañía
+    organizational_description: Descripción organizacional
+    baseline_year_diagnostic: Diagnóstico del año de referencia
+    report_frequency: Frecuencia de informes
+    intended_use: Uso previst
+    diagnostic_scope: Alcance del diagnóstico
+    diagnostic_objectives: Objetivos del diagnóstico
+    quantification_methodology: Metodología de cuantificación
+    emissions_inventory_exclusions: Exclusiones del inventario de emisiones
+    carbon_footprint_determination: Determinación de la huella de carbono
+    gei_inventory_boundaries: Límites del inventario GEI
+    report_results: Informar resultados
+    emissions_inventory: Inventario de remisiones
+    emissions_consolidation: Consolidación de emisiones
+    emissions_consolidation_year: Año de consolidación de emisiones
+    carbon_footprint_quantification: Cuantificación de la huella de carbono
+    emissions_reduction_recommendations: Recomendaciones de reducción de emisione
+    conclusions: Conclusiones
+    annexes: Anexo
+    save: Save
 save: Guardar
 search: Buscar
 select:
@@ -447,3 +476,6 @@ view: Ver
 waste:
   companyGenerationQuestion: ¿Que tipo de desperdición se generan en las operaciones?
 yes: Sí
+open: Abrir
+preview: Previsualizar
+duplicate: Duplicar

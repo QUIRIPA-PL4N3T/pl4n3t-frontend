@@ -212,3 +212,61 @@ export const DEFAULT_UPDATE_PASSWORD: UpdatePassword = {
   new_password: '',
   confirm_password: '',
 }
+
+export const DEFAULT_REPORT: ReportConfig = {
+  id: 1,
+  name: 'Informe de Inventarios de GEI y Huella de Carbono Organizacional',
+  creation_date: '2016-08-29T09:12:33.001Z',
+  version: 1.0,
+  tags: '',
+  introduction: '',
+  definitions: '',
+  company_description: '',
+  organizational_description: '',
+  baseline_year_diagnostic: '',
+  report_frequency: '',
+  intended_use: '',
+  diagnostic_scope: '',
+  diagnostic_objectives: '',
+  quantification_methodology: '',
+  emissions_inventory_exclusions: '',
+  carbon_footprint_determination: '',
+  gei_inventory_boundaries: '',
+  report_results: '',
+  emissions_inventory: '',
+  emissions_consolidation: '',
+  emissions_consolidation_year: '',
+  carbon_footprint_quantification: '',
+  emissions_reduction_recommendations: '',
+  conclusions: '',
+  annexes: '',
+}
+
+export interface ReportConfig {
+  id?: number
+  name: string
+  creation_date: string
+  version: number
+  tags: string
+  introduction?: string
+  definitions?: string
+  company_description?: string
+  organizational_description?: string
+  baseline_year_diagnostic?: string
+  report_frequency?: string
+  intended_use?: string
+  diagnostic_scope?: string
+  diagnostic_objectives?: string
+  quantification_methodology?: string
+  emissions_inventory_exclusions?: string
+  carbon_footprint_determination?: string
+  gei_inventory_boundaries?: string
+  report_results?: string
+  emissions_inventory?: string
+  emissions_consolidation?: string
+  emissions_consolidation_year?: string
+  carbon_footprint_quantification?: string
+  emissions_reduction_recommendations?: string
+  conclusions?: string
+  annexes?: string
+}

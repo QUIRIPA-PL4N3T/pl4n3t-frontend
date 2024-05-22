@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    '<': typeof import('./components/<.vue')['default']
     Accordion: typeof import('./components/Accordion/index.vue')['default']
     ActivitiesTable: typeof import('./components/PlanetComponents/ActivitiesTable.vue')['default']
     ActivitySearch: typeof import('./components/ActivitySearch/index.vue')['default']
@@ -56,9 +57,11 @@ declare module 'vue' {
     InvestmentFields: typeof import('./components/EmissionSourcePartialForms/InvestmentFields.vue')['default']
     InvestmentRegisterFields: typeof import('./components/ActivityRegisterPartialForm/InvestmentRegisterFields.vue')['default']
     InvestmentSearch: typeof import('./components/InvestmentSearch/index.vue')['default']
+    ItemTemplate: typeof import('./components/Reports/ItemTemplate.vue')['default']
     Language: typeof import('./components/TheHeader/navTools/language.vue')['default']
     LeasedAssetFields: typeof import('./components/EmissionSourcePartialForms/LeasedAssetFields.vue')['default']
     LeasedAssetRegisterFields: typeof import('./components/ActivityRegisterPartialForm/LeasedAssetRegisterFields.vue')['default']
+    ListTemplates: typeof import('./components/Reports/ListTemplates.vue')['default']
     LocationsTable: typeof import('./components/PlanetComponents/LocationsTable.vue')['default']
     Logo: typeof import('./components/TheHeader/navTools/Logo.vue')['default']
     Map: typeof import('./components/Analytics-Component/Map.vue')['default']
