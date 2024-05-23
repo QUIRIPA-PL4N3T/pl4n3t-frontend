@@ -348,7 +348,7 @@ reports:
 
   template_form:
     name: name
-    version: Version,
+    version: Version
     tags: Tags
     introduction: Introduction
     definitions: Definitions

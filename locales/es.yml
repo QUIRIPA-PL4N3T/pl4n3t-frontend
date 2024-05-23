@@ -427,6 +427,8 @@ register:
   link: Ingresar
   success: ¡Usuario registrado!
   title: Registrarse
+templates:
+  title: Plantillas
 reports:
   format: Formato del Informe
   generate: Generar Informe
