@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
-import type { ReportConfig } from '~/api/modelsDefaults'
+import type { ActionEmits, ReportConfig } from '~/api/modelsDefaults'
 
 const { template, edit } = defineProps<{
   template: ReportConfig

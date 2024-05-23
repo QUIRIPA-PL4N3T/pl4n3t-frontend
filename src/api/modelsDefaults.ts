@@ -286,6 +286,7 @@ export interface ReportConfig {
   emissions_reduction_recommendations?: string
   conclusions?: string
   annexes?: string
+  using?: boolean
 }
 
 export interface ActionEmits<T> {

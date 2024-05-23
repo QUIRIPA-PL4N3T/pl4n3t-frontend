@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ItemTemplate from './ItemTemplate.vue'
-import type { ReportConfig } from '~/api/modelsDefaults'
+import { type ActionEmits, DEFAULT_REPORT, type ReportConfig } from '~/api/modelsDefaults'
 
 interface Edit {
   active: boolean
@@ -12,12 +12,17 @@ const { templates, edit } = defineProps<{
   edit?: Edit
 }>()
 
-let preview = ref<boolean>(false)
-const template = ref<ReportConfig>(null)
+let preview = $ref<boolean>(false)
+// let previewTemplate = $ref<boolean>(false)
+
+// let templateCompany = $ref<ReportConfig>(DEFAULT_REPORT)
+let template = $ref<ReportConfig>(DEFAULT_REPORT)
 const router = useRouter()
 
-function onAction(value: ActionEmits) {
-  preview = false
+function tooggleDrawer() {
+  preview = !preview
+}
+function onAction(value: ActionEmits<ReportConfig>) {
   switch (value.action) {
     case 'edit':
       router.push({
@@ -26,8 +31,8 @@ function onAction(value: ActionEmits) {
       })
       break
     case 'preview':
-      preview = true
       template = value.value
+      tooggleDrawer()
       break
     default:
       break
@@ -36,9 +41,17 @@ function onAction(value: ActionEmits) {
 </script>
 
 <template>
-  <Drawer :open="preview" direction="right" title="Preview" class-button="hidden">
+  <Drawer
+    :open="preview"
+    :close-icon="true"
+    direction="right"
+    title="Preview"
+    class-button="hidden"
+    size="md"
+    @close="value => preview = value"
+  >
     <template #body>
-      <TemplateForm v-if="template" v-model="template" />
+      <ReportManager :template="template" />
     </template>
   </Drawer>
   <ul>

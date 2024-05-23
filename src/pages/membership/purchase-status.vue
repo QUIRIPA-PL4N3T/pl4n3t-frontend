@@ -1,5 +1,19 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
+import type { Membership } from '~/api-client'
+
 import Bill from '~/components/Payment/Bill.vue'
+
+const membershipsStore = useMembershipsStore()
+const router = useRouter()
+
+const id = Number(router.currentRoute.value.params?.id)
+
+const { getMembershipById } = storeToRefs(membershipsStore)
+
+const membership = computed((): Membership => {
+  return getMembershipById.value(id)
+})
 
 const { t } = useI18n()
 </script>
@@ -9,7 +23,7 @@ const { t } = useI18n()
     <div class="text-center mb-12">
       <div class="w-full flex flex-wrap gap-2 justify-center">
         <div class="max-w-sm text-left">
-          <MembershipCard :buy="false" :membership="currentMembership" />
+          <MembershipCard :buy="false" :membership="membership" />
         </div>
         <div class="max-w-lg p-8 mx-auto px-4 sm:px-6 lg:px-8 bg-white rounded-xl overflow-hidden shadow-lg">
           <div class="max-w-[500px] min-w-xl space-y-4 flex flex-col justify-center items-center">

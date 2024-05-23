@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import type { ReportConfig } from '~/api/modelsDefaults'
-import { DEFAULT_REPORT } from '~/api/modelsDefaults'
 
 const { t } = useI18n()
 
-const model = defineModel<ReportConfig>(DEFAULT_REPORT)
+const model = defineModel<ReportConfig>('report', { required: true })
 </script>
 
 <template>
@@ -43,20 +42,20 @@ const model = defineModel<ReportConfig>(DEFAULT_REPORT)
   <quill-editor v-model="model.company_description" theme="snow" />
   <quill-editor v-model="model.organizational_description" theme="snow" />
   <quill-editor v-model="model.baseline_year_diagnostic" theme="snow" />
-  <quill-editor v-model="report_frequency" theme="snow" />
-  <quill-editor v-model="intended_use" theme="snow" />
-  <quill-editor v-model="diagnostic_scope" theme="snow" />
-  <quill-editor v-model="diagnostic_objectives" theme="snow" />
-  <quill-editor v-model="quantification_methodology" theme="snow" />
-  <quill-editor v-model="emissions_inventory_exclusions" theme="snow" />
-  <quill-editor v-model="carbon_footprint_determination" theme="snow" />
-  <quill-editor v-model="gei_inventory_boundaries" theme="snow" />
-  <quill-editor v-model="report_results" theme="snow" />
-  <quill-editor v-model="emissions_inventory" theme="snow" />
-  <quill-editor v-model="emissions_consolidation" theme="snow" />
-  <quill-editor v-model="emissions_consolidation_year" theme="snow" />
-  <quill-editor v-model="carbon_footprint_quantification" theme="snow" />
-  <quill-editor v-model="emissions_reduction_recommendations" theme="snow" />
-  <quill-editor v-model="conclusions" theme="snow" />
-  <quill-editor v-model="annexes" theme="snow" />
+  <quill-editor v-model="model.report_frequency" theme="snow" />
+  <quill-editor v-model="model.intended_use" theme="snow" />
+  <quill-editor v-model="model.diagnostic_scope" theme="snow" />
+  <quill-editor v-model="model.diagnostic_objectives" theme="snow" />
+  <quill-editor v-model="model.quantification_methodology" theme="snow" />
+  <quill-editor v-model="model.emissions_inventory_exclusions" theme="snow" />
+  <quill-editor v-model="model.carbon_footprint_determination" theme="snow" />
+  <quill-editor v-model="model.gei_inventory_boundaries" theme="snow" />
+  <quill-editor v-model="model.report_results" theme="snow" />
+  <quill-editor v-model="model.emissions_inventory" theme="snow" />
+  <quill-editor v-model="model.emissions_consolidation" theme="snow" />
+  <quill-editor v-model="model.emissions_consolidation_year" theme="snow" />
+  <quill-editor v-model="model.carbon_footprint_quantification" theme="snow" />
+  <quill-editor v-model="model.emissions_reduction_recommendations" theme="snow" />
+  <quill-editor v-model="model.conclusions" theme="snow" />
+  <quill-editor v-model="model.annexes" theme="snow" />
 </template>
