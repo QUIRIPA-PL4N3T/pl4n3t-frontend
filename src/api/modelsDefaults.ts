@@ -270,3 +270,8 @@ export interface ReportConfig {
   conclusions?: string
   annexes?: string
 }
+
+export interface ActionEmits<T> {
+  action: 'edit' | 'preview'
+  value: T
+}

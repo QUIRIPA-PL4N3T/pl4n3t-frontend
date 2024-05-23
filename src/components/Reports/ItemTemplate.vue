@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
-import { _RouterTyped } from 'unplugin-vue-router'
 import type { ReportConfig } from '~/api/modelsDefaults'
 
 const { template, edit } = defineProps<{
@@ -8,12 +7,16 @@ const { template, edit } = defineProps<{
   edit?: boolean
 }>()
 
+const emit = defineEmits<{
+  (event: 'onAction', value: ActionEmits<ReportConfig>): void
+}>()
+
 const { t } = useI18n()
 </script>
 
 <template>
-  <div class="ml-2 flex space-x-2 rtl:space-x-reverse">
-    <div class="flex-1 flex space-x-2 rtl:space-x-reverse">
+  <div :class="template?.using ? 'border-purple-500' : 'border-primary-500'" class="flex space-x-2 rtl:space-x-reverse border-l-2">
+    <div class="flex-1 flex space-x-2 ml-2 rtl:space-x-reverse">
       <div class="flex flex-wrap justify-center items-center">
         <span
           class="block text-slate-600 text-sm dark:text-slate-300 mr-2"
@@ -28,10 +31,15 @@ const { t } = useI18n()
         >{{ template.creation_date }}</span>
       </div>
     </div>
-    <div class="flex flex-wrap gap-1">
+    <div class="flex flex-wrap justify-center items-center gap-1">
       <Tooltip placement="top" arrow theme="dark">
         <template #button>
-          <div class="action-btn hover:scale-110">
+          <div
+            class="hover:scale-110" @click="emit('onAction', {
+              action: 'preview',
+              value: template,
+            })"
+          >
             <Icon icon="heroicons-outline:eye" class="size-4" />
           </div>
         </template>
@@ -39,9 +47,14 @@ const { t } = useI18n()
       </Tooltip>
       <Tooltip v-if="edit" placement="top" arrow theme="dark">
         <template #button>
-          <router-link to="" class="action-btn hover:scale-110">
+          <div
+            class="hover:scale-110" @click="emit('onAction', {
+              action: 'edit',
+              value: template,
+            })"
+          >
             <Icon icon="heroicons-outline:pencil" class="size-4" />
-          </router-link>
+          </div>
         </template>
         <span> {{ t('edit') }}</span>
       </Tooltip>
