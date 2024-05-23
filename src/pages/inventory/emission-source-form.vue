@@ -6,8 +6,6 @@ const props = defineProps<{ id?: string }>()
 const selectedGroup = ref<EmissionSourceGroup | undefined>(undefined)
 const selectedGroupId = ref(0)
 const selectedFactorTypeId = ref(0)
-const disabledSourceType = ref<boolean>(false)
-const groupContainerRef = ref<HTMLDivElement | null>(null)
 const confirmModal = ref<any>(null)
 provide('selectedGroupId', selectedGroupId)
 const router = useRouter()
@@ -77,14 +75,6 @@ function setSelectGroup(group: EmissionSourceGroup) {
   selectedGroupId.value = group.id
   classificationStore.setEmissionTypesByGroup(group.id)
   selectedGroup.value = group
-  switch (selectedGroup.value?.form_name) {
-    case 'ORGANIZATION_VEHICLES':
-      currentEmissionSource.value.source_type = 2
-      disabledSourceType.value = true
-      break
-    default:
-      break
-  }
 }
 
 function setSelectGroupById(id: number) {
@@ -104,8 +94,18 @@ onMounted(() => {
   setSelectGroupById(currentEmissionSource.value.group!)
 })
 
+onBeforeUnmount(() => {
+  selectedGroupId.value = 0
+  emissionSourceStore.fetchEmissionSource(0)
+  selectedGroup.value = undefined
+})
+
 const isNew = computed(() => {
   return currentEmissionSource.value.id === 0
+})
+
+const formFields = computed<string>(() => {
+  return selectedGroup.value?.form_name || ''
 })
 
 const currentGroup = computed<EmissionSourceGroup | undefined>(() => {
@@ -116,7 +116,7 @@ const currentGroup = computed<EmissionSourceGroup | undefined>(() => {
 <template>
   <div class="xl:col-span-2">
     <Card :title="`${t('emissionSource.edit')} ${currentEmissionSource.name}`">
-      <div v-if="isNew" ref="groupContainerRef" class="flex gap-3 items-stretch overflow-auto pb-5">
+      <div v-if="isNew" class="flex gap-3 items-stretch overflow-auto pb-5">
         <div
           v-for="(group, i) in inventoriableClassificationGroups"
           :key="i"
@@ -164,7 +164,6 @@ const currentGroup = computed<EmissionSourceGroup | undefined>(() => {
         </div>
         <Alert
           v-if="selectedGroup"
-          dismissible
           class-name="bg-primary-500 bg-opacity-[14%] text-indigo-500 w-full"
           icon="heroicons-outline:information-circle"
         >
@@ -197,16 +196,16 @@ const currentGroup = computed<EmissionSourceGroup | undefined>(() => {
                 />
               </div>
             </div>
-            <FuelUseFields v-if="selectedGroup && ['FUEL'].includes(selectedGroup.form_name!)" />
-            <OrganizationVehicleFields v-else-if="selectedGroup && ['ORGANIZATION_VEHICLES'].includes(selectedGroup.form_name!)" />
-            <ElectricityFields v-else-if="selectedGroup && ['ELECTRICITY'].includes(selectedGroup.form_name!)" />
-            <RefrigerantFields v-else-if="selectedGroup && ['REFRIGERANTS'].includes(selectedGroup.form_name!)" />
-            <WasteFields v-else-if="selectedGroup && ['WASTE'].includes(selectedGroup.form_name!)" />
-            <ServiceFields v-else-if="selectedGroup && ['SERVICES'].includes(selectedGroup.form_name!)" />
-            <LeasedAssetFields v-else-if="selectedGroup && ['LEASED_ASSETS'].includes(selectedGroup.form_name!)" />
-            <TransportationFields v-else-if="selectedGroup && ['TRANSPORTATION'].includes(selectedGroup.form_name!)" />
-            <ProductFields v-else-if="selectedGroup && ['PRODUCTS'].includes(selectedGroup.form_name!)" />
-            <InvestmentFields v-else-if="selectedGroup && ['INVESTMENTS'].includes(selectedGroup.form_name!)" />
+            <FuelUseFields v-if="formFields === 'FUEL'" />
+            <OrganizationVehicleFields v-else-if="formFields === 'ORGANIZATION_VEHICLES'" />
+            <ElectricityFields v-else-if="formFields === 'ELECTRICITY'" />
+            <RefrigerantFields v-else-if="formFields === 'REFRIGERANTS'" />
+            <WasteFields v-else-if="formFields === 'WASTE'" />
+            <ServiceFields v-else-if="formFields === 'SERVICES'" />
+            <LeasedAssetFields v-else-if="formFields === 'LEASED_ASSETS'" />
+            <TransportationFields v-else-if="formFields === 'TRANSPORTATION'" />
+            <ProductFields v-else-if="formFields === 'PRODUCTS'" />
+            <InvestmentFields v-else-if="formFields === 'INVESTMENTS'" />
             <!-- Attachment Section -->
             <div class="mb-5">
               <ul>

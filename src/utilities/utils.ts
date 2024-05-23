@@ -122,3 +122,7 @@ export function formatOptionsNotEmpty(list: any, labelKey = 'name', valueKey = '
 
   return options
 }
+
+export function deepCopy<T>(obj: T): T {
+  return JSON.parse(JSON.stringify(obj))
+}
