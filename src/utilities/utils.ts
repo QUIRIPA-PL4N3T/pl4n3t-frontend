@@ -101,6 +101,28 @@ export function formatOptions(list: any, labelKey = 'name', valueKey = 'id', emp
       }
     }
   })
-
   return emptyOption ? [empty, ...options] : options
+}
+
+export function formatOptionsNotEmpty(list: any, labelKey = 'name', valueKey = 'id') {
+  const options = list.map((item: any) => {
+    if (typeof item === 'object') {
+      return {
+        label: item[labelKey],
+        value: item[valueKey],
+      }
+    }
+    else {
+      return {
+        label: item,
+        value: item,
+      }
+    }
+  })
+
+  return options
+}
+
+export function deepCopy<T>(obj: T): T {
+  return JSON.parse(JSON.stringify(obj))
 }

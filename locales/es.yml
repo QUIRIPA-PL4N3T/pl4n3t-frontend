@@ -1,14 +1,3 @@
-not_found: Lo sentimos informacion no disponible
-email: Correo
-errorEmail: Correo no valido
-password: Contraseña
-hintPassword: Contraseña
-errorPassword: Mínimo 8 caracteres
-forgotPassword: Restablecer Contraseña?
-dashboard:
-  title: Dashboard
-locations:
-  title: Sedes
 Accept: Acceptar
 activities:
   activity: Actividad
@@ -63,6 +52,7 @@ company:
   edit: Editar
   email: Correo
   emissionSource: Agentes Emisor
+  equipment: Agentes Emisor
   locations: Sedes
   members: Miembros
   name: Nombre
@@ -84,17 +74,19 @@ company:
   update:
     success: ¡La compañía fue actualizada con Éxito!
   url: Página Web
-  equipment: Agentes Emisor
 copyright:
   footer: COPYRIGHT ©; Amanecer en el Palmar, todos los derechos reservados
 currentLocation:
   required: Debe seleccionar una Sede para pode Continuar
+dashboard:
+  title: Dashboard
 delete: Eliminar
 distibution:
   bySede: Distribución por Sede
 distribution:
   bySede: Distribución por Sede
 edit: Editar
+email: Correo
 emission:
   sources: Fuentes de Emisión
 emission source-edit:
@@ -154,6 +146,7 @@ emissionSource:
     reparaciones del equipo?
   name: Nombre / Marcar / Modelo
   process_label: Seleccione el proceso o actividad
+  productOperationRequirements: Para el funcionamiento del producto requiere
   product_name: Nombre del Producto
   refrigerant_capacity_label: Capacidad de refrigerante en el equipo
   refrigerant_convert_label: >-
@@ -176,111 +169,193 @@ emissionSource:
   source_type_help: Tipo de fuente de emisión
   specific_factor_label: Factor de Emisión específico
   specific_factor_unit_label: Unidad de Factor de emisión
+  supplier_name: Nombre del Proveedor
+  type: Tipo de Equipo
+  unit: Unidades de Medida
+  unitsSold: Unidades Vendidas
+  unitsSoldPeriod: Periodo de venta de las Unidades Vendidas
+  vapor_generation_question: ¿Existe un factor de emisión específico asociado a al generación de Vapor?
+  vehicle_capacity: Capacidad
+  vehicle_code: Placa
+  vehicle_efficiency: Eficiencia del Vehículo
+  vehicle_efficiency_unit: Unidad
+  vehicle_fuel: Tipo de Combustible
+  vehicle_load_type: Tipo de Vehículo
+  vehicle_name: Marca ó Modelo
+  vehicle_type: Clase de Vehículo
+equipments:
+  add: Agregar
+  modal:
+    branch: Marca
+    description: Descripción
+    emissionSource-type: Tipo de equipo
+    identification: Placa | Serial | Número de Identificación
+    location: Sede
+    name: Nombre
+    title: Fuentes de emisión de la Compañía
+  title: Fuentes de Emisión
+errorEmail: Correo no valido
+errorPassword: Mínimo 8 caracteres
+errors:
+  register:
+    exist: Ya existe un usuario registrado con este correo
+    password: Su contraseña no puede ser una clave utilizada comúnmente.
+forgotPassword: Restablecer Contraseña?
+general:
+  brand: Marca
+  city: Ciudad
+  country: País
+  economic_sector: Sector Económico
+  industry_type: Tipo de Industria
+  location: Sede
+  manage: Gestionar
+  new: Nuevo
+  nit: NIT
+  origin_country: País de origen
+  state: Departamento
+goals:
+  title: Metas
+hintPassword: Contraseña
+inventory:
+  title: Fuentes de Emisión
+liquidation:
+  form: Formularío de Liquidación
+  title: Cuantificar
+location:
+  add: Agregar Sede
+  address: Dirección
+  created:
+    success: Se ha creado la nueva sede
+  deleted:
+    brand: La marca ha sido eliminada
+    success: Se ha eliminado la sede
+  email: Correo
+  employees: Empleados
+  employeesNumber: Número de empleados
+  modal:
+    title: Agregar un nueva sede
+  name: Nombre
+  new: Nueva Sede
+  phone: Teléfono
+  status: Estado
+  title: Editar Sede
+  type: Tipo de Sede
+  updated:
+    success: Se ha actulizado la sede
+locations:
+  title: Sedes
+login:
+  buttonLogin: Ingresar
+  checkBox: Mantener conectado
+  footer: No tienes una cuenta?
+  google:
+    created: >-
+      Se envió un correo para activar su cuenta, por favor active su cuenta e
+      intente de nuevo
+  link: Crear Cuenta
+  text: Iniciar Sesión
+membership:
+  benefits: Para obtener mejores resultados
+  brandsLimit: Marcas Permitidas
+  changePlan: Cambiar Plan
+  currentTitle: Membresía Actual
+  daysRemaining: Días restantes
+  duration: Duración
+  endDate: Fecha de Finalización
+  locationLimit: Sedes Permitidas
+  termOf: Vigencia de la membresía
+  title: Membresía
+  update: Cambiar de Plan
+  userLimit: Usuarios Permitidas
+  workersLimit: Límite de Empleados
+memberships:
+  button: Comprar
+  card-title: Planes
+  days: Dias
+  subscriber: Estas sustrito
+  subtitle: Escoje el mejor plan para ti
+  title: Membresias
+menu:
+  activities: Actividades
+  characterization: Caracterización
+  chat: Chat
+  company: Compañía
+  companyLocations: Sedes
+  dashboard: Dashboard
+  email: correo
+  equipment: Fuentes de Emisión
+  faq: FAQ
+  goals: Metas y Objetivos
+  inventory: Inventario
+  logout: Salir
+  membership: Membresía
+  profile: Perfil
+  register-data: Ingreso de Datos
+  reports: Reportes
+  settings: Configuración
+  title: Menu
+  todo: Tareas
 my membership:
   title: Mis membresias
 my_membership:
-  title_memberships: Ultimas membresias adquiridas
-  title: Actualmente tiene la membresia
+  button: Cambiar de Plan
   company: Estam membresia esta asociada a tu empresa
-  subtitle: Fechas importantes de tu mebresia
   end_date: Tu membresia finaliza
   start_date: Inicio de membresia
-  button: Cambiar de Plan
-memberships:
-  title: Membresias
-  subtitle: Escoje el mejor plan para ti
-  card-title: Planes
-  button: Comprar
-  days: Dias
-  subscriber: Estas sustrito
-purchase membership:
-  title: Comprar membresia
-purchase_membership:
-  header: Estas comprando Membresia
-  subheader: Suministra la informacion de cada seccion para procesar el pago
-  footer: Gracias por confiar en nosotros
-  footer-total: Total
-  button: Pagar
-  alerts:
-    success: El pago se ha solita exitosamenta, en un momento, cargadon detalles de compra...
-    error: El pago no se ha completado, intentalo en un momento
-  fields:
-    name:
-      label: Nombre completo
-      placeholder: Joe doe
-    email:
-      label: Correo electronico
-      placeholder: correo
-    phone_zone:
-      label: Pais
-      placeholder: '+57'
-    phone:
-      label: Numero de telefono
-      placeholder: '316412155'
-    identification:
-      label: Identificacion
-      placeholder: '1321321212'
-    identification_type:
-      label: Tipo
-    street_name:
-      label: Direccion
-      placeholder: Calle 20
-    street_number:
-      label: Numero
-      placeholder: '#12 - 24'
-    zip_code:
-      label: Codigo Postal
-      placeholder: '06233200'
-purchase status:
-  title: Estado de compra
-purchase_status:
-  title_table: Datos de compra
-  header_status: El pago de la membresia fue
-  icon_fail: emoji
-  icon_success: emoji
-  subheader_success: Ahora puedes distrutar de todos los beneficios de tu plan
-  subheader_fail: Tuvimos problemas procesando el pago intentalo nuevamente
+  subtitle: Fechas importantes de tu mebresia
+  title: Actualmente tiene la membresia
+  title_memberships: Ultimas membresias adquiridas
+no: No
+no_apply: No Aplica
+notResultFound: No se encontrarón Resultados
+not_found: Lo sentimos informacion no disponible
+optionCreated: Opción Creada
+optionCreationFailed: Creación de la Opción Fallida
+optionLoadingFailed: Carga de la opción fallida
+password: Contraseña
 profile:
-  title: Perfil
-  titles:
-    basic_title: Datos basicos
-    basic_subtitle: Aqui podras actualizar tus datos basicos
-    password_title: Actulizar contrasena
-    password_subtitle: Actuliazar tu contrase, ten encuenta que se cerrara tu sesion
-    delete_title: Eliminacion de cuenta
-    delete_subtitle: 'Actualmente eres dueno de la compania:'
-    delete_summary: Oat cake ice cream candy chocolate cake chocolate cake cotton candy dragée apple pi
-  button_form: Actualizar
-  button_delete: Eliminar
-  button_cancel: Cancelar
   alerts:
-    profile_success: Datos de perfil actualizado
-    password_success: Contrasena actualizada
-    Avatar_success: Contrasena actualizada
+    Avatar_success: Contraseña actualizada
     error: Hubo un error al actualizar los datos
+    password_success: Contraseña actualizada
+    profile_success: Datos de perfil actualizado
+  button_cancel: Cancelar
+  button_delete: Eliminar
+  button_form: Actualizar
   fields:
-    old_password:
-      label: Ultima contrasena
-      placeholder: '****'
-    new_password:
-      label: Nueva contrasena
-      placeholder: '****'
     confirm_password:
       label: Confirmacion de contrasena
       placeholder: '****'
-    username:
-      label: Usario
-      placeholder: Joe15
+    email:
+      label: Correo electronico
+      placeholder: email@:gmail.com
     first_name:
       label: Nombres
       placeholder: Joe moe
     last_name:
       label: Apellidos
       placeholder: Doe
-    email:
-      label: Correo electronico
-      placeholder: 'email@:gmail.com'
+    new_password:
+      label: Nueva contrasena
+      placeholder: '****'
+    old_password:
+      label: Ultima contrasena
+      placeholder: '****'
+    username:
+      label: Usario
+      placeholder: Joe15
   supplier_name: Nombre del Proveedor
+  title: Perfil
+  titles:
+    basic_subtitle: Aqui podras actualizar tus datos basicos
+    basic_title: Datos basicos
+    delete_subtitle: 'Actualmente eres dueno de la compania:'
+    delete_summary: >-
+      Oat cake ice cream candy chocolate cake chocolate cake cotton candy dragée
+      apple pi
+    delete_title: Eliminacion de cuenta
+    password_subtitle: Actuliazar tu contrase, ten encuenta que se cerrara tu sesion
+    password_title: Actulizar contrasena
   type: Seleccione el equipo
   unit: Unidad de Medida
   updated: Fuente de Emisión Actualizada
@@ -309,111 +384,55 @@ profile:
     Seleccione el los desperdicios generados de los cuales se lleva seguimiento
     y registro
   waste_type_label: ¿A cuál de las siguientes clase de residuo pertenece la fuente de emisión?
-equipments:
-  add: Agregar
-  modal:
-    branch: Marca
-    description: Descripción
-    emissionSource-type: Tipo de equipo
-    identification: Placa | Serial | Número de Identificación
-    location: Sede
-    name: Nombre
-    title: Fuentes de emisión de la Compañía
-  title: Fuentes de Emisión
-errors:
-  register:
-    exist: Ya existe un usuario registrado con este correo
-    password: Su contraseña no puede ser una clave utilizada comúnmente.
-general:
-  brand: Marca
-  city: Ciudad
-  country: País
-  economic_sector: Sector Económico
-  industry_type: Tipo de Industria
-  location: Sede
-  manage: Gestionar
-  new: Nuevo
-  nit: NIT
-  origin_country: País de origen
-  state: Departamento
-goals:
-  title: Metas
-inventory:
-  title: Fuentes de Emisión
-liquidation:
-  form: Formularío de Liquidación
-  title: Cuantificar
-location:
-  modal:
-    title: Agregar un nueva sede
-  name: Nombre
-  address: Dirección
-  phone: Teléfono
-  email: Correo
-  employees: Empleados
-  status: Estado
-  add: Agregar Sede
-  created:
-    success: Se ha creado la nueva sede
-  deleted:
-    brand: La marca ha sido eliminada
-    success: Se ha eliminado la sede
-  employeesNumber: Número de empleados
-  new: Nueva Sede
-  type: Tipo de Sede
-  updated:
-    success: Se ha actulizado la sede
-  title: Editar Sede
-login:
-  text: Iniciar Sesión
-  checkBox: Mantener conectado
-  buttonLogin: Ingresar
-  footer: No tienes una cuenta?
-  link: Crear Cuenta
-  google:
-    created: >-
-      Se envió un correo para activar su cuenta, por favor active su cuenta e
-      intente de nuevo
-membership:
-  benefits: Para obtener mejores resultados
-  brandsLimit: Marcas Permitidas
-  changePlan: Cambiar Plan
-  currentTitle: Membresía Actual
-  daysRemaining: Días restantes
-  duration: Duración
-  endDate: Fecha de Finalización
-  locationLimit: Sedes Permitidas
-  termOf: Vigencia de la membresía
-  title: Membresía
-  update: Cambiar de Plan
-  userLimit: Usuarios Permitidas
-  workersLimit: Límite de Empleados
-menu:
-  title: Menu
-  profile: Perfil
-  chat: Chat
-  email: correo
-  todo: Tareas
-  settings: Configuración
-  membership: Membresía
-  faq: FAQ
-  logout: Salir
-  dashboard: Dashboard
-  characterization: Caracterización
-  company: Compañía
-  activities: Actividades
-  goals: Metas y Objetivos
-  reports: Reportes
-  companyLocations: Sedes
-  equipment: Fuentes de Emisión
-  inventory: Inventario
-  register-data: Ingreso de Datos
-no: No
-no_apply: No Aplica
-notResultFound: No se encontrarón Resultados
-optionCreated: Opción Creada
-optionCreationFailed: Creación de la Opción Fallida
-optionLoadingFailed: Carga de la opción fallida
+purchase membership:
+  title: Comprar membresia
+purchase status:
+  title: Estado de compra
+purchase_membership:
+  alerts:
+    error: El pago no se ha completado, intentalo en un momento
+    success: >-
+      El pago se ha solita exitosamenta, en un momento, cargadon detalles de
+      compra...
+  button: Pagar
+  fields:
+    email:
+      label: Correo electronico
+      placeholder: correo
+    identification:
+      label: Identificacion
+      placeholder: '1321321212'
+    identification_type:
+      label: Tipo
+    name:
+      label: Nombre completo
+      placeholder: Joe doe
+    phone:
+      label: Numero de telefono
+      placeholder: '316412155'
+    phone_zone:
+      label: Pais
+      placeholder: '+57'
+    street_name:
+      label: Direccion
+      placeholder: Calle 20
+    street_number:
+      label: Numero
+      placeholder: '#12 - 24'
+    zip_code:
+      label: Codigo Postal
+      placeholder: '06233200'
+  footer: Gracias por confiar en nosotros
+  footer-total: Total
+  header: Estas comprando Membresia
+  subheader: Suministra la informacion de cada seccion para procesar el pago
+purchase_status:
+  header_status: El pago de la membresia fue
+  icon_fail: emoji
+  icon_success: emoji
+  subheader_fail: Tuvimos problemas procesando el pago intentalo nuevamente
+  subheader_success: Ahora puedes distrutar de todos los beneficios de tu plan
+  title_table: Datos de compra
 register:
   account-activation: Debe ingresar a su correo para continuar con la activación de su cuenta
   buttonLogin: Crear Cuenta

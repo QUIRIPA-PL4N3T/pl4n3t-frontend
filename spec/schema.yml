@@ -3222,6 +3222,21 @@ components:
           type: object
           additionalProperties: {}
           readOnly: true
+        product_operation_requirements:
+          type: string
+          nullable: true
+          title: Requerimientos para el funcionamiento del Producto
+          maxLength: 255
+        units_sold:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Unidades vendidas
+        units_sold_period:
+          type: string
+          nullable: true
+          title: Periodo de Ventas
+          maxLength: 255
       required:
         - documents
         - emission_factor
@@ -4181,6 +4196,21 @@ components:
           type: object
           additionalProperties: {}
           readOnly: true
+        product_operation_requirements:
+          type: string
+          nullable: true
+          title: Requerimientos para el funcionamiento del Producto
+          maxLength: 255
+        units_sold:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Unidades vendidas
+        units_sold_period:
+          type: string
+          nullable: true
+          title: Periodo de Ventas
+          maxLength: 255
     PatchedEmissionsSourceMonthEntry:
       type: object
       properties:

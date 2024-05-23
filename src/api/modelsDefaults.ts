@@ -17,25 +17,6 @@ import type {
 }
   from '~/api-client'
 
-export const DEFAULT_COMPANY: Company = {
-  id: 0,
-  name: '',
-  description: null,
-  industry: null,
-  size: SizeEnum.Small,
-  website: null,
-  geo_location: null,
-  economic_sector: null,
-  industry_type: null,
-  logo_absolute_url: '',
-  locations: [],
-  members_roles: [],
-  brands: [],
-  city_name: '',
-  state_name: '',
-  country_name: '',
-}
-
 export const DEFAULT_BRAND: Brand = {
   id: 0,
   company: 0,
@@ -57,21 +38,24 @@ export const DEFAULT_LOCATION: Location = {
   geo_location: null,
   brand: 0,
   location_type: null,
-  emission_source_locations: [],
+  emission_sources: [],
 }
 
 export const DEFAULT_EMISSIONS_SOURCE: EmissionsSource = {
   id: 0,
   name: '',
   code: '',
-  description: null,
   location: 0,
+  description: null,
   image: null,
   group: 0,
   factor_type: 0,
   emission_factor: 0,
   geo_location: null,
   documents: [],
+  emission_source_name: '',
+  group_name: '',
+  waste_management_data: {},
 }
 
 export const DEFAULT_DOCUMENT: DocumentsApiDocumentsCreateRequest = {
@@ -111,6 +95,7 @@ export const DEFAULT_COMPANY_MEMBERSHIP: CompanyMembership = {
   membership: DEFAULT_MEMBERSHIP,
   start_date: '2024-05-15T15:35:37.531Z',
   end_date: '2024-05-15T15:35:37.531Z',
+  days_remaining: '',
 }
 
 export const DEFAULT_PURCHASE_PHONE: Phone = {
@@ -130,7 +115,7 @@ export const DEFAULT_PURCHASE_ADDRESS: Address = {
 }
 
 export const DEFAULT_PAYER: Payer = {
-  name: 'juan sebastian',
+  name: 'Juan Sebastian',
   surname: '',
   email: 'jstorres0211@gmail.com',
   phone: DEFAULT_PURCHASE_PHONE,
@@ -147,6 +132,38 @@ export const DEFAULT_BACK_URL: BackUrls = {
 export const DEFAULT_PURCHASE: Purchase = {
   payer: DEFAULT_PAYER,
   back_urls: DEFAULT_BACK_URL,
+}
+
+export const DEFAULT_COMPANY: Company = {
+  id: 0,
+  name: '',
+  description: null,
+  industry: null,
+  size: SizeEnum.Small,
+  locations: [],
+  website: null,
+  geo_location: null,
+  economic_sector: null,
+  industry_type: null,
+  members_roles: [],
+  brands: [] as Array<Brand>,
+  country: null,
+  address: null,
+  postal_code: null,
+  phone: null,
+  state: null,
+  city: null,
+  logo_absolute_url: '',
+  email: null,
+  country_name: '',
+  state_name: '',
+  city_name: '',
+  nit: null,
+  logo: null,
+  economic_sector_name: '',
+  size_name: '',
+  industry_type_name: '',
+  membership: DEFAULT_COMPANY_MEMBERSHIP,
 }
 
 export interface AttrMembership {

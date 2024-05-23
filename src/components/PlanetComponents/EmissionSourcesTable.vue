@@ -35,10 +35,6 @@ function editItem(id: number) {
     params: { id },
   })
 }
-
-async function deleteItem(id: number) {
-  await emissionSourceStore.deleteEmissionSource(id)
-}
 </script>
 
 <template>
@@ -79,14 +75,6 @@ async function deleteItem(id: number) {
                 </div>
               </template>
               <span> Edit</span>
-            </Tooltip>
-            <Tooltip placement="top" arrow theme="danger-500">
-              <template #button>
-                <div class="action-btn" @click="deleteItem(props.row.id)">
-                  <Icon icon="heroicons:trash" />
-                </div>
-              </template>
-              <span>Delete</span>
             </Tooltip>
           </div>
         </span>

@@ -6,10 +6,9 @@ const props = defineProps<{ id?: string }>()
 const selectedGroup = ref<EmissionSourceGroup | undefined>(undefined)
 const selectedGroupId = ref(0)
 const selectedFactorTypeId = ref(0)
-const disabledSourceType = ref<boolean>(false)
-const groupContainerRef = ref<HTMLDivElement | null>(null)
 const confirmModal = ref<any>(null)
-
+provide('selectedGroupId', selectedGroupId)
+const router = useRouter()
 const { t } = useI18n()
 const authStore = useAuthStore()
 
@@ -24,6 +23,15 @@ const { currentEmissionSource } = storeToRefs(emissionSourceStore)
 
 async function save() {
   await emissionSourceStore.saveEmissionSource()
+  if (currentEmissionSource.value.id !== 0)
+    editItem(currentEmissionSource.value.id)
+}
+
+function editItem(id: number) {
+  router.push({
+    name: 'emission-source-edit',
+    params: { id },
+  })
 }
 
 async function deleteEmissionFactor(id: number) {
@@ -55,7 +63,7 @@ watch(() => user.value, () => {
 })
 
 watch(() => selectedFactorTypeId.value, () => {
-  classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value, currentEmissionSource.value.source_type)
+  classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value, Number(currentEmissionSource.value.source_type))
 })
 
 watch(() => currentEmissionSource.value.group, () => {
@@ -67,27 +75,11 @@ function setSelectGroup(group: EmissionSourceGroup) {
   selectedGroupId.value = group.id
   classificationStore.setEmissionTypesByGroup(group.id)
   selectedGroup.value = group
-
-  switch (selectedGroup.value?.form_name) {
-    case 'ORGANIZATION_VEHICLES':
-      currentEmissionSource.value.source_type = 2
-      disabledSourceType.value = true
-      break
-    default:
-      break
-  }
-}
-
-function setSelectedGroupFocus(id: number) {
-  const selectedElement = groupContainerRef.value?.querySelector(`button[data-group-id="${id}"]`)
-  selectedElement?.scrollIntoView({ behavior: 'smooth', inline: 'center' })
 }
 
 function setSelectGroupById(id: number) {
-  if (id !== 0) {
+  if (id !== 0)
     selectedGroup.value = inventoriableClassificationGroups.value.find(group => group.id === id)
-    setSelectedGroupFocus(id)
-  }
 }
 
 function closeModal() {
@@ -95,16 +87,36 @@ function closeModal() {
     confirmModal.value.closeModal()
 }
 
-setSelectGroupById(currentEmissionSource.value.group!)
-
 if (user.value && !Number.isNaN(props.id))
   emissionSourceStore.fetchEmissionSource(Number(props.id))
+
+onMounted(() => {
+  setSelectGroupById(currentEmissionSource.value.group!)
+})
+
+onBeforeUnmount(() => {
+  selectedGroupId.value = 0
+  emissionSourceStore.fetchEmissionSource(0)
+  selectedGroup.value = undefined
+})
+
+const isNew = computed(() => {
+  return currentEmissionSource.value.id === 0
+})
+
+const formFields = computed<string>(() => {
+  return selectedGroup.value?.form_name || ''
+})
+
+const currentGroup = computed<EmissionSourceGroup | undefined>(() => {
+  return inventoriableClassificationGroups.value.find(item => item.id === currentEmissionSource.value.group)
+})
 </script>
 
 <template>
   <div class="xl:col-span-2">
     <Card :title="`${t('emissionSource.edit')} ${currentEmissionSource.name}`">
-      <div ref="groupContainerRef" class="flex gap-3 items-stretch overflow-auto pb-5">
+      <div v-if="isNew" class="flex gap-3 items-stretch overflow-auto pb-5">
         <div
           v-for="(group, i) in inventoriableClassificationGroups"
           :key="i"
@@ -129,14 +141,35 @@ if (user.value && !Number.isNaN(props.id))
           </button>
         </div>
       </div>
-      <Alert
-        v-if="selectedGroup"
-        dismissible
-        class-name="bg-primary-500 bg-opacity-[14%] text-indigo-500"
-        icon="heroicons-outline:information-circle"
+      <div
+        v-if="currentGroup"
+        class="flex gap-4"
       >
-        <div class="text-indigo-600 text-sm" v-html="selectedGroup.description" />
-      </Alert>
+        <div
+          v-if="!isNew"
+          class="relative flex w-1/4 justify-center items-center"
+          :data-group-id="currentGroup.id"
+          :class="{ 'border-indigo-600 rounded border-2': currentGroup.id === selectedGroupId }"
+        >
+          <div class="flex flex-col items-center p-2">
+            <Image
+              :src="currentGroup.icon!"
+              alt="{{ brand.name }}"
+              image-class="rounded-md max-w-full h-[80px] object-contain object-center p-3"
+            />
+            <span class="text-xs pt-2 text-center">
+              {{ currentGroup.name }}
+            </span>
+          </div>
+        </div>
+        <Alert
+          v-if="selectedGroup"
+          class-name="bg-primary-500 bg-opacity-[14%] text-indigo-500 w-full"
+          icon="heroicons-outline:information-circle"
+        >
+          <div class="text-indigo-600 text-sm" v-html="selectedGroup.description" />
+        </Alert>
+      </div>
       <div class="flex flex-row gap-4 pt-5">
         <!-- Form Column -->
         <div class="w-full">
@@ -152,6 +185,7 @@ if (user.value && !Number.isNaN(props.id))
               <div class="flex gap-4 pb-5">
                 <FormKit
                   v-model="selectedGroupId"
+                  number
                   type="hidden"
                   name="group"
                 />
@@ -162,16 +196,16 @@ if (user.value && !Number.isNaN(props.id))
                 />
               </div>
             </div>
-            <FuelUseFields v-if="selectedGroup && ['FUEL'].includes(selectedGroup.form_name!)" />
-            <OrganizationVehicleFields v-else-if="selectedGroup && ['ORGANIZATION_VEHICLES'].includes(selectedGroup.form_name!)" />
-            <ElectricityFields v-else-if="selectedGroup && ['ELECTRICITY'].includes(selectedGroup.form_name!)" />
-            <RefrigerantFields v-else-if="selectedGroup && ['REFRIGERANTS'].includes(selectedGroup.form_name!)" />
-            <WasteFields v-else-if="selectedGroup && ['WASTE'].includes(selectedGroup.form_name!)" />
-            <ServiceFields v-else-if="selectedGroup && ['SERVICES'].includes(selectedGroup.form_name!)" />
-            <LeasedAssetFields v-else-if="selectedGroup && ['LEASED_ASSETS'].includes(selectedGroup.form_name!)" />
-            <TransportationFields v-else-if="selectedGroup && ['TRANSPORTATION'].includes(selectedGroup.form_name!)" />
-            <ProductFields v-else-if="selectedGroup && ['PRODUCTS'].includes(selectedGroup.form_name!)" />
-            <InvestmentFields v-else-if="selectedGroup && ['INVESTMENTS'].includes(selectedGroup.form_name!)" />
+            <FuelUseFields v-if="formFields === 'FUEL'" />
+            <OrganizationVehicleFields v-else-if="formFields === 'ORGANIZATION_VEHICLES'" />
+            <ElectricityFields v-else-if="formFields === 'ELECTRICITY'" />
+            <RefrigerantFields v-else-if="formFields === 'REFRIGERANTS'" />
+            <WasteFields v-else-if="formFields === 'WASTE'" />
+            <ServiceFields v-else-if="formFields === 'SERVICES'" />
+            <LeasedAssetFields v-else-if="formFields === 'LEASED_ASSETS'" />
+            <TransportationFields v-else-if="formFields === 'TRANSPORTATION'" />
+            <ProductFields v-else-if="formFields === 'PRODUCTS'" />
+            <InvestmentFields v-else-if="formFields === 'INVESTMENTS'" />
             <!-- Attachment Section -->
             <div class="mb-5">
               <ul>

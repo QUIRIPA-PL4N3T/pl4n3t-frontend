@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
 import Multiselect from '@vueform/multiselect'
 import { useClassificationStore } from '~/stores/classification'
 
@@ -32,6 +33,10 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  group: {
+    type: [String, Number, undefined] as PropType<string | number | undefined>,
+    default: undefined,
+  },
   classes: {
     type: String,
     default: '',
@@ -41,12 +46,22 @@ const props = defineProps({
     default: 1,
   },
 })
-
 const emit = defineEmits(['update:modelValue'])
+const authStore = useAuthStore()
+const { user } = storeToRefs(authStore)
+
 const classificationStore = useClassificationStore()
 const options = ref<Option[]>([])
 
 onMounted(() => {
+  loadOptions()
+})
+
+watch(() => props.group, () => {
+  loadOptions()
+})
+
+watch(() => user.value, () => {
   loadOptions()
 })
 
@@ -57,7 +72,16 @@ async function onSearchChange(query: string) {
 }
 
 async function loadOptions(query = '') {
-  const data: any = await classificationStore.getCommonEquipments(query)
+  if (!user.value)
+    return
+
+  const params: any = {}
+  if (query)
+    params.name = query
+  if (props.group)
+    params.group = props.group
+
+  const data: any = await classificationStore.getCommonEquipments(params)
   options.value = data.map((item: any) => ({
     label: item.name,
     value: item.name,

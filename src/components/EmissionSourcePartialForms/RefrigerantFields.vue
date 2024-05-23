@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import Multiselect from '@vueform/multiselect'
 
 const selectedFactorTypeId = ref(0)
 const sourceTypeId = ref(0)
 const classificationStore = useClassificationStore()
 const basicStorage = useBasicStore()
-
+const emissionSourceStore = useEmissionSourceStore()
 const { t } = useI18n()
+const selectedGroupId = inject('selectedGroupId')
 
 const {
-  optionsRefrigerantSourceList,
   optionsRefrigerantDisposalList,
   optionsRefrigerantMaintenanceAndRepairList,
   optionsRefrigerantCapacityUnitList,
+  optionUnitOfMeasure,
+  optionYesNo,
 } = storeToRefs(basicStorage)
 
 const {
@@ -21,6 +22,8 @@ const {
   optionsFilteredEmissionFactors,
   optionSourceTypes,
 } = storeToRefs(classificationStore)
+
+const { currentEmissionSource } = storeToRefs(emissionSourceStore)
 
 function filterEmissionFactors() {
   classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value)
@@ -37,130 +40,112 @@ watch(() => optionFactorTypes.value, () => {
 </script>
 
 <template>
-  <div>
-    <div class="mb-5">
-      <FormKit
-        :label="t('emissionSource.code')"
-        outer-class="w-full"
-        inner-class="max-w-xl"
-        type="text"
-        placeholder="..."
-        name="electricity_supplier"
-      />
-    </div>
-    <div class="pb-5">
-      <FormKit
-        v-model="sourceTypeId"
-        :label="t('emissionSource.source_type')"
-        type="select"
-        placeholder="..."
-        :options="optionSourceTypes"
-        name="source_type"
-      />
-    </div>
-    <div class="mb-5">
-      <label for="multiselect" class="mb-5">{{ t('emissionSource.type') }}</label>
-      <Multiselect
-        mode="tags"
-        :close-on-select="true"
-        :searchable="true"
-        :create-option="true"
-        :options="optionsRefrigerantSourceList"
-        :max="1"
-      />
-    </div>
-    <!-- Emission factor select -->
-    <div class="flex gap-4 pb-5">
+  <div class="flex flex-col md:grid md:grid-cols-4 md:gap-4">
+    <FormKit
+      :label="t('emissionSource.code')"
+      outer-class="w-full"
+      inner-class="max-w-xl"
+      type="text"
+      name="code"
+    />
+    <FormKit
+      v-model="sourceTypeId"
+      :label="t('emissionSource.source_type')"
+      type="select"
+      :options="optionSourceTypes"
+      name="source_type"
+    />
+    <EquipmentSearch
+      v-model="currentEmissionSource.equipment_name"
+      :label="t('emissionSource.type')"
+      :group="Number(selectedGroupId)"
+      classes="md:col-start-1 md:col-span-3"
+    />
+    <div class="grid grid-cols-subgrid gap-4 col-span-4 bg-neutral-100 p-4 rounded mb-5">
       <FormKit
         v-model="selectedFactorTypeId"
         :label="t('emissionSource.factor_type')"
-        outer-class="w-full"
+        outer-class="md:col-span-1"
         type="select"
-        placeholder="..."
         name="factor_type"
         :options="optionFactorTypes"
+        validation="required"
         @onchange="filterEmissionFactors"
       />
       <FormKit
         :label="t('emissionSource.refrigerant_type')"
-        outer-class="w-full"
+        outer-class="md:col-span-2"
         type="select"
-        placeholder="..."
+        validation="required"
         name="emission_factor"
-        :help="t('emissionSource.refrigerant_type_help')"
         :options="optionsFilteredEmissionFactors"
       />
-    </div>
-    <!-- End Emission Factor select -->
-    <div class="mb-5 flex gap-4">
       <FormKit
-        type="number"
-        :label="t('emissionSource.refrigerant_capacity_label')"
-        number
-        name="efficiency"
-      />
-
-      <FormKit
-        :label="t('emissionSource.efficiency_unit_label')"
+        :label="t('emissionSource.unit')"
+        outer-class="md:col-span-1"
         type="select"
-        :options="optionsRefrigerantCapacityUnitList"
-        placeholder="..."
-        name="efficiency_unit"
+        validation="required"
+        name="emission_factor_unit"
+        :options="optionUnitOfMeasure"
       />
     </div>
-    <div class="mb-5">
-      <FormKit
-        type="radio"
-        :label="t('emissionSource.refrigerant_leaks_label')"
-        :options="{ yes: t('yes'), no: t('no') }"
-        fieldset-class="$remove:max-w-md"
-        name="refrigerant_leaks"
-        :classes="{
-          fieldset: 'max-w-full',
-        }
-        "
-      />
-    </div>
-    <div class="mb-5">
-      <FormKit
-        type="radio"
-        :label="t('emissionSource.refrigerant_convert_label')"
-        :options="{ yes: t('yes'), no: t('no') }"
-        fieldset-class="$remove:max-w-md"
-        name="refrigerant_convert"
-        :classes="{
-          fieldset: 'max-w-full',
-        }
-        "
-      />
-    </div>
-    <div class="mb-5 flex w-full gap-5">
-      <FormKit
-        type="checkbox"
-        :label="t('emissionSource.refrigerant_final_disposal')"
-        :options="optionsRefrigerantDisposalList"
-        name="fuel_storage"
-        outer-class="flex-1"
-        fieldset-class="p-3"
-      />
-
-      <FormKit
-        type="checkbox"
-        :label="t('emissionSource.maintenance_actions')"
-        :options="optionsRefrigerantMaintenanceAndRepairList"
-        outer-class="flex-1"
-        fieldset-class="p-3"
-        name="fuel_storage_management"
-      />
-    </div>
-    <div class="mb-5">
-      <FormKit
-        :label="t('emissionSource.description')"
-        type="textarea"
-        placeholder="..."
-        name="description"
-        :help="t('emissionSource.description_help')"
-      />
-    </div>
+    <FormKit
+      type="number"
+      :label="t('emissionSource.refrigerant_capacity_label')"
+      outer-class="md:col-span-2"
+      number
+      step="any"
+      name="refrigerant_capacity"
+    />
+    <FormKit
+      :label="t('emissionSource.efficiency_unit_label')"
+      type="select"
+      :options="optionsRefrigerantCapacityUnitList"
+      name="refrigerant_capacity_unit"
+    />
+    <FormKit
+      type="radio"
+      :label="t('emissionSource.refrigerant_leaks_label')"
+      :options="optionYesNo"
+      outer-class="md:col-span-4"
+      name="has_refrigerant_leaks"
+      :classes="{
+        fieldset: 'max-w-full',
+      }
+      "
+    />
+    <FormKit
+      type="radio"
+      :label="t('emissionSource.refrigerant_convert_label')"
+      :options="optionYesNo"
+      outer-class="md:col-span-4"
+      fieldset-class="$remove:max-w-md"
+      name="has_refrigerant_conversions"
+      :classes="{
+        fieldset: 'max-w-full',
+      }
+      "
+    />
+    <CheckBoxMultiple
+      v-model="currentEmissionSource.final_disposal_of_refrigerants"
+      :label="t('emissionSource.refrigerant_final_disposal')"
+      :options="optionsRefrigerantDisposalList"
+      name="final_disposal_of_refrigerants"
+      outer-class="md:col-start-1 md:col-span-2"
+    />
+    <CheckBoxMultiple
+      v-model="currentEmissionSource.support_actions_refrigerant_equipment"
+      :label="t('emissionSource.maintenance_actions')"
+      :options="optionsRefrigerantMaintenanceAndRepairList"
+      outer-class="md:col-span-2"
+      name="support_actions_refrigerant_equipment"
+    />
+    <FormKit
+      :label="t('emissionSource.description')"
+      outer-class="md:col-start-1 md:col-span-4"
+      type="textarea"
+      name="description"
+      :help="t('emissionSource.description_help')"
+    />
   </div>
 </template>

@@ -4,12 +4,13 @@ import { companyEmissionSourceApi, locationApi } from '~/api'
 import type { EmissionsSource } from '~/api-client'
 import { DEFAULT_EMISSIONS_SOURCE } from '~/api/modelsDefaults'
 import { i18n } from '~/modules/i18n'
+import { deepCopy } from '~/utilities/utils'
 
 const toast = useToast()
 
 export const useEmissionSourceStore = defineStore('emissionSource', {
   state: () => ({
-    currentEmissionSource: <EmissionsSource>DEFAULT_EMISSIONS_SOURCE,
+    currentEmissionSource: <EmissionsSource>deepCopy(DEFAULT_EMISSIONS_SOURCE),
     locationEmissionSources: <EmissionsSource[]>[],
     currentGlobalLocationId: useLocalStorage<any | null>('currentGlobalLocationId', null),
   }),
@@ -37,7 +38,7 @@ export const useEmissionSourceStore = defineStore('emissionSource', {
     async fetchEmissionSource(id: number) {
       // Fetch current location by id
       if (id === 0) {
-        this.currentEmissionSource = DEFAULT_EMISSIONS_SOURCE
+        this.currentEmissionSource = deepCopy(DEFAULT_EMISSIONS_SOURCE)
         return
       }
 
@@ -46,7 +47,7 @@ export const useEmissionSourceStore = defineStore('emissionSource', {
         this.currentEmissionSource = currentEmissionSource
       }
       catch (error) {
-        this.currentEmissionSource = DEFAULT_EMISSIONS_SOURCE
+        this.currentEmissionSource = deepCopy(DEFAULT_EMISSIONS_SOURCE)
       }
     },
     async fetchEmissionSourcesByLocation(id: number) {

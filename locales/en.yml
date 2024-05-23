@@ -1,4 +1,3 @@
-not_found: Data not found
 Accept: Accept
 activities:
   activity: Activity
@@ -112,6 +111,7 @@ emissionSource:
     the equipment?
   name: Name / Brand / Model
   process_label: Select the process or activity
+  productOperationRequirements: For the operation of the product requires
   refrigerant_capacity_label: Refrigerant capacity in the equipment
   refrigerant_convert_label: >-
     Have conversions been made to refrigerants with lower global warming
@@ -132,10 +132,19 @@ emissionSource:
   supplier_name: Provider's name
   type: Select the team
   unit: Unit of measurement
+  unitsSold: Sold units
+  unitsSoldPeriod: Sales period of the Units Sold
   updated: Updated Emission Source
   vapor_generation_question: Is there a specific emission factor associated with steam generation?
-  vehicle_fuel: Fuel
+  vehicle_capacity: Capacity
+  vehicle_code: Plate
+  vehicle_efficiency: Vehicle Efficiency
+  vehicle_efficiency_unit: Unit
+  vehicle_fuel: Type
   vehicle_fuel_type: Fuel type
+  vehicle_load_type: Vehicle Class
+  vehicle_name: Brand or Model
+  vehicle_type: Vehicle Type
   wasteManagement: How waste is managed
   wasteName: Waste Name
   wasteRegister: Select the waste generated that is tracked and recorded
@@ -207,6 +216,13 @@ membership:
   title: Membership
   userLimit: Users Number
   workersLimit: Employee Limit
+memberships:
+  button: Buy
+  card-title: Plans
+  days: Days
+  subscriber: You are subscriber to
+  subtitle: Choose the best plan
+  title: Memberships
 menu:
   chat: Chat
   email: mail
@@ -216,12 +232,100 @@ menu:
   profile: Profile
   settings: Setting
   todo: Tasks
+my_membership:
+  button: Change of plan
+  company: This membership has associate to company
+  end_date: You membership finally
+  start_date: Init of membership
+  subtitle: Dates important of your membership
+  title: Actually do you have
+  title_memberships: Last membership bought
 no: No
 no_apply: Does not apply
 notResultFound: No results found
+not_found: Data not found
 optionCreated: Created Option
 optionCreationFailed: Creation of the Failed Option
 password: Password
+profile:
+  alerts:
+    avatar_success: Contraseña actualizada
+    error: Hubo un error al actualizar los datos
+    password_success: Contraseña actualizada
+    profile_success: Datos de perfil actualizado
+  button_cancel: Cancel
+  button_delete: Delete
+  button_form: Update
+  fields:
+    confirm_password:
+      label: Confirm Password
+      placeholder: '****'
+    email:
+      label: E-mail
+      placeholder: email@:mail.com
+    first_name:
+      label: Name
+      placeholder: Joe moe
+    last_name:
+      label: Last name
+      placeholder: Doe
+    new_password:
+      label: New password
+      placeholder: '****'
+    old_password:
+      label: Lasted password
+      placeholder: '****'
+    username:
+      label: User
+      placeholder: Joe15
+  title: Profile
+  titles:
+    basic_subtitle: Aquí podrás actualizar tus datos básicos
+    basic_title: Datos básicos
+    delete_subtitle: 'Your account is currently an owner in these organizations:'
+    delete_summary: >-
+      Oat cake ice cream candy chocolate cake chocolate cake cotton candy dragée
+      apple pi
+    delete_title: Delete account
+    password_subtitle: Actualizar tu contraseña, ten encuentra que se cerrara tu session
+    password_title: Actulizar contrasena
+purchase_membership:
+  alerts:
+    error: El pago no se ha completado, intentalo en un momento
+    pre_success: Ya puedes continuar con el pago
+    success: El pago se ha solicitado exitosamenta, cargando detalles de compra...,
+  button: Pay
+  fields:
+    email:
+      label: Email
+      placeholder: email
+    identification:
+      label: Identification
+      placeholder: '1321321212'
+    identification_type:
+      label: Type
+    name:
+      label: Full name
+      placeholder: Joe doe
+    phone:
+      label: Phone number
+      placeholder: '316412155'
+    phone_zone:
+      label: Country
+      placeholder: '+57'
+    street_name:
+      label: Street
+      placeholder: Street 40
+    street_number:
+      label: Street Number
+      placeholder: '#12 - 24'
+    zip_code:
+      label: Postal code
+      placeholder: '06233200'
+  footer: Thank for confidence on ours
+  footer-total: Total
+  header: You are buying
+  subheader: Give us the information of each section for process payment
 register:
   buttonLogin: Create An Account
   checkBox: You accept our Terms and Conditions and Privacy Policy
@@ -236,98 +340,6 @@ select:
   location: Select a Headquarters
 selectAnOption: Select an Option
 signInSocial: Or continue with
-my_membership:
-  title_memberships: Last memberships buyed
-  title: Actually do you have
-  company: This membership has associate to company
-  subtitle: Dates important of your membership
-  end_date: You memberaship finally
-  start_date: Init of membership
-  button: Change of plan
-memberships:
-  title: Memberships
-  subtitle: Choose the best plan
-  card-title: Plans
-  button: Buy
-  days: Days
-  subscriber: You are susbcriber to
-purchase_membership:
-  header: You are buying
-  subheader: Give us the information of each section for process payment
-  footer: Thank for confidense on ours
-  footer-total: Total
-  button: Pay
-  alerts:
-    pre_success: Ya puedes continuar con el pago
-    success: El pago se ha solicitado exitosamenta, cargando detalles de compra...,
-    error: El pago no se ha completado, intentalo en un momento
-  fields:
-    name:
-      label: Full name
-      placeholder: Joe doe
-    phone_zone:
-      label: Country
-      placeholder: '+57'
-    phone:
-      label: Phone number
-      placeholder: '316412155'
-    email:
-      label: Email
-      placeholder: email
-    identification:
-      label: Identification
-      placeholder: '1321321212'
-    identification_type:
-      label: Type
-    street_name:
-      label: Street
-      placeholder: Street 40
-    street_number:
-      label: Street Number
-      placeholder: '#12 - 24'
-    zip_code:
-      label: Postal code
-      placeholder: '06233200'
-profile:
-  title: Profile
-  titles:
-    basic_title: Datos basicos
-    basic_subtitle: Aqui podras actualizar tus datos basicos
-    password_title: Actulizar contrasena
-    password_subtitle: Actuliazar tu contrase, ten encuenta que se cerrara tu sesion
-    delete_title: Delete account
-    delete_subtitle: 'Your account is currently an owner in these organizations:'
-    delete_summary: Oat cake ice cream candy chocolate cake chocolate cake cotton candy dragée apple pi
-  button_form: Update
-  button_delete: Delete
-  button_cancel: Cancel
-  alerts:
-    profile_success: Datos de perfil actualizado
-    password_success: Contrasena actualizada
-    avatar_success: Contrasena actualizada
-    error: Hubo un error al actualizar los datos
-  fields:
-    old_password:
-      label: Lasted password
-      placeholder: '****'
-    new_password:
-      label: New password
-      placeholder: '****'
-    confirm_password:
-      label: Confirm Password
-      placeholder: '****'
-    username:
-      label: User
-      placeholder: Joe15
-    first_name:
-      label: Name
-      placeholder: Joe moe
-    last_name:
-      label: Last name
-      placeholder: Doe
-    email:
-      label: E-mail
-      placeholder: 'email@:gmail.com'
 since:
   lastMonth: since last month
 waste:
