@@ -4,7 +4,7 @@ import { mainApi } from '~/api'
 import { SizeEnum } from '~/api-client'
 import type { City, Country, DocumentType, EconomicSector, IndustryType, LocationType, State, UnitOfMeasure } from '~/api-client'
 import { i18n } from '~/modules/i18n'
-import { formatOptions } from '~/utilities/utils'
+import { formatOptions, formatOptionsNotEmpty } from '~/utilities/utils'
 
 export const useBasicStore = defineStore('basic', {
   state: () => ({
@@ -46,6 +46,8 @@ export const useBasicStore = defineStore('basic', {
     wasteManagementOrganicList: useLocalStorage<string[]>('wasteManagementOrganicList', []),
     wasteManagementInorganicList: useLocalStorage<string[]>('wasteManagementInorganicList', []),
     wasteManagementDangerList: useLocalStorage<string[]>('wasteManagementDangerList', []),
+    unitSoldPeriod: useLocalStorage<string[]>('unitSoldPeriod', []),
+    productOperation: useLocalStorage<string[]>('productOperation', []),
   }),
   getters: {
     optionsEconomicSectorList(): any {
@@ -174,6 +176,12 @@ export const useBasicStore = defineStore('basic', {
     },
     optionWasteManagementDangerList(): any {
       return formatOptions(this.wasteManagementDangerList)
+    },
+    optionUnitSoldPeriod(): any {
+      return formatOptions(this.unitSoldPeriod)
+    },
+    optionProductOperation(): any {
+      return formatOptionsNotEmpty(this.productOperation)
     },
     optionYesNo(): any {
       return [
@@ -368,6 +376,12 @@ export const useBasicStore = defineStore('basic', {
 
         const investmentStr: any = configurations.find((config: any) => config.key === 'INVESTMENT_LIST')
         this.investmentList = investmentStr.value.split(',')
+
+        const unitSoldPeriodStr: any = configurations.find((config: any) => config.key === 'UNITS_SOLD_PERIOD_LIST')
+        this.unitSoldPeriod = unitSoldPeriodStr.value.split(',')
+
+        const productOperationStr: any = configurations.find((config: any) => config.key === 'PRODUCT_OPERATION_OPTIONS_LIST')
+        this.productOperation = productOperationStr.value.split(',')
       }
       catch (error) {
         console.error(error)

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
 import Multiselect from '@vueform/multiselect'
 import { useClassificationStore } from '~/stores/classification'
 
@@ -42,6 +43,8 @@ const props = defineProps({
   },
 })
 const emit = defineEmits(['update:modelValue'])
+const authStore = useAuthStore()
+const { user } = storeToRefs(authStore)
 const classificationStore = useClassificationStore()
 const options = ref<Option[]>([])
 
@@ -56,6 +59,8 @@ async function onSearchChange(query: string) {
 }
 
 async function loadOptions(query?: string) {
+  if (!user.value)
+    return
   const data: any = await classificationStore.getCommonProducts(query)
   options.value = data.map((item: any) => ({
     label: item.name,

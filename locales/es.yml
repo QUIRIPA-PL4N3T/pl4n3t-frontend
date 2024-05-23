@@ -146,6 +146,7 @@ emissionSource:
     reparaciones del equipo?
   name: Nombre / Marcar / Modelo
   process_label: Seleccione el proceso o actividad
+  productOperationRequirements: Para el funcionamiento del producto requiere
   product_name: Nombre del Producto
   refrigerant_capacity_label: Capacidad de refrigerante en el equipo
   refrigerant_convert_label: >-
@@ -168,8 +169,11 @@ emissionSource:
   source_type_help: Tipo de fuente de emisión
   specific_factor_label: Factor de Emisión específico
   specific_factor_unit_label: Unidad de Factor de emisión
+  supplier_name: Nombre del Proveedor
   type: Tipo de Equipo
   unit: Unidades de Medida
+  unitsSold: Unidades Vendidas
+  unitsSoldPeriod: Periodo de venta de las Unidades Vendidas
   vapor_generation_question: ¿Existe un factor de emisión específico asociado a al generación de Vapor?
 equipments:
   add: Agregar
