@@ -3,19 +3,32 @@ import { storeToRefs } from 'pinia'
 
 const membershipsStore = useMembershipsStore()
 const companyStore = useCompanyStore()
+const authStore = useAuthStore()
+const { user } = storeToRefs(authStore)
 const { t } = useI18n()
 const router = useRouter()
 
 const { company } = storeToRefs(companyStore)
 const { currentMembership, companyMembership } = storeToRefs(membershipsStore)
 
-membershipsStore.fetchCompanyMembership(Number(company.value.id))
-
 function viewPlans() {
   router.push({
     name: 'memberships',
   })
 }
+
+function loadData() {
+  if (user.value)
+    membershipsStore.fetchCompanyMembership(Number(company.value.id))
+}
+
+watch(() => user.value, () => {
+  loadData()
+})
+
+onMounted(() => {
+  loadData()
+})
 </script>
 
 <template>

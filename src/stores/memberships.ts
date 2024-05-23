@@ -58,7 +58,7 @@ export const useMembershipsStore = defineStore('membership', {
     async purchaseMembership(requestParameters: MembershipsApiMembershipsPurchaseCreateRequest) {
       try {
         const { data } = await membershipsApi.membershipsPurchaseCreate(requestParameters)
-        this.preferenceResponse = data?.init_point
+        this.preferenceResponse = data
       }
       catch (error) {
         console.error(error)

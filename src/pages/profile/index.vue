@@ -22,12 +22,11 @@ let loading = $ref<boolean>(false)
 let processingBasic = $ref<boolean>(false)
 let processingPassword = $ref<boolean>(false)
 
-authStore.getUserProfile()
-
 const file = ref(null)
 
 watch(() => user.value, () => {
   loading = !!user.value
+  authStore.getUserProfile()
 })
 
 async function updateUser() {
@@ -113,6 +112,15 @@ async function deleteAccount(confirm: boolean) {
     }
   }
 }
+
+function loadData() {
+  if (user.value)
+    authStore.getUserProfile()
+}
+
+onMounted(() => {
+  loadData()
+})
 </script>
 
 <template>

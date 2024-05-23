@@ -5,12 +5,26 @@ import { MembershipTypeEnum } from '~/api-client'
 const { t } = useI18n()
 const membershipsStore = useMembershipsStore()
 const companyStore = useCompanyStore()
+const authStore = useAuthStore()
 
+const { user } = storeToRefs(authStore)
 const { company } = storeToRefs(companyStore)
 const { companyMembership, membershipsTypes } = storeToRefs(membershipsStore)
 
-membershipsStore.fetchCompanyMembership(company.value.id)
-membershipsStore.fetchMemberships()
+function loadData() {
+  if (user.value) {
+    membershipsStore.fetchMemberships()
+    membershipsStore.fetchCompanyMembership(company.value.id)
+  }
+}
+
+watch(() => user.value, () => {
+  loadData()
+})
+
+onMounted(() => {
+  loadData()
+})
 </script>
 
 <template>
