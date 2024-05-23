@@ -28,7 +28,7 @@ async function save() {
 }
 
 function editItem(id: number) {
-  router.push({
+  router.replace({
     name: 'emission-source-edit',
     params: { id },
   })
