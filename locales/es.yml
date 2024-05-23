@@ -175,6 +175,14 @@ emissionSource:
   unitsSold: Unidades Vendidas
   unitsSoldPeriod: Periodo de venta de las Unidades Vendidas
   vapor_generation_question: ¿Existe un factor de emisión específico asociado a al generación de Vapor?
+  vehicle_capacity: Capacidad
+  vehicle_code: Placa
+  vehicle_efficiency: Eficiencia del Vehículo
+  vehicle_efficiency_unit: Unidad
+  vehicle_fuel: Tipo de Combustible
+  vehicle_load_type: Tipo de Vehículo
+  vehicle_name: Marca ó Modelo
+  vehicle_type: Clase de Vehículo
 equipments:
   add: Agregar
   modal:

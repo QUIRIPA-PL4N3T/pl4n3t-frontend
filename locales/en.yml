@@ -136,8 +136,15 @@ emissionSource:
   unitsSoldPeriod: Sales period of the Units Sold
   updated: Updated Emission Source
   vapor_generation_question: Is there a specific emission factor associated with steam generation?
-  vehicle_fuel: Fuel
+  vehicle_capacity: Capacity
+  vehicle_code: Plate
+  vehicle_efficiency: Vehicle Efficiency
+  vehicle_efficiency_unit: Unit
+  vehicle_fuel: Type
   vehicle_fuel_type: Fuel type
+  vehicle_load_type: Vehicle Class
+  vehicle_name: Brand or Model
+  vehicle_type: Vehicle Type
   wasteManagement: How waste is managed
   wasteName: Waste Name
   wasteRegister: Select the waste generated that is tracked and recorded

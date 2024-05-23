@@ -7,9 +7,10 @@ const emissionSourceStore = useEmissionSourceStore()
 const classificationStore = useClassificationStore()
 const selectedFactorTypeId = ref(0)
 
-const { t } = useI18n()
+// Set default source type to mobile: 1 Fixed, 2 Mobile vehicles always mobile
+const SOURCE_TYPE_DEFAULT = 2
 
-const disabledSourceType = ref<boolean>(false)
+const { t } = useI18n()
 
 const { currentEmissionSource } = storeToRefs(emissionSourceStore)
 // Store to ref
@@ -22,126 +23,98 @@ const {
 const {
   optionFactorTypes,
   optionsFilteredEmissionFactors,
-  optionSourceTypes,
 } = storeToRefs(classificationStore)
 
 function filterEmissionFactors() {
   classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value)
 }
 
-function emissionFactorLabel(): string {
-  return t('emissionSource.vehicle_fuel')
-}
-
-function emissionFactorTypeLabel(): string {
-  return t('emissionSource.vehicle_fuel_type')
-}
+watch(() => selectedFactorTypeId.value, () => {
+  classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value, SOURCE_TYPE_DEFAULT)
+})
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col md:grid md:grid-cols-4 md:gap-4">
     <FormKit
-      :label="t('emissionSource.code')"
+      :label="t('emissionSource.vehicle_code')"
       outer-class="w-full"
       inner-class="max-w-xl"
+      validation="required"
       type="text"
-      placeholder="..."
       name="code"
     />
     <FormKit
-      :label="t('emissionSource.name')"
+      :label="t('emissionSource.vehicle_name')"
       outer-class="w-full"
       inner-class="max-w-xl"
       type="text"
-      placeholder="..."
       name="name"
     />
-  </div>
-  <div class="pb-5">
     <FormKit
-      :disabled="disabledSourceType"
-      :label="t('emissionSource.source_type')"
-      type="select"
-      placeholder="..."
-      :options="optionSourceTypes"
+      type="hidden"
+      number
+      :value="SOURCE_TYPE_DEFAULT"
       name="source_type"
     />
-  </div>
-  <div
-    class="grid grid-cols-1 md:grid-cols-2 gap-x-4"
-  >
-    <div class="pb-5">
-      <FormKit
-        :label="t('emissionSource.vehicle_type')"
-        type="select"
-        placeholder="..."
-        :options="optionsVehicleTypeList"
-        name="vehicle_type"
-      />
-    </div>
-    <div class="pb-5">
-      <FormKit
-        :label="t('emissionSource.vehicle_load_type')"
-        type="select"
-        placeholder="..."
-        :options="optionsVehicleLoadList"
-        name="vehicle_load"
-      />
-    </div>
-    <div class="pb-5 col-span-2">
-      <FormKit
-        type="number"
-        :label="`${t('emissionSource.vehicle_capacity')} ${currentEmissionSource.vehicle_load || ''}`"
-        number
-        name="vehicle_capacity"
-      />
-    </div>
-    <div class="pb-5">
-      <FormKit
-        type="number"
-        :label="t('emissionSource.vehicle_efficiency')"
-        number
-        name="vehicle_efficiency"
-      />
-    </div>
-    <div class="pb-5">
-      <FormKit
-        :label="t('emissionSource.vehicle_efficiency_unit')"
-        type="select"
-        placeholder="..."
-        :options="optionsVehicleEfficiencyUnitList"
-        name="vehicle_efficiency_unit"
-      />
-    </div>
-  </div>
-  <!-- Emission factor select -->
-  <div class="flex gap-4 pb-5">
     <FormKit
-      v-model="selectedFactorTypeId"
-      :label="emissionFactorTypeLabel()"
-      outer-class="w-full"
+      :label="t('emissionSource.vehicle_type')"
       type="select"
-      placeholder="..."
-      name="factor_type"
-      :options="optionFactorTypes"
-      @onchange="filterEmissionFactors"
+      outer-class="md:col-start-1"
+      :options="optionsVehicleTypeList"
+      name="vehicle_type"
     />
     <FormKit
-      :label="emissionFactorLabel()"
-      outer-class="w-full"
+      :label="t('emissionSource.vehicle_load_type')"
       type="select"
-      placeholder="..."
-      name="emission_factor"
-      :options="optionsFilteredEmissionFactors"
+      :options="optionsVehicleLoadList"
+      name="vehicle_load"
     />
-  </div>
-  <!-- End Emission Factor select -->
-  <div class="mb-5">
+    <FormKit
+      type="number"
+      :label="`${t('emissionSource.vehicle_capacity')} ${currentEmissionSource.vehicle_load || ''}`"
+      number
+      name="vehicle_capacity"
+    />
+    <div class="grid grid-cols-subgrid gap-4 col-span-4 bg-neutral-100 p-4 rounded mb-5">
+      <FormKit
+        v-model="selectedFactorTypeId"
+        :label="t('emissionSource.vehicle_fuel')"
+        outer-class="md:col-span-1"
+        type="select"
+        name="factor_type"
+        :options="optionFactorTypes"
+        validation="required"
+        @onchange="filterEmissionFactors"
+      />
+      <FormKit
+        :label="t('emissionSource.vehicle_fuel')"
+        outer-class="md:col-span-2"
+        type="select"
+        validation="required"
+        name="emission_factor"
+        :options="optionsFilteredEmissionFactors"
+      />
+    </div>
+    <FormKit
+      type="number"
+      :label="t('emissionSource.vehicle_efficiency')"
+      step="any"
+      number="float"
+      name="vehicle_efficiency"
+    />
+    <FormKit
+      :label="t('emissionSource.vehicle_efficiency_unit')"
+      type="select"
+      :options="optionsVehicleEfficiencyUnitList"
+      name="vehicle_efficiency_unit"
+    />
     <FormKit
       :label="t('emissionSource.description')"
+      outer-class="md:col-start-1 md:col-span-4"
       type="textarea"
-      placeholder="..."
       name="description"
+      :help="t('emissionSource.description_help')"
     />
   </div>
 </template>

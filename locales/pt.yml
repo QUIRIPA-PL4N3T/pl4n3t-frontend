@@ -8,6 +8,7 @@ currentLocation:
 email: E-mail
 emissionSource:
   goodAndServiceType: Dica de aquisição
+  vehicle_type: ''
 equipments:
   modal:
     title: Fontes de emissão de organizações registradas

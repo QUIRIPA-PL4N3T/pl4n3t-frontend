@@ -10,7 +10,7 @@ const disabledSourceType = ref<boolean>(false)
 const groupContainerRef = ref<HTMLDivElement | null>(null)
 const confirmModal = ref<any>(null)
 provide('selectedGroupId', selectedGroupId)
-
+const router = useRouter()
 const { t } = useI18n()
 const authStore = useAuthStore()
 
@@ -25,6 +25,15 @@ const { currentEmissionSource } = storeToRefs(emissionSourceStore)
 
 async function save() {
   await emissionSourceStore.saveEmissionSource()
+  if (currentEmissionSource.value.id !== 0)
+    editItem(currentEmissionSource.value.id)
+}
+
+function editItem(id: number) {
+  router.push({
+    name: 'emission-source-edit',
+    params: { id },
+  })
 }
 
 async function deleteEmissionFactor(id: number) {
@@ -56,7 +65,7 @@ watch(() => user.value, () => {
 })
 
 watch(() => selectedFactorTypeId.value, () => {
-  classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value, currentEmissionSource.value.source_type)
+  classificationStore.filterEmissionFactorByType(selectedFactorTypeId.value, Number(currentEmissionSource.value.source_type))
 })
 
 watch(() => currentEmissionSource.value.group, () => {
@@ -78,16 +87,9 @@ function setSelectGroup(group: EmissionSourceGroup) {
   }
 }
 
-function setSelectedGroupFocus(id: number) {
-  const selectedElement = groupContainerRef.value?.querySelector(`button[data-group-id="${id}"]`)
-  selectedElement?.scrollIntoView({ behavior: 'smooth', inline: 'center' })
-}
-
 function setSelectGroupById(id: number) {
-  if (id !== 0) {
+  if (id !== 0)
     selectedGroup.value = inventoriableClassificationGroups.value.find(group => group.id === id)
-    setSelectedGroupFocus(id)
-  }
 }
 
 function closeModal() {
@@ -95,16 +97,26 @@ function closeModal() {
     confirmModal.value.closeModal()
 }
 
-setSelectGroupById(currentEmissionSource.value.group!)
-
 if (user.value && !Number.isNaN(props.id))
   emissionSourceStore.fetchEmissionSource(Number(props.id))
+
+onMounted(() => {
+  setSelectGroupById(currentEmissionSource.value.group!)
+})
+
+const isNew = computed(() => {
+  return currentEmissionSource.value.id === 0
+})
+
+const currentGroup = computed<EmissionSourceGroup | undefined>(() => {
+  return inventoriableClassificationGroups.value.find(item => item.id === currentEmissionSource.value.group)
+})
 </script>
 
 <template>
   <div class="xl:col-span-2">
     <Card :title="`${t('emissionSource.edit')} ${currentEmissionSource.name}`">
-      <div ref="groupContainerRef" class="flex gap-3 items-stretch overflow-auto pb-5">
+      <div v-if="isNew" ref="groupContainerRef" class="flex gap-3 items-stretch overflow-auto pb-5">
         <div
           v-for="(group, i) in inventoriableClassificationGroups"
           :key="i"
@@ -129,14 +141,36 @@ if (user.value && !Number.isNaN(props.id))
           </button>
         </div>
       </div>
-      <Alert
-        v-if="selectedGroup"
-        dismissible
-        class-name="bg-primary-500 bg-opacity-[14%] text-indigo-500"
-        icon="heroicons-outline:information-circle"
+      <div
+        v-if="currentGroup"
+        class="flex gap-4"
       >
-        <div class="text-indigo-600 text-sm" v-html="selectedGroup.description" />
-      </Alert>
+        <div
+          v-if="!isNew"
+          class="relative flex w-1/4 justify-center items-center"
+          :data-group-id="currentGroup.id"
+          :class="{ 'border-indigo-600 rounded border-2': currentGroup.id === selectedGroupId }"
+        >
+          <div class="flex flex-col items-center p-2">
+            <Image
+              :src="currentGroup.icon!"
+              alt="{{ brand.name }}"
+              image-class="rounded-md max-w-full h-[80px] object-contain object-center p-3"
+            />
+            <span class="text-xs pt-2 text-center">
+              {{ currentGroup.name }}
+            </span>
+          </div>
+        </div>
+        <Alert
+          v-if="selectedGroup"
+          dismissible
+          class-name="bg-primary-500 bg-opacity-[14%] text-indigo-500 w-full"
+          icon="heroicons-outline:information-circle"
+        >
+          <div class="text-indigo-600 text-sm" v-html="selectedGroup.description" />
+        </Alert>
+      </div>
       <div class="flex flex-row gap-4 pt-5">
         <!-- Form Column -->
         <div class="w-full">
@@ -152,6 +186,7 @@ if (user.value && !Number.isNaN(props.id))
               <div class="flex gap-4 pb-5">
                 <FormKit
                   v-model="selectedGroupId"
+                  number
                   type="hidden"
                   name="group"
                 />
