@@ -54,7 +54,7 @@ function submitForm() {
 </template>
 
   <route lang="yaml">
-name: liquidation
+name: liquidations
 meta:
   layout: sidebar
   requiresAuth: true

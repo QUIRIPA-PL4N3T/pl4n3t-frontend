@@ -41,9 +41,7 @@ declare module 'vue-router/auto/routes' {
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
     'activities': RouteRecordInfo<'activities', '/activities', Record<never, never>, Record<never, never>>,
-    'register-activity': RouteRecordInfo<'register-activity', '/register-activity/:id', Record<never, never>, Record<never, never>>,
-    'liquidation': RouteRecordInfo<'liquidation', '/activities/liquidation', Record<never, never>, Record<never, never>>,
-    'register': RouteRecordInfo<'register', '/activities/register', Record<never, never>, Record<never, never>>,
+    'register-activity': RouteRecordInfo<'register-activity', '/activities/:id', Record<never, never>, Record<never, never>>,
     'analytics': RouteRecordInfo<'analytics', '/analytics', Record<never, never>, Record<never, never>>,
     '/auth/login': RouteRecordInfo<'/auth/login', '/auth/login', Record<never, never>, Record<never, never>>,
     '/auth/register': RouteRecordInfo<'/auth/register', '/auth/register', Record<never, never>, Record<never, never>>,
@@ -57,6 +55,7 @@ declare module 'vue-router/auto/routes' {
     'goals': RouteRecordInfo<'goals', '/goals', Record<never, never>, Record<never, never>>,
     'inventory': RouteRecordInfo<'inventory', '/inventory', Record<never, never>, Record<never, never>>,
     'emission-source-edit': RouteRecordInfo<'emission-source-edit', '/inventory/:id', Record<never, never>, Record<never, never>>,
+    'liquidations': RouteRecordInfo<'liquidations', '/liquidations', Record<never, never>, Record<never, never>>,
     'memberships': RouteRecordInfo<'memberships', '/memberships', Record<never, never>, Record<never, never>>,
     'my-membership': RouteRecordInfo<'my-membership', '/my-membership', Record<never, never>, Record<never, never>>,
     'purchase-membership': RouteRecordInfo<'purchase-membership', '/purchase-membership/:id', Record<never, never>, Record<never, never>>,

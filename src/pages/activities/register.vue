@@ -1,33 +1,33 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import type { EmissionsSource } from '~/api-client'
 
-const router = useRouter()
 const classificationStore = useClassificationStore()
 const { classificationGroups } = storeToRefs(classificationStore)
 const emissionSourceStore = useEmissionSourceStore()
 const { currentGlobalLocationId } = storeToRefs(emissionSourceStore)
+const { locationEmissionSources } = storeToRefs(emissionSourceStore)
+
+const emissionSourceSelected = ref<EmissionsSource | null>(null)
+
 const { t } = useI18n()
+let selectedGroupId = $ref(0)
 
-function filterByGroup(id: number) {
-  // TODO: add emissionSource filter by group
-  console.warn(id)
-}
-
-function goRegisterActivity(id: number) {
-  router.push({
-    name: 'emission-source-edit',
-    params: { id },
-  })
+async function filterByGroup(id: number) {
+  selectedGroupId = id
+  emissionSourceStore.filterEmissionSources(
+    {
+      group: selectedGroupId,
+      location: currentGlobalLocationId.value,
+    },
+  )
 }
 </script>
 
 <template>
   <div class="w-full h-full">
     <div class="lg:col-span-4 col-span-12 space-y-5">
-      <Card
-        v-if="currentGlobalLocationId"
-        :title="t('activities.modal.title')"
-      >
+      <Card v-if="currentGlobalLocationId">
         <div class="flex gap-3 items-baseline overflow-auto">
           <button
             v-for="(group, i) in classificationGroups"
@@ -47,24 +47,32 @@ function goRegisterActivity(id: number) {
             </div>
           </button>
         </div>
-
-        <div class="flex justify-end pb-4">
-          <Button
-            :text="t('emissionSource.add')"
-            btn-class="btn btn-dark btn-sm"
-            @click.prevent="goRegisterActivity(0)"
-          />
-        </div>
-
-        <ActivitiesTable />
       </Card>
-      <NoLocationSelected v-else />
+    </div>
+    <div class="flex flex-col md:flex-row gap-2 pt-2 w-full">
+      <div class="w-full md:w-1/4">
+        <Card>
+          <EmissionSourceSelect
+            v-model="emissionSourceSelected"
+            :label="t('emissionSource.title')"
+            :options="locationEmissionSources"
+          />
+        </Card>
+      </div>
+      <div class="w-full md:w-3/4">
+        <Card>
+          <FuelCalculator
+            v-model="emissionSourceSelected"
+          />
+        </Card>
+      </div>
     </div>
   </div>
 </template>
 
 <route lang="yaml">
-name: register
+path: '/activities/:id'
+name: register-activity
 meta:
   layout: sidebar
   requiresAuth: true

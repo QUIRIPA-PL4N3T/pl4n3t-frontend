@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { useLocalStorage } from '@vueuse/core'
 import { emissionFactorApi, emissionSourceGroupApi, quantificationTypeApi, sourceTypeApi } from '~/api'
-import type { EmissionFactor, EmissionSourceGroup, FactorType, QuantificationType, SourceType } from '~/api-client'
+import type { EmissionFactor, EmissionFactorList, EmissionSourceGroup, FactorType, QuantificationType, SourceType } from '~/api-client'
 import { formatOptions } from '~/utilities/utils'
 
 export const useClassificationStore = defineStore('classification', {
@@ -9,8 +9,8 @@ export const useClassificationStore = defineStore('classification', {
     quantificationTypes: useLocalStorage<QuantificationType[]>('quantificationTypes', []),
     classificationGroups: useLocalStorage<EmissionSourceGroup[]>('classificationGroups', []),
     factorTypes: useLocalStorage<FactorType[]>('emissionFactorTypes', []),
-    emissionFactors: useLocalStorage<EmissionFactor[]>('emissionFactors', []),
-    filteredEmissionFactors: useLocalStorage<EmissionFactor[]>('filteredEmissionFactors', []),
+    emissionFactors: useLocalStorage<EmissionFactorList[]>('emissionFactors', []),
+    filteredEmissionFactors: useLocalStorage<EmissionFactorList[]>('filteredEmissionFactors', []),
     sourceTypes: useLocalStorage<SourceType[]>('sourceTypes', []),
     environment: useLocalStorage<QuantificationType | null>('environment', null),
   }),
@@ -100,10 +100,16 @@ export const useClassificationStore = defineStore('classification', {
       }
     },
     filterEmissionFactorByType(id: number, source_type?: number) {
-      if (source_type)
-        this.filteredEmissionFactors = this.emissionFactors.filter(item => item.factor_type === id && item.source_type === source_type)
-      else
-        this.filteredEmissionFactors = this.emissionFactors.filter(item => item.factor_type === id)
+      if (source_type) {
+        this.filteredEmissionFactors = this.emissionFactors.filter(
+          item => Number(item.factor_type) === id && Number(item.source_type) === source_type,
+        )
+      }
+      else {
+        this.filteredEmissionFactors = this.emissionFactors.filter(
+          item => Number(item.factor_type) === id,
+        )
+      }
     },
     async fetchClassificationData() {
       try {

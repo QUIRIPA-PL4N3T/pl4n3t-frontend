@@ -1,4 +1,7 @@
 import { defineStore } from 'pinia'
+import type { EmissionFactor, UnitOfMeasure } from '~/api-client'
+import { emissionFactorApi, mainApi } from '~/api'
+import { formatOptions } from '~/utilities/utils'
 
 export interface companyInterface {
   title: string
@@ -29,8 +32,21 @@ export const useEmissionFactorStore = defineStore('emissionFactor', {
   state: () => ({
     emissionFactors: <any[]>[],
     activities: <any[]>[],
+    emissionFactor: <EmissionFactor | null>(null),
+    factorUnits: <UnitOfMeasure[]>([]),
   }),
   getters: {
+    optionsYears(): any {
+      const years = []
+      const currentYear = new Date().getFullYear()
+      for (let i = currentYear - 20; i <= currentYear; i++) {
+        years.push({
+          label: i.toString(),
+          value: i,
+        })
+      }
+      return years
+    },
     optionsMonths(): any {
       return months.map((month, index) => ({
         label: month,
@@ -75,8 +91,37 @@ export const useEmissionFactorStore = defineStore('emissionFactor', {
         },
       ]
     },
+    getFactorData(): EmissionFactor | null {
+      return this.emissionFactor
+    },
+    getFactorUnits(): UnitOfMeasure[] {
+      return this.factorUnits
+    },
+    optionsFactorUnits(): any {
+      return formatOptions(this.factorUnits, 'name', 'id', true)
+    },
+
   },
   actions: {
+    async retrieveFactorData(id: number) {
+      try {
+        const { data } = await emissionFactorApi.emissionsEmissionFactorsRetrieve({ id })
+        this.emissionFactor = data
+        this.fetchFactorUnits(this.emissionFactor.measure_type || '')
+      }
+      catch (error) {
+        console.error(error)
+      }
+    },
+    async fetchFactorUnits(measureType: string) {
+      try {
+        const { data } = await mainApi.mainUnitOfMeasureList({ measureType })
+        this.factorUnits = data
+      }
+      catch (error) {
+        console.error(error)
+      }
+    },
     fetchActivities(data: any) {
       this.emissionFactors = data
     },

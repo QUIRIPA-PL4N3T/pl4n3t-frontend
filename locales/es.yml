@@ -1,8 +1,11 @@
-Accept: Acceptar
+Accept: Aceptar
+Units: Unidades
 activities:
   activity: Actividad
   add: Agregar Actividad
   amount: Cantidad
+  group:
+    selector: Grupo de Fuente de emisión
   hc4: HC4
   ho2: HO2
   location: Sede
@@ -11,11 +14,16 @@ activities:
     amount: Cantidad
     location: Sede
     month: Mes
-    title: Registrar una Actividad
+    title: Registro de Actividades
   month: Mes
   n20: N2O
   processActivities: Cuantificar Periodo
   register: Registrar Actividades
+  registerActivity: Resgistra una Actividad
+  title: Registro de Actividades
+activity:
+  register:
+    emissions: Callcular emisiones de Gases de Efecto Invernadero
 analytics:
   title: Análisis
 brand:
@@ -35,6 +43,7 @@ brands:
   newBrand: Nueva Marca
 button:
   back: Atrás
+calculate: Calcular
 cancel: Cancelar
 company:
   addMember: Agregar
@@ -91,6 +100,14 @@ emission:
   sources: Fuentes de Emisión
 emission source-edit:
   title: Registro de Inventario
+emissionFactor:
+  greenhouseGas: Gas
+  gwp: GWP
+  name: Nombre del Factor de Emissión
+  type: Tipo
+  uncertainty: Incertidumbre
+  usage: Consumo
+  value: Valor
 emissionSource:
   add: Agregar
   asset_duration_label: Unidad
@@ -162,6 +179,7 @@ emissionSource:
   save:
     error: La Fuente de emisión no ha podido ser guardada
     success: Fuente de emisión guardada
+  selectProduct: Seleccione el Tipo de Producto
   service_label: Servicio Adquirido
   shelf_life_label: Estimación Vida útil del producto
   shelf_life_unit_label: Unidad
@@ -170,6 +188,7 @@ emissionSource:
   specific_factor_label: Factor de Emisión específico
   specific_factor_unit_label: Unidad de Factor de emisión
   supplier_name: Nombre del Proveedor
+  title: Fuente de Emisión
   type: Tipo de Equipo
   unit: Unidades de Medida
   unitsSold: Unidades Vendidas
@@ -295,6 +314,7 @@ menu:
   settings: Configuración
   title: Menu
   todo: Tareas
+month: Mes
 my membership:
   title: Mis membresias
 my_membership:
@@ -446,6 +466,8 @@ register:
   link: Ingresar
   success: ¡Usuario registrado!
   title: Registrarse
+register activity:
+  title: Registrar actividad
 reports:
   format: Formato del Informe
   generate: Generar Informe

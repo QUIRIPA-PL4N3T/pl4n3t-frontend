@@ -1892,6 +1892,7 @@ paths:
   /api/emissions/emission-factors/:
     get:
       operationId: emissionsEmissionFactorsList
+      summary: Lista todos las plantillas de la compañía
       tags:
         - EmissionFactors
       security:
@@ -1903,7 +1904,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/EmissionFactor'
+                  $ref: '#/components/schemas/EmissionFactorList'
           description: ''
   /api/emissions/emission-factors/{id}/:
     get:
@@ -2221,9 +2222,32 @@ paths:
                 items:
                   $ref: '#/components/schemas/State'
           description: ''
+  /api/main/type-unit-of-measure/:
+    get:
+      operationId: mainTypeUnitOfMeasureRetrieve
+      description: Obtiene la información de un usuario mediante el nombre usuario
+      summary: Obtiene la información de un usuario mediante el nombre usuario
+      tags:
+        - Main
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeasureType'
+          description: ''
+        '404':
+          description: El Usuario no existe
   /api/main/unit-of-measure/:
     get:
       operationId: mainUnitOfMeasureList
+      parameters:
+        - in: query
+          name: measure_type
+          schema:
+            type: string
       tags:
         - Main
       security:
@@ -2342,6 +2366,328 @@ paths:
                 items:
                   $ref: '#/components/schemas/Membership'
           description: ''
+  /api/reports/company-templates/:
+    get:
+      operationId: reportsCompanyTemplatesList
+      summary: Lista todos las plantillas de la compañía
+      tags:
+        - Reports
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CompanyTemplateList'
+          description: ''
+    post:
+      operationId: reportsCompanyTemplatesCreate
+      tags:
+        - Reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyTemplateDetail'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CompanyTemplateDetail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CompanyTemplateDetail'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyTemplateDetail'
+          description: ''
+  /api/reports/company-templates/{id}/:
+    get:
+      operationId: reportsCompanyTemplatesRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Plantilla de Compañía.
+          required: true
+      tags:
+        - Reports
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyTemplateDetail'
+          description: ''
+    put:
+      operationId: reportsCompanyTemplatesUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Plantilla de Compañía.
+          required: true
+      tags:
+        - Reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyTemplateDetail'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CompanyTemplateDetail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CompanyTemplateDetail'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyTemplateDetail'
+          description: ''
+    patch:
+      operationId: reportsCompanyTemplatesPartialUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Plantilla de Compañía.
+          required: true
+      tags:
+        - Reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCompanyTemplateDetail'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCompanyTemplateDetail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCompanyTemplateDetail'
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyTemplateDetail'
+          description: ''
+    delete:
+      operationId: reportsCompanyTemplatesDestroy
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Plantilla de Compañía.
+          required: true
+      tags:
+        - Reports
+      security:
+        - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/reports/planet-templates/:
+    get:
+      operationId: reportsPlanetTemplatesList
+      summary: Lista todas los plantillas de Pl4n3t
+      tags:
+        - Reports
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReportTemplateList'
+          description: ''
+  /api/reports/planet-templates/{id}/:
+    get:
+      operationId: reportsPlanetTemplatesRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Plantilla de Pl4n3t.
+          required: true
+      tags:
+        - Reports
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportTemplateDetail'
+          description: ''
+  /api/reports/reports/:
+    get:
+      operationId: reportsReportsList
+      summary: Lista todos los reportes
+      tags:
+        - Reports
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReportList'
+          description: ''
+    post:
+      operationId: reportsReportsCreate
+      tags:
+        - Reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportDetail'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReportDetail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReportDetail'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
+  /api/reports/reports/{id}/:
+    get:
+      operationId: reportsReportsRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Reporte.
+          required: true
+      tags:
+        - Reports
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
+    put:
+      operationId: reportsReportsUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Reporte.
+          required: true
+      tags:
+        - Reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportDetail'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReportDetail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReportDetail'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
+    patch:
+      operationId: reportsReportsPartialUpdate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Reporte.
+          required: true
+      tags:
+        - Reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedReportDetail'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedReportDetail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedReportDetail'
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
+    delete:
+      operationId: reportsReportsDestroy
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Reporte.
+          required: true
+      tags:
+        - Reports
+      security:
+        - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
   /documentation/schema.yml:
     get:
       operationId: documentationSchema.ymlRetrieve
@@ -2740,6 +3086,123 @@ components:
         - id
         - membership
         - start_date
+    CompanyTemplateDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 200
+        creation_date:
+          type: string
+          format: date
+          readOnly: true
+        version:
+          type: number
+          format: double
+          title: Versión
+        introduction:
+          type: string
+          title: Introducción
+        definitions:
+          type: string
+          title: Definiciones
+        company_description:
+          type: string
+          title: Descripción de la Empresa
+        organizational_description:
+          type: string
+          title: Descripción Organizacional que realiza el diagnostico
+        baseline_year_diagnostic:
+          type: string
+          title: Año base diagnostico e informe
+        report_frequency:
+          type: string
+          title: Frecuencia del Informe
+        intended_use:
+          type: string
+          title: Uso previsto y usuarios y usuarios previstos del informe
+        diagnostic_scope:
+          type: string
+          title: Alcance del diagnostico
+        diagnostic_objectives:
+          type: string
+          title: Objetivos del Diagnostico e Informe
+        quantification_methodology:
+          type: string
+          title: Metodología de Cuantificación
+        emissions_inventory_exclusions:
+          type: string
+          title: Exclusiones del inventario de las fuentes de Emisión
+        carbon_footprint_determination:
+          type: string
+          title: Determinación de la Huella de Carbono
+        gei_inventory_boundaries:
+          type: string
+          title: Limites del inventario de GEI
+        report_results:
+          type: string
+          title: Resultados del informe
+        emissions_inventory:
+          type: string
+          title: Inventario de Cuantificación de emisiones gei organizacionales
+        emissions_consolidation:
+          type: string
+          title: Consolidado del inventario de emisiones de gei generadas Año/periodo
+        emissions_consolidation_year:
+          type: string
+          title: Consolidado gei emitidas durante el año
+        carbon_footprint_quantification:
+          type: string
+          title: Cuantificación huella de carbono
+        emissions_reduction_recommendations:
+          type: string
+          title: Recomendaciones en reducciones de emisiones de GEI
+        conclusions:
+          type: string
+          title: Conclusiones
+        annexes:
+          type: string
+          title: Anexos
+        fields_ordered:
+          type: string
+          title: Secciones del Reporte
+          maxLength: 1024
+        company:
+          type: integer
+          nullable: true
+      required:
+        - creation_date
+        - id
+        - name
+    CompanyTemplateList:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 200
+        version:
+          type: number
+          format: double
+          title: Versión
+        creation_date:
+          type: string
+          format: date
+          readOnly: true
+        company:
+          type: integer
+          nullable: true
+      required:
+        - creation_date
+        - id
+        - name
     Configuration:
       type: object
       properties:
@@ -2892,6 +3355,62 @@ components:
           title: Descripción
           maxLength: 255
         factor_type:
+          $ref: '#/components/schemas/FactorType'
+        source_type:
+          $ref: '#/components/schemas/SourceType'
+        unit:
+          $ref: '#/components/schemas/UnitOfMeasure'
+        greenhouse_emission_gases:
+          type: array
+          items:
+            $ref: '#/components/schemas/GreenhouseGasEmission'
+        measure_type:
+          allOf:
+            - $ref: '#/components/schemas/MeasureTypeEnum'
+          title: Tipo de Medida
+          description: |-
+            Tipo de medida
+
+            * `UNKNOWN` - Desconocido
+            * `QUANTITY` - Cantidad
+            * `AREA` - Area
+            * `LENGTH` - Longitud
+            * `ANGLE` - Ángulo
+            * `TIME` - Tiempo
+            * `VELOCITY` - Velocidad
+            * `VOLUMEN` - Volumen
+            * `SCALE` - Escala
+            * `WEIGHT` - Peso
+            * `ENERGY` - Energía
+            * `MASS` - Masa
+            * `TEMPERATURE` - Presión
+            * `POWER` - Potencia
+            * `FREQUENCY` - Frecuencia
+            * `ENERGY_CONSUMPTION` - Consumo de energía
+            * `GEI_EMISSION` - Emisiones de gases de efecto Invernadero
+      required:
+        - description
+        - factor_type
+        - greenhouse_emission_gases
+        - id
+        - name
+        - source_type
+        - unit
+    EmissionFactorList:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+        description:
+          type: string
+          title: Descripción
+          maxLength: 255
+        factor_type:
           type: integer
           title: Tipo de Factor de Emisión
         source_type:
@@ -2900,6 +3419,30 @@ components:
         unit:
           type: integer
           title: Unidad de Consumo
+        measure_type:
+          allOf:
+            - $ref: '#/components/schemas/MeasureTypeEnum'
+          title: Tipo de Medida
+          description: |-
+            Tipo de medida
+
+            * `UNKNOWN` - Desconocido
+            * `QUANTITY` - Cantidad
+            * `AREA` - Area
+            * `LENGTH` - Longitud
+            * `ANGLE` - Ángulo
+            * `TIME` - Tiempo
+            * `VELOCITY` - Velocidad
+            * `VOLUMEN` - Volumen
+            * `SCALE` - Escala
+            * `WEIGHT` - Peso
+            * `ENERGY` - Energía
+            * `MASS` - Masa
+            * `TEMPERATURE` - Presión
+            * `POWER` - Potencia
+            * `FREQUENCY` - Frecuencia
+            * `ENERGY_CONSUMPTION` - Consumo de energía
+            * `GEI_EMISSION` - Emisiones de gases de efecto Invernadero
       required:
         - description
         - factor_type
@@ -3363,11 +3906,9 @@ components:
           type: integer
           readOnly: true
         greenhouse_gas:
-          type: integer
-          title: Gas de efecto invernadero
+          $ref: '#/components/schemas/GreenhouseGas'
         unit:
-          type: integer
-          title: Unidad Factor de Emisión
+          $ref: '#/components/schemas/UnitOfMeasure'
         emission_factor:
           type: integer
         value:
@@ -3564,6 +4105,16 @@ components:
           type: string
       required:
         - refresh_token
+    MeasureType:
+      type: object
+      properties:
+        value:
+          type: string
+        label:
+          type: string
+      required:
+        - label
+        - value
     MeasureTypeEnum:
       enum:
         - UNKNOWN
@@ -3582,6 +4133,7 @@ components:
         - POWER
         - FREQUENCY
         - ENERGY_CONSUMPTION
+        - GEI_EMISSION
       type: string
       description: |-
         * `UNKNOWN` - Desconocido
@@ -3600,6 +4152,7 @@ components:
         * `POWER` - Potencia
         * `FREQUENCY` - Frecuencia
         * `ENERGY_CONSUMPTION` - Consumo de energía
+        * `GEI_EMISSION` - Emisiones de gases de efecto Invernadero
     Member:
       type: object
       properties:
@@ -3888,6 +4441,94 @@ components:
           allOf:
             - $ref: '#/components/schemas/CompanyMembership'
           readOnly: true
+    PatchedCompanyTemplateDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 200
+        creation_date:
+          type: string
+          format: date
+          readOnly: true
+        version:
+          type: number
+          format: double
+          title: Versión
+        introduction:
+          type: string
+          title: Introducción
+        definitions:
+          type: string
+          title: Definiciones
+        company_description:
+          type: string
+          title: Descripción de la Empresa
+        organizational_description:
+          type: string
+          title: Descripción Organizacional que realiza el diagnostico
+        baseline_year_diagnostic:
+          type: string
+          title: Año base diagnostico e informe
+        report_frequency:
+          type: string
+          title: Frecuencia del Informe
+        intended_use:
+          type: string
+          title: Uso previsto y usuarios y usuarios previstos del informe
+        diagnostic_scope:
+          type: string
+          title: Alcance del diagnostico
+        diagnostic_objectives:
+          type: string
+          title: Objetivos del Diagnostico e Informe
+        quantification_methodology:
+          type: string
+          title: Metodología de Cuantificación
+        emissions_inventory_exclusions:
+          type: string
+          title: Exclusiones del inventario de las fuentes de Emisión
+        carbon_footprint_determination:
+          type: string
+          title: Determinación de la Huella de Carbono
+        gei_inventory_boundaries:
+          type: string
+          title: Limites del inventario de GEI
+        report_results:
+          type: string
+          title: Resultados del informe
+        emissions_inventory:
+          type: string
+          title: Inventario de Cuantificación de emisiones gei organizacionales
+        emissions_consolidation:
+          type: string
+          title: Consolidado del inventario de emisiones de gei generadas Año/periodo
+        emissions_consolidation_year:
+          type: string
+          title: Consolidado gei emitidas durante el año
+        carbon_footprint_quantification:
+          type: string
+          title: Cuantificación huella de carbono
+        emissions_reduction_recommendations:
+          type: string
+          title: Recomendaciones en reducciones de emisiones de GEI
+        conclusions:
+          type: string
+          title: Conclusiones
+        annexes:
+          type: string
+          title: Anexos
+        fields_ordered:
+          type: string
+          title: Secciones del Reporte
+          maxLength: 1024
+        company:
+          type: integer
+          nullable: true
     PatchedDocument:
       type: object
       properties:
@@ -4326,6 +4967,103 @@ components:
         role_description:
           type: string
           readOnly: true
+    PatchedReportDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 200
+        creation_date:
+          type: string
+          format: date
+          readOnly: true
+        version:
+          type: number
+          format: double
+          title: Versión
+        introduction:
+          type: string
+          title: Introducción
+        definitions:
+          type: string
+          title: Definiciones
+        company_description:
+          type: string
+          title: Descripción de la Empresa
+        organizational_description:
+          type: string
+          title: Descripción Organizacional que realiza el diagnostico
+        baseline_year_diagnostic:
+          type: string
+          title: Año base diagnostico e informe
+        report_frequency:
+          type: string
+          title: Frecuencia del Informe
+        intended_use:
+          type: string
+          title: Uso previsto y usuarios y usuarios previstos del informe
+        diagnostic_scope:
+          type: string
+          title: Alcance del diagnostico
+        diagnostic_objectives:
+          type: string
+          title: Objetivos del Diagnostico e Informe
+        quantification_methodology:
+          type: string
+          title: Metodología de Cuantificación
+        emissions_inventory_exclusions:
+          type: string
+          title: Exclusiones del inventario de las fuentes de Emisión
+        carbon_footprint_determination:
+          type: string
+          title: Determinación de la Huella de Carbono
+        gei_inventory_boundaries:
+          type: string
+          title: Limites del inventario de GEI
+        report_results:
+          type: string
+          title: Resultados del informe
+        emissions_inventory:
+          type: string
+          title: Inventario de Cuantificación de emisiones gei organizacionales
+        emissions_consolidation:
+          type: string
+          title: Consolidado del inventario de emisiones de gei generadas Año/periodo
+        emissions_consolidation_year:
+          type: string
+          title: Consolidado gei emitidas durante el año
+        carbon_footprint_quantification:
+          type: string
+          title: Cuantificación huella de carbono
+        emissions_reduction_recommendations:
+          type: string
+          title: Recomendaciones en reducciones de emisiones de GEI
+        conclusions:
+          type: string
+          title: Conclusiones
+        annexes:
+          type: string
+          title: Anexos
+        fields_ordered:
+          type: string
+          title: Secciones del Reporte
+          maxLength: 1024
+        period:
+          type: string
+          maxLength: 10
+        pdf_report:
+          type: string
+          format: uri
+          nullable: true
+        is_finalized:
+          type: boolean
+        company:
+          type: integer
+          nullable: true
     Payer:
       type: object
       properties:
@@ -4446,6 +5184,247 @@ components:
       required:
         - email
         - password
+    ReportDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 200
+        creation_date:
+          type: string
+          format: date
+          readOnly: true
+        version:
+          type: number
+          format: double
+          title: Versión
+        introduction:
+          type: string
+          title: Introducción
+        definitions:
+          type: string
+          title: Definiciones
+        company_description:
+          type: string
+          title: Descripción de la Empresa
+        organizational_description:
+          type: string
+          title: Descripción Organizacional que realiza el diagnostico
+        baseline_year_diagnostic:
+          type: string
+          title: Año base diagnostico e informe
+        report_frequency:
+          type: string
+          title: Frecuencia del Informe
+        intended_use:
+          type: string
+          title: Uso previsto y usuarios y usuarios previstos del informe
+        diagnostic_scope:
+          type: string
+          title: Alcance del diagnostico
+        diagnostic_objectives:
+          type: string
+          title: Objetivos del Diagnostico e Informe
+        quantification_methodology:
+          type: string
+          title: Metodología de Cuantificación
+        emissions_inventory_exclusions:
+          type: string
+          title: Exclusiones del inventario de las fuentes de Emisión
+        carbon_footprint_determination:
+          type: string
+          title: Determinación de la Huella de Carbono
+        gei_inventory_boundaries:
+          type: string
+          title: Limites del inventario de GEI
+        report_results:
+          type: string
+          title: Resultados del informe
+        emissions_inventory:
+          type: string
+          title: Inventario de Cuantificación de emisiones gei organizacionales
+        emissions_consolidation:
+          type: string
+          title: Consolidado del inventario de emisiones de gei generadas Año/periodo
+        emissions_consolidation_year:
+          type: string
+          title: Consolidado gei emitidas durante el año
+        carbon_footprint_quantification:
+          type: string
+          title: Cuantificación huella de carbono
+        emissions_reduction_recommendations:
+          type: string
+          title: Recomendaciones en reducciones de emisiones de GEI
+        conclusions:
+          type: string
+          title: Conclusiones
+        annexes:
+          type: string
+          title: Anexos
+        fields_ordered:
+          type: string
+          title: Secciones del Reporte
+          maxLength: 1024
+        period:
+          type: string
+          maxLength: 10
+        pdf_report:
+          type: string
+          format: uri
+          nullable: true
+        is_finalized:
+          type: boolean
+        company:
+          type: integer
+          nullable: true
+      required:
+        - creation_date
+        - id
+        - name
+        - period
+    ReportList:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 200
+        version:
+          type: number
+          format: double
+          title: Versión
+        creation_date:
+          type: string
+          format: date
+          readOnly: true
+        period:
+          type: string
+          maxLength: 10
+        is_finalized:
+          type: boolean
+      required:
+        - creation_date
+        - id
+        - name
+        - period
+    ReportTemplateDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 200
+        creation_date:
+          type: string
+          format: date
+          readOnly: true
+        version:
+          type: number
+          format: double
+          title: Versión
+        introduction:
+          type: string
+          title: Introducción
+        definitions:
+          type: string
+          title: Definiciones
+        company_description:
+          type: string
+          title: Descripción de la Empresa
+        organizational_description:
+          type: string
+          title: Descripción Organizacional que realiza el diagnostico
+        baseline_year_diagnostic:
+          type: string
+          title: Año base diagnostico e informe
+        report_frequency:
+          type: string
+          title: Frecuencia del Informe
+        intended_use:
+          type: string
+          title: Uso previsto y usuarios y usuarios previstos del informe
+        diagnostic_scope:
+          type: string
+          title: Alcance del diagnostico
+        diagnostic_objectives:
+          type: string
+          title: Objetivos del Diagnostico e Informe
+        quantification_methodology:
+          type: string
+          title: Metodología de Cuantificación
+        emissions_inventory_exclusions:
+          type: string
+          title: Exclusiones del inventario de las fuentes de Emisión
+        carbon_footprint_determination:
+          type: string
+          title: Determinación de la Huella de Carbono
+        gei_inventory_boundaries:
+          type: string
+          title: Limites del inventario de GEI
+        report_results:
+          type: string
+          title: Resultados del informe
+        emissions_inventory:
+          type: string
+          title: Inventario de Cuantificación de emisiones gei organizacionales
+        emissions_consolidation:
+          type: string
+          title: Consolidado del inventario de emisiones de gei generadas Año/periodo
+        emissions_consolidation_year:
+          type: string
+          title: Consolidado gei emitidas durante el año
+        carbon_footprint_quantification:
+          type: string
+          title: Cuantificación huella de carbono
+        emissions_reduction_recommendations:
+          type: string
+          title: Recomendaciones en reducciones de emisiones de GEI
+        conclusions:
+          type: string
+          title: Conclusiones
+        annexes:
+          type: string
+          title: Anexos
+        fields_ordered:
+          type: string
+          title: Secciones del Reporte
+          maxLength: 1024
+      required:
+        - creation_date
+        - id
+        - name
+    ReportTemplateList:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 200
+        version:
+          type: number
+          format: double
+          title: Versión
+        creation_date:
+          type: string
+          format: date
+          readOnly: true
+      required:
+        - creation_date
+        - id
+        - name
     ResetPassword:
       type: object
       properties:
@@ -4616,6 +5595,7 @@ components:
             * `POWER` - Potencia
             * `FREQUENCY` - Frecuencia
             * `ENERGY_CONSUMPTION` - Consumo de energía
+            * `GEI_EMISSION` - Emisiones de gases de efecto Invernadero
         name_standard_unit:
           type: string
           title: Nombre de la unidad Estándar

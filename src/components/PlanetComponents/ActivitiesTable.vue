@@ -7,7 +7,7 @@ const emissionFactorStore = useEmissionFactorStore()
 const { activities } = storeToRefs(emissionFactorStore)
 
 const current = ref(1)
-const perpage = ref(10)
+const perPage = ref(10)
 const pageRange = ref(5)
 
 const columns = ref([
@@ -59,7 +59,7 @@ const columns = ref([
       :rows="activities"
       :pagination-options="{
         enabled: true,
-        perPage: perpage,
+        perPage,
       }"
       :sort-options="{
         enabled: false,
@@ -114,7 +114,7 @@ const columns = ref([
           <Pagination
             :total="activities.length"
             :current="current"
-            :per-page="perpage"
+            :per-page="perPage"
             :page-range="pageRange"
             :page-changed="props.pageChanged"
             :per-page-changed="props.perPageChanged"

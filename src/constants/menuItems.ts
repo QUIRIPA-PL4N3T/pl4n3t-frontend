@@ -34,13 +34,13 @@ export const menuItems = [
   {
     title: 'menu.register-data',
     icon: 'heroicons-outline:clipboard-list',
-    link: '/activities/register',
+    link: '/activities',
     requiredCompany: true,
   },
   {
     title: 'activities.processActivities',
     icon: 'heroicons-outline:cog',
-    link: '/activities/liquidation',
+    link: '/liquidations',
     requiredCompany: true,
   },
   {

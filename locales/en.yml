@@ -1,14 +1,23 @@
 Accept: Accept
+Units: Units
 activities:
   activity: Activity
   amount: Amount
+  group:
+    selector: Emission Source Group
   hc4: HC4
   ho2: HO2
   location: Campus
   modal:
+    month: Month
     title: Register an Activity
   month: Month
   n20: N2O
+  registerActivity: Register an Activity
+  title: Activity Log
+activity:
+  register:
+    emissions: Calculate Greenhouse Gas Emissions
 analytics:
   title: Analysis
 brand:
@@ -23,6 +32,7 @@ brand:
     success: The brand was successfully updated
 brands:
   newBrand: New brand
+calculate: Calculate
 cancel: Cancel
 company:
   addMember: Add
@@ -58,6 +68,14 @@ edit: Edit
 email: Email
 emission:
   sources: Emission Sources
+emissionFactor:
+  greenhouseGas: Gas
+  gwp: GWP
+  name: Emission Factor Name
+  type: Guy
+  uncertainty: Uncertainty
+  usage: Consumption
+  value: Worth
 emissionSource:
   add: Add
   asset_duration_label: Unit
@@ -122,6 +140,7 @@ emissionSource:
   save:
     error: The broadcast source could not be saved
     success: Broadcast source saved successfully
+  selectProduct: Select Product Type
   service_label: Purchased Service
   shelf_life_label: Estimated useful life of the product
   shelf_life_unit_label: Unit
@@ -130,6 +149,7 @@ emissionSource:
   specific_factor_label: Specific Emission Factor
   specific_factor_unit_label: Emission Factor Unit
   supplier_name: Provider's name
+  title: Emission Source
   type: Select the team
   unit: Unit of measurement
   unitsSold: Sold units
@@ -232,6 +252,7 @@ menu:
   profile: Profile
   settings: Setting
   todo: Tasks
+month: Month
 my_membership:
   button: Change of plan
   company: This membership has associate to company
