@@ -10,6 +10,7 @@ export const useAuthStore = defineStore('auth', {
     user: <UserModel | null>(null),
     password: <UpdatePassword>(DEFAULT_UPDATE_PASSWORD),
     accessToken: null,
+    loadingToken: <boolean>(false),
     refreshToken: Cookies.get('refreshToken') || null,
     interceptorConfigured: false,
     hasActiveAccount: null,
@@ -106,12 +107,14 @@ export const useAuthStore = defineStore('auth', {
     },
     async refresh() {
       try {
-      // Update access and refresh token from api Server
+        // Update access and refresh token from api Server
+        this.loadingToken = true
         this.refreshTokenSynchronize()
         if (this.refreshToken && !this.user) {
         // Request a new token
           const { data } = await accountApi.accountsRefreshCreate({ tokenRefresh: { refresh: this.refreshToken, access: this.accessToken } })
           this.accessToken = data.access
+          this.loadingToken = false
           // Update and Persist refresh token
           this.refreshTokenPersist(data.refresh)
           setupInterceptors(this)

@@ -63,6 +63,7 @@ declare module 'vue-router/auto/routes' {
     'purchase-status': RouteRecordInfo<'purchase-status', '/purchase-status/:id', Record<never, never>, Record<never, never>>,
     'profile': RouteRecordInfo<'profile', '/profile', Record<never, never>, Record<never, never>>,
     'reports': RouteRecordInfo<'reports', '/reports', Record<never, never>, Record<never, never>>,
+    'template': RouteRecordInfo<'template', '/template/:id', Record<never, never>, Record<never, never>>,
     'templates': RouteRecordInfo<'templates', '/reports/templates', Record<never, never>, Record<never, never>>,
     'settings': RouteRecordInfo<'settings', '/settings', Record<never, never>, Record<never, never>>,
   }

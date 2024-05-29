@@ -13,6 +13,8 @@ import type {
   Payer,
   Phone,
   Purchase,
+  ReportDetail,
+  ReportTemplateList,
   UpdatePassword,
 }
   from '~/api-client'
@@ -230,12 +232,18 @@ export const DEFAULT_UPDATE_PASSWORD: UpdatePassword = {
   confirm_password: '',
 }
 
-export const DEFAULT_REPORT: ReportConfig = {
+export const DEFAULT_REPORT: ReportTemplateList = {
   id: 1,
   name: 'Informe de Inventarios de GEI y Huella de Carbono Organizacional',
   creation_date: '2016-08-29T09:12:33.001Z',
   version: 1.0,
-  tags: '',
+}
+
+export const DEFAULT_REPORT_DETAIL: ReportDetail = {
+  id: 0,
+  name: '',
+  creation_date: '',
+  version: 1,
   introduction: '',
   definitions: '',
   company_description: '',
@@ -256,40 +264,11 @@ export const DEFAULT_REPORT: ReportConfig = {
   carbon_footprint_quantification: '',
   emissions_reduction_recommendations: '',
   conclusions: '',
+  period: '',
   annexes: '',
 }
 
-export interface ReportConfig {
-  id?: number
-  name: string
-  creation_date: string
-  version: number
-  tags: string
-  introduction?: string
-  definitions?: string
-  company_description?: string
-  organizational_description?: string
-  baseline_year_diagnostic?: string
-  report_frequency?: string
-  intended_use?: string
-  diagnostic_scope?: string
-  diagnostic_objectives?: string
-  quantification_methodology?: string
-  emissions_inventory_exclusions?: string
-  carbon_footprint_determination?: string
-  gei_inventory_boundaries?: string
-  report_results?: string
-  emissions_inventory?: string
-  emissions_consolidation?: string
-  emissions_consolidation_year?: string
-  carbon_footprint_quantification?: string
-  emissions_reduction_recommendations?: string
-  conclusions?: string
-  annexes?: string
-  using?: boolean
-}
-
 export interface ActionEmits<T> {
-  action: 'edit' | 'preview'
+  action: 'edit' | 'preview' | 'branch' | 'delete'
   value: T
 }

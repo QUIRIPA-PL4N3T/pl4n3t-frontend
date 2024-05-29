@@ -17,6 +17,7 @@ import {
   MainApi,
   MembershipsApi,
   QuantificationTypesApi,
+  ReportsApi,
   SourceTypesApi,
 } from '~/api-client'
 
@@ -43,3 +44,4 @@ export const quantificationTypeApi = new QuantificationTypesApi(undefined, apiUr
 export const sourceTypeApi = new SourceTypesApi(undefined, apiUrl, axiosInstance)
 export const documentApi = new DocumentsApi(undefined, apiUrl, axiosInstance)
 export const membershipsApi = new MembershipsApi(undefined, apiUrl, axiosInstance)
+export const reportsApi = new ReportsApi(undefined, apiUrl, axiosInstance)

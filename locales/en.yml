@@ -9,8 +9,10 @@ activities:
     title: Register an Activity
   month: Month
   n20: N2O
+add: Add
 analytics:
   title: Analysis
+branch: Branch
 brand:
   created:
     success: A new one has been created successfully
@@ -54,6 +56,7 @@ currentLocation:
 delete: Delete
 distribution:
   bySede: Distribution by Headquarters
+duplicate: Duplicate
 edit: Edit
 email: Email
 emission:
@@ -176,6 +179,7 @@ hintEmail: Email
 hintPassword: Password
 liquidation:
   form: Settlement Form
+loading: loading...
 location:
   add: Add Headquarters
   address: Address
@@ -244,9 +248,11 @@ no: No
 no_apply: Does not apply
 notResultFound: No results found
 not_found: Data not found
+open: Open
 optionCreated: Created Option
 optionCreationFailed: Creation of the Failed Option
 password: Password
+preview: Preview
 profile:
   alerts:
     avatar_success: Contraseña actualizada
@@ -326,6 +332,7 @@ purchase_membership:
   footer-total: Total
   header: You are buying
   subheader: Give us the information of each section for process payment
+refreshing_token: Loading session token...
 register:
   buttonLogin: Create An Account
   checkBox: You accept our Terms and Conditions and Privacy Policy
@@ -334,6 +341,52 @@ register:
   hintFullName: Full Name
   link: SIGN IP
   text: Sign up
+reports:
+  branch_error: Has ocurred a error processing the branch
+  branch_message: >-
+    Deseas crear un plantilla para la empresa selecionada basada en esta
+    plantilla ?
+  branch_title: Generar plantilla empresarial
+  company_templates: Company templates
+  delete_error: Have a error deleting the template
+  delete_message: Are your sure of delete this template of company
+  delete_success: The template has deleted successfuly
+  delete_title: Template deleting
+  enable_templates: Enable Templates
+  format: Formato del Informe
+  generate: Generar Informe
+  methodology: Metodología
+  period: Período
+  template: Templates
+  template_form:
+    annexes: Annexes
+    baseline_year_diagnostic: Baseline year diagnostic
+    carbon_footprint_determination: Carbon footprint determination
+    carbon_footprint_quantification: Carbon footprint quantification
+    company_description: Company description
+    conclusions: Conclusions
+    creation_date: Creation date
+    definitions: Definitions
+    diagnostic_objectives: Diagnostic objectives
+    diagnostic_scope: Diagnostic scope
+    emissions_consolidation: Emissions consolidation
+    emissions_consolidation_year: Emissions consolidation year
+    emissions_inventory: Remissions inventory
+    emissions_inventory_exclusions: Emissions inventory exclusions
+    emissions_reduction_recommendations: Emissions_reduction recommendations
+    gei_inventory_boundaries: GEI inventory boundaries
+    intended_use: Intended use
+    introduction: Introduction
+    name: name
+    organizational_description: Organizational description
+    quantification_methodology: Quantification methodology
+    report_frequency: Report frequency
+    report_results: Report results
+    save: Save
+    tags: Tags
+    version: Version
+  title: Reportes
+  unselected_company: Select a company
 save: Save
 search: Search
 select:
@@ -342,45 +395,7 @@ selectAnOption: Select an Option
 signInSocial: Or continue with
 since:
   lastMonth: since last month
+update: update
 waste:
   companyGenerationQuestion: What type of waste is generated in operations?
 yes: Yes
-open: Open
-preview: Preview
-duplicate: Duplicate
-reports:
-  format: Formato del Informe
-  generate: Generar Informe
-  methodology: Metodología
-  period: Período
-  title: Reportes
-  template: Templates
-  enable_templates: Enable Templates
-  company_templates: Company templates
-
-  template_form:
-    name: name
-    version: Version
-    tags: Tags
-    introduction: Introduction
-    definitions: Definitions
-    company_description: Company description
-    organizational_description: Organizational description
-    baseline_year_diagnostic: Baseline year diagnostic
-    report_frequency: Report frequency
-    intended_use: Intended use
-    diagnostic_scope: Diagnostic scope
-    diagnostic_objectives: Diagnostic objectives
-    quantification_methodology: Quantification methodology
-    emissions_inventory_exclusions: Emissions inventory exclusions
-    carbon_footprint_determination: Carbon footprint determination
-    gei_inventory_boundaries: GEI inventory boundaries
-    report_results: Report results
-    emissions_inventory: Remissions inventory
-    emissions_consolidation: Emissions consolidation
-    emissions_consolidation_year: Emissions consolidation year
-    carbon_footprint_quantification: Carbon footprint quantification
-    emissions_reduction_recommendations: Emissions_reduction recommendations
-    conclusions: Conclusions
-    annexes: Annexes
-    save: Save

@@ -6,6 +6,9 @@ const themeSettingsStore = useThemeSettingsStore()
 
 const { menuLayout, sidebarHidden, sidebarCollapse, mobileSidebar } = storeToRefs(themeSettingsStore)
 const { width } = useWindowSize()
+const authStore = useAuthStore()
+const { loadingToken } = storeToRefs(authStore)
+const { t } = useI18n()
 
 function switchHeaderClass() {
   if (
@@ -44,7 +47,10 @@ function switchHeaderClass() {
           :class="width > 1280 ? switchHeaderClass() : ''"
         >
           <Breadcrumbs />
-          <RouterView />
+          <div v-if="loadingToken" class="w-full">
+            <BasicLoader :text="t('refreshing_token')" />
+          </div>
+          <RouterView v-else />
         </div>
       </div>
     </main>

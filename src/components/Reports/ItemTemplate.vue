@@ -1,21 +1,23 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
-import type { ActionEmits, ReportConfig } from '~/api/modelsDefaults'
+import type { CompanyTemplateList, ReportTemplateList } from '~/api-client'
+import type { ActionEmits } from '~/api/modelsDefaults'
 
 const { template, edit } = defineProps<{
-  template: ReportConfig
+  template: CompanyTemplateList | ReportTemplateList
   edit?: boolean
+  branch?: boolean
 }>()
 
 const emit = defineEmits<{
-  (event: 'onAction', value: ActionEmits<ReportConfig>): void
+  (event: 'onAction', value: ActionEmits<CompanyTemplateList | ReportTemplateList>): void
 }>()
 
 const { t } = useI18n()
 </script>
 
 <template>
-  <div :class="template?.using ? 'border-purple-500' : 'border-primary-500'" class="flex space-x-2 rtl:space-x-reverse border-l-2">
+  <div :class="template?.company ? 'border-purple-500' : 'border-primary-500'" class="flex space-x-2 rtl:space-x-reverse border-l-2">
     <div class="flex-1 flex space-x-2 ml-2 rtl:space-x-reverse">
       <div class="flex flex-wrap justify-center items-center">
         <span
@@ -57,6 +59,32 @@ const { t } = useI18n()
           </div>
         </template>
         <span> {{ t('edit') }}</span>
+      </Tooltip>
+      <Tooltip v-if="edit" placement="top" arrow theme="dark">
+        <template #button>
+          <div
+            class="hover:scale-110" @click="emit('onAction', {
+              action: 'delete',
+              value: template,
+            })"
+          >
+            <Icon icon="radix-icons:trash" class="size-4" />
+          </div>
+        </template>
+        <span> {{ t('delete') }}</span>
+      </Tooltip>
+      <Tooltip v-if="branch" placement="top" arrow theme="dark">
+        <template #button>
+          <div
+            class="hover:scale-110" @click="emit('onAction', {
+              action: 'branch',
+              value: template,
+            })"
+          >
+            <Icon icon="carbon:branch" class="size-4" />
+          </div>
+        </template>
+        <span> {{ t('branch') }}</span>
       </Tooltip>
     </div>
   </div>

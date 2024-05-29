@@ -16,8 +16,10 @@ activities:
   n20: N2O
   processActivities: Cuantificar Periodo
   register: Registrar Actividades
+add: Agregar
 analytics:
   title: Análisis
+branch: Rama
 brand:
   add: Nueva Marca
   created:
@@ -85,6 +87,7 @@ distibution:
   bySede: Distribución por Sede
 distribution:
   bySede: Distribución por Sede
+duplicate: Duplicar
 edit: Editar
 email: Correo
 emission:
@@ -221,6 +224,7 @@ inventory:
 liquidation:
   form: Formularío de Liquidación
   title: Cuantificar
+loading: Cargando...
 location:
   add: Agregar Sede
   address: Dirección
@@ -309,10 +313,12 @@ no: No
 no_apply: No Aplica
 notResultFound: No se encontrarón Resultados
 not_found: Lo sentimos informacion no disponible
+open: Abrir
 optionCreated: Opción Creada
 optionCreationFailed: Creación de la Opción Fallida
 optionLoadingFailed: Carga de la opción fallida
 password: Contraseña
+preview: Previsualizar
 profile:
   alerts:
     Avatar_success: Contraseña actualizada
@@ -433,6 +439,7 @@ purchase_status:
   subheader_fail: Tuvimos problemas procesando el pago intentalo nuevamente
   subheader_success: Ahora puedes distrutar de todos los beneficios de tu plan
   title_table: Datos de compra
+refreshing_token: Cargando token de sesion...
 register:
   account-activation: Debe ingresar a su correo para continuar con la activación de su cuenta
   buttonLogin: Crear Cuenta
@@ -446,43 +453,52 @@ register:
   link: Ingresar
   success: ¡Usuario registrado!
   title: Registrarse
-templates:
-  title: Plantillas
 reports:
+  branch_error: Ha ocurrido un error procesando la rama
+  branch_message: >-
+    Deseas crear un plantilla para la empresa selecionada basada en esta
+    plantilla ?
+  branch_title: Generate template for company
+  company_templates: Plantillas registradas
+  delete_error: Hubo un error al eliminar la plantilla
+  delete_message: Estas seguro de eliminar este registro de plantilla
+  delete_success: Se ha eliminado la plantilla correctamente
+  delete_title: Eliminacion de plantilla
+  enable_templates: Plantillas disponibles
   format: Formato del Informe
   generate: Generar Informe
   methodology: Metodología
   period: Período
-  title: Reportes
   template: Plantillas
-  enable_templates: Plantillas disponibles
-  company_templates: Plantillas registradas
   template_form:
-    name: name
-    version: v
-    tags: Tags
-    introduction: Introducción
-    definitions: Definiciones
-    company_description: Descripción de la compañía
-    organizational_description: Descripción organizacional
+    annexes: Anexo
     baseline_year_diagnostic: Diagnóstico del año de referencia
-    report_frequency: Frecuencia de informes
-    intended_use: Uso previst
-    diagnostic_scope: Alcance del diagnóstico
-    diagnostic_objectives: Objetivos del diagnóstico
-    quantification_methodology: Metodología de cuantificación
-    emissions_inventory_exclusions: Exclusiones del inventario de emisiones
     carbon_footprint_determination: Determinación de la huella de carbono
-    gei_inventory_boundaries: Límites del inventario GEI
-    report_results: Informar resultados
-    emissions_inventory: Inventario de remisiones
+    carbon_footprint_quantification: Cuantificación de la huella de carbono
+    company_description: Descripción de la compañía
+    conclusions: Conclusiones
+    creation_date: Fecha creacion
+    definitions: Definiciones
+    diagnostic_objectives: Objetivos del diagnóstico
+    diagnostic_scope: Alcance del diagnóstico
     emissions_consolidation: Consolidación de emisiones
     emissions_consolidation_year: Año de consolidación de emisiones
-    carbon_footprint_quantification: Cuantificación de la huella de carbono
+    emissions_inventory: Inventario de remisiones
+    emissions_inventory_exclusions: Exclusiones del inventario de emisiones
     emissions_reduction_recommendations: Recomendaciones de reducción de emisione
-    conclusions: Conclusiones
-    annexes: Anexo
+    gei_inventory_boundaries: Límites del inventario GEI
+    intended_use: Uso previst
+    introduction: Introducción
+    name: Nombre
+    organizational_description: Descripción organizacional
+    quantification_methodology: Metodología de cuantificación
+    report_frequency: Frecuencia de informes
+    report_results: Informar resultados
     save: Save
+    tags: Tags
+    version: Version
+  title: Reportes
+  unselected_company: Seleciona una compania
 save: Guardar
 search: Buscar
 select:
@@ -493,10 +509,12 @@ selectAnOption: Seleccione una Opción
 signInSocial: O Continue con
 since:
   lastMonth: Desde el último mes
+template:
+  title: Plantilla
+templates:
+  title: Plantillas
+update: actualizar
 view: Ver
 waste:
   companyGenerationQuestion: ¿Que tipo de desperdición se generan en las operaciones?
 yes: Sí
-open: Abrir
-preview: Previsualizar
-duplicate: Duplicar
