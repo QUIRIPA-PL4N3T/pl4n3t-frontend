@@ -4,7 +4,7 @@ import { VueGoodTable } from 'vue-good-table-next'
 
 const { t } = useI18n()
 const emissionFactorStore = useEmissionFactorStore()
-const { activities } = storeToRefs(emissionFactorStore)
+const { emissionResults } = storeToRefs(emissionFactorStore)
 
 const current = ref(1)
 const perPage = ref(10)
@@ -12,37 +12,40 @@ const pageRange = ref(5)
 
 const columns = ref([
   {
-    label: 'Id',
-    field: 'id',
+    label: t('activities.year'),
+    field: 'year',
   },
   {
     label: t('activities.month'),
     field: 'month',
   },
   {
-    label: t('activities.location'),
-    field: 'location',
+    label: t('activities.source'),
+    field: 'source_name',
   },
   {
-    label: t('activities.activity'),
-    field: 'activity',
-  },
-
-  {
-    label: t('activities.amount'),
-    field: 'amount',
+    label: t('activities.usage'),
+    field: 'usage',
   },
   {
-    label: t('activities.ho2'),
-    field: 'valueHO2',
+    label: t('activities.units'),
+    field: 'unit_symbol',
+  },
+  {
+    label: t('activities.totalCo2e'),
+    field: 'total_co2e',
+  },
+  {
+    label: t('activities.co2'),
+    field: 'co2',
   },
   {
     label: t('activities.hc4'),
-    field: 'valueCH4',
+    field: 'ch4',
   },
   {
     label: t('activities.n20'),
-    field: 'valueN2O',
+    field: 'n2o',
   },
   {
     label: 'Action',
@@ -52,11 +55,11 @@ const columns = ref([
 </script>
 
 <template>
-  <div v-if="activities">
+  <div v-if="emissionResults">
     <VueGoodTable
       :columns="columns"
-      style-class=" vgt-table  lesspadding2 centered "
-      :rows="activities"
+      style-class=" vgt-table less-padding2 centered "
+      :rows="emissionResults"
       :pagination-options="{
         enabled: true,
         perPage,
@@ -66,12 +69,12 @@ const columns = ref([
       }"
       :select-options="{
         enabled: true,
-        selectOnCheckboxOnly: true, // only select when checkbox is clicked instead of the row
-        selectioninfoClass: 'custom-class',
+        selectOnCheckboxOnly: true,
+        selectionInfoClass: 'custom-class',
         selectionText: 'rows selected',
         clearSelectionText: 'clear',
-        disableSelectinfo: true, // disable the select info-500 panel on top
-        selectAllByGroup: true, // when used in combination with a grouped table, add a checkbox in the header row to check/uncheck the entire group
+        disableSelectInfo: true,
+        selectAllByGroup: true,
       }"
     >
       <template #table-row="props">
@@ -90,14 +93,6 @@ const columns = ref([
               </template>
               <span> View</span>
             </Tooltip>
-            <Tooltip placement="top" arrow theme="dark">
-              <template #button>
-                <div class="action-btn">
-                  <Icon icon="heroicons:pencil-square" />
-                </div>
-              </template>
-              <span> Edit</span>
-            </Tooltip>
             <Tooltip placement="top" arrow theme="danger-500">
               <template #button>
                 <div class="action-btn">
@@ -112,7 +107,7 @@ const columns = ref([
       <template #pagination-bottom="props">
         <div class="py-4 px-3 flex justify-center">
           <Pagination
-            :total="activities.length"
+            :total="emissionResults.length"
             :current="current"
             :per-page="perPage"
             :page-range="pageRange"

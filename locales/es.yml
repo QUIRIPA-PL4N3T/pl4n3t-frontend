@@ -4,9 +4,10 @@ activities:
   activity: Actividad
   add: Agregar Actividad
   amount: Cantidad
+  co2: CO₂
   group:
     selector: Grupo de Fuente de emisión
-  hc4: HC4
+  hc4: CH₄
   ho2: HO2
   location: Sede
   modal:
@@ -16,11 +17,16 @@ activities:
     month: Mes
     title: Registro de Actividades
   month: Mes
-  n20: N2O
+  n20: N₂O
   processActivities: Cuantificar Periodo
   register: Registrar Actividades
   registerActivity: Resgistra una Actividad
+  source: Fuente de Emisión
   title: Registro de Actividades
+  totalCo2e: Total CO₂e
+  units: Unidades
+  usage: Consumo
+  year: Año
 activity:
   register:
     emissions: Callcular emisiones de Gases de Efecto Invernadero

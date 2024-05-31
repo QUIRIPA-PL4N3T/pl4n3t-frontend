@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useToast } from 'vue-toastification'
-import type { EmissionFactor, EmissionResult, UnitOfMeasure } from '~/api-client'
+import type { EmissionFactor, EmissionResultList, UnitOfMeasure } from '~/api-client'
 import { emissionFactorApi, emissionResultApi, mainApi } from '~/api'
 import { formatOptions, handleError } from '~/utilities/utils'
 import { i18n } from '~/modules/i18n'
@@ -38,6 +38,7 @@ export const useEmissionFactorStore = defineStore('emissionFactor', {
     activities: <any[]>[],
     emissionFactor: <EmissionFactor | null>(null),
     factorUnits: <UnitOfMeasure[]>([]),
+    emissionResults: <EmissionResultList[]>([]),
   }),
   getters: {
     optionsYears(): any {
@@ -107,6 +108,15 @@ export const useEmissionFactorStore = defineStore('emissionFactor', {
 
   },
   actions: {
+    async fetchEmissionResults(filter: any) {
+      try {
+        const { data } = await emissionResultApi.emissionsEmissionResultsList(filter)
+        this.emissionResults = data
+      }
+      catch (error) {
+        console.error(error)
+      }
+    },
     async retrieveFactorData(id: number) {
       try {
         const { data } = await emissionFactorApi.emissionsEmissionFactorsRetrieve({ id })

@@ -3,6 +3,7 @@ Units: Units
 activities:
   activity: Activity
   amount: Amount
+  co2: CO₂
   group:
     selector: Emission Source Group
   hc4: HC4
@@ -14,7 +15,12 @@ activities:
   month: Month
   n20: N2O
   registerActivity: Register an Activity
+  source: Emission Source
   title: Activity Log
+  totalCo2e: Total CO₂e
+  units: Units
+  usage: Consumption
+  year: Year
 activity:
   register:
     emissions: Calculate Greenhouse Gas Emissions

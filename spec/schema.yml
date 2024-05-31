@@ -1927,6 +1927,61 @@ paths:
               schema:
                 $ref: '#/components/schemas/EmissionFactor'
           description: ''
+  /api/emissions/emission-results/:
+    get:
+      operationId: emissionsEmissionResultsList
+      summary: Lista todos los resultados de emisiones
+      parameters:
+        - in: query
+          name: factor_type
+          schema:
+            type: number
+        - in: query
+          name: group
+          schema:
+            type: number
+        - in: query
+          name: location
+          schema:
+            type: number
+        - in: query
+          name: source_type
+          schema:
+            type: number
+      tags:
+        - EmissionsResults
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmissionResultList'
+          description: ''
+  /api/emissions/emission-results/{id}/:
+    get:
+      operationId: emissionsEmissionResultsRetrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this Resultado de Emisión.
+          required: true
+      tags:
+        - EmissionsResults
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmissionResultDetail'
+          description: ''
   /api/emissions/factor-types/:
     get:
       operationId: emissionsFactorTypesList
@@ -2883,6 +2938,17 @@ components:
         - name
         - slug
         - state
+    Co2ByComponent:
+      type: object
+      properties:
+        emission_factor:
+          type: integer
+          nullable: true
+          description: Factor de emisión asociado.
+        co2e:
+          type: number
+          format: double
+          title: CO₂e Equivalente
     CommonActivity:
       type: object
       properties:
@@ -3547,9 +3613,31 @@ components:
           description: Factor de emisión asociado.
       required:
         - greenhouse_gas
+    EmissionGasDetailFull:
+      type: object
+      properties:
+        greenhouse_gas:
+          $ref: '#/components/schemas/GreenhouseGas'
+        value:
+          type: number
+          format: double
+          title: Cantidad Emitida
+        co2e:
+          type: number
+          format: double
+          title: CO₂e Equivalente
+        emission_factor:
+          type: integer
+          nullable: true
+          description: Factor de emisión asociado.
+      required:
+        - greenhouse_gas
     EmissionResult:
       type: object
       properties:
+        id:
+          type: integer
+          readOnly: true
         name:
           type: string
           title: Nombre
@@ -3591,7 +3679,7 @@ components:
           nullable: true
         month:
           allOf:
-            - $ref: '#/components/schemas/EmissionResultMonthEnum'
+            - $ref: '#/components/schemas/MonthFabEnum'
           title: Mes
         year:
           type: integer
@@ -3602,38 +3690,155 @@ components:
         - date
         - documents
         - gas_details
+        - id
         - name
         - unit
         - usage
         - user_created
-    EmissionResultMonthEnum:
-      enum:
-        - '1'
-        - '2'
-        - '3'
-        - '4'
-        - '5'
-        - '6'
-        - '7'
-        - '8'
-        - '9'
-        - '10'
-        - '11'
-        - '12'
-      type: string
-      description: |-
-        * `1` - Enero
-        * `2` - Febrero
-        * `3` - Marzo
-        * `4` - Abril
-        * `5` - Mayo
-        * `6` - Junio
-        * `7` - Julio
-        * `8` - Agosto
-        * `9` - Septiembre
-        * `10` - Octubre
-        * `11` - Noviembre
-        * `12` - Diciembre
+    EmissionResultDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+        date:
+          type: string
+          format: date
+          title: Fecha
+        usage:
+          type: number
+          format: double
+          title: Uso
+        unit:
+          type: integer
+          title: Unidad de Medida
+        total_co2e:
+          type: number
+          format: double
+          title: Total CO₂e
+        gas_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmissionGasDetailFull'
+        total_emissions_gas:
+          type: array
+          items:
+            $ref: '#/components/schemas/TotalEmissionGas'
+        co2_by_component:
+          type: array
+          items:
+            $ref: '#/components/schemas/Co2ByComponent'
+        emission_source:
+          $ref: '#/components/schemas/EmissionsSource'
+        location:
+          type: integer
+          nullable: true
+        user_created:
+          type: integer
+          nullable: true
+        month:
+          allOf:
+            - $ref: '#/components/schemas/MonthFabEnum'
+          title: Mes
+        year:
+          type: integer
+          maximum: 32767
+          minimum: 0
+          title: Año
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+          readOnly: true
+          nullable: true
+      required:
+        - co2_by_component
+        - date
+        - documents
+        - emission_source
+        - gas_details
+        - id
+        - name
+        - total_emissions_gas
+        - unit
+        - usage
+    EmissionResultList:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+        date:
+          type: string
+          format: date
+          title: Fecha
+        usage:
+          type: number
+          format: double
+          title: Uso
+        month:
+          type: string
+          readOnly: true
+        year:
+          type: integer
+          maximum: 32767
+          minimum: 0
+          title: Año
+        unit:
+          type: integer
+          title: Unidad de Medida
+        total_co2e:
+          type: number
+          format: double
+          title: Total CO₂e
+        co2:
+          type: number
+          format: double
+          readOnly: true
+        hc4:
+          type: number
+          format: double
+          readOnly: true
+        n2o:
+          type: number
+          format: double
+          readOnly: true
+        co:
+          type: number
+          format: double
+          readOnly: true
+        hc:
+          type: number
+          format: double
+          readOnly: true
+        unit_symbol:
+          type: string
+          readOnly: true
+        source_name:
+          type: string
+          readOnly: true
+      required:
+        - co
+        - co2
+        - date
+        - hc
+        - hc4
+        - id
+        - month
+        - n2o
+        - name
+        - source_name
+        - unit
+        - unit_symbol
+        - usage
     EmissionSourceGroup:
       type: object
       properties:
@@ -4486,6 +4691,34 @@ components:
         * `BASIC` - Básica
         * `PREMIUM` - Premium
         * `ELITE` - Elite
+    MonthFabEnum:
+      enum:
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        - '5'
+        - '6'
+        - '7'
+        - '8'
+        - '9'
+        - '10'
+        - '11'
+        - '12'
+      type: string
+      description: |-
+        * `1` - Enero
+        * `2` - Febrero
+        * `3` - Marzo
+        * `4` - Abril
+        * `5` - Mayo
+        * `6` - Junio
+        * `7` - Julio
+        * `8` - Agosto
+        * `9` - Septiembre
+        * `10` - Octubre
+        * `11` - Noviembre
+        * `12` - Diciembre
     NullEnum:
       enum:
         - null
@@ -5730,6 +5963,21 @@ components:
       required:
         - access
         - refresh
+    TotalEmissionGas:
+      type: object
+      properties:
+        greenhouse_gas:
+          $ref: '#/components/schemas/GreenhouseGas'
+        value:
+          type: number
+          format: double
+          title: Cantidad Emitida
+        co2e:
+          type: number
+          format: double
+          title: CO₂e Equivalente
+      required:
+        - greenhouse_gas
     UnitOfMeasure:
       type: object
       properties:

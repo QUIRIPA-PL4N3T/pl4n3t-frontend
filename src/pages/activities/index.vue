@@ -3,9 +3,13 @@ import { storeToRefs } from 'pinia'
 
 const router = useRouter()
 const classificationStore = useClassificationStore()
-const { classificationGroups } = storeToRefs(classificationStore)
 const emissionSourceStore = useEmissionSourceStore()
+const emissionFactor = useEmissionFactorStore()
+const authStore = useAuthStore()
+
+const { classificationGroups } = storeToRefs(classificationStore)
 const { currentGlobalLocationId } = storeToRefs(emissionSourceStore)
+const { user } = storeToRefs(authStore)
 const { t } = useI18n()
 
 function filterByGroup(id: number) {
@@ -19,6 +23,26 @@ function goRegisterActivity(id: number) {
     params: { id },
   })
 }
+
+async function loadData() {
+  if (user.value && currentGlobalLocationId.value) {
+    emissionFactor.fetchEmissionResults({
+      location: currentGlobalLocationId.value,
+    })
+  }
+}
+
+watch(() => user.value, () => {
+  loadData()
+})
+
+watch(() => currentGlobalLocationId.value, () => {
+  loadData()
+})
+
+onMounted(() => {
+  loadData()
+})
 </script>
 
 <template>
