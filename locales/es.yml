@@ -100,6 +100,7 @@ delete: Eliminar
 distibution:
   bySede: Distribución por Sede
 distribution:
+  byMonth: Distribución Mensual
   bySede: Distribución por Sede
 edit: Editar
 email: Correo

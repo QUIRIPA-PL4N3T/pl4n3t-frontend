@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useToast } from 'vue-toastification'
-import { brandApi, companyApi, locationApi } from '~/api'
+import { brandApi, companyApi, dashboardApi, locationApi } from '~/api'
 import type {
   Brand,
   Company,
@@ -23,6 +23,7 @@ export const useCompanyStore = defineStore('company', {
     currentBrand: <Brand>JSON.parse(JSON.stringify(DEFAULT_BRAND)),
     currentLocation: <Location>DEFAULT_LOCATION,
     company: <Company>DEFAULT_COMPANY,
+    dashboardData: <any>({}),
   }),
   getters: {
     brands(): Brand[] {
@@ -60,6 +61,16 @@ export const useCompanyStore = defineStore('company', {
     },
   },
   actions: {
+    async fetchDashboardData(id: number) {
+      try {
+        const requestParameters = { id }
+        const { data } = await dashboardApi.companiesDashboardRetrieve(requestParameters)
+        this.dashboardData = data
+      }
+      catch (error) {
+        console.error(error)
+      }
+    },
     async fetchCompany() {
       try {
         const { data: companies } = await companyApi.companiesCompaniesList()

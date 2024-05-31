@@ -70,6 +70,7 @@ currentLocation:
   required: You must select a Location to be able to Continue
 delete: Delete
 distribution:
+  byMonth: Monthly Distribution
   bySede: Distribution by Headquarters
 edit: Edit
 email: Email

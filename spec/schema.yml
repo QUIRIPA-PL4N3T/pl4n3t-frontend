@@ -1319,6 +1319,28 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/companies/dashboard/:
+    get:
+      operationId: companiesDashboardRetrieve
+      summary: Recuperar los datos del dashboard para una sede especifica
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          description: Location ID
+          required: true
+      tags:
+        - Dashboard
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardData'
+          description: ''
   /api/companies/emission-source-month-entries/:
     get:
       operationId: companiesEmissionSourceMonthEntriesList
@@ -3345,6 +3367,29 @@ components:
       required:
         - email
         - password
+    DashboardData:
+      type: object
+      properties:
+        gas_emissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/GasEmissionSummary'
+        emission_sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmissionSourceSummary'
+        gei_distribution:
+          type: array
+          items:
+            $ref: '#/components/schemas/GEISummary'
+        total_emissions:
+          type: number
+          format: double
+      required:
+        - emission_sources
+        - gas_emissions
+        - gei_distribution
+        - total_emissions
     Document:
       type: object
       properties:
@@ -3798,7 +3843,7 @@ components:
         total_co2e:
           type: number
           format: double
-          title: Total CO₂e
+          readOnly: true
         co2:
           type: number
           format: double
@@ -3836,6 +3881,7 @@ components:
         - n2o
         - name
         - source_name
+        - total_co2e
         - unit
         - unit_symbol
         - usage
@@ -3895,6 +3941,17 @@ components:
         - emission_factor_types
         - id
         - name
+    EmissionSourceSummary:
+      type: object
+      properties:
+        source_type:
+          type: string
+        value:
+          type: number
+          format: double
+      required:
+        - source_type
+        - value
     EmissionsSource:
       type: object
       properties:
@@ -4248,6 +4305,17 @@ components:
         - description
         - id
         - name
+    GEISummary:
+      type: object
+      properties:
+        category:
+          type: string
+        percentage:
+          type: number
+          format: double
+      required:
+        - category
+        - percentage
     GHGScope:
       type: object
       properties:
@@ -4274,6 +4342,21 @@ components:
         - code
         - id
         - name
+    GasEmissionSummary:
+      type: object
+      properties:
+        gas_name:
+          type: string
+        total_value:
+          type: number
+          format: double
+        percentage_change:
+          type: number
+          format: double
+      required:
+        - gas_name
+        - percentage_change
+        - total_value
     GoogleAccount:
       type: object
       properties:

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// import { storeToRefs } from 'pinia'
+import { storeToRefs } from 'pinia'
 
 // Import Images
 import shade1 from '~/assets/images/all-img/shade-1.png'
@@ -13,86 +13,154 @@ import {
   stackedDark,
 } from '~/constants/data'
 
-// const emissionFactorStore = useEmissionFactorStore()
+const companyStore = useCompanyStore()
+const authStore = useAuthStore()
+const emissionSourceStore = useEmissionSourceStore()
+
+const { user } = storeToRefs(authStore)
+const { currentGlobalLocationId } = storeToRefs(emissionSourceStore)
+const { dashboardData } = storeToRefs(companyStore)
+
 const themeSettingsStore = useThemeSettingsStore()
 const { t } = useI18n()
-// const companyStore = useCompanyStore()
-// const { statistics } = storeToRefs(emissionFactorStore)
-// const { company } = storeToRefs(companyStore)
 
-const statistics = [
+const statistics = ref([
   {
-    title: 'CO₂ - Dióxido de Carbono',
-    count: '354',
+    title: 'Dióxido de Carbono',
+    count: '0',
     bg: 'bg-warning-500',
     text: 'text-primary-500',
-    percent: '25.67% ',
+    percent: '0',
     icon: 'heroicons:arrow-trending-up',
     img: shade1,
     percentClass: 'text-primary-500',
   },
   {
-    title: 'CH₄ - Metano ',
-    count: '86,9',
-
+    title: 'Hexafluoruro de Azufre',
+    count: '0',
     bg: 'bg-info-500',
     text: 'text-primary-500',
-    percent: '8.67%',
+    percent: '0',
     icon: 'heroicons:arrow-trending-up',
     img: shade2,
     percentClass: 'text-primary-500',
   },
   {
-    title: 'N₂O - Óxido Nitroso',
-    count: '15%',
+    title: 'Hidrocarburos no quemados',
+    count: '0',
     bg: 'bg-primary-500',
     text: 'text-danger-500',
-    percent: '1.67%  ',
+    percent: '0',
+    icon: 'heroicons:arrow-trending-down',
+    img: shade3,
+    percentClass: 'text-danger-500',
+  },
+  {
+    title: 'Hidrofluorocarbonos',
+    count: '0',
+    bg: 'bg-success-500',
+    text: 'text-primary-500',
+    percent: '0',
+    icon: 'heroicons:arrow-trending-up',
+    img: shade4,
+    percentClass: 'text-primary-500',
+  },
+  {
+    title: 'Metano',
+    count: '0',
+    bg: 'bg-indigo-500',
+    text: 'text-primary-500',
+    percent: '0',
+    icon: 'heroicons:arrow-trending-up',
+    img: shade1,
+    percentClass: 'text-primary-500',
+  },
+  {
+    title: 'Monóxido de Carbono',
+    count: '0',
+    bg: 'bg-sky-500',
+    text: 'text-primary-500',
+    percent: '0',
+    icon: 'heroicons:arrow-trending-up',
+    img: shade2,
+    percentClass: 'text-primary-500',
+  },
+  {
+    title: 'Óxido Nitroso"',
+    count: '0',
+    bg: 'bg-orange-500',
+    text: 'text-danger-500',
+    percent: '0',
     icon: 'heroicons:arrow-trending-down',
     img: shade3,
     percentClass: 'text-danger-500',
   },
   {
     title: 'Perfluorocarbonos',
-    count: '654',
-    bg: 'bg-success-500',
+    count: '0',
+    bg: 'bg-yellow-500',
     text: 'text-primary-500',
-    percent: '11.67%  ',
+    percent: '0',
     icon: 'heroicons:arrow-trending-up',
     img: shade4,
     percentClass: 'text-primary-500',
   },
-]
+])
 
-const Campaigns = [
+const EmissionSources = ref([
   {
     name: 'Tipo de Fuente',
     value: 'Valor',
   },
-  {
-    name: 'Combustible',
-    value: '40%',
-  },
-  {
-    name: 'Electricidad',
-    value: '28%',
-  },
-  {
-    name: 'Papel',
-    value: '34%',
-  },
-  {
-    name: 'Viajes',
-    value: '17%',
-  },
-]
+])
 
-// const rangeDate = null
+function updateDashboardData() {
+  if (!dashboardData.value)
+    return
 
-// const show = $ref<boolean[]>([])
-// function toggleGraphVisibility(index: number) {
-//   show[index] = !show[index]
-// }
+  // Updates gas statistics
+  statistics.value.forEach((stat) => {
+    const gasData = dashboardData.value.gas_emissions.find((gas: any) => gas.gas_name === stat.title)
+    if (gasData) {
+      stat.count = gasData.total_value.toFixed(3)
+      stat.percent = gasData.percentage_change.toString()
+      // Updates the color of the percentage depending on whether it is positive or negative
+      stat.percentClass = gasData.percentage_change >= 0 ? 'text-primary-500' : 'text-danger-500'
+      stat.icon = gasData.percentage_change >= 0 ? 'heroicons:arrow-trending-up' : 'heroicons:arrow-trending-down'
+    }
+  })
+
+  // Update EmissionSources
+  EmissionSources.value.length = 1 // Keeps only the first element, the header
+  dashboardData.value.emission_sources.forEach((source: any) => {
+    EmissionSources.value.push({
+      name: source.source_type,
+      value: `${source.value.toFixed(2)}%`,
+    })
+  })
+}
+
+async function loadData() {
+  if (user.value && currentGlobalLocationId.value)
+    await companyStore.fetchDashboardData(currentGlobalLocationId.value)
+  updateDashboardData()
+}
+
+watch(() => dashboardData.value, () => {
+  updateDashboardData()
+})
+
+watch(() => user.value, () => {
+  loadData()
+})
+
+watch(() => currentGlobalLocationId.value, () => {
+  loadData()
+})
+
+onMounted(() => {
+  loadData()
+})
 </script>
 
 <template>
@@ -139,7 +207,7 @@ const Campaigns = [
           <Card>
             <header class="md:flex md:space-y-0 space-y-4">
               <h6 class="flex-1 text-slate-900 dark:text-white">
-                {{ t('distribution.bySede') }}
+                {{ t('distribution.byMonth') }}
               </h6>
             </header>
 
@@ -161,7 +229,7 @@ const Campaigns = [
           <Card :title="t('emission.sources')">
             <ul class="divide-y divide-slate-100 dark:divide-slate-700">
               <li
-                v-for="(item, i) in Campaigns"
+                v-for="(item, i) in EmissionSources"
                 :key="i"
                 class="first:text-xs text-sm first:text-slate-600 text-slate-600 dark:text-slate-300 py-2 first:uppercase"
               >

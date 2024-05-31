@@ -5,6 +5,7 @@ import {
   CompanyEmissionSourceEntriesApi,
   CompanyEmissionSourcesApi,
   CompanyMembersApi,
+  DashboardApi,
   DocumentsApi,
   EmissionFactorsApi,
   EmissionSourceGroupsApi,
@@ -45,3 +46,4 @@ export const sourceTypeApi = new SourceTypesApi(undefined, apiUrl, axiosInstance
 export const documentApi = new DocumentsApi(undefined, apiUrl, axiosInstance)
 export const membershipsApi = new MembershipsApi(undefined, apiUrl, axiosInstance)
 export const emissionResultApi = new EmissionsResultsApi(undefined, apiUrl, axiosInstance)
+export const dashboardApi = new DashboardApi(undefined, apiUrl, axiosInstance)
