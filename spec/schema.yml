@@ -2039,6 +2039,31 @@ paths:
               schema:
                 $ref: '#/components/schemas/GreenhouseGas'
           description: ''
+  /api/emissions/save-emission-data/:
+    post:
+      operationId: emissionsSaveEmissionDataCreate
+      description: Iniciar sesión con una cuenta de google
+      tags:
+        - EmissionsResults
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmissionResult'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EmissionResult'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EmissionResult'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '201':
+          description: Los datos fuerón guardados con éxito
+        '404':
+          description: los datos no son validos
   /api/emissions/source-types/:
     get:
       operationId: emissionsSourceTypesList
@@ -3498,6 +3523,54 @@ components:
         - name
         - source_type
         - unit
+    EmissionGasDetail:
+      type: object
+      properties:
+        greenhouse_gas:
+          type: integer
+          title: Gas de Efecto Invernadero
+        value:
+          type: number
+          format: double
+          title: Cantidad Emitida
+        co2e:
+          type: number
+          format: double
+          title: CO₂e Equivalente
+      required:
+        - greenhouse_gas
+    EmissionResult:
+      type: object
+      properties:
+        name:
+          type: string
+          title: Nombre
+          maxLength: 255
+        date:
+          type: string
+          format: date
+          title: Fecha
+        usage:
+          type: number
+          format: double
+          title: Uso
+        unit:
+          type: integer
+          title: Unidad de Medida
+        total_co2e:
+          type: number
+          format: double
+          title: Total CO₂e
+        gas_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmissionGasDetail'
+      required:
+        - date
+        - gas_details
+        - name
+        - unit
+        - usage
     EmissionSourceGroup:
       type: object
       properties:

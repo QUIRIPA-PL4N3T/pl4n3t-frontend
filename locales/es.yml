@@ -204,6 +204,9 @@ emissionSource:
   vehicle_load_type: Tipo de Vehículo
   vehicle_name: Marca ó Modelo
   vehicle_type: Clase de Vehículo
+emissions:
+  saved:
+    success: Los datos fuerón guardados con éxito
 equipments:
   add: Agregar
   modal:

@@ -120,6 +120,25 @@ function calculateEmissions() {
   })
 }
 
+async function saveEmissionData() {
+  const data = {
+    name: 'Resultado de Emisión',
+    date: new Date().toISOString().split('T')[0],
+    usage: usage.value,
+    unit: unit.value,
+    total_co2e: results.value!.CO2e,
+    gas_details: Object.entries(groupedResults.value!).flatMap(([_, factors]) =>
+      Object.entries(factors).map(([acronym, value]) => ({
+        greenhouse_gas: getGreenHouseGasByAcronym(acronym)!.id,
+        value,
+        co2e: value * globalWarmingPotential[acronym],
+      })),
+    ),
+  }
+
+  await emissionFactorStore.saveEmissionResult(data)
+}
+
 const title = computed(() => {
   if (emissionFactor.value)
     return emissionFactor.value.name
@@ -165,6 +184,7 @@ onMounted(() => {
     <h4>{{ title }}</h4>
     <p>{{ subHeading }}</p>
   </div>
+  <!-- Greenhouse calculator -->
   <div class="calculator-container">
     <FormKit
       type="form"
@@ -209,6 +229,7 @@ onMounted(() => {
     </FormKit>
   </div>
 
+  <!-- Greenhouse emission by component -->
   <div v-if="groupedResults && results">
     <template v-for="(factors, group) in groupedResults" :key="group">
       <div class="results">
@@ -255,7 +276,8 @@ onMounted(() => {
     </template>
   </div>
 
-  <div v-if="results" class="grid grid-cols-2 py-4 px-2 mt-2 border rounded-md">
+  <!-- Total Co2 emissions -->
+  <div v-if="results" class="grid grid-cols-2 py-4 px-2 mt-2 border rounded-md mb-2">
     <div class="col-span-1 font-bold">
       <strong class="text-sm">
         {{ t('total_carbon_dioxide_equivalent') }}
@@ -263,6 +285,16 @@ onMounted(() => {
     </div>
     <div class="col-span-1 text-md text-right pe-16">
       {{ results.CO2e.toFixed(7) }} kg de CO₂e
+    </div>
+  </div>
+
+  <div class="col-span-2 flex justify-end">
+    <div class="space-y-5">
+      <Button
+        :text="t('save')"
+        btn-class="btn-dark"
+        @click="saveEmissionData()"
+      />
     </div>
   </div>
 </template>

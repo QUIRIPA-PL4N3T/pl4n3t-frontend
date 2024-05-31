@@ -171,6 +171,9 @@ emissionSource:
   wasteName: Waste Name
   wasteRegister: Select the waste generated that is tracked and recorded
   wasteType: To which of the following waste classes does the emission source belong?
+emissions:
+  saved:
+    success: Data was saved successfully
 equipments:
   modal:
     title: Registered organization emission sources

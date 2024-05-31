@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia'
-import type { EmissionFactor, UnitOfMeasure } from '~/api-client'
-import { emissionFactorApi, mainApi } from '~/api'
-import { formatOptions } from '~/utilities/utils'
+import { useToast } from 'vue-toastification'
+import type { EmissionFactor, EmissionResult, UnitOfMeasure } from '~/api-client'
+import { emissionFactorApi, emissionResultApi, mainApi } from '~/api'
+import { formatOptions, handleError } from '~/utilities/utils'
+import { i18n } from '~/modules/i18n'
 
 export interface companyInterface {
   title: string
@@ -27,6 +29,8 @@ const months: string[] = [
   'Noviembre',
   'Diciembre',
 ]
+
+const toast = useToast()
 
 export const useEmissionFactorStore = defineStore('emissionFactor', {
   state: () => ({
@@ -120,6 +124,18 @@ export const useEmissionFactorStore = defineStore('emissionFactor', {
       }
       catch (error) {
         console.error(error)
+      }
+    },
+    async saveEmissionResult(results: EmissionResult) {
+      try {
+        const requestParameters = { emissionResult: results }
+        const { status } = await emissionResultApi.emissionsSaveEmissionDataCreate(requestParameters)
+        if (status === 201)
+          toast.success(i18n.t('emissions.saved.success'))
+      }
+      catch (error) {
+        toast.error(error)
+        console.error(handleError(error))
       }
     },
     fetchActivities(data: any) {
