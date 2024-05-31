@@ -45,6 +45,7 @@ button:
   back: Atrás
 calculate: Calcular
 cancel: Cancelar
+carbon_dioxide_equivalent: Equivalente de Dióxido de Carbono (CO₂e)
 company:
   addMember: Agregar
   address: Dirección
@@ -101,6 +102,7 @@ emission:
 emission source-edit:
   title: Registro de Inventario
 emissionFactor:
+  applicationPercentage: Porcentaje de aplicación
   greenhouseGas: Gas
   gwp: GWP
   name: Nombre del Factor de Emissión
@@ -484,6 +486,7 @@ selectAnOption: Seleccione una Opción
 signInSocial: O Continue con
 since:
   lastMonth: Desde el último mes
+total_carbon_dioxide_equivalent: Total Equivalente de Dióxido de Carbono (CO₂e)
 view: Ver
 waste:
   companyGenerationQuestion: ¿Que tipo de desperdición se generan en las operaciones?

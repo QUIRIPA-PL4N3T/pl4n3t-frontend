@@ -34,6 +34,7 @@ brands:
   newBrand: New brand
 calculate: Calculate
 cancel: Cancel
+carbon_dioxide_equivalent: Carbon Dioxide Equivalent (CO₂e)
 company:
   addMember: Add
   address: Address
@@ -69,6 +70,7 @@ email: Email
 emission:
   sources: Emission Sources
 emissionFactor:
+  applicationPercentage: Application percentage
   greenhouseGas: Gas
   gwp: GWP
   name: Emission Factor Name
@@ -363,6 +365,7 @@ selectAnOption: Select an Option
 signInSocial: Or continue with
 since:
   lastMonth: since last month
+total_carbon_dioxide_equivalent: Total Carbon Dioxide Equivalent (CO₂e)
 waste:
   companyGenerationQuestion: What type of waste is generated in operations?
 yes: Yes

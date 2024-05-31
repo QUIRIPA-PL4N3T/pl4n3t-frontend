@@ -3388,13 +3388,61 @@ components:
             * `FREQUENCY` - Frecuencia
             * `ENERGY_CONSUMPTION` - Consumo de energía
             * `GEI_EMISSION` - Emisiones de gases de efecto Invernadero
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmissionFactorComponent'
+          readOnly: true
+        application_percentage:
+          type: number
+          format: double
+          maximum: 1
+          minimum: 0
+          title: Porcentaje de Aplicación
+          description: 1 equivale al 100%
       required:
+        - components
         - description
         - factor_type
         - greenhouse_emission_gases
         - id
         - name
         - source_type
+        - unit
+    EmissionFactorComponent:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        component_factor:
+          type: integer
+          title: Factor de Emisión Componente
+        application_percentage:
+          type: number
+          format: double
+          maximum: 1
+          minimum: 0
+          title: Porcentaje de Aplicación
+          description: 1 equivale al 100%
+        component_name:
+          type: string
+          title: Nombre del Componente
+          maxLength: 255
+        unit:
+          allOf:
+            - $ref: '#/components/schemas/UnitOfMeasure'
+          readOnly: true
+        greenhouse_emission_gases:
+          type: array
+          items:
+            $ref: '#/components/schemas/GreenhouseGasEmission'
+          readOnly: true
+      required:
+        - component_factor
+        - component_name
+        - greenhouse_emission_gases
+        - id
         - unit
     EmissionFactorList:
       type: object
