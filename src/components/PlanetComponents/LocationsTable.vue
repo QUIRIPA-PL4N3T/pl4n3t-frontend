@@ -59,7 +59,7 @@ function editItem(id: number) {
   <div v-if="company.locations">
     <VueGoodTable
       :columns="columns"
-      style-class=" vgt-table  lesspadding2 centered "
+      style-class=" vgt-table less-padding2 centered "
       :rows="company.locations"
       :pagination-options="{
         enabled: true,

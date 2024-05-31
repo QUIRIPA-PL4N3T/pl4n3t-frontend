@@ -75,7 +75,7 @@ export default {
   <div>
     <vue-good-table
       :columns="columns"
-      style-class=" vgt-table   table-head lesspadding2   v-middle"
+      style-class=" vgt-table table-head less-padding2   v-middle"
       :rows="recetOrder"
       :pagination-options="{
         enabled: true,

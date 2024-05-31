@@ -129,7 +129,7 @@ export default {
   <div class="-mx-6 -mb-6">
     <vue-good-table
       :columns="columns"
-      style-class=" vgt-table   lesspadding v-middle table-head  rounded-md "
+      style-class=" vgt-table less-padding v-middle table-head  rounded-md "
       :rows="teamtable"
       :pagination-options="{
         enabled: true,

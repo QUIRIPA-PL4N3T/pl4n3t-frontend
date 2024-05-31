@@ -76,7 +76,7 @@ export default {
   <div>
     <vue-good-table
       :columns="columns"
-      style-class=" vgt-table  lesspadding2 centered "
+      style-class=" vgt-table  less-padding2 centered "
       :rows="advancedTable"
       :pagination-options="{
         enabled: true,
