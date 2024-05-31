@@ -11,6 +11,9 @@ const {
   optionsMonths,
   optionsYears,
 } = storeToRefs(emissionFactorStore)
+const emissionSourceStore = useEmissionSourceStore()
+
+const { currentGlobalLocationId } = storeToRefs(emissionSourceStore)
 
 const { t } = useI18n()
 
@@ -127,12 +130,23 @@ async function saveEmissionData() {
     usage: usage.value,
     unit: unit.value,
     total_co2e: results.value!.CO2e,
-    gas_details: Object.entries(groupedResults.value!).flatMap(([_, factors]) =>
-      Object.entries(factors).map(([acronym, value]) => ({
-        greenhouse_gas: getGreenHouseGasByAcronym(acronym)!.id,
-        value,
-        co2e: value * globalWarmingPotential[acronym],
-      })),
+    emission_source: model.value?.id,
+    location: currentGlobalLocationId.value,
+    month: month.value + 1,
+    year: year.value,
+    gas_details: Object.entries(groupedResults.value!).flatMap(([group, factors]) =>
+      Object.entries(factors).map(([acronym, value]) => {
+        const greenhouseGas = getGreenHouseGasByAcronym(acronym)
+        if (!greenhouseGas)
+          throw new Error(`Greenhouse gas not found for acronym: ${acronym}`)
+
+        return {
+          emission_factor: getFactorIDByName(group),
+          greenhouse_gas: greenhouseGas.id,
+          value,
+          co2e: value * globalWarmingPotential[acronym],
+        }
+      }),
     ),
   }
 
@@ -164,6 +178,16 @@ function getGreenhouseNameByAcronym(acronym: string): string {
   if (greenhouseGas)
     return greenhouseGas.name
   return acronym
+}
+
+function getFactorIDByName(name: string): number {
+  if (name === emissionFactor.value?.name) {
+    return emissionFactor.value.id
+  }
+  else {
+    const component = emissionFactor.value?.components.find(item => item.component_name === name)
+    return component?.component_factor || 0
+  }
 }
 
 watch(() => model.value, () => {

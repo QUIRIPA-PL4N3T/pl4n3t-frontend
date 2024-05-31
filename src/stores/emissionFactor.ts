@@ -126,7 +126,7 @@ export const useEmissionFactorStore = defineStore('emissionFactor', {
         console.error(error)
       }
     },
-    async saveEmissionResult(results: EmissionResult) {
+    async saveEmissionResult(results: any) {
       try {
         const requestParameters = { emissionResult: results }
         const { status } = await emissionResultApi.emissionsSaveEmissionDataCreate(requestParameters)

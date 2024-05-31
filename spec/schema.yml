@@ -2061,7 +2061,11 @@ paths:
         - jwtAuth: []
       responses:
         '201':
-          description: Los datos fuerón guardados con éxito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmissionResult'
+          description: ''
         '404':
           description: los datos no son validos
   /api/emissions/source-types/:
@@ -3537,6 +3541,10 @@ components:
           type: number
           format: double
           title: CO₂e Equivalente
+        emission_factor:
+          type: integer
+          nullable: true
+          description: Factor de emisión asociado.
       required:
         - greenhouse_gas
     EmissionResult:
@@ -3565,12 +3573,67 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EmissionGasDetail'
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+          readOnly: true
+          nullable: true
+        emission_source:
+          type: integer
+          nullable: true
+        location:
+          type: integer
+          nullable: true
+        user_created:
+          type: integer
+          readOnly: true
+          nullable: true
+        month:
+          allOf:
+            - $ref: '#/components/schemas/EmissionResultMonthEnum'
+          title: Mes
+        year:
+          type: integer
+          maximum: 32767
+          minimum: 0
+          title: Año
       required:
         - date
+        - documents
         - gas_details
         - name
         - unit
         - usage
+        - user_created
+    EmissionResultMonthEnum:
+      enum:
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        - '5'
+        - '6'
+        - '7'
+        - '8'
+        - '9'
+        - '10'
+        - '11'
+        - '12'
+      type: string
+      description: |-
+        * `1` - Enero
+        * `2` - Febrero
+        * `3` - Marzo
+        * `4` - Abril
+        * `5` - Mayo
+        * `6` - Junio
+        * `7` - Julio
+        * `8` - Agosto
+        * `9` - Septiembre
+        * `10` - Octubre
+        * `11` - Noviembre
+        * `12` - Diciembre
     EmissionSourceGroup:
       type: object
       properties:
@@ -3922,7 +3985,7 @@ components:
         emission_agent:
           type: integer
         month:
-          $ref: '#/components/schemas/MonthEnum'
+          $ref: '#/components/schemas/EmissionsSourceMonthEntryMonthEnum'
         emission:
           type: number
           format: double
@@ -3934,6 +3997,34 @@ components:
         - month
         - register_date
         - unit
+    EmissionsSourceMonthEntryMonthEnum:
+      enum:
+        - January
+        - February
+        - March
+        - April
+        - May
+        - June
+        - July
+        - August
+        - September
+        - October
+        - November
+        - December
+      type: string
+      description: |-
+        * `January` - Enero
+        * `February` - Febrero
+        * `March` - Marzo
+        * `April` - Abril
+        * `May` - Mayo
+        * `June` - Junio
+        * `July` - Julio
+        * `August` - Agosto
+        * `September` - Septiembre
+        * `October` - Octubre
+        * `November` - Noviembre
+        * `December` - Diciembre
     FactorType:
       type: object
       properties:
@@ -4395,34 +4486,6 @@ components:
         * `BASIC` - Básica
         * `PREMIUM` - Premium
         * `ELITE` - Elite
-    MonthEnum:
-      enum:
-        - January
-        - February
-        - March
-        - April
-        - May
-        - June
-        - July
-        - August
-        - September
-        - October
-        - November
-        - December
-      type: string
-      description: |-
-        * `January` - Enero
-        * `February` - Febrero
-        * `March` - Marzo
-        * `April` - Abril
-        * `May` - Mayo
-        * `June` - Junio
-        * `July` - Julio
-        * `August` - Agosto
-        * `September` - Septiembre
-        * `October` - Octubre
-        * `November` - Noviembre
-        * `December` - Diciembre
     NullEnum:
       enum:
         - null
@@ -4985,7 +5048,7 @@ components:
         emission_agent:
           type: integer
         month:
-          $ref: '#/components/schemas/MonthEnum'
+          $ref: '#/components/schemas/EmissionsSourceMonthEntryMonthEnum'
         emission:
           type: number
           format: double
