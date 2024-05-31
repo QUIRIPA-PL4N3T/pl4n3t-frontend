@@ -135,18 +135,20 @@ async function saveEmissionData() {
     month: month.value + 1,
     year: year.value,
     gas_details: Object.entries(groupedResults.value!).flatMap(([group, factors]) =>
-      Object.entries(factors).map(([acronym, value]) => {
-        const greenhouseGas = getGreenHouseGasByAcronym(acronym)
-        if (!greenhouseGas)
-          throw new Error(`Greenhouse gas not found for acronym: ${acronym}`)
+      Object.entries(factors)
+        .filter(([_, value]) => value !== 0) // Filter only those values different from 0
+        .map(([acronym, value]) => {
+          const greenhouseGas = getGreenHouseGasByAcronym(acronym)
+          if (!greenhouseGas)
+            throw new Error(`Greenhouse gas not found for acronym: ${acronym}`)
 
-        return {
-          emission_factor: getFactorIDByName(group),
-          greenhouse_gas: greenhouseGas.id,
-          value,
-          co2e: value * globalWarmingPotential[acronym],
-        }
-      }),
+          return {
+            emission_factor: getFactorIDByName(group),
+            greenhouse_gas: greenhouseGas.id,
+            value,
+            co2e: value * globalWarmingPotential[acronym],
+          }
+        }),
     ),
   }
 
