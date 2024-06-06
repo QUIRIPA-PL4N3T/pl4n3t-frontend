@@ -53,7 +53,7 @@ function getIcon(value: string | number | boolean) {
         class="space-x-4 relative flex items-center mb-5 rtl:space-x-reverse"
       >
         <span class="text-[32px] leading-10 font-medium">
-          ${{ membership.price !== '0.00' ? membership.price : 'FREE' }}
+          {{ membership.price !== '0.00' ? `$ ${membership.price}` : 'FREE' }}
         </span>
       </div>
       <p class="text-purple-800 dark:text-slate-300 text-lg">
@@ -73,7 +73,7 @@ function getIcon(value: string | number | boolean) {
             <strong class="mr-1 font-semibold text-slate-700">
               {{ attr.attr }}
             </strong>
-            <span class="text-md">- {{ getIcon(membership?.[attr.field]) }}</span>
+            <span class="text-md">: {{ getIcon(membership?.[attr.field]) }}</span>
           </p>
         </li>
       </ul>

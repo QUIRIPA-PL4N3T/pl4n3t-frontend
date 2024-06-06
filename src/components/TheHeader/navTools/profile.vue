@@ -12,7 +12,7 @@ const ProfileMenu = [
     label: t('menu.profile'),
     icon: 'heroicons-outline:user',
     link: () => {
-      router.push('profile')
+      router.push({ name: 'profile' })
     },
   },
   // {
@@ -40,14 +40,14 @@ const ProfileMenu = [
     label: t('menu.settings'),
     icon: 'heroicons-outline:cog',
     link: () => {
-      router.push('settings')
+      router.push({ name: 'settings' })
     },
   },
   {
     label: t('menu.membership'),
     icon: 'heroicons-outline:credit-card',
     link: () => {
-      router.push('my-membership')
+      router.push({ name: 'my-membership' })
     },
   },
   // {

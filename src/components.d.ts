@@ -123,7 +123,7 @@ declare module 'vue' {
     ServiceRegisterFields: typeof import('./components/ActivityRegisterPartialForm/ServiceRegisterFields.vue')['default']
     Settings: typeof import('./components/Settings/index.vue')['default']
     SignInSocial: typeof import('./components/SignInSocial.vue')['default']
-    SkeletonForm: typeof import('./components/Skeleton/SkeletonForm.vue')['default']
+    SkeletonForm: typeof import('./components/Reports/SkeletonForm.vue')['default']
     SkeletonReportList: typeof import('./components/Reports/SkeletonReportList.vue')['default']
     Skin: typeof import('./components/Settings/Tools/Skin.vue')['default']
     SplitDropdown: typeof import('./components/Dropdown/SplitDropdown.vue')['default']

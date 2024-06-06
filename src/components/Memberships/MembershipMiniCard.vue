@@ -25,6 +25,9 @@ const {
           badge-class="bg-primary-500 text-primary-500 bg-opacity-[0.12]"
         />
       </div>
+      <p v-if="companyMembership.days_remaining !== ''" class="text-purple-800 dark:text-slate-300 text-lg">
+        {{ companyMembership.days_remaining }}
+      </p>
       <p class="text-purple-800 dark:text-slate-300 text-lg">
         {{ companyMembership.start_date }} / {{ companyMembership.end_date }}
       </p>
