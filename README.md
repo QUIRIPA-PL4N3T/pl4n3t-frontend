@@ -1,31 +1,3 @@
-<p align='center'>
-  <img src='https://user-images.githubusercontent.com/11247099/154486817-f86b8f20-5463-4122-b6e9-930622e757f2.png' alt='Vitesse - Opinionated Vite Starter Template' width='600'/>
-</p>
-
-<p align='center'>
-Mocking up web app with <b>Vitesse</b><sup><em>(speed)</em></sup><br>
-</p>
-
-<br>
-
-<p align='center'>
-<a href="https://vitesse.netlify.app/">Live Demo</a>
-</p>
-
-<br>
-
-> **Note**: This template is created during the early transition of Vue 3 and Vite. At this moment, if you are seeking for better Vue developer experience and more consistent maintenance, we recommend using [Nuxt 3](https://nuxt.com) instead (it also works perfectly with SPA or SSG as needed). This template still serves as a reference, but expect slower updates.
-
-<br>
-
-<p align='center'>
-<b>English</b> | <a href="https://github.com/antfu/vitesse/blob/main/README.zh-CN.md">简体中文</a>
-<!-- Contributors: Thanks for getting interested, however we DON'T accept new translations to the README, thanks. -->
-</p>
-
-<br>
-
-
 ## Features
 
 - ⚡️ [Vue 3](https://github.com/vuejs/core), [Vite](https://github.com/vitejs/vite), [pnpm](https://pnpm.io/), [esbuild](https://github.com/evanw/esbuild) - born with fastness
@@ -38,11 +10,9 @@ Mocking up web app with <b>Vitesse</b><sup><em>(speed)</em></sup><br>
 
 - 📑 [Layout system](./src/layouts)
 
-- 📲 [PWA](https://github.com/antfu/vite-plugin-pwa)
+- 🎨 [Tailwind](https://tailwindcss.com/docs/installation)
 
-- 🎨 [UnoCSS](https://github.com/antfu/unocss) - the instant on-demand atomic CSS engine
-
-- 😃 [Use icons from any icon sets with classes](https://github.com/antfu/unocss/tree/main/packages/preset-icons)
+- 🧩 [OpenAPI Generator](https://openapi-generator.tech/docs/installation/)
 
 - 🌍 [I18n ready](./locales)
 
@@ -50,7 +20,9 @@ Mocking up web app with <b>Vitesse</b><sup><em>(speed)</em></sup><br>
 
 - 🗒 [Markdown Support](https://github.com/unplugin/unplugin-vue-markdown)
 
-- 🔥 Use the [new `<script setup>` syntax](https://github.com/vuejs/rfcs/pull/227)
+- 🔥 Use the [new `<script setup lang="ts">` syntax](https://github.com/vuejs/rfcs/pull/227)
+
+- 📑 Use [FormKit](https://formkit.com/getting-started/what-is-formkit) building framework
 
 - 📥 [APIs auto importing](https://github.com/antfu/unplugin-auto-import) - use Composition API and others directly
 
@@ -73,12 +45,11 @@ Mocking up web app with <b>Vitesse</b><sup><em>(speed)</em></sup><br>
 
 ### UI Frameworks
 
-- [UnoCSS](https://github.com/antfu/unocss) - The instant on-demand atomic CSS engine.
+- [Tailwind](https://tailwindcss.com/docs/installation) - Tailwind CSS works by scanning all of your HTML files, JavaScript components, and any other templates for class names, generating the corresponding styles and then writing them to a static CSS file.
 
-### Icons
+- [Element-plus components](https://element-plus.org/es-ES/component/overview.html)
 
-- [Iconify](https://iconify.design) - use icons from any icon sets [🔍Icônes](https://icones.netlify.app/)
-- [Pure CSS Icons via UnoCSS](https://github.com/antfu/unocss/tree/main/packages/preset-icons)
+- [FormKit theme editor](https://themes.formkit.com/editor) To customize the appearance of your FormKit components, follow these steps to generate and install a theme using the FormKit theme editor.
 
 ### Plugins
 
@@ -89,7 +60,6 @@ Mocking up web app with <b>Vitesse</b><sup><em>(speed)</em></sup><br>
 - [`unplugin-vue-components`](https://github.com/antfu/unplugin-vue-components) - components auto import
 - [`unplugin-auto-import`](https://github.com/antfu/unplugin-auto-import) - Directly use Vue Composition API and others without importing
 - [`unplugin-vue-macros`](https://github.com/sxzz/unplugin-vue-macros) - Explore and extend more macros and syntax sugar to Vue.
-- [`vite-plugin-pwa`](https://github.com/antfu/vite-plugin-pwa) - PWA
 - [`unplugin-vue-markdown`](https://github.com/antfu/unplugin-vue-markdown) - Markdown as components / components in Markdown
   - [`markdown-it-shikiji`](https://github.com/antfu/shikiji) - [Shiki](https://github.com/antfu/shikiji) for syntax highlighting
 - [Vue I18n](https://github.com/intlify/vue-i18n-next) - Internationalization
@@ -102,7 +72,7 @@ Mocking up web app with <b>Vitesse</b><sup><em>(speed)</em></sup><br>
 
 ### Coding Style
 
-- Use Composition API with [`<script setup>` SFC syntax](https://github.com/vuejs/rfcs/pull/227)
+- Use Composition API with [`<script setup lang="ts">` SFC syntax](https://vuejs.org/api/sfc-script-setup.html)
 - [ESLint](https://eslint.org/) with [@antfu/eslint-config](https://github.com/antfu/eslint-config), single quotes, no semi.
 
 ### Dev tools
@@ -121,47 +91,6 @@ Mocking up web app with <b>Vitesse</b><sup><em>(speed)</em></sup><br>
   - [i18n Ally](https://marketplace.visualstudio.com/items?itemName=lokalise.i18n-ally) - All in one i18n support
   - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
-## Variations
-
-As this template is strongly opinionated, the following provides a curated list for community-maintained variations with different preferences and feature sets. Check them out as well. PR to add yours is also welcome!
-
-###### Official
-
-- [vitesse-lite](https://github.com/antfu/vitesse-lite) - Lightweight version of Vitesse
-- [vitesse-nuxt3](https://github.com/antfu/vitesse-nuxt3) - Vitesse for Nuxt 3
-- [vitesse-nuxt-bridge](https://github.com/antfu/vitesse-nuxt-bridge) - Vitesse for Nuxt 2 with Bridge
-- [vitesse-webext](https://github.com/antfu/vitesse-webext) - WebExtension Vite starter template
-
-###### Community
-
-- [vitesse-ssr-template](https://github.com/frandiox/vitesse-ssr-template) by [@frandiox](https://github.com/frandiox) - Vitesse with SSR
-- [vitailse](https://github.com/zynth17/vitailse) by [@zynth17](https://github.com/zynth17) - Like Vitesse but with TailwindCSS
-- [vitesse-modernized-chrome-ext](https://github.com/xiaoluoboding/vitesse-modernized-chrome-ext) by [@xiaoluoboding](https://github.com/xiaoluoboding) - ⚡️ Modernized Chrome Extension Manifest V3 Vite Starter Template
-- [vitesse-stackter-clean-architect](https://github.com/shamscorner/vitesse-stackter-clean-architect) by [@shamscorner](https://github.com/shamscorner) - A modular clean architecture pattern in vitesse template
-- [vitesse-enterprise](https://github.com/FranciscoKloganB/vitesse-enterprise) by [@FranciscoKloganB](https://github.com/FranciscoKloganB) - Consistent coding styles regardless of team-size.
-- [vitecamp](https://github.com/nekobc1998923/vitecamp) by [@nekobc1998923](https://github.com/nekobc1998923) - Like Vitesse but without SSG/SSR/File based routing, includes Element Plus
-- [vitesse-h5](https://github.com/YunYouJun/vitesse-h5) by [@YunYouJun](https://github.com/YunYouJun) - Vitesse for Mobile
-- [bat](https://github.com/olgam4/bat) by [@olgam4](https://github.com/olgam4) - Vitesse for SolidJS
-- [vitesse-solid](https://github.com/xbmlz/vitesse-solid) by [@xbmlz](https://github.com/xbmlz) - Vitesse for SolidJS, build with [`SolidStart`](https://start.solidjs.com/), includes [UnoCSS](https://github.com/unocss/unocss) and [HopeUI](https://hope-ui.com/).
-
-## Try it now!
-
-> Vitesse requires Node >=14.18
-
-### GitHub Template
-
-[Create a repo from this template on GitHub](https://github.com/antfu/vitesse/generate).
-
-### Clone to local
-
-If you prefer to do it manually with the cleaner git history
-
-```bash
-npx degit antfu/vitesse my-vitesse-app
-cd my-vitesse-app
-pnpm i # If you don't have pnpm installed, run: npm install -g pnpm
-```
-
 ## Checklist
 
 When you use this template, try follow the checklist to update your info properly
@@ -176,6 +105,67 @@ When you use this template, try follow the checklist to update your info properl
 And, enjoy :)
 
 ## Usage
+
+### Installing pnpm
+
+To manage project dependencies, we use `pnpm` instead of other package managers like `npm` or `yarn`. Here’s how you can install `pnpm` and the reasons why we prefer it.
+
+#### Installation
+
+To install `pnpm`, follow these steps:
+
+1. **Using npm**:
+
+   If you have `npm` installed, you can install `pnpm` globally by running the following command:
+
+   ```sh
+   npm install -g pnpm
+   ```
+
+### Getting Started with pnpm
+   After installing pnpm, you can use it to manage your project dependencies:
+
+   1. **Install dependencies:**
+
+      ```
+       pnpm install
+      ```
+
+
+### Generating the API Client
+
+To generate the API client, follow these steps:
+
+1. **Ensure you have npx and openapi-generator-cli installed.**
+   You can install them globally using:
+
+   ```
+   npm install -g npx @openapitools/openapi-generator-cli
+   ```
+
+2. **Download the OpenAPI Specification**
+
+   Download the `schema.yml` file from the following [URL](https://pl4n3t.com/documentation/schema.yml)  and save it in the `spec` directory:
+
+   ```sh
+   curl -o ./spec/schema.yml https://pl4n3t.com/documentation/schema.yml
+   ```
+
+3. **Run the Generation Script**
+
+   Use the `gen-api script` defined in the package.json to generate the API client. This script uses the openapi-generator-cli to create a TypeScript client with Axios.
+
+   ```sh
+    pnpm run gen-api
+   ```
+
+   The gen-api script performs the following actions:
+
+   - Removes the existing src/api-client directory.
+   - Uses the openapi-generator-cli to generate a new API client from the spec/schema.yml file.
+   - Outputs the generated files to the src/api-client directory.
+   - Configures additional properties for the generation process, such as separating models and APIs, using a single request parameter, and setting package names.
+
 
 ### Development
 
@@ -195,26 +185,74 @@ pnpm build
 
 And you will see the generated file in `dist` that ready to be served.
 
-### Deploy on Netlify
+### Initial Deployment on Dokku
 
-Go to [Netlify](https://app.netlify.com/start) and select your clone, `OK` along the way, and your App will be live in a minute.
+1. **Build your application**
+    ```bash
+    pnpm build
+    ```
 
-### Docker Production Build
+2. **Prepare files for deployment**
+    - Create a new repository and structure your files as follows:
+        ```plaintext
+        .
+        ├── .static
+        ├── dist/
+        ├── static.json
+        ```
 
-First, build the vitesse image by opening the terminal in the project's root directory.
+    - The `static.json` file should contain the following content:
+        ```json
+        {
+          "root": "dist",
+          "clean_urls": false,
+          "routes": {
+            "/**": "index.html"
+          },
+          "headers": {
+            "/**": {
+              "Access-Control-Allow-Origin": "*"
+            }
+          }
+        }
+        ```
 
-```bash
-docker buildx build . -t vitesse:latest
-```
+3. **Configure Dokku**
+    - Log in to your Dokku server.
+    - Navigate to your application directory and set up the buildpacks and environment variables:
+        ```bash
+        dokku apps:create app
+        dokku buildpacks:set app https://github.com/heroku/heroku-buildpack-static
+        dokku config:set app NGINX_ROOT=/dist
+        dokku letsencrypt:set app email <email>
+        dokku letsencrypt:enable app
+        dokku config:set app GOOGLE_CLIENT_ID=''
+        ```
 
-Run the image and specify port mapping with the `-p` flag.
+4. **Deploy the application**
+    - Initialize a git repository, add your Dokku server as a remote, and push for the first time:
+        ```bash
+        git init
+        git remote add dokku dokku@your-dokku-server:app
+        git add .
+        git commit -m "Initial commit"
+        git push dokku master
+        ```
 
-```bash
-docker run --rm -it -p 8080:80 vitesse:latest
-```
+### Future Deployments
 
-## Why
+1. **Build the application**
+    ```bash
+    pnpm build
+    ```
 
-I have created several Vite apps recently. Setting the configs up is kinda the bottleneck for me to make the ideas simply come true within a very short time.
+2. **Replace the `dist` folder in your repository**
 
-So I made this starter template for myself to create apps more easily, along with some good practices that I have learned from making those apps. It's strongly opinionated, but feel free to tweak it or even maintain your own forks. [(see community maintained variation forks)](#variations)
+3. **Commit and push the changes**
+    ```bash
+    git add dist
+    git commit -m "Update dist"
+    git push dokku master
+    ```
+
+By following these steps, you should be able to deploy and update your application on the Dokku server easily. If you have any additional questions or encounter any issues, feel free to ask.
